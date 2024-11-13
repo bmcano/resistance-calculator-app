@@ -1,6 +1,7 @@
 package com.brandoncano.resistancecalculator.ui.screens.about
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -13,19 +14,20 @@ import androidx.compose.material.icons.outlined.Colorize
 import androidx.compose.material.icons.outlined.Memory
 import androidx.compose.material.icons.outlined.Policy
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.screens.home.OurAppsButtons
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
+import com.brandoncano.sharedcomponents.composables.AppCard
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
-import com.brandoncano.sharedcomponents.composables.AppStandardCard
 import com.brandoncano.sharedcomponents.composables.AppTopAppBar
 import com.brandoncano.sharedcomponents.data.ArrowCardButtonContents
 import com.brandoncano.sharedcomponents.screen.AppInfoCard
@@ -44,9 +46,17 @@ fun AboutScreen(
     onRateThisAppTapped: () -> Unit,
     onViewOurAppsTapped: () -> Unit,
 ) {
-    Surface(modifier = Modifier.fillMaxSize()) {
+    Scaffold(
+        topBar = {
+            AppTopAppBar(
+                titleText = stringResource(R.string.about_title),
+                navigationIcon = Icons.Filled.Close,
+                onNavigateBack = onNavigateBack,
+            )
+        }
+    ) { paddingValues ->
         AboutScreenContent(
-            onNavigateBack = onNavigateBack,
+            paddingValues = paddingValues,
             onViewPrivacyPolicyTapped = onViewPrivacyPolicyTapped,
             onViewColorCodeIecTapped = onViewColorCodeIecTapped,
             onViewPreferredValuesIecTapped = onViewPreferredValuesIecTapped,
@@ -59,7 +69,7 @@ fun AboutScreen(
 
 @Composable
 private fun AboutScreenContent(
-    onNavigateBack: () -> Unit,
+    paddingValues: PaddingValues,
     onViewPrivacyPolicyTapped: () -> Unit,
     onViewColorCodeIecTapped: () -> Unit,
     onViewPreferredValuesIecTapped: () -> Unit,
@@ -67,25 +77,20 @@ private fun AboutScreenContent(
     onRateThisAppTapped: () -> Unit,
     onViewOurAppsTapped: () -> Unit,
 ) {
+    val sidePadding = dimensionResource(com.brandoncano.sharedcomponents.R.dimen.app_side_padding)
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .padding(paddingValues)
+            .padding(horizontal = sidePadding)
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.Start,
     ) {
-        AppTopAppBar(
-            titleText = stringResource(R.string.about_title),
-            navigationIcon = Icons.Filled.Close,
-            onNavigateBack = onNavigateBack,
-        )
         Spacer(modifier = Modifier.height(12.dp))
-
         AuthorCard()
         Spacer(modifier = Modifier.height(16.dp))
-
         AppInfoCard(R.string.version, R.string.last_updated)
         Spacer(modifier = Modifier.height(16.dp))
-
         AppArrowCardButton(
             ArrowCardButtonContents(
                 imageVector = Icons.Outlined.Policy,
@@ -94,13 +99,12 @@ private fun AboutScreenContent(
             )
         )
         Spacer(modifier = Modifier.height(32.dp))
-
         Text(
             text = stringResource(id = R.string.about_description),
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 12.dp),
+            modifier = Modifier.padding(bottom = 12.dp),
             style = textStyleHeadline(),
         )
-        AppStandardCard {
+        AppCard {
             Text(
                 text = stringResource(id = R.string.about_description_01),
                 modifier = Modifier.padding(16.dp),
@@ -113,11 +117,10 @@ private fun AboutScreenContent(
             )
         }
         Spacer(modifier = Modifier.height(32.dp))
-
         Text(
             text = stringResource(id = R.string.about_iec_header_text),
             modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp, bottom = 12.dp)
+                .padding(bottom = 12.dp)
                 .align(Alignment.Start),
             style = textStyleHeadline(),
         )
@@ -139,7 +142,6 @@ private fun AboutScreenContent(
             ),
         )
         Spacer(modifier = Modifier.height(32.dp))
-
         OurAppsButtons(
             onRateThisAppTapped = onRateThisAppTapped,
             onViewOurAppsTapped = onViewOurAppsTapped,

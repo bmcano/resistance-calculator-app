@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -56,11 +57,12 @@ fun LearnPreferredValuesScreen(
 
 @Composable
 private fun LearnPreferredValuesScreenContent(paddingValues: PaddingValues) {
+    val sidePadding = dimensionResource(com.brandoncano.sharedcomponents.R.dimen.app_side_padding)
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues)
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = sidePadding)
             .verticalScroll(rememberScrollState()),
     ) {
         Text(

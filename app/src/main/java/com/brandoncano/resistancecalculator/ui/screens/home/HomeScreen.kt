@@ -82,7 +82,7 @@ private fun HomeScreenContent(
     onRateThisAppTapped: () -> Unit,
     onViewOurAppsTapped: () -> Unit,
 ) {
-    val sidePadding = dimensionResource(R.dimen.app_side_padding)
+    val sidePadding = dimensionResource(com.brandoncano.sharedcomponents.R.dimen.app_side_padding)
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -96,7 +96,7 @@ private fun HomeScreenContent(
         Text(
             text = stringResource(id = R.string.home_calculators_header_text),
             modifier = Modifier
-                .padding(horizontal = 16.dp, vertical = 12.dp)
+                .padding(vertical = 12.dp)
                 .align(Alignment.Start),
             style = textStyleHeadline(),
         )

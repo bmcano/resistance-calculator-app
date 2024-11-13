@@ -62,9 +62,7 @@ fun OurAppsButtons(
     Column {
         Text(
             text = stringResource(id = R.string.home_our_apps_header_text),
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .align(Alignment.Start),
+            modifier = Modifier.align(Alignment.Start),
             style = textStyleHeadline(),
         )
         Spacer(modifier = Modifier.height(12.dp))
