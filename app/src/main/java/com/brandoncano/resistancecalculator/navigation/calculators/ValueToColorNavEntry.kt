@@ -19,7 +19,6 @@ import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
 import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
-import com.brandoncano.resistancecalculator.navigation.navigateToColorToValue
 import com.brandoncano.resistancecalculator.navigation.navigateToPreferredValuesIec
 import com.brandoncano.resistancecalculator.ui.screens.vtc.ValueToColorScreen
 import com.brandoncano.resistancecalculator.util.MultiplierFromUnits
@@ -72,10 +71,6 @@ fun NavGraphBuilder.valueToColorScreen(
             onAboutTapped = {
                 openMenu.value = false
                 navigateToAbout(navHostController)
-            },
-            onColorToValueTapped = {
-                openMenu.value = false
-                navigateToColorToValue(navHostController)
             },
             onValueChanged = { resistance, units, band5, band6, clearFocus ->
                 reset.value = false

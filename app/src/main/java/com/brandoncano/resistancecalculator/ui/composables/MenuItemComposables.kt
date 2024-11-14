@@ -3,10 +3,8 @@ package com.brandoncano.resistancecalculator.ui.composables
 import android.graphics.Picture
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Colorize
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Palette
-import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -50,15 +48,6 @@ fun AppThemeMenuItem(
     )
 }
 
-@Composable
-fun ColorToValueMenuItem(onColorToValueTapped: () -> Unit) {
-    DropdownMenuItem(
-        text = { MenuText(stringRes = R.string.menu_color_to_value) },
-        onClick = onColorToValueTapped,
-        leadingIcon = { MenuIcon(Icons.Outlined.Colorize) },
-    )
-}
-
 @AppComponentPreviews
 @Composable
 private fun MenuItemsPreview() {
@@ -67,7 +56,6 @@ private fun MenuItemsPreview() {
         Column {
             AboutAppMenuItem {}
             ClearSelectionsMenuItem {}
-            ColorToValueMenuItem {}
             FeedbackMenuItem("app", showMenu)
             ShareImageMenuItem("applicationId", showMenu, Picture())
             ShareTextMenuItem("text", showMenu)
