@@ -17,7 +17,6 @@ import com.brandoncano.resistancecalculator.model.ctv.ResistorCtvViewModel
 import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.navigation.navigateToColorCodeIec
-import com.brandoncano.resistancecalculator.navigation.navigateToValueToColor
 import com.brandoncano.resistancecalculator.ui.screens.ctv.ColorToValueScreen
 
 fun NavGraphBuilder.colorToValueScreen(
@@ -53,10 +52,6 @@ fun NavGraphBuilder.colorToValueScreen(
             onAboutTapped = {
                 openMenu.value = false
                 navigateToAbout(navHostController)
-            },
-            onValueToColorTapped = {
-                openMenu.value = false
-                navigateToValueToColor(navHostController)
             },
             onUpdateBand = { bandNumber, color ->
                 reset.value = false

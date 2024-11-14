@@ -59,15 +59,6 @@ fun ColorToValueMenuItem(onColorToValueTapped: () -> Unit) {
     )
 }
 
-@Composable
-fun ValueToColorMenuItem(onValueToColorTapped: () -> Unit) {
-    DropdownMenuItem(
-        text = { MenuText(stringRes = R.string.menu_value_to_color) },
-        onClick = onValueToColorTapped,
-        leadingIcon = { MenuIcon(Icons.Outlined.Search) },
-    )
-}
-
 @AppComponentPreviews
 @Composable
 private fun MenuItemsPreview() {
@@ -80,7 +71,6 @@ private fun MenuItemsPreview() {
             FeedbackMenuItem("app", showMenu)
             ShareImageMenuItem("applicationId", showMenu, Picture())
             ShareTextMenuItem("text", showMenu)
-            ValueToColorMenuItem {}
         }
     }
 }
