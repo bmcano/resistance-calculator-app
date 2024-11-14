@@ -3,6 +3,7 @@ package com.brandoncano.resistancecalculator.ui.screens.smd
 import android.graphics.Picture
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -17,7 +18,6 @@ import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material.icons.outlined.Looks3
 import androidx.compose.material.icons.outlined.Looks4
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -28,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -72,43 +73,8 @@ fun SmdScreen(
     navBarPosition: Int,
     onLearnSmdCodesTapped: () -> Unit,
 ) {
-    Surface(modifier = Modifier.fillMaxSize()) {
-        SmdScreenContent(
-            openMenu = openMenu,
-            reset = reset,
-            resistor = resistor,
-            isError = isError,
-            onOpenThemeDialog = onOpenThemeDialog,
-            onNavigateBack = onNavigateBack,
-            onClearSelectionsTapped = onClearSelectionsTapped,
-            onAboutTapped = onAboutTapped,
-            onValueChanged = onValueChanged,
-            onNavBarSelectionChanged = onNavBarSelectionChanged,
-            navBarPosition = navBarPosition,
-            onLearnSmdCodesTapped = onLearnSmdCodesTapped,
-        )
-    }
-}
-
-@Composable
-private fun SmdScreenContent(
-    openMenu: MutableState<Boolean>,
-    reset: MutableState<Boolean>,
-    resistor: SmdResistor,
-    isError: Boolean,
-    onOpenThemeDialog: () -> Unit,
-    onNavigateBack: () -> Unit,
-    onClearSelectionsTapped: () -> Unit,
-    onAboutTapped: () -> Unit,
-    onValueChanged: (String, String, Boolean) -> Unit,
-    onNavBarSelectionChanged: (Int) -> Unit,
-    navBarPosition: Int,
-    onLearnSmdCodesTapped: () -> Unit,
-) {
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
     val picture = remember { Picture() }
-    val code = remember { mutableStateOf(resistor.code) }
-
     Scaffold(
         topBar = {
             AppMenuTopAppBar(
@@ -162,56 +128,80 @@ private fun SmdScreenContent(
             )
         }
     ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            SmdResistorDisplay(picture, resistor, isError)
-            AppTextField(
-                label = stringResource(id = R.string.hint_smd_code),
-                modifier = Modifier.padding(top = 32.dp, start = 16.dp, end = 16.dp),
-                value = code,
-                reset = reset.value,
-                isError = isError,
-                errorMessage = stringResource(id = R.string.error_invalid_code),
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.Characters,
-                    autoCorrectEnabled = false,
-                    keyboardType = KeyboardType.Text,
-                    imeAction = ImeAction.Done
-                )
-            ) {
-                code.value = it.uppercase(Locale.getDefault())
-                onValueChanged(code.value, resistor.units, false)
-            }
-            AppDropDownMenu(
-                label = stringResource(id = R.string.units_hint),
-                modifier = Modifier.padding(top = 12.dp),
-                selectedOption = resistor.units,
-                items = DropdownLists.UNITS_LIST,
-                reset = reset.value,
-                onOptionSelected = { onValueChanged(code.value, it, true) }
+        SmdScreenContent(
+            paddingValues = paddingValues,
+            picture = picture,
+            reset = reset,
+            resistor = resistor,
+            isError = isError,
+            onValueChanged = onValueChanged,
+            onLearnSmdCodesTapped = onLearnSmdCodesTapped,
+        )
+    }
+}
+
+@Composable
+private fun SmdScreenContent(
+    paddingValues: PaddingValues,
+    picture: Picture,
+    reset: MutableState<Boolean>,
+    resistor: SmdResistor,
+    isError: Boolean,
+    onValueChanged: (String, String, Boolean) -> Unit,
+    onLearnSmdCodesTapped: () -> Unit,
+) {
+    val code = remember { mutableStateOf(resistor.code) }
+    val sidePadding = dimensionResource(com.brandoncano.sharedcomponents.R.dimen.app_side_padding)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValues)
+            .padding(horizontal = sidePadding)
+            .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        SmdResistorDisplay(picture, resistor, isError)
+        AppTextField(
+            label = stringResource(id = R.string.hint_smd_code),
+            modifier = Modifier.padding(top = 32.dp),
+            value = code,
+            reset = reset.value,
+            isError = isError,
+            errorMessage = stringResource(id = R.string.error_invalid_code),
+            keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.Characters,
+                autoCorrectEnabled = false,
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Done
             )
-            AppDivider(modifier = Modifier.padding(vertical = 24.dp, horizontal = 16.dp))
-            Column(horizontalAlignment = Alignment.Start) {
-                Text(
-                    text = stringResource(R.string.smd_headline_text),
-                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
-                    style = textStyleHeadline(),
-                )
-                AppArrowCardButton(
-                    ArrowCardButtonContents(
-                        imageVector = Icons.Outlined.Lightbulb,
-                        text = stringResource(R.string.smd_button_text),
-                        onClick = onLearnSmdCodesTapped,
-                    )
-                )
-            }
-            Spacer(modifier = Modifier.height(24.dp))
+        ) {
+            code.value = it.uppercase(Locale.getDefault())
+            onValueChanged(code.value, resistor.units, false)
         }
+        AppDropDownMenu(
+            label = stringResource(id = R.string.units_hint),
+            modifier = Modifier.padding(top = 12.dp),
+            selectedOption = resistor.units,
+            items = DropdownLists.UNITS_LIST,
+            reset = reset.value,
+            onOptionSelected = { onValueChanged(code.value, it, true) }
+        )
+        AppDivider(modifier = Modifier.padding(vertical = 24.dp))
+        Column(horizontalAlignment = Alignment.Start) {
+            Text(
+                text = stringResource(R.string.smd_headline_text),
+                modifier = Modifier.padding(bottom = 16.dp),
+                style = textStyleHeadline(),
+            )
+            AppArrowCardButton(
+                ArrowCardButtonContents(
+                    imageVector = Icons.Outlined.Lightbulb,
+                    text = stringResource(R.string.smd_button_text),
+                    onClick = onLearnSmdCodesTapped,
+                )
+            )
+        }
+        Spacer(modifier = Modifier.height(24.dp))
     }
 }
 
