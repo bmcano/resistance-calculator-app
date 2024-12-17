@@ -53,7 +53,7 @@ fun LearnSmdCodesScreen(
 
 @Composable
 private fun LearnSmdCodesScreenContent(paddingValues: PaddingValues) {
-    val sidePadding = dimensionResource(com.brandoncano.sharedcomponents.R.dimen.app_side_padding)
+    val sidePadding = dimensionResource(R.dimen.app_side_padding)
     Column(
         modifier = Modifier
             .fillMaxSize()

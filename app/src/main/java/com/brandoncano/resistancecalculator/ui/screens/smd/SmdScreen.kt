@@ -151,7 +151,7 @@ private fun SmdScreenContent(
     onLearnSmdCodesTapped: () -> Unit,
 ) {
     val code = remember { mutableStateOf(resistor.code) }
-    val sidePadding = dimensionResource(com.brandoncano.sharedcomponents.R.dimen.app_side_padding)
+    val sidePadding = dimensionResource(R.dimen.app_side_padding)
     Column(
         modifier = Modifier
             .fillMaxSize()
