@@ -11,8 +11,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Colorize
+import androidx.compose.material.icons.outlined.LinearScale
 import androidx.compose.material.icons.outlined.Memory
 import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.Tune
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -114,6 +116,19 @@ private fun HomeScreenContent(
                 imageVector = Icons.Outlined.Memory,
                 text = stringResource(id = R.string.home_button_smd),
                 onClick = onSmdTapped
+            ),
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        AppArrowCardButton(
+            ArrowCardButtonContents(
+                imageVector = Icons.Outlined.LinearScale,
+                text = stringResource(id = R.string.home_button_series_calculator),
+                onClick = { /* TODO */ }
+            ),
+            ArrowCardButtonContents(
+                imageVector = Icons.Outlined.Tune, // Alts could be: SyncAlt, DeviceHub
+                text = stringResource(id = R.string.home_button_parallel_calculator),
+                onClick = { /* TODO */ }
             ),
         )
         Spacer(modifier = Modifier.height(32.dp))

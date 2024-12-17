@@ -44,6 +44,8 @@
     <string name="home_button_color_to_value">Color to value</string>
     <string name="home_button_value_to_color">Value to color</string>
     <string name="home_button_smd">SMD resistor</string>
+    <string name="home_button_series_calculator">Resistors in series</string>
+    <string name="home_button_parallel_calculator">Resistors in parallel</string>
     <string name="home_our_apps_header_text">Our apps</string>
     <string name="home_button_rate_us">Rate this app on Google Play</string>
     <string name="home_button_view_apps">Check out our other apps</string>
