@@ -1,9 +1,10 @@
 <resources>
-    <!-- Activity title -->
+    <!-- Screen titles -->
     <string name="app_name">Resistor Calculator</string>
     <string name="title_color_to_value">Color to Value</string>
     <string name="title_value_to_color">Value to Color</string>
     <string name="title_smd">SMD Resistor</string>
+    <string name="title_series_resistors">Series Resistors</string>
     <!-- OutlinedTextField hints -->
     <string name="number_band_hint1">First band</string>
     <string name="number_band_hint2">Second band</string>
@@ -65,6 +66,11 @@
     <string name="vtc_invalid_card_action">Use closest value</string>
     <string name="vtc_invalid_tolerance_label">Invalid tolerance for resistor type</string>
     <string name="vtc_invalid_tolerance_body">Adjust your selection to match the supported tolerances for a %1$s-band resistor.</string>
+    <!-- Series/Parallel screen text -->
+    <string name="circuit_use_same_values">Use the same resistor values?</string>
+    <string name="circuit_num_resistors_label">Number of resistors</string>
+    <string name="circuit_text_field_label">Resistor (Ω)</string>
+    <string name="circuit_text_field_label_multiple">Resistor %1$s (Ω)</string>
     <!-- Info screen/components text -->
     <string name="info_title">IEC 60062 Standard</string>
     <string name="info_title_3">IEC 60063 Standard</string>

@@ -46,6 +46,7 @@ fun HomeScreen(
     onColorToValueTapped: () -> Unit,
     onValueToColorTapped: () -> Unit,
     onSmdTapped: () -> Unit,
+    onSeriesCalculatorTapped: () -> Unit,
     onRateThisAppTapped: () -> Unit,
     onViewOurAppsTapped: () -> Unit,
 ) {
@@ -68,6 +69,7 @@ fun HomeScreen(
             onColorToValueTapped = onColorToValueTapped,
             onValueToColorTapped = onValueToColorTapped,
             onSmdTapped = onSmdTapped,
+            onSeriesCalculatorTapped = onSeriesCalculatorTapped,
             onRateThisAppTapped = onRateThisAppTapped,
             onViewOurAppsTapped = onViewOurAppsTapped,
         )
@@ -80,6 +82,7 @@ private fun HomeScreenContent(
     onColorToValueTapped: () -> Unit,
     onValueToColorTapped: () -> Unit,
     onSmdTapped: () -> Unit,
+    onSeriesCalculatorTapped: () -> Unit,
     onRateThisAppTapped: () -> Unit,
     onViewOurAppsTapped: () -> Unit,
 ) {
@@ -123,7 +126,7 @@ private fun HomeScreenContent(
             ArrowCardButtonContents(
                 imageVector = Icons.Outlined.LinearScale,
                 text = stringResource(id = R.string.home_button_series_calculator),
-                onClick = { /* TODO */ }
+                onClick = onSeriesCalculatorTapped
             ),
             ArrowCardButtonContents(
                 imageVector = Icons.Outlined.Tune, // Alts could be: SyncAlt, DeviceHub
@@ -151,6 +154,7 @@ private fun HomePreview() {
             onColorToValueTapped = {},
             onValueToColorTapped = {},
             onSmdTapped = {},
+            onSeriesCalculatorTapped = {},
             onRateThisAppTapped = {},
             onViewOurAppsTapped = {},
         )

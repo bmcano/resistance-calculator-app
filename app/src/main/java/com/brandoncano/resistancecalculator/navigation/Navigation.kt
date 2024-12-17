@@ -5,6 +5,7 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -13,6 +14,7 @@ import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.navigation.calculators.colorToValueScreen
 import com.brandoncano.resistancecalculator.navigation.calculators.smdScreen
 import com.brandoncano.resistancecalculator.navigation.calculators.valueToColorScreen
+import com.brandoncano.resistancecalculator.navigation.circuit.seriesCalculatorScreen
 import com.brandoncano.resistancecalculator.navigation.learn.learnColorCodes
 import com.brandoncano.resistancecalculator.navigation.learn.learnPreferredValues
 import com.brandoncano.resistancecalculator.navigation.learn.learnSmdCodes
@@ -37,6 +39,7 @@ fun Navigation(onOpenThemeDialog: () -> Unit) {
         learnColorCodes(navController)
         learnPreferredValues(navController)
         learnSmdCodes(navController)
+        seriesCalculatorScreen(navController)
         smdScreen(navController, onOpenThemeDialog)
         valueToColorScreen(navController, onOpenThemeDialog)
         // from shared library
@@ -72,6 +75,12 @@ fun navigateToValueToColor(navController: NavHostController) {
 
 fun navigateToSmd(navController: NavHostController) {
     navController.navigate(Screen.Smd.route) {
+        popUpTo(Screen.Home.route)
+    }
+}
+
+fun navigateToSeriesCalculator(navController: NavController) {
+    navController.navigate(Screen.SeriesCalculator.route) {
         popUpTo(Screen.Home.route)
     }
 }
