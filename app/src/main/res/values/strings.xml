@@ -69,8 +69,9 @@
     <!-- Series/Parallel screen text -->
     <string name="circuit_use_same_values">Use the same resistor values?</string>
     <string name="circuit_num_resistors_label">Number of resistors</string>
-    <string name="circuit_text_field_label">Resistor (Ω)</string>
-    <string name="circuit_text_field_label_multiple">Resistor %1$s (Ω)</string>
+    <string name="circuit_units_label">Units</string>
+    <string name="circuit_text_field_label">Resistance (%1$s)</string>
+    <string name="circuit_text_field_label_multiple">Resistance %1$s (%2$s)</string>
     <!-- Info screen/components text -->
     <string name="info_title">IEC 60062 Standard</string>
     <string name="info_title_3">IEC 60063 Standard</string>

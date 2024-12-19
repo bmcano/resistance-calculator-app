@@ -8,11 +8,11 @@ object TotalResistanceSeries {
     fun execute(resistorValues: List<String>): String {
         return resistorValues
             .sumOf { it.toDoubleOrNull() ?: 0.0 }
-            .toString()
+            .formatResistance()
     }
 
     fun execute(numberOfResistors: Int, resistorValue: String): String {
         val req = numberOfResistors * (resistorValue.toDoubleOrNull() ?: 0.0)
-        return req.toString()
+        return req.formatResistance()
     }
 }

@@ -2,12 +2,9 @@ package com.brandoncano.resistancecalculator.navigation.circuit
 
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -25,7 +22,6 @@ fun NavGraphBuilder.seriesCalculatorScreen(
         enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
         exitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
-        val context = LocalContext.current
         val focusManager = LocalFocusManager.current
         val openMenu = remember { mutableStateOf(false) }
         val reset = remember { mutableStateOf(false) }
@@ -39,6 +35,7 @@ fun NavGraphBuilder.seriesCalculatorScreen(
             onClearSelectionsTapped = {
                 openMenu.value = false
                 reset.value = true
+                totalResistance.value = "0.0"
                 focusManager.clearFocus()
             },
             onAboutTapped = {

@@ -2,6 +2,7 @@ package com.brandoncano.resistancecalculator.ui.screens.circuit
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -49,7 +50,7 @@ import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
 import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
 import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 import com.brandoncano.sharedcomponents.text.textStyleBody
-import com.brandoncano.sharedcomponents.text.textStyleTitle
+import com.brandoncano.sharedcomponents.text.textStyleLargeTitle
 
 @Composable
 fun SeriesCalculatorScreen(
@@ -101,6 +102,7 @@ private fun ColorToValueScreenContent(
     val sidePadding = dimensionResource(R.dimen.app_side_padding)
     var sameValues by remember { mutableStateOf(false) }
     var resistorCount by remember { mutableIntStateOf(2) }
+    var units by remember { mutableStateOf(Symbols.OHMS) }
 
     Column(
         modifier = Modifier
@@ -121,9 +123,9 @@ private fun ColorToValueScreenContent(
         )
         Spacer(modifier = Modifier.height(24.dp))
         Text(
-            text = "${totalResistance.value} ${Symbols.OHMS}",
+            text = "${totalResistance.value} $units",
             modifier = Modifier,
-            style = textStyleTitle()
+            style = textStyleLargeTitle()
         )
         Spacer(modifier = Modifier.height(24.dp))
         Row(
@@ -145,14 +147,31 @@ private fun ColorToValueScreenContent(
             )
         }
         Spacer(modifier = Modifier.height(12.dp))
-        AppDropDownMenu(
-            label = stringResource(id = R.string.circuit_num_resistors_label),
-            modifier = Modifier,
-            selectedOption = resistorCount.toString(),
-            items = DropdownLists.RESISTOR_COUNT_LIST,
-        ) { selectedValue ->
-            resistorCount = selectedValue.toIntOrNull() ?: 2
-            onValueChanged(sameValues, resistorCount)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+        ) {
+            AppDropDownMenu(
+                label = stringResource(id = R.string.circuit_num_resistors_label),
+                modifier = Modifier
+                    .weight(0.5f)
+                    .padding(end = 8.dp),
+                selectedOption = resistorCount.toString(),
+                items = DropdownLists.RESISTOR_COUNT_LIST,
+            ) { selectedValue ->
+                resistorCount = selectedValue.toIntOrNull() ?: 2
+                onValueChanged(sameValues, resistorCount)
+            }
+            AppDropDownMenu(
+                label = stringResource(id = R.string.circuit_units_label),
+                modifier = Modifier
+                    .weight(0.5f)
+                    .padding(start = 8.dp),
+                selectedOption = units,
+                items = DropdownLists.UNITS_LIST,
+            ) {
+                it -> units = it
+            }
         }
         Spacer(modifier = Modifier.height(12.dp))
         Column(
@@ -162,9 +181,9 @@ private fun ColorToValueScreenContent(
             val fieldsToShow = if (sameValues) 1 else resistorCount
             repeat(fieldsToShow) { index ->
                 val labelText = if (sameValues) {
-                    stringResource(id = R.string.circuit_text_field_label)
+                    stringResource(id = R.string.circuit_text_field_label, units)
                 } else {
-                    stringResource(id = R.string.circuit_text_field_label_multiple, index + 1)
+                    stringResource(id = R.string.circuit_text_field_label_multiple, index + 1, units)
                 }
                 AppTextField(
                     label = labelText,
