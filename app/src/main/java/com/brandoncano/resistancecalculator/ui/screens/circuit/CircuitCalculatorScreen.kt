@@ -53,7 +53,8 @@ import com.brandoncano.sharedcomponents.text.textStyleBody
 import com.brandoncano.sharedcomponents.text.textStyleLargeTitle
 
 @Composable
-fun SeriesCalculatorScreen(
+fun CircuitCalculatorScreen(
+    circuitVector: Int,
     openMenu: MutableState<Boolean>,
     reset: MutableState<Boolean>,
     onNavigateBack: () -> Unit,
@@ -81,7 +82,8 @@ fun SeriesCalculatorScreen(
             }
         },
     ) { paddingValues ->
-        ColorToValueScreenContent(
+        CircuitCalculatorScreenContent(
+            circuitVector = circuitVector,
             paddingValues = paddingValues,
             reset = reset,
             onValueChanged = onValueChanged,
@@ -92,7 +94,8 @@ fun SeriesCalculatorScreen(
 }
 
 @Composable
-private fun ColorToValueScreenContent(
+private fun CircuitCalculatorScreenContent(
+    circuitVector: Int,
     paddingValues: PaddingValues,
     reset: MutableState<Boolean>,
     onValueChanged: (Boolean, Int) -> Unit,
@@ -113,11 +116,11 @@ private fun ColorToValueScreenContent(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Image(
-            painter = painterResource(R.drawable.img_series_resistors),
+            painter = painterResource(circuitVector),
             contentDescription = null,
             modifier = Modifier
                 .padding(top = 16.dp)
-                .size(width = 288.dp, height = 112.dp)
+                .size(width = 288.dp, height = 128.dp)
                 .align(Alignment.CenterHorizontally),
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant)
         )
@@ -205,9 +208,10 @@ private fun ColorToValueScreenContent(
 
 @AppScreenPreviews
 @Composable
-private fun ColorToValueScreen4BandPreview() {
+private fun CircuitCalculatorScreenSeriesPreview() {
     ResistorCalculatorTheme {
-        SeriesCalculatorScreen(
+        CircuitCalculatorScreen(
+            circuitVector = R.drawable.img_series_resistors,
             openMenu = remember { mutableStateOf(false) },
             reset = remember { mutableStateOf(false) },
             onNavigateBack = {},
@@ -219,3 +223,22 @@ private fun ColorToValueScreen4BandPreview() {
         )
     }
 }
+
+@AppScreenPreviews
+@Composable
+private fun CircuitCalculatorScreenParallelPreview() {
+    ResistorCalculatorTheme {
+        CircuitCalculatorScreen(
+            circuitVector = R.drawable.img_parallel_resistors,
+            openMenu = remember { mutableStateOf(false) },
+            reset = remember { mutableStateOf(false) },
+            onNavigateBack = {},
+            onClearSelectionsTapped = {},
+            onAboutTapped = {},
+            onValueChanged = { _, _ -> },
+            totalResistance = remember { mutableStateOf("0.0") },
+            resistorInputs = remember { mutableStateListOf(*Array(8) { "" }) }
+        )
+    }
+}
+

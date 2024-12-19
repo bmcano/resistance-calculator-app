@@ -32,6 +32,7 @@ fun NavGraphBuilder.homeScreen(
             onValueToColorTapped = { navigateToValueToColor(navHostController) },
             onSmdTapped = { navigateToSmd(navHostController) },
             onSeriesCalculatorTapped = { navigateToSeriesCalculator(navHostController) },
+            onParallelCalculatorTapped = { navigateToParallelCalculator(navHostController) },
             onRateThisAppTapped = { navigateToGooglePlay(context) },
             onViewOurAppsTapped = { navigateToOurApps(navHostController) },
         )

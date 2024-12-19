@@ -47,6 +47,7 @@ fun HomeScreen(
     onValueToColorTapped: () -> Unit,
     onSmdTapped: () -> Unit,
     onSeriesCalculatorTapped: () -> Unit,
+    onParallelCalculatorTapped: () -> Unit,
     onRateThisAppTapped: () -> Unit,
     onViewOurAppsTapped: () -> Unit,
 ) {
@@ -70,6 +71,7 @@ fun HomeScreen(
             onValueToColorTapped = onValueToColorTapped,
             onSmdTapped = onSmdTapped,
             onSeriesCalculatorTapped = onSeriesCalculatorTapped,
+            onParallelCalculatorTapped = onParallelCalculatorTapped,
             onRateThisAppTapped = onRateThisAppTapped,
             onViewOurAppsTapped = onViewOurAppsTapped,
         )
@@ -83,6 +85,7 @@ private fun HomeScreenContent(
     onValueToColorTapped: () -> Unit,
     onSmdTapped: () -> Unit,
     onSeriesCalculatorTapped: () -> Unit,
+    onParallelCalculatorTapped: () -> Unit,
     onRateThisAppTapped: () -> Unit,
     onViewOurAppsTapped: () -> Unit,
 ) {
@@ -129,9 +132,9 @@ private fun HomeScreenContent(
                 onClick = onSeriesCalculatorTapped
             ),
             ArrowCardButtonContents(
-                imageVector = Icons.Outlined.Tune, // Alts could be: SyncAlt, DeviceHub
+                imageVector = Icons.Outlined.Tune, // TODO - Alts could be: SyncAlt, DeviceHub
                 text = stringResource(id = R.string.home_button_parallel_calculator),
-                onClick = { /* TODO */ }
+                onClick = onParallelCalculatorTapped
             ),
         )
         Spacer(modifier = Modifier.height(32.dp))
@@ -155,6 +158,7 @@ private fun HomePreview() {
             onValueToColorTapped = {},
             onSmdTapped = {},
             onSeriesCalculatorTapped = {},
+            onParallelCalculatorTapped = {},
             onRateThisAppTapped = {},
             onViewOurAppsTapped = {},
         )

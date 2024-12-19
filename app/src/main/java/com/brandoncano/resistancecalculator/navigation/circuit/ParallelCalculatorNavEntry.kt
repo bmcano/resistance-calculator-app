@@ -13,13 +13,13 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.ui.screens.circuit.CircuitCalculatorScreen
-import com.brandoncano.resistancecalculator.util.circuit.TotalResistanceSeries
+import com.brandoncano.resistancecalculator.util.circuit.TotalResistanceParallel
 
-fun NavGraphBuilder.seriesCalculatorScreen(
+fun NavGraphBuilder.parallelCalculatorScreen(
     navHostController: NavHostController,
 ) {
     composable(
-        route = Screen.SeriesCalculator.route,
+        route = Screen.ParallelCalculator.route,
         enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
         exitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
@@ -30,7 +30,7 @@ fun NavGraphBuilder.seriesCalculatorScreen(
         val resistorInputs = remember { mutableStateListOf(*Array(8) { "" }) }
 
         CircuitCalculatorScreen(
-            circuitVector = R.drawable.img_series_resistors,
+            circuitVector = R.drawable.img_parallel_resistors,
             openMenu = openMenu,
             reset = reset,
             onNavigateBack = { navHostController.popBackStack() },
@@ -46,12 +46,12 @@ fun NavGraphBuilder.seriesCalculatorScreen(
             },
             onValueChanged = { sameValues, resistorCount ->
                 totalResistance.value = if (sameValues) {
-                    TotalResistanceSeries.execute(
+                    TotalResistanceParallel.execute(
                         numberOfResistors = resistorCount,
                         resistorValue = resistorInputs[0]
                     )
                 } else {
-                    TotalResistanceSeries.execute(
+                    TotalResistanceParallel.execute(
                         resistorValues = resistorInputs
                             .take(resistorCount)
                             .filter { it.isNotEmpty() }
