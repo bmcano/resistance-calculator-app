@@ -155,9 +155,9 @@ private fun SmdScreenContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(paddingValues)
-            .padding(horizontal = sidePadding)
-            .verticalScroll(rememberScrollState()),
+            .padding(horizontal = sidePadding),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         SmdResistorDisplay(picture, resistor, isError)

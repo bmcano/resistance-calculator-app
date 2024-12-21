@@ -111,9 +111,9 @@ private fun CircuitCalculatorScreenContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(paddingValues)
-            .padding(horizontal = sidePadding)
-            .verticalScroll(rememberScrollState()),
+            .padding(horizontal = sidePadding),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Image(

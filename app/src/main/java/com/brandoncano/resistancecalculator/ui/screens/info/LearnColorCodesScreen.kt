@@ -58,9 +58,9 @@ private fun LearnColorCodesScreenContent(paddingValues: PaddingValues) {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(paddingValues)
-            .padding(horizontal = sidePadding)
-            .verticalScroll(rememberScrollState()),
+            .padding(horizontal = sidePadding),
     ) {
         Text(
             text = stringResource(R.string.info_intro_title),

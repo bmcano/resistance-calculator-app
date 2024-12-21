@@ -81,9 +81,9 @@ private fun AboutScreenContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(paddingValues)
-            .padding(horizontal = sidePadding)
-            .verticalScroll(rememberScrollState()),
+            .padding(horizontal = sidePadding),
         horizontalAlignment = Alignment.Start,
     ) {
         Spacer(modifier = Modifier.height(12.dp))

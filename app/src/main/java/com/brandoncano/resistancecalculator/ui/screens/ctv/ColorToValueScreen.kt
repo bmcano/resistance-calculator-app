@@ -159,9 +159,10 @@ private fun ColorToValueScreenContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(paddingValues)
             .padding(horizontal = sidePadding)
-            .verticalScroll(rememberScrollState()),
+            ,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         ResistorDisplay(picture, resistor)

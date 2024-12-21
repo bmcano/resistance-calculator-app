@@ -57,9 +57,9 @@ private fun LearnSmdCodesScreenContent(paddingValues: PaddingValues) {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(paddingValues)
-            .padding(horizontal = sidePadding)
-            .verticalScroll(rememberScrollState()),
+            .padding(horizontal = sidePadding),
         horizontalAlignment = Alignment.Start,
     ) {
         Text(
