@@ -136,7 +136,7 @@
       android:fillColor="#000000"
       android:strokeColor="#00000000"/>
   <path
-      android:pathData="M3,24l90,0l0,0.188l-90,0z"
+      android:pathData="M0,24l96,0l0,0.2l-96,0z"
       android:strokeWidth="0.75"
       android:fillColor="#000000"
       android:strokeColor="#00000000"/>
