@@ -42,6 +42,7 @@ import com.brandoncano.resistancecalculator.data.DropdownLists
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.circuit.IsValidNumber
+import com.brandoncano.sharedcomponents.composables.AppDivider
 import com.brandoncano.sharedcomponents.composables.AppDropDownMenu
 import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
@@ -176,7 +177,7 @@ private fun CircuitCalculatorScreenContent(
                 it -> units = it
             }
         }
-        Spacer(modifier = Modifier.height(12.dp))
+        AppDivider(modifier = Modifier.padding(top = 16.dp, bottom = 4.dp))
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
