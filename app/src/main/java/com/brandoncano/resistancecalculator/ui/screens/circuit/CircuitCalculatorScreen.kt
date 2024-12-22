@@ -22,13 +22,8 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
@@ -39,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.data.DropdownLists
+import com.brandoncano.resistancecalculator.model.circuit.Circuit
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.circuit.IsValidNumber
@@ -56,14 +52,13 @@ import com.brandoncano.sharedcomponents.text.textStyleLargeTitle
 @Composable
 fun CircuitCalculatorScreen(
     circuitVector: Int,
+    circuit: Circuit,
     openMenu: MutableState<Boolean>,
     reset: MutableState<Boolean>,
     onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
-    onValueChanged: (Boolean, Int) -> Unit,
-    totalResistance: MutableState<String>,
-    resistorInputs: SnapshotStateList<String>,
+    onValueChanged: (Boolean, Int, String) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -84,30 +79,24 @@ fun CircuitCalculatorScreen(
         },
     ) { paddingValues ->
         CircuitCalculatorScreenContent(
-            circuitVector = circuitVector,
             paddingValues = paddingValues,
+            circuitVector = circuitVector,
+            circuit = circuit,
             reset = reset,
             onValueChanged = onValueChanged,
-            totalResistance = totalResistance,
-            resistorInputs = resistorInputs,
         )
     }
 }
 
 @Composable
 private fun CircuitCalculatorScreenContent(
-    circuitVector: Int,
     paddingValues: PaddingValues,
+    circuitVector: Int,
+    circuit: Circuit,
     reset: MutableState<Boolean>,
-    onValueChanged: (Boolean, Int) -> Unit,
-    totalResistance: MutableState<String>,
-    resistorInputs: SnapshotStateList<String>,
+    onValueChanged: (Boolean, Int, String) -> Unit,
 ) {
     val sidePadding = dimensionResource(R.dimen.app_side_padding)
-    var sameValues by remember { mutableStateOf(false) }
-    var resistorCount by remember { mutableIntStateOf(2) }
-    var units by remember { mutableStateOf(Symbols.OHMS) }
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -127,7 +116,7 @@ private fun CircuitCalculatorScreenContent(
         )
         Spacer(modifier = Modifier.height(24.dp))
         Text(
-            text = "${totalResistance.value} $units",
+            text = "${circuit.totalResistance} ${circuit.units}",
             modifier = Modifier,
             style = textStyleLargeTitle()
         )
@@ -143,10 +132,9 @@ private fun CircuitCalculatorScreenContent(
             )
             Switch(
                 modifier = Modifier.padding(start = 16.dp),
-                checked = sameValues,
+                checked = circuit.sameValues,
                 onCheckedChange = {
-                    sameValues = it
-                    onValueChanged(sameValues, resistorCount)
+                    onValueChanged(it, circuit.resistorCount, circuit.units)
                 }
             )
         }
@@ -160,46 +148,45 @@ private fun CircuitCalculatorScreenContent(
                 modifier = Modifier
                     .weight(0.5f)
                     .padding(end = 8.dp),
-                selectedOption = resistorCount.toString(),
+                selectedOption = circuit.resistorCount.toString(),
                 items = DropdownLists.RESISTOR_COUNT_LIST,
-            ) { selectedValue ->
-                resistorCount = selectedValue.toIntOrNull() ?: 2
-                onValueChanged(sameValues, resistorCount)
+            ) {
+                val resistorCount = it.toIntOrNull() ?: 2
+                onValueChanged(circuit.sameValues, resistorCount, circuit.units)
             }
             AppDropDownMenu(
                 label = stringResource(id = R.string.circuit_units_label),
                 modifier = Modifier
                     .weight(0.5f)
                     .padding(start = 8.dp),
-                selectedOption = units,
+                selectedOption = circuit.units,
                 items = DropdownLists.UNITS_LIST,
-            ) {
-                it -> units = it
-            }
+                onOptionSelected = { onValueChanged(circuit.sameValues, circuit.resistorCount, it) }
+            )
         }
         AppDivider(modifier = Modifier.padding(top = 16.dp, bottom = 4.dp))
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            val fieldsToShow = if (sameValues) 1 else resistorCount
+            val fieldsToShow = if (circuit.sameValues) 1 else circuit.resistorCount
             repeat(fieldsToShow) { index ->
-                val labelText = if (sameValues) {
-                    stringResource(id = R.string.circuit_text_field_label, units)
+                val labelText = if (circuit.sameValues) {
+                    stringResource(id = R.string.circuit_text_field_label, circuit.units)
                 } else {
-                    stringResource(id = R.string.circuit_text_field_label_multiple, index + 1, units)
+                    stringResource(id = R.string.circuit_text_field_label_multiple, index + 1, circuit.units)
                 }
                 AppTextField(
                     label = labelText,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 8.dp),
-                    value = remember { mutableStateOf(resistorInputs[index]) },
+                    value = remember { mutableStateOf(circuit.resistorInputs[index]) },
                     reset = reset.value,
-                    isError = !IsValidNumber.execute(resistorInputs[index]),
+                    isError = !IsValidNumber.execute(circuit.resistorInputs[index]),
                 ) { newValue ->
-                    resistorInputs[index] = newValue
-                    onValueChanged(sameValues, resistorCount)
+                    circuit.resistorInputs[index] = newValue
+                    onValueChanged(circuit.sameValues, circuit.resistorCount, circuit.units)
                 }
             }
         }
@@ -213,14 +200,13 @@ private fun CircuitCalculatorScreenSeriesPreview() {
     ResistorCalculatorTheme {
         CircuitCalculatorScreen(
             circuitVector = R.drawable.img_series_resistors,
+            circuit = Circuit(),
             openMenu = remember { mutableStateOf(false) },
             reset = remember { mutableStateOf(false) },
             onNavigateBack = {},
             onClearSelectionsTapped = {},
             onAboutTapped = {},
-            onValueChanged = { _, _ -> },
-            totalResistance = remember { mutableStateOf("0.0") },
-            resistorInputs = remember { mutableStateListOf(*Array(8) { "" }) }
+            onValueChanged = { _, _, _ -> },
         )
     }
 }
@@ -231,15 +217,13 @@ private fun CircuitCalculatorScreenParallelPreview() {
     ResistorCalculatorTheme {
         CircuitCalculatorScreen(
             circuitVector = R.drawable.img_parallel_resistors,
+            circuit = Circuit(),
             openMenu = remember { mutableStateOf(false) },
             reset = remember { mutableStateOf(false) },
             onNavigateBack = {},
             onClearSelectionsTapped = {},
             onAboutTapped = {},
-            onValueChanged = { _, _ -> },
-            totalResistance = remember { mutableStateOf("0.0") },
-            resistorInputs = remember { mutableStateListOf(*Array(8) { "" }) }
+            onValueChanged = { _, _, _ -> },
         )
     }
 }
-
