@@ -172,11 +172,7 @@ private fun CircuitCalculatorScreenContent(
         ) {
             val fieldsToShow = if (circuit.sameValues) 1 else circuit.resistorCount
             repeat(fieldsToShow) { index ->
-                val labelText = if (circuit.sameValues) {
-                    stringResource(id = R.string.circuit_text_field_label, circuit.units)
-                } else {
-                    stringResource(id = R.string.circuit_text_field_label_multiple, index + 1, circuit.units)
-                }
+                val labelText = getResistanceLabelText(circuit.sameValues, circuit.units, index + 1)
                 AppTextField(
                     label = labelText,
                     modifier = Modifier
@@ -192,6 +188,15 @@ private fun CircuitCalculatorScreenContent(
             }
         }
         Spacer(modifier = Modifier.height(48.dp))
+    }
+}
+
+@Composable
+private fun getResistanceLabelText(sameValues: Boolean, units: String, count: Int): String {
+    return if (sameValues) {
+        stringResource(id = R.string.circuit_text_field_label, units)
+    } else {
+        stringResource(id = R.string.circuit_text_field_label_multiple, count, units)
     }
 }
 
