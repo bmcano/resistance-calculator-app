@@ -5,6 +5,7 @@
     <string name="title_value_to_color">Value to Color</string>
     <string name="title_smd">SMD Resistor</string>
     <string name="title_series_resistors">Series Resistors</string>
+    <string name="title_parallel_resistors">Parallel Resistors</string>
     <!-- OutlinedTextField hints -->
     <string name="number_band_hint1">First band</string>
     <string name="number_band_hint2">Second band</string>

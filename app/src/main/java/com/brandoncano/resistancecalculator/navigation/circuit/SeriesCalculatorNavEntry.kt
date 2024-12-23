@@ -32,6 +32,7 @@ fun NavGraphBuilder.seriesCalculatorScreen(
         val circuit by viewModel.circuit.collectAsState()
 
         CircuitCalculatorScreen(
+            circuitTitle = R.string.title_series_resistors,
             circuitVector = R.drawable.img_series_resistors,
             circuit = circuit,
             openMenu = openMenu,
@@ -48,7 +49,7 @@ fun NavGraphBuilder.seriesCalculatorScreen(
                 navigateToAbout(navHostController)
             },
             onValueChanged = { sameValues, resistorCount, units ->
-                viewModel.updateValues(sameValues, resistorCount, units)
+                viewModel.updateValues(sameValues, resistorCount, units, true)
             },
         )
     }

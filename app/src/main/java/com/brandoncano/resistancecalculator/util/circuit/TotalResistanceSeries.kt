@@ -5,14 +5,15 @@ package com.brandoncano.resistancecalculator.util.circuit
  */
 object TotalResistanceSeries {
 
-    fun execute(resistorValues: List<String>): String {
+    fun execute(sameValues: Boolean, resistorCount: Int, resistorValues: List<String>): String {
+        if (sameValues) {
+            val value = resistorValues.firstOrNull() ?: "0"
+            val req = resistorCount * (value.toDoubleOrNull() ?: 0.0)
+            return req.formatResistance()
+        }
+
         return resistorValues
             .sumOf { it.toDoubleOrNull() ?: 0.0 }
             .formatResistance()
-    }
-
-    fun execute(numberOfResistors: Int, resistorValue: String): String {
-        val req = numberOfResistors * (resistorValue.toDoubleOrNull() ?: 0.0)
-        return req.formatResistance()
     }
 }

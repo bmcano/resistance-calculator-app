@@ -32,6 +32,7 @@ fun NavGraphBuilder.parallelCalculatorScreen(
         val circuit by viewModel.circuit.collectAsState()
 
         CircuitCalculatorScreen(
+            circuitTitle = R.string.title_parallel_resistors,
             circuitVector = R.drawable.img_parallel_resistors,
             circuit = circuit,
             openMenu = openMenu,
@@ -48,7 +49,7 @@ fun NavGraphBuilder.parallelCalculatorScreen(
                 navigateToAbout(navHostController)
             },
             onValueChanged = { sameValues, resistorCount, units ->
-                viewModel.updateValues(sameValues, resistorCount, units)
+                viewModel.updateValues(sameValues, resistorCount, units, false)
             },
         )
     }

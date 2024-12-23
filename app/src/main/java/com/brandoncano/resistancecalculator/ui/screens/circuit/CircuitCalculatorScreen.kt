@@ -51,6 +51,7 @@ import com.brandoncano.sharedcomponents.text.textStyleLargeTitle
 
 @Composable
 fun CircuitCalculatorScreen(
+    circuitTitle: Int,
     circuitVector: Int,
     circuit: Circuit,
     openMenu: MutableState<Boolean>,
@@ -63,7 +64,7 @@ fun CircuitCalculatorScreen(
     Scaffold(
         topBar = {
             AppMenuTopAppBar(
-                titleText = stringResource(R.string.title_series_resistors),
+                titleText = stringResource(circuitTitle),
                 interactionSource = remember { MutableInteractionSource() },
                 showMenu = openMenu,
                 navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,
@@ -199,6 +200,7 @@ private fun CircuitCalculatorScreenContent(
 private fun CircuitCalculatorScreenSeriesPreview() {
     ResistorCalculatorTheme {
         CircuitCalculatorScreen(
+            circuitTitle = R.string.title_series_resistors,
             circuitVector = R.drawable.img_series_resistors,
             circuit = Circuit(),
             openMenu = remember { mutableStateOf(false) },
@@ -216,6 +218,7 @@ private fun CircuitCalculatorScreenSeriesPreview() {
 private fun CircuitCalculatorScreenParallelPreview() {
     ResistorCalculatorTheme {
         CircuitCalculatorScreen(
+            circuitTitle = R.string.title_parallel_resistors,
             circuitVector = R.drawable.img_parallel_resistors,
             circuit = Circuit(),
             openMenu = remember { mutableStateOf(false) },
