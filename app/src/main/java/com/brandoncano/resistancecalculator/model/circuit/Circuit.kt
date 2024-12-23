@@ -9,5 +9,5 @@ data class Circuit(
     val sameValues: Boolean = false,
     val resistorCount: Int = 2,
     val units: String = Symbols.OHMS,
-    val totalResistance: String = "0.0",
+    val totalResistance: String = "0",
 )

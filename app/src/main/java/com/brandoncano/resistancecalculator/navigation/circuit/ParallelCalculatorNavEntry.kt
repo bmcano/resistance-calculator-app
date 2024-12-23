@@ -49,6 +49,7 @@ fun NavGraphBuilder.parallelCalculatorScreen(
                 navigateToAbout(navHostController)
             },
             onValueChanged = { sameValues, resistorCount, units ->
+                reset.value = false
                 viewModel.updateValues(sameValues, resistorCount, units, false)
             },
         )

@@ -17,7 +17,10 @@ class CircuitViewModel : ViewModel() {
     }
 
     fun clear() {
-        _circuit.value = Circuit()
+        _circuit.value = Circuit(
+            resistorCount = _circuit.value.resistorCount,
+            units = _circuit.value.units,
+        )
     }
 
     private fun calculateTotalResistance(isSeriesCalculation: Boolean) {
