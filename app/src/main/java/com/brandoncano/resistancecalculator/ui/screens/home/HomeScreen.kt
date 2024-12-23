@@ -132,7 +132,7 @@ private fun HomeScreenContent(
                 onClick = onSeriesCalculatorTapped
             ),
             ArrowCardButtonContents(
-                imageVector = Icons.Outlined.Tune, // TODO - Alts could be: SyncAlt, DeviceHub
+                imageVector = Icons.Outlined.Tune,
                 text = stringResource(id = R.string.home_button_parallel_calculator),
                 onClick = onParallelCalculatorTapped
             ),

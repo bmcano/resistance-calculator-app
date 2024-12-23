@@ -16,7 +16,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _showThemeDialog = MutableStateFlow(false)
     val showThemeDialog: MutableStateFlow<Boolean> = _showThemeDialog
 
-
     init {
         val themePreference = ThemePreferences.THEME_PREFERENCE.loadIntData(application)
         _themeMode.value = ThemeMode.fromValue(themePreference)
