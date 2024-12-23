@@ -78,7 +78,7 @@ object ResistanceSmdFormatter {
                 val value = sigFigs.setNumberSignificantFigures(3)
                 return value.toString()
             }
-        } catch (e: NumberFormatException) {
+        } catch (_: NumberFormatException) {
             return resistance
         }
 

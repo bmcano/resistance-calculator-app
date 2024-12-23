@@ -1,5 +1,6 @@
 package com.brandoncano.resistancecalculator.util.resistor
 
+import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.util.MultiplierFromUnits
 
@@ -36,9 +37,12 @@ object IsValidResistance {
         val patterns = if (isThreeFourBand) validThreeFourBandPatterns else validFiveSixBandPatterns
         val isValidFormat = patterns.any { it.matches(input) }
         if (!isValidFormat) return false
+        if (!isThreeFourBand && resistor.units == Symbols.OHMS && Regex("""^0\.\d\d\d$""").matches(input)) {
+            return false
+        }
 
+        val minValue = 0.10
         val maxValue = if (isThreeFourBand) 99_000_000_000 else 999_000_000_000
-        val minValue = if (isThreeFourBand) 0.10 else 1.00
         val resistance = input.toDoubleOrNull() ?: return false
         val multiplier = MultiplierFromUnits.execute(resistor.units)
         val resistanceInOhms = resistance * multiplier

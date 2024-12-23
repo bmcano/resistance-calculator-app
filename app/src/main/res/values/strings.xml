@@ -1,9 +1,11 @@
 <resources>
-    <!-- Activity title -->
+    <!-- Screen titles -->
     <string name="app_name">Resistor Calculator</string>
     <string name="title_color_to_value">Color to Value</string>
     <string name="title_value_to_color">Value to Color</string>
     <string name="title_smd">SMD Resistor</string>
+    <string name="title_series_resistors">Series Resistors</string>
+    <string name="title_parallel_resistors">Parallel Resistors</string>
     <!-- OutlinedTextField hints -->
     <string name="number_band_hint1">First band</string>
     <string name="number_band_hint2">Second band</string>
@@ -15,8 +17,6 @@
     <string name="units_hint">Units</string>
     <string name="hint_smd_code">Code</string>
     <!-- Menu items -->
-    <string name="menu_value_to_color">Value to color</string>
-    <string name="menu_color_to_value">Color to value</string>
     <string name="menu_about">About the app</string>
     <string name="menu_app_theme">App appearance</string>
     <!-- Default text -->
@@ -34,7 +34,7 @@
     <!-- About screen/components text -->
     <string name="about_title">About The App</string>
     <string name="about_description">Description</string>
-    <string name="about_description_01">This app features calculators for both standard color-band resistors, capable of converting between color to value and value to color, as well as SMD resistors with three different code standards for determining resistance.</string>
+    <string name="about_description_01">This app includes a range of calculators to help determine and convert resistance values for standard color-band resistors, SMD resistors, and more, supporting a variety of coding standards and configurations.</string>
     <string name="about_description_02">This app follows the IEC 60062 and IEC 60063 international standards for resistor coding and calculations to help ensure accuracy. For more detailed information, you can refer to the IEC 60062/60063 pages below.</string>
     <string name="about_iec_header_text">International standard IEC 60062/60063</string>
     <string name="about_standard_iec_button">View resistor color code</string>
@@ -46,6 +46,8 @@
     <string name="home_button_color_to_value">Color to value</string>
     <string name="home_button_value_to_color">Value to color</string>
     <string name="home_button_smd">SMD resistor</string>
+    <string name="home_button_series_calculator">Resistors in series</string>
+    <string name="home_button_parallel_calculator">Resistors in parallel</string>
     <string name="home_our_apps_header_text">Our apps</string>
     <string name="home_button_rate_us">Rate this app on Google Play</string>
     <string name="home_button_view_apps">Check out our other apps</string>
@@ -65,6 +67,12 @@
     <string name="vtc_invalid_card_action">Use closest value</string>
     <string name="vtc_invalid_tolerance_label">Invalid tolerance for resistor type</string>
     <string name="vtc_invalid_tolerance_body">Adjust your selection to match the supported tolerances for a %1$s-band resistor.</string>
+    <!-- Series/Parallel screen text -->
+    <string name="circuit_use_same_values">Use the same resistor values?</string>
+    <string name="circuit_num_resistors_label">Number of resistors</string>
+    <string name="circuit_units_label">Units</string>
+    <string name="circuit_text_field_label">Resistance (%1$s)</string>
+    <string name="circuit_text_field_label_multiple">Resistance %1$s (%2$s)</string>
     <!-- Info screen/components text -->
     <string name="info_title">IEC 60062 Standard</string>
     <string name="info_title_3">IEC 60063 Standard</string>

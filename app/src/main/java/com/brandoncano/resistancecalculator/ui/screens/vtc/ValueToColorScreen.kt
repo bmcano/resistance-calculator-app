@@ -9,6 +9,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,7 +24,6 @@ import androidx.compose.material.icons.outlined.Looks4
 import androidx.compose.material.icons.outlined.Looks5
 import androidx.compose.material.icons.outlined.Looks6
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -33,6 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
@@ -42,7 +43,6 @@ import com.brandoncano.resistancecalculator.data.ESeriesCardContent
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppThemeMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.ColorToValueMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.Sdk
@@ -71,48 +71,6 @@ fun ValueToColorScreen(
     onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
-    onColorToValueTapped: () -> Unit,
-    onValueChanged: (String, String, String, String, Boolean) -> Unit,
-    onNavBarSelectionChanged: (Int) -> Unit,
-    onValidateResistanceTapped: () -> Unit,
-    onUseValueTapped: () -> String,
-    onLearnMoreTapped: () -> Unit,
-) {
-    Surface(modifier = Modifier.fillMaxSize()) {
-        ValueToColorScreenContent(
-            resistor = resistor,
-            navBarPosition = navBarPosition,
-            isError = isError,
-            openMenu = openMenu,
-            reset = reset,
-            eSeriesCardContent = eSeriesCardContent,
-            onOpenThemeDialog = onOpenThemeDialog,
-            onNavigateBack = onNavigateBack,
-            onClearSelectionsTapped = onClearSelectionsTapped,
-            onAboutTapped = onAboutTapped,
-            onColorToValueTapped = onColorToValueTapped,
-            onValueChanged = onValueChanged,
-            onNavBarSelectionChanged = onNavBarSelectionChanged,
-            onValidateResistanceTapped = onValidateResistanceTapped,
-            onUseValueTapped = onUseValueTapped,
-            onLearnMoreTapped = onLearnMoreTapped,
-        )
-    }
-}
-
-@Composable
-private fun ValueToColorScreenContent(
-    resistor: ResistorVtc,
-    navBarPosition: Int,
-    isError: Boolean,
-    openMenu: MutableState<Boolean>,
-    reset: MutableState<Boolean>,
-    eSeriesCardContent: ESeriesCardContent,
-    onOpenThemeDialog: () -> Unit,
-    onNavigateBack: () -> Unit,
-    onClearSelectionsTapped: () -> Unit,
-    onAboutTapped: () -> Unit,
-    onColorToValueTapped: () -> Unit,
     onValueChanged: (String, String, String, String, Boolean) -> Unit,
     onNavBarSelectionChanged: (Int) -> Unit,
     onValidateResistanceTapped: () -> Unit,
@@ -121,8 +79,6 @@ private fun ValueToColorScreenContent(
 ) {
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
     val picture = remember { Picture() }
-    val resistance = remember { mutableStateOf(resistor.resistance) }
-
     Scaffold(
         topBar = {
             AppMenuTopAppBar(
@@ -132,7 +88,6 @@ private fun ValueToColorScreenContent(
                 navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,
                 onNavigateBack = onNavigateBack,
             ) {
-                ColorToValueMenuItem(onColorToValueTapped)
                 ClearSelectionsMenuItem(onClearSelectionsTapped)
                 ShareTextMenuItem(
                     text = resistor.shareableText(),
@@ -181,78 +136,114 @@ private fun ValueToColorScreenContent(
             )
         }
     ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.CenterHorizontally
+        ValueToColorScreenContent(
+            paddingValues = paddingValues,
+            navBarSelection = navBarSelection,
+            picture = picture,
+            resistor = resistor,
+            isError = isError,
+            reset = reset,
+            eSeriesCardContent = eSeriesCardContent,
+            onValueChanged = onValueChanged,
+            onValidateResistanceTapped = onValidateResistanceTapped,
+            onUseValueTapped = onUseValueTapped,
+            onLearnMoreTapped = onLearnMoreTapped,
+        )
+    }
+}
+
+@Composable
+private fun ValueToColorScreenContent(
+    paddingValues: PaddingValues,
+    navBarSelection: Int,
+    picture: Picture,
+    resistor: ResistorVtc,
+    isError: Boolean,
+    reset: MutableState<Boolean>,
+    eSeriesCardContent: ESeriesCardContent,
+    onValueChanged: (String, String, String, String, Boolean) -> Unit,
+    onValidateResistanceTapped: () -> Unit,
+    onUseValueTapped: () -> String,
+    onLearnMoreTapped: () -> Unit,
+) {
+    val resistance = remember { mutableStateOf(resistor.resistance) }
+    val sidePadding = dimensionResource(R.dimen.app_side_padding)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(paddingValues)
+            .padding(horizontal = sidePadding),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        ResistorDisplay(picture, resistor, isError)
+        AppTextField(
+            label = stringResource(id = R.string.type_resistance_hint),
+            modifier = Modifier.padding(top = 32.dp),
+            value = resistance,
+            reset = reset.value,
+            isError = isError,
+            errorMessage = stringResource(id = R.string.error_invalid_resistance),
         ) {
-            ResistorDisplay(picture, resistor, isError)
-            AppTextField(
-                label = stringResource(id = R.string.type_resistance_hint),
-                modifier = Modifier.padding(top = 32.dp, start = 16.dp, end = 16.dp),
-                value = resistance,
-                reset = reset.value,
-                isError = isError,
-                errorMessage = stringResource(id = R.string.error_invalid_resistance),
-            ) {
-                resistance.value = it
-                onValueChanged(resistance.value, resistor.units, resistor.band5, resistor.band6, false)
-            }
-            AppDropDownMenu(
-                label = stringResource(id = R.string.units_hint),
-                modifier = Modifier.padding(top = 12.dp),
-                selectedOption = resistor.units,
-                items = DropdownLists.UNITS_LIST,
-                reset = reset.value,
-                onOptionSelected =  { onValueChanged(resistance.value, it, resistor.band5, resistor.band6, true) },
-            )
-            AnimatedVisibility(
-                visible = navBarSelection != 0,
-                enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
-                exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically(),
-            ) {
-                ImageTextDropDownMenu(
-                    modifier = Modifier.padding(top = 12.dp),
-                    label = R.string.tolerance_band_hint,
-                    selectedOption = resistor.band5,
-                    items = DropdownLists.TOLERANCE_LIST,
-                    reset = reset.value,
-                    isValueToColor = true,
-                    onOptionSelected = { onValueChanged(resistance.value, resistor.units, it, resistor.band6, true) },
-                )
-            }
-            AnimatedVisibility(
-                visible = navBarSelection == 3,
-                enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
-                exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically(),
-            ) {
-                ImageTextDropDownMenu(
-                    modifier = Modifier.padding(top = 12.dp),
-                    label = R.string.ppm_band_hint,
-                    selectedOption = resistor.band6,
-                    items = DropdownLists.PPM_LIST,
-                    reset = reset.value,
-                    isValueToColor = true,
-                    onOptionSelected = { onValueChanged(resistance.value, resistor.units, resistor.band5, it, true) },
-                )
-            }
-            Spacer(modifier = Modifier.height(24.dp))
-            AppButton(
-                label = stringResource(R.string.vtc_validate_e_series_button),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                onClick = onValidateResistanceTapped,
-            )
-            ESeriesCard(
-                eSeriesCardContent = eSeriesCardContent,
-                onLearnMoreTapped = onLearnMoreTapped,
-                onUseValueTapped = { resistance.value = onUseValueTapped() }
-            )
-            Spacer(modifier = Modifier.height(24.dp))
+            resistance.value = it
+            onValueChanged(resistance.value, resistor.units, resistor.band5, resistor.band6, false)
         }
+        AppDropDownMenu(
+            label = stringResource(id = R.string.units_hint),
+            modifier = Modifier.padding(top = 12.dp),
+            selectedOption = resistor.units,
+            items = DropdownLists.UNITS_LIST,
+            reset = reset.value,
+            onOptionSelected = {
+                onValueChanged(resistance.value, it, resistor.band5, resistor.band6, true)
+            },
+        )
+        AnimatedVisibility(
+            visible = navBarSelection != 0,
+            enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
+            exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically(),
+        ) {
+            ImageTextDropDownMenu(
+                modifier = Modifier.padding(top = 12.dp),
+                label = R.string.tolerance_band_hint,
+                selectedOption = resistor.band5,
+                items = DropdownLists.TOLERANCE_LIST,
+                reset = reset.value,
+                isValueToColor = true,
+                onOptionSelected = {
+                    onValueChanged(resistance.value, resistor.units, it, resistor.band6, true)
+                },
+            )
+        }
+        AnimatedVisibility(
+            visible = navBarSelection == 3,
+            enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
+            exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically(),
+        ) {
+            ImageTextDropDownMenu(
+                modifier = Modifier.padding(top = 12.dp),
+                label = R.string.ppm_band_hint,
+                selectedOption = resistor.band6,
+                items = DropdownLists.PPM_LIST,
+                reset = reset.value,
+                isValueToColor = true,
+                onOptionSelected = {
+                    onValueChanged(resistance.value, resistor.units, resistor.band5, it, true)
+                },
+            )
+        }
+        Spacer(modifier = Modifier.height(24.dp))
+        AppButton(
+            label = stringResource(R.string.vtc_validate_e_series_button),
+            modifier = Modifier.fillMaxWidth(),
+            onClick = onValidateResistanceTapped,
+        )
+        ESeriesCard(
+            eSeriesCardContent = eSeriesCardContent,
+            onLearnMoreTapped = onLearnMoreTapped,
+            onUseValueTapped = { resistance.value = onUseValueTapped() }
+        )
+        Spacer(modifier = Modifier.height(24.dp))
     }
 }
 
@@ -271,7 +262,6 @@ private fun ValueToColorScreenPreview() {
             onNavigateBack = {},
             onClearSelectionsTapped = {},
             onAboutTapped = {},
-            onColorToValueTapped = {},
             onValueChanged = { _, _, _, _, _ -> },
             onNavBarSelectionChanged = { _ -> },
             onValidateResistanceTapped = {},

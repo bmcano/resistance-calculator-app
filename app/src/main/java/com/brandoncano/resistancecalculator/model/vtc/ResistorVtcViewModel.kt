@@ -26,6 +26,9 @@ class ResistorVtcViewModel(context: Context) : ViewModel() {
     private val _eSeriesCardContent: MutableStateFlow<ESeriesCardContent> = MutableStateFlow(ESeriesCardContent.NoContent)
     val eSeriesCardContent: StateFlow<ESeriesCardContent> get() = _eSeriesCardContent
 
+    private val _closestStandardValue = MutableStateFlow(10.0)
+    val closestStandardValue: StateFlow<Double> get() = _closestStandardValue
+
     init {
         viewModelScope.launch {
             val loadedResistor = repository.loadResistor()
@@ -69,6 +72,10 @@ class ResistorVtcViewModel(context: Context) : ViewModel() {
 
     fun updateCardContent(content: ESeriesCardContent) {
         _eSeriesCardContent.value = content
+    }
+
+    fun updateClosestStandardValue(value: Double) {
+        _closestStandardValue.value = value
     }
 
     private fun updateErrorState() {

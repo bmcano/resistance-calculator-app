@@ -9,6 +9,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -23,7 +24,6 @@ import androidx.compose.material.icons.outlined.Looks4
 import androidx.compose.material.icons.outlined.Looks5
 import androidx.compose.material.icons.outlined.Looks6
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -34,6 +34,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
@@ -43,7 +44,6 @@ import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppThemeMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
-import com.brandoncano.resistancecalculator.ui.composables.ValueToColorMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.Sdk
 import com.brandoncano.resistancecalculator.util.resistor.shareableText
@@ -70,47 +70,12 @@ fun ColorToValueScreen(
     onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
-    onValueToColorTapped: () -> Unit,
-    onUpdateBand: (Int, String) -> Unit,
-    onNavBarSelectionChanged: (Int) -> Unit,
-    onLearnColorCodesTapped: () -> Unit,
-) {
-    Surface(modifier = Modifier.fillMaxSize()) {
-        ColorToValueScreenContent(
-            openMenu = openMenu,
-            reset = reset,
-            resistor = resistor,
-            navBarPosition = navBarPosition,
-            onOpenThemeDialog = onOpenThemeDialog,
-            onNavigateBack = onNavigateBack,
-            onClearSelectionsTapped = onClearSelectionsTapped,
-            onAboutTapped = onAboutTapped,
-            onValueToColorTapped = onValueToColorTapped,
-            onUpdateBand = onUpdateBand,
-            onNavBarSelectionChanged = onNavBarSelectionChanged,
-            onLearnColorCodesTapped = onLearnColorCodesTapped,
-        )
-    }
-}
-
-@Composable
-private fun ColorToValueScreenContent(
-    openMenu: MutableState<Boolean>,
-    reset: MutableState<Boolean>,
-    resistor: ResistorCtv,
-    navBarPosition: Int,
-    onOpenThemeDialog: () -> Unit,
-    onNavigateBack:  () -> Unit,
-    onClearSelectionsTapped: () -> Unit,
-    onAboutTapped: () -> Unit,
-    onValueToColorTapped: () -> Unit,
     onUpdateBand: (Int, String) -> Unit,
     onNavBarSelectionChanged: (Int) -> Unit,
     onLearnColorCodesTapped: () -> Unit,
 ) {
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
     val picture = remember { Picture() }
-
     Scaffold(
         topBar = {
             AppMenuTopAppBar(
@@ -120,7 +85,6 @@ private fun ColorToValueScreenContent(
                 navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,
                 onNavigateBack = onNavigateBack,
             ) {
-                ValueToColorMenuItem(onValueToColorTapped)
                 ClearSelectionsMenuItem(onClearSelectionsTapped)
                 ShareTextMenuItem(
                     text = resistor.shareableText(),
@@ -169,99 +133,123 @@ private fun ColorToValueScreenContent(
             )
         }
     ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.CenterHorizontally,
+        ColorToValueScreenContent(
+            paddingValues = paddingValues,
+            picture = picture,
+            reset = reset,
+            resistor = resistor,
+            navBarSelection = navBarSelection,
+            onUpdateBand = onUpdateBand,
+            onLearnColorCodesTapped = onLearnColorCodesTapped,
+        )
+    }
+}
+
+@Composable
+private fun ColorToValueScreenContent(
+    paddingValues: PaddingValues,
+    picture: Picture,
+    reset: MutableState<Boolean>,
+    resistor: ResistorCtv,
+    navBarSelection: Int,
+    onUpdateBand: (Int, String) -> Unit,
+    onLearnColorCodesTapped: () -> Unit,
+) {
+    val sidePadding = dimensionResource(R.dimen.app_side_padding)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(paddingValues)
+            .padding(horizontal = sidePadding)
+            ,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        ResistorDisplay(picture, resistor)
+        ImageTextDropDownMenu(
+            modifier = Modifier.padding(top = 32.dp),
+            label = R.string.number_band_hint1,
+            selectedOption = resistor.band1,
+            items = DropdownLists.NUMBER_LIST_NO_BLACK,
+            reset = reset.value,
+            onOptionSelected = { onUpdateBand(1, it) },
+        )
+        ImageTextDropDownMenu(
+            modifier = Modifier.padding(top = 12.dp),
+            label = R.string.number_band_hint2,
+            selectedOption = resistor.band2,
+            items = DropdownLists.NUMBER_LIST,
+            reset = reset.value,
+            onOptionSelected = {
+                onUpdateBand(2, it)
+            },
+        )
+        AnimatedVisibility(
+            visible = navBarSelection == 2 || navBarSelection == 3,
+            enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
+            exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically()
         ) {
-            ResistorDisplay(picture, resistor)
-            ImageTextDropDownMenu(
-                modifier = Modifier.padding(top = 32.dp),
-                label = R.string.number_band_hint1,
-                selectedOption = resistor.band1,
-                items = DropdownLists.NUMBER_LIST_NO_BLACK,
-                reset = reset.value,
-                onOptionSelected = { onUpdateBand(1, it) },
-            )
             ImageTextDropDownMenu(
                 modifier = Modifier.padding(top = 12.dp),
-                label = R.string.number_band_hint2,
-                selectedOption = resistor.band2,
+                label = R.string.number_band_hint3,
+                selectedOption = resistor.band3,
                 items = DropdownLists.NUMBER_LIST,
                 reset = reset.value,
-                onOptionSelected = {
-                    onUpdateBand(2, it)
-                },
+                onOptionSelected = { onUpdateBand(3, it) },
             )
-            AnimatedVisibility(
-                visible = navBarSelection == 2 || navBarSelection == 3,
-                enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
-                exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically()
-            ) {
-                ImageTextDropDownMenu(
-                    modifier = Modifier.padding(top = 12.dp),
-                    label = R.string.number_band_hint3,
-                    selectedOption = resistor.band3,
-                    items = DropdownLists.NUMBER_LIST,
-                    reset = reset.value,
-                    onOptionSelected = { onUpdateBand(3, it) },
-                )
-            }
+        }
+        ImageTextDropDownMenu(
+            modifier = Modifier.padding(top = 12.dp),
+            label = R.string.multiplier_band_hint,
+            selectedOption = resistor.band4,
+            items = DropdownLists.MULTIPLIER_LIST,
+            reset = reset.value,
+            onOptionSelected = { onUpdateBand(4, it) },
+        )
+        AnimatedVisibility(
+            visible = navBarSelection != 0,
+            enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
+            exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically()
+        ) {
             ImageTextDropDownMenu(
                 modifier = Modifier.padding(top = 12.dp),
-                label = R.string.multiplier_band_hint,
-                selectedOption = resistor.band4,
-                items = DropdownLists.MULTIPLIER_LIST,
+                label = R.string.tolerance_band_hint,
+                selectedOption = resistor.band5,
+                items = DropdownLists.TOLERANCE_LIST,
                 reset = reset.value,
-                onOptionSelected = { onUpdateBand(4, it) },
+                onOptionSelected = { onUpdateBand(5, it) },
             )
-            AnimatedVisibility(
-                visible = navBarSelection != 0,
-                enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
-                exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically()
-            ) {
-                ImageTextDropDownMenu(
-                    modifier = Modifier.padding(top = 12.dp),
-                    label = R.string.tolerance_band_hint,
-                    selectedOption = resistor.band5,
-                    items = DropdownLists.TOLERANCE_LIST,
-                    reset = reset.value,
-                    onOptionSelected = { onUpdateBand(5, it) },
-                )
-            }
-            AnimatedVisibility(
-                visible = navBarSelection == 3,
-                enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
-                exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically()
-            ) {
-                ImageTextDropDownMenu(
-                    modifier = Modifier.padding(top = 12.dp),
-                    label = R.string.ppm_band_hint,
-                    selectedOption = resistor.band6,
-                    items = DropdownLists.PPM_LIST,
-                    reset = reset.value,
-                    onOptionSelected = { onUpdateBand(6, it) },
-                )
-            }
-            AppDivider(modifier = Modifier.padding(vertical = 24.dp, horizontal = 16.dp))
-            Column(horizontalAlignment = Alignment.Start) {
-                Text(
-                    text = stringResource(R.string.ctv_headline_text),
-                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
-                    style = textStyleHeadline(),
-                )
-                AppArrowCardButton(
-                    ArrowCardButtonContents(
-                        imageVector = Icons.Outlined.Lightbulb,
-                        text = stringResource(R.string.ctv_button_text),
-                        onClick = onLearnColorCodesTapped,
-                    )
-                )
-            }
-            Spacer(modifier = Modifier.height(24.dp))
         }
+        AnimatedVisibility(
+            visible = navBarSelection == 3,
+            enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
+            exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically()
+        ) {
+            ImageTextDropDownMenu(
+                modifier = Modifier.padding(top = 12.dp),
+                label = R.string.ppm_band_hint,
+                selectedOption = resistor.band6,
+                items = DropdownLists.PPM_LIST,
+                reset = reset.value,
+                onOptionSelected = { onUpdateBand(6, it) },
+            )
+        }
+        AppDivider(modifier = Modifier.padding(vertical = 24.dp))
+        Column(horizontalAlignment = Alignment.Start) {
+            Text(
+                text = stringResource(R.string.ctv_headline_text),
+                modifier = Modifier.padding(bottom = 16.dp),
+                style = textStyleHeadline(),
+            )
+            AppArrowCardButton(
+                ArrowCardButtonContents(
+                    imageVector = Icons.Outlined.Lightbulb,
+                    text = stringResource(R.string.ctv_button_text),
+                    onClick = onLearnColorCodesTapped,
+                )
+            )
+        }
+        Spacer(modifier = Modifier.height(24.dp))
     }
 }
 
@@ -278,7 +266,6 @@ private fun ColorToValueScreen4BandPreview() {
             onNavigateBack = {},
             onClearSelectionsTapped = {},
             onAboutTapped = {},
-            onValueToColorTapped = {},
             onUpdateBand = { _, _ -> },
             onNavBarSelectionChanged = { _ -> },
             onLearnColorCodesTapped = {},

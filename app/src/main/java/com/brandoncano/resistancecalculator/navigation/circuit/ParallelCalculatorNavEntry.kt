@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.navigation.calculators
+package com.brandoncano.resistancecalculator.navigation.circuit
 
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
@@ -6,42 +6,37 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
-import com.brandoncano.resistancecalculator.model.ctv.ResistorCtvViewModel
+import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.model.circuit.CircuitViewModel
 import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
-import com.brandoncano.resistancecalculator.navigation.navigateToColorCodeIec
-import com.brandoncano.resistancecalculator.ui.screens.ctv.ColorToValueScreen
+import com.brandoncano.resistancecalculator.ui.screens.circuit.CircuitCalculatorScreen
 
-fun NavGraphBuilder.colorToValueScreen(
+fun NavGraphBuilder.parallelCalculatorScreen(
     navHostController: NavHostController,
-    onOpenThemeDialog: () -> Unit,
 ) {
     composable(
-        route = Screen.ColorToValue.route,
+        route = Screen.ParallelCalculator.route,
         enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
         exitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
-        val context = LocalContext.current
         val focusManager = LocalFocusManager.current
         val openMenu = remember { mutableStateOf(false) }
         val reset = remember { mutableStateOf(false) }
-        val viewModel: ResistorCtvViewModel = viewModel(factory = ResistorViewModelFactory(context))
-        val resistor by viewModel.resistor.collectAsState()
-        val navBarSelection by viewModel.navBarSelection.collectAsState()
+        val viewModel: CircuitViewModel = viewModel()
+        val circuit by viewModel.circuit.collectAsState()
 
-        ColorToValueScreen(
+        CircuitCalculatorScreen(
+            circuitTitle = R.string.title_parallel_resistors,
+            circuitVector = R.drawable.img_parallel_resistors,
+            circuit = circuit,
             openMenu = openMenu,
             reset = reset,
-            resistor = resistor,
-            navBarPosition = navBarSelection,
-            onOpenThemeDialog = onOpenThemeDialog,
             onNavigateBack = { navHostController.popBackStack() },
             onClearSelectionsTapped = {
                 openMenu.value = false
@@ -53,14 +48,10 @@ fun NavGraphBuilder.colorToValueScreen(
                 openMenu.value = false
                 navigateToAbout(navHostController)
             },
-            onUpdateBand = { bandNumber, color ->
+            onValueChanged = { sameValues, resistorCount, units ->
                 reset.value = false
-                viewModel.updateBand(bandNumber, color)
+                viewModel.updateValues(sameValues, resistorCount, units, false)
             },
-            onNavBarSelectionChanged = { selection ->
-                viewModel.saveNavBarSelection(selection)
-            },
-            onLearnColorCodesTapped = { navigateToColorCodeIec(navHostController) },
         )
     }
 }

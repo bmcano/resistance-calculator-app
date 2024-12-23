@@ -62,4 +62,5 @@ object DropdownLists {
     )
 
     val UNITS_LIST = listOf(Symbols.OHMS, Symbols.KOHMS, Symbols.MOHMS, Symbols.GOHMS)
+    val RESISTOR_COUNT_LIST = listOf("2", "3", "4", "5", "6", "7", "8")
 }

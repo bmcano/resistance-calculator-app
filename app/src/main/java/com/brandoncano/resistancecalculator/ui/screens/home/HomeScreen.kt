@@ -2,6 +2,7 @@ package com.brandoncano.resistancecalculator.ui.screens.home
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -10,9 +11,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Colorize
+import androidx.compose.material.icons.outlined.LinearScale
 import androidx.compose.material.icons.outlined.Memory
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material3.Surface
+import androidx.compose.material.icons.outlined.Tune
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -20,6 +23,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
@@ -42,17 +46,32 @@ fun HomeScreen(
     onColorToValueTapped: () -> Unit,
     onValueToColorTapped: () -> Unit,
     onSmdTapped: () -> Unit,
+    onSeriesCalculatorTapped: () -> Unit,
+    onParallelCalculatorTapped: () -> Unit,
     onRateThisAppTapped: () -> Unit,
     onViewOurAppsTapped: () -> Unit,
 ) {
-    Surface(modifier = Modifier.fillMaxSize()) {
+    Scaffold(
+        topBar = {
+            AppMenuTopAppBar(
+                titleText = stringResource(R.string.app_name),
+                interactionSource = remember { MutableInteractionSource() },
+                showMenu = openMenu,
+                content = {
+                    FeedbackMenuItem(Symbols.APP_NAME, openMenu)
+                    AppThemeMenuItem(openMenu, onOpenThemeDialog)
+                    AboutAppMenuItem(onAboutTapped)
+                }
+            )
+        },
+    ) { paddingValues ->
         HomeScreenContent(
-            openMenu = openMenu,
-            onOpenThemeDialog = onOpenThemeDialog,
-            onAboutTapped = onAboutTapped,
+            paddingValues = paddingValues,
             onColorToValueTapped = onColorToValueTapped,
             onValueToColorTapped = onValueToColorTapped,
             onSmdTapped = onSmdTapped,
+            onSeriesCalculatorTapped = onSeriesCalculatorTapped,
+            onParallelCalculatorTapped = onParallelCalculatorTapped,
             onRateThisAppTapped = onRateThisAppTapped,
             onViewOurAppsTapped = onViewOurAppsTapped,
         )
@@ -61,44 +80,33 @@ fun HomeScreen(
 
 @Composable
 private fun HomeScreenContent(
-    openMenu: MutableState<Boolean>,
-    onOpenThemeDialog: () -> Unit,
-    onAboutTapped: () -> Unit,
+    paddingValues: PaddingValues,
     onColorToValueTapped: () -> Unit,
     onValueToColorTapped: () -> Unit,
     onSmdTapped: () -> Unit,
+    onSeriesCalculatorTapped: () -> Unit,
+    onParallelCalculatorTapped: () -> Unit,
     onRateThisAppTapped: () -> Unit,
     onViewOurAppsTapped: () -> Unit,
 ) {
+    val sidePadding = dimensionResource(R.dimen.app_side_padding)
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
+            .verticalScroll(rememberScrollState())
+            .padding(paddingValues)
+            .padding(horizontal = sidePadding),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        AppMenuTopAppBar(
-            titleText = stringResource(R.string.app_name),
-            interactionSource = remember { MutableInteractionSource() },
-            showMenu = openMenu,
-            navigationIcon = null,
-            onNavigateBack = {},
-        ) {
-            FeedbackMenuItem(Symbols.APP_NAME, openMenu)
-            AppThemeMenuItem(openMenu, onOpenThemeDialog)
-            AboutAppMenuItem(onAboutTapped)
-        }
-
         AppIcon()
-        Spacer(modifier = Modifier.height(32.dp))
-
+        Spacer(modifier = Modifier.height(20.dp))
         Text(
             text = stringResource(id = R.string.home_calculators_header_text),
             modifier = Modifier
-                .padding(horizontal = 16.dp)
+                .padding(vertical = 12.dp)
                 .align(Alignment.Start),
             style = textStyleHeadline(),
         )
-        Spacer(modifier = Modifier.height(12.dp))
         AppArrowCardButton(
             ArrowCardButtonContents(
                 imageVector = Icons.Outlined.Colorize,
@@ -110,16 +118,25 @@ private fun HomeScreenContent(
                 text = stringResource(id = R.string.home_button_value_to_color),
                 onClick = onValueToColorTapped
             ),
-        )
-        Spacer(modifier = Modifier.height(12.dp))
-        AppArrowCardButton(
             ArrowCardButtonContents(
                 imageVector = Icons.Outlined.Memory,
                 text = stringResource(id = R.string.home_button_smd),
                 onClick = onSmdTapped
-            )
+            ),
         )
-
+        Spacer(modifier = Modifier.height(16.dp))
+        AppArrowCardButton(
+            ArrowCardButtonContents(
+                imageVector = Icons.Outlined.LinearScale,
+                text = stringResource(id = R.string.home_button_series_calculator),
+                onClick = onSeriesCalculatorTapped
+            ),
+            ArrowCardButtonContents(
+                imageVector = Icons.Outlined.Tune,
+                text = stringResource(id = R.string.home_button_parallel_calculator),
+                onClick = onParallelCalculatorTapped
+            ),
+        )
         Spacer(modifier = Modifier.height(32.dp))
         OurAppsButtons(
             onRateThisAppTapped = onRateThisAppTapped,
@@ -140,6 +157,8 @@ private fun HomePreview() {
             onColorToValueTapped = {},
             onValueToColorTapped = {},
             onSmdTapped = {},
+            onSeriesCalculatorTapped = {},
+            onParallelCalculatorTapped = {},
             onRateThisAppTapped = {},
             onViewOurAppsTapped = {},
         )

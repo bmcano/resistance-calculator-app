@@ -10,7 +10,9 @@ sealed class Screen(val route: String) {
     data object LearnColorCodes : Screen("color_to_value/learn")
     data object LearnPreferredValues : Screen("value_to_color/learn")
     data object LearnSmdCodes : Screen("smd/learn")
+    data object ParallelCalculator: Screen("parallel_calculator")
     data object Smd: Screen("smd")
+    data object SeriesCalculator: Screen("series_calculator")
     data object ValueToColor: Screen("value_to_color")
     data object ViewOurApps : Screen("view_our_apps")
 }

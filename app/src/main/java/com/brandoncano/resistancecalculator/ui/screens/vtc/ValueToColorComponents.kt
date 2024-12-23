@@ -141,7 +141,7 @@ private fun ESeriesCardContent(
     val color = if (isValueValid) validGreen else warningGold
     AppCard(
         modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp, top = 12.dp)
+            .padding(top = 12.dp)
             .fillMaxWidth()
     ) {
         Row(
