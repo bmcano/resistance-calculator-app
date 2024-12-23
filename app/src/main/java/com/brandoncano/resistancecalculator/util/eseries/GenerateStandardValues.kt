@@ -10,7 +10,7 @@ object GenerateStandardValues {
     fun execute(eSeriesList: List<Int>): List<Double> {
         val standardValues = mutableListOf<Double>()
         val exponents = -2..9 // from 0.01Ω to 1GΩ
-        for (exponent in exponents) {
+        exponents.forEach { exponent ->
             val multiplier = 10.0.pow(exponent)
             for (eValue in eSeriesList) {
                 val standardValue = eValue * multiplier
