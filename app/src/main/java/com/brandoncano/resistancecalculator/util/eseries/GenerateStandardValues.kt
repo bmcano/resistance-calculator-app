@@ -12,7 +12,7 @@ object GenerateStandardValues {
         val exponents = -2..9 // from 0.01Ω to 1GΩ
         exponents.forEach { exponent ->
             val multiplier = 10.0.pow(exponent)
-            for (eValue in eSeriesList) {
+            eSeriesList.forEach { eValue ->
                 val standardValue = eValue * multiplier
                 standardValues.add(standardValue.roundToTwoDecimalPlaces())
             }

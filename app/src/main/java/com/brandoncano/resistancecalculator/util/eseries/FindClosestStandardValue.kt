@@ -10,7 +10,7 @@ object FindClosestStandardValue {
     fun execute(resistanceValue: Double, standardValues: List<Double>): Double {
         var closestValue = standardValues[0]
         var minDiff = abs(resistanceValue - closestValue)
-        for (value in standardValues) {
+        standardValues.forEach { value ->
             val diff = abs(resistanceValue - value)
             if (diff < minDiff) {
                 minDiff = diff
