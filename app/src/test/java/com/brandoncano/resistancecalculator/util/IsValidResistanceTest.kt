@@ -54,7 +54,6 @@ class IsValidResistanceTest {
         assertFalse(IsValidResistance.execute(resistor, "0012"))
         assertFalse(IsValidResistance.execute(resistor, "012"))
         assertFalse(IsValidResistance.execute(resistor, "001"))
-        assertFalse(IsValidResistance.execute(resistor, ".12"))
         assertFalse(IsValidResistance.execute(resistor, ".01"))
         assertFalse(IsValidResistance.execute(resistor, "0.123"))
         assertFalse(IsValidResistance.execute(resistor, "0.0123"))
@@ -96,6 +95,7 @@ class IsValidResistanceTest {
         resistor.units = S.OHMS
         resistor.navBarSelection = 2
         assertTrue(IsValidResistance.execute(resistor, "0"))
+        assertTrue(IsValidResistance.execute(resistor, "0.62"))
         assertTrue(IsValidResistance.execute(resistor, "1"))
         assertTrue(IsValidResistance.execute(resistor, "1.0"))
         assertTrue(IsValidResistance.execute(resistor, "1.00"))
