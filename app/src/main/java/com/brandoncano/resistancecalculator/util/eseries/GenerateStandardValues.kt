@@ -10,11 +10,11 @@ object GenerateStandardValues {
     fun execute(eSeriesList: List<Int>): List<Double> {
         val standardValues = mutableListOf<Double>()
         val exponents = -2..9 // from 0.01Ω to 1GΩ
-        for (exp in exponents) {
-            val multiplier = 10.0.pow(exp)
+        for (exponent in exponents) {
+            val multiplier = 10.0.pow(exponent)
             for (eValue in eSeriesList) {
-                // Note: rounded of floating point errors is handled in the RoundStandardValue function
-                standardValues.add(eValue * multiplier)
+                val standardValue = eValue * multiplier
+                standardValues.add(standardValue.roundToTwoDecimalPlaces())
             }
         }
         return standardValues
