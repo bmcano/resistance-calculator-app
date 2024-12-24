@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Apps
+import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Grade
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -76,6 +78,11 @@ fun OurAppsButtons(
                 imageVector = Icons.Outlined.Apps,
                 text = stringResource(id = R.string.home_button_view_apps),
                 onClick = onViewOurAppsTapped,
+            ),
+            ArrowCardButtonContents(
+                imageVector = Icons.Outlined.FavoriteBorder,
+                text = "Donate",
+                onClick = {},
             ),
         )
     }

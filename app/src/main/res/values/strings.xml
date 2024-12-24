@@ -48,7 +48,7 @@
     <string name="home_button_smd">SMD resistor</string>
     <string name="home_button_series_calculator">Resistors in series</string>
     <string name="home_button_parallel_calculator">Resistors in parallel</string>
-    <string name="home_our_apps_header_text">Our apps</string>
+    <string name="home_our_apps_header_text">Support us</string>
     <string name="home_button_rate_us">Rate this app on Google Play</string>
     <string name="home_button_view_apps">Check out our other apps</string>
     <!-- SMD screen/components text -->
