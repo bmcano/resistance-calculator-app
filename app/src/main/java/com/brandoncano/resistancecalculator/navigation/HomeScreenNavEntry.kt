@@ -35,6 +35,7 @@ fun NavGraphBuilder.homeScreen(
             onParallelCalculatorTapped = { navigateToParallelCalculator(navHostController) },
             onRateThisAppTapped = { navigateToGooglePlay(context) },
             onViewOurAppsTapped = { navigateToOurApps(navHostController) },
+            onDonateTapped = { navigateToDonate(navHostController) },
         )
     }
 }

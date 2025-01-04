@@ -28,6 +28,7 @@ fun NavGraphBuilder.aboutScreen(
             onViewSmdCodeIecTapped = { navigateToSmdCodeIec(navHostController) },
             onRateThisAppTapped = { navigateToGooglePlay(context) },
             onViewOurAppsTapped = { navigateToOurApps(navHostController) },
+            onDonateTapped = { navigateToDonate(navHostController) },
         )
     }
 }

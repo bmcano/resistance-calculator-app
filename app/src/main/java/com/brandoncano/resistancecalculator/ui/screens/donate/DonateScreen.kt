@@ -70,7 +70,7 @@ fun DonateScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = sidePadding)
-                    .padding(vertical = 16.dp)
+                    .padding(vertical = 24.dp)
                     .defaultMinSize(minHeight = 56.dp),
                 enabled = selectedAmount != null,
                 shape = MaterialTheme.shapes.medium,

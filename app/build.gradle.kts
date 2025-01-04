@@ -12,8 +12,8 @@ android {
         applicationId = "com.brandoncano.resistancecalculator"
         minSdk = 21
         targetSdk = 35
-        versionCode = 25 // for 3.6.0
-        versionName = "3.6.0"
+        versionCode = 25 // for 3.6.0 - unsure for donate addition
+        versionName = "3.x.x-donate"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -72,6 +72,8 @@ dependencies {
     implementation(libs.androidx.compose.runtime.livedata)
     implementation(libs.androidx.compose.material.icons)
     implementation(libs.androidx.compose.material3)
+    // com.android
+    implementation(libs.billing.client)
     // com.google
     implementation(libs.gson)
     // unit testing

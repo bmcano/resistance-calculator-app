@@ -45,6 +45,7 @@ fun AboutScreen(
     onViewSmdCodeIecTapped: () -> Unit,
     onRateThisAppTapped: () -> Unit,
     onViewOurAppsTapped: () -> Unit,
+    onDonateTapped: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -63,6 +64,7 @@ fun AboutScreen(
             onViewSmdCodeIecTapped = onViewSmdCodeIecTapped,
             onRateThisAppTapped = onRateThisAppTapped,
             onViewOurAppsTapped = onViewOurAppsTapped,
+            onDonateTapped = onDonateTapped,
         )
     }
 }
@@ -76,6 +78,7 @@ private fun AboutScreenContent(
     onViewSmdCodeIecTapped: () -> Unit,
     onRateThisAppTapped: () -> Unit,
     onViewOurAppsTapped: () -> Unit,
+    onDonateTapped: () -> Unit,
 ) {
     val sidePadding = dimensionResource(R.dimen.app_side_padding)
     Column(
@@ -145,6 +148,7 @@ private fun AboutScreenContent(
         OurAppsButtons(
             onRateThisAppTapped = onRateThisAppTapped,
             onViewOurAppsTapped = onViewOurAppsTapped,
+            onDonateTapped = onDonateTapped,
         )
         Spacer(modifier = Modifier.height(48.dp))
     }
@@ -162,6 +166,7 @@ private fun AboutPreview() {
             onViewSmdCodeIecTapped = {},
             onRateThisAppTapped = {},
             onViewOurAppsTapped = {},
+            onDonateTapped = {},
         )
     }
 }

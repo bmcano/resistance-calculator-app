@@ -36,6 +36,7 @@ fun Navigation(onOpenThemeDialog: () -> Unit) {
     ) {
         aboutScreen(navController)
         colorToValueScreen(navController, onOpenThemeDialog)
+        donateScreen(navController)
         homeScreen(navController, onOpenThemeDialog)
         learnColorCodes(navController)
         learnPreferredValues(navController)
@@ -107,6 +108,10 @@ fun navigateToSmdCodeIec(navController: NavHostController) {
 
 fun navigateToOurApps(navController: NavHostController) {
     navController.navigate(Screen.ViewOurApps.route)
+}
+
+fun navigateToDonate(navController: NavHostController) {
+    navController.navigate(Screen.Donate.route)
 }
 
 fun navigateToGooglePlay(context: Context) {
