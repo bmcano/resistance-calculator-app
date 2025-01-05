@@ -1,14 +1,10 @@
 package com.brandoncano.resistancecalculator.navigation
 
 import android.content.Context
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.navigation.calculators.colorToValueScreen
@@ -19,8 +15,9 @@ import com.brandoncano.resistancecalculator.navigation.circuit.seriesCalculatorS
 import com.brandoncano.resistancecalculator.navigation.learn.learnColorCodes
 import com.brandoncano.resistancecalculator.navigation.learn.learnPreferredValues
 import com.brandoncano.resistancecalculator.navigation.learn.learnSmdCodes
-import com.brandoncano.sharedcomponents.data.Apps
-import com.brandoncano.sharedcomponents.screen.ViewOurAppsScreen
+import com.brandoncano.sharedcomponents.navigation.SharedScreens
+import com.brandoncano.sharedcomponents.navigation.donateScreen
+import com.brandoncano.sharedcomponents.navigation.viewOurAppsScreen
 import com.brandoncano.sharedcomponents.utils.OpenLink
 
 /**
@@ -36,7 +33,6 @@ fun Navigation(onOpenThemeDialog: () -> Unit) {
     ) {
         aboutScreen(navController)
         colorToValueScreen(navController, onOpenThemeDialog)
-        donateScreen(navController)
         homeScreen(navController, onOpenThemeDialog)
         learnColorCodes(navController)
         learnPreferredValues(navController)
@@ -46,17 +42,8 @@ fun Navigation(onOpenThemeDialog: () -> Unit) {
         smdScreen(navController, onOpenThemeDialog)
         valueToColorScreen(navController, onOpenThemeDialog)
         // from shared library
-        composable(
-            route = Screen.ViewOurApps.route,
-            enterTransition = { slideInVertically(initialOffsetY = { it }) },
-            exitTransition = { slideOutVertically(targetOffsetY = { it }) },
-        ) {
-            ViewOurAppsScreen(
-                context = LocalContext.current,
-                app = Apps.Resistor,
-                onNavigateBack = { navController.popBackStack() },
-            )
-        }
+        donateScreen(navController)
+        viewOurAppsScreen(navController)
     }
 }
 
@@ -107,11 +94,11 @@ fun navigateToSmdCodeIec(navController: NavHostController) {
 }
 
 fun navigateToOurApps(navController: NavHostController) {
-    navController.navigate(Screen.ViewOurApps.route)
+    navController.navigate(SharedScreens.ViewOurApps.route)
 }
 
 fun navigateToDonate(navController: NavHostController) {
-    navController.navigate(Screen.Donate.route)
+    navController.navigate(SharedScreens.Donate.route)
 }
 
 fun navigateToGooglePlay(context: Context) {

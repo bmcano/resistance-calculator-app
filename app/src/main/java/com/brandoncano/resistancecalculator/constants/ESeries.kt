@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.data
+package com.brandoncano.resistancecalculator.constants
 
 /**
  * E6 - 20% - 3 band resistors

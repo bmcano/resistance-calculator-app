@@ -1,10 +1,10 @@
 package com.brandoncano.resistancecalculator.util.eseries
 
-import com.brandoncano.resistancecalculator.data.ESeries.E12
-import com.brandoncano.resistancecalculator.data.ESeries.E192
-import com.brandoncano.resistancecalculator.data.ESeries.E24
-import com.brandoncano.resistancecalculator.data.ESeries.E48
-import com.brandoncano.resistancecalculator.data.ESeries.E96
+import com.brandoncano.resistancecalculator.constants.ESeries.E12
+import com.brandoncano.resistancecalculator.constants.ESeries.E192
+import com.brandoncano.resistancecalculator.constants.ESeries.E24
+import com.brandoncano.resistancecalculator.constants.ESeries.E48
+import com.brandoncano.resistancecalculator.constants.ESeries.E96
 
 /**
  * Job: Get string representation for the E-Series list

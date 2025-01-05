@@ -1,7 +1,6 @@
-package com.brandoncano.resistancecalculator.data
+package com.brandoncano.resistancecalculator.constants
 
-import com.brandoncano.resistancecalculator.constants.Colors
-import com.brandoncano.resistancecalculator.constants.Symbols
+import com.brandoncano.resistancecalculator.data.DropdownItem
 
 /**
  * Job: Holds the list of items for each dropdown
