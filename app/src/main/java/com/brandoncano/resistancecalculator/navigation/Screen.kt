@@ -14,5 +14,4 @@ sealed class Screen(val route: String) {
     data object Smd: Screen("smd")
     data object SeriesCalculator: Screen("series_calculator")
     data object ValueToColor: Screen("value_to_color")
-    data object ViewOurApps : Screen("view_our_apps")
 }

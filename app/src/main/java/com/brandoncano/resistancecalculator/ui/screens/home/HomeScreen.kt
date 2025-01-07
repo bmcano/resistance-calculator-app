@@ -50,6 +50,7 @@ fun HomeScreen(
     onParallelCalculatorTapped: () -> Unit,
     onRateThisAppTapped: () -> Unit,
     onViewOurAppsTapped: () -> Unit,
+    onDonateTapped: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -74,6 +75,7 @@ fun HomeScreen(
             onParallelCalculatorTapped = onParallelCalculatorTapped,
             onRateThisAppTapped = onRateThisAppTapped,
             onViewOurAppsTapped = onViewOurAppsTapped,
+            onDonateTapped = onDonateTapped,
         )
     }
 }
@@ -88,6 +90,7 @@ private fun HomeScreenContent(
     onParallelCalculatorTapped: () -> Unit,
     onRateThisAppTapped: () -> Unit,
     onViewOurAppsTapped: () -> Unit,
+    onDonateTapped: () -> Unit,
 ) {
     val sidePadding = dimensionResource(R.dimen.app_side_padding)
     Column(
@@ -141,6 +144,7 @@ private fun HomeScreenContent(
         OurAppsButtons(
             onRateThisAppTapped = onRateThisAppTapped,
             onViewOurAppsTapped = onViewOurAppsTapped,
+            onDonateTapped = onDonateTapped,
         )
         Spacer(modifier = Modifier.height(48.dp))
     }
@@ -161,6 +165,7 @@ private fun HomePreview() {
             onParallelCalculatorTapped = {},
             onRateThisAppTapped = {},
             onViewOurAppsTapped = {},
+            onDonateTapped = {},
         )
     }
 }

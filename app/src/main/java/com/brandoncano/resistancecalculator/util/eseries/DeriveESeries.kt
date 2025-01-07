@@ -1,6 +1,6 @@
 package com.brandoncano.resistancecalculator.util.eseries
 
-import com.brandoncano.resistancecalculator.data.ESeries
+import com.brandoncano.resistancecalculator.constants.ESeries
 
 /**
  * Job: Derive the correct E-Series from a mapping of tolerance the number of bands

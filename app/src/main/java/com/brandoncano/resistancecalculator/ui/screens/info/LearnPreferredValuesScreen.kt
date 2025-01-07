@@ -24,7 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.data.ESeries
+import com.brandoncano.resistancecalculator.constants.ESeries
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AppDivider
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews

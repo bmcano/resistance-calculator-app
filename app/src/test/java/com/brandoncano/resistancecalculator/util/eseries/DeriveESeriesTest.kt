@@ -1,6 +1,6 @@
 package com.brandoncano.resistancecalculator.util.eseries
 
-import com.brandoncano.resistancecalculator.data.ESeries
+import com.brandoncano.resistancecalculator.constants.ESeries
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull

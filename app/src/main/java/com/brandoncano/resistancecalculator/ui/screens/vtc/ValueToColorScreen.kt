@@ -38,7 +38,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Symbols
-import com.brandoncano.resistancecalculator.data.DropdownLists
+import com.brandoncano.resistancecalculator.constants.DropdownLists
 import com.brandoncano.resistancecalculator.data.ESeriesCardContent
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem

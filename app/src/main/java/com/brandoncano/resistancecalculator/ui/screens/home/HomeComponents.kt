@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Apps
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Grade
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -58,6 +59,7 @@ fun AppIcon() {
 fun OurAppsButtons(
     onRateThisAppTapped: () -> Unit,
     onViewOurAppsTapped: () -> Unit,
+    onDonateTapped: () -> Unit,
 ) {
     Column {
         Text(
@@ -77,6 +79,11 @@ fun OurAppsButtons(
                 text = stringResource(id = R.string.home_button_view_apps),
                 onClick = onViewOurAppsTapped,
             ),
+            ArrowCardButtonContents(
+                imageVector = Icons.Outlined.FavoriteBorder,
+                text = stringResource(R.string.home_button_donate),
+                onClick = onDonateTapped,
+            ),
         )
     }
 }
@@ -89,6 +96,7 @@ private fun OurAppsButtonsPreview() {
             OurAppsButtons(
                 onRateThisAppTapped = {},
                 onViewOurAppsTapped = {},
+                onDonateTapped = {},
             )
         }
     }
