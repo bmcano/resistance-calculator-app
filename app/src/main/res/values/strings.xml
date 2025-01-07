@@ -51,6 +51,7 @@
     <string name="home_our_apps_header_text">Support us</string>
     <string name="home_button_rate_us">Rate this app on Google Play</string>
     <string name="home_button_view_apps">Check out our other apps</string>
+    <string name="home_button_donate">Donate</string>
     <!-- SMD screen/components text -->
     <string name="smd_headline_text">Learn about SMD codes</string>
     <string name="smd_button_text">Explore the IEC 60062 standard</string>

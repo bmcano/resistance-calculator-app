@@ -81,7 +81,7 @@ fun OurAppsButtons(
             ),
             ArrowCardButtonContents(
                 imageVector = Icons.Outlined.FavoriteBorder,
-                text = "Donate",
+                text = stringResource(R.string.home_button_donate),
                 onClick = onDonateTapped,
             ),
         )
