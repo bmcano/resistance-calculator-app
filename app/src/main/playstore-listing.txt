@@ -7,7 +7,7 @@ Short description: (77/80)
 
 Instantly calculate resistor color codes and values for electronics projects.
 ----------------------------------------------------------------------------------------------------
-Full description: (2701/4000)
+Full description: (2688/4000)
 
 Quickly and accurately calculate resistor values with our intuitive app, perfect for electronics hobbyists, students, and professionals. Whether you're deciphering color bands or directly inputting resistance values, this resistor calculator is designed to simplify your tasks with an easy-to-use interface.
 
@@ -21,7 +21,6 @@ Quickly and accurately calculate resistor values with our intuitive app, perfect
 • Parallel Resistor Calculator
 
 <b>Key Features:</b>
-
 • Color-to-Value Calculator - Quickly calculate resistance values by selecting resistor color bands. Perfect for resistor color-code lookups in electronics projects.
 • Value-to-Color Calculator - Enter a resistance value, tolerance, and temperature coefficient (if applicable) to view the matching color code bands in real-time.
 • SMD Resistor Code Calculator - Easily convert SMD (Surface-Mount Device) codes to standard Ohm values. Supports 3-digit EIA, 4-digit EIA, and EIA-96 coding standards.
@@ -29,22 +28,27 @@ Quickly and accurately calculate resistor values with our intuitive app, perfect
 • Parallel Resistance Calculator - Accurately calculate the equivalent resistance of multiple resistors in parallel.
 
 <b>Additional Functionalities:</b>
-
 • Preferred Values Validation - Ensures inputted values adhere to standard resistor values, helping you avoid errors and select commonly used resistances for your projects.
 • Share Your Resistor Values - Share calculated resistor details by text or image for easy project collaboration.
 • Built-in Information Pages - Access in-app guides on resistor color coding and SMD resistor codes. Perfect for quick reference or learning.
 • Customize App Appearance - Switch between light and dark themes to personalize your experience.
 
 <b>Why Choose Our App?</b>
-
 • Accurate & Reliable - Based on the IEC 60062 and IEC 60063 standards, ensuring industry-standard results.
 • Fully Responsive - Optimized for all mobile devices, ensuring a smooth experience on any screen.
 
 <b>Your Feedback Matters:</b>
-
 Have suggestions or encountered a bug? Reach out anytime at:
 brandoncano.development@gmail.com
 
 <b>Tags:</b>
-Resistor color code calculator, Resistor calculator, Resistance calculator, Resistor color to value calculator, Resistor value to color calculator, Resistor Standard values (E-series), SMD (surface mount device) resistor calculator, Series resistance calculator, Parallel resistance calculator.
+Resistor color code calculator
+Resistor calculator
+Resistance calculator
+Resistor color to value calculator
+Resistor value to color calculator
+Resistor Standard values (E-series)
+SMD (surface mount device) resistor calculator
+Series resistance calculator
+Parallel resistance calculator
 ----------------------------------------------------------------------------------------------------
