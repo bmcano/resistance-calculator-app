@@ -236,6 +236,7 @@ private fun ValueToColorScreenContent(
         AppButton(
             label = stringResource(R.string.vtc_validate_e_series_button),
             modifier = Modifier.fillMaxWidth(),
+            enabled = !resistor.isEmpty() && !isError,
             onClick = onValidateResistanceTapped,
         )
         ESeriesCard(
