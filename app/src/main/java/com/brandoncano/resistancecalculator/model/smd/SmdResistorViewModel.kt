@@ -38,7 +38,7 @@ class SmdResistorViewModel(context: Context): ViewModel() {
         updateErrorState()
         if (!_isError.value) {
             _resistor.value.formatResistance()
-            saveResistorValues(_resistor.value)
+            saveResistorValues()
         }
     }
 
@@ -52,13 +52,13 @@ class SmdResistorViewModel(context: Context): ViewModel() {
         updateErrorState()
         if (!_isError.value) {
             _resistor.value.formatResistance()
-            saveResistorValues(_resistor.value)
+            saveResistorValues()
         }
         repository.saveNavBarSelection(navBarSelection)
     }
 
-    private fun saveResistorValues(resistor: SmdResistor) {
-        repository.saveResistor(resistor)
+    private fun saveResistorValues() {
+        repository.saveResistor(_resistor.value)
     }
 
     private fun updateErrorState() {
