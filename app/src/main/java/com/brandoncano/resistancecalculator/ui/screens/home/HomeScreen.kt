@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
@@ -32,7 +33,7 @@ import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppThemeMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
-import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
+import com.brandoncano.sharedcomponents.composables.AppHomeTopAppBar
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
 import com.brandoncano.sharedcomponents.data.ArrowCardButtonContents
@@ -54,10 +55,11 @@ fun HomeScreen(
 ) {
     Scaffold(
         topBar = {
-            AppMenuTopAppBar(
+            AppHomeTopAppBar(
                 titleText = stringResource(R.string.app_name),
                 interactionSource = remember { MutableInteractionSource() },
                 showMenu = openMenu,
+                appIcon = painterResource(R.drawable.img_app_icon),
                 content = {
                     FeedbackMenuItem(Symbols.APP_NAME, openMenu)
                     AppThemeMenuItem(openMenu, onOpenThemeDialog)
@@ -99,15 +101,11 @@ private fun HomeScreenContent(
             .verticalScroll(rememberScrollState())
             .padding(paddingValues)
             .padding(horizontal = sidePadding),
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.Start,
     ) {
-        AppIcon()
-        Spacer(modifier = Modifier.height(20.dp))
         Text(
             text = stringResource(id = R.string.home_calculators_header_text),
-            modifier = Modifier
-                .padding(vertical = 12.dp)
-                .align(Alignment.Start),
+            modifier = Modifier.padding(top = 16.dp, bottom = 12.dp),
             style = textStyleHeadline(),
         )
         AppArrowCardButton(

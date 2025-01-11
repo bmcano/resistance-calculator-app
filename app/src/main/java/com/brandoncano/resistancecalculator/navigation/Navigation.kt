@@ -15,6 +15,7 @@ import com.brandoncano.resistancecalculator.navigation.circuit.seriesCalculatorS
 import com.brandoncano.resistancecalculator.navigation.learn.learnColorCodes
 import com.brandoncano.resistancecalculator.navigation.learn.learnPreferredValues
 import com.brandoncano.resistancecalculator.navigation.learn.learnSmdCodes
+import com.brandoncano.sharedcomponents.data.Apps
 import com.brandoncano.sharedcomponents.navigation.SharedScreens
 import com.brandoncano.sharedcomponents.navigation.donateScreen
 import com.brandoncano.sharedcomponents.navigation.viewOurAppsScreen
@@ -43,7 +44,7 @@ fun Navigation(onOpenThemeDialog: () -> Unit) {
         valueToColorScreen(navController, onOpenThemeDialog)
         // from shared library
         donateScreen(navController)
-        viewOurAppsScreen(navController)
+        viewOurAppsScreen(navController, Apps.Resistor)
     }
 }
 

@@ -22,7 +22,9 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.ui.theme.black
+import com.brandoncano.resistancecalculator.ui.theme.blue
 import com.brandoncano.resistancecalculator.ui.theme.red
+import com.brandoncano.resistancecalculator.ui.theme.violet
 import com.brandoncano.resistancecalculator.ui.theme.white
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.sharedcomponents.composables.AppCard
@@ -172,10 +174,10 @@ private fun TableColorCell(modifier: Modifier, text: String, backgroundColor: Co
         modifier = modifier,
         contentAlignment = Alignment.Center,
     ) {
-        val style = if (backgroundColor == black || backgroundColor == red) {
-            textStyleCaption().white()
-        } else {
-            textStyleCaption().black()
+        val darkColors = setOf(black, red, blue, violet)
+        val style = when (backgroundColor) {
+            in darkColors -> textStyleCaption().white()
+            else -> textStyleCaption().black()
         }
         Text(
             text = text,
@@ -215,7 +217,7 @@ fun ESeriesTable(seriesName: String, values: List<Int>) {
                         if (index < values.size) {
                             Text(
                                 text = values[index].toString(),
-                                style = textStyleBody().onSurfaceVariant(),
+                                style = textStyleSubhead().onSurfaceVariant(),
                                 modifier = Modifier
                                     .padding(start = 8.dp, end = 8.dp, top = 8.dp)
                                     .weight(1f),
@@ -298,13 +300,13 @@ fun CodeValueTable() {
                     rowItems.forEach { codeValue ->
                         Text(
                             text = codeValue.code,
-                            style = textStyleBody(),
+                            style = textStyleSubhead(),
                             modifier = Modifier.weight(1f),
                             textAlign = TextAlign.Center,
                         )
                         Text(
                             text = codeValue.value,
-                            style = textStyleBody().onSurfaceVariant(),
+                            style = textStyleSubhead().onSurfaceVariant(),
                             modifier = Modifier.weight(1f),
                             textAlign = TextAlign.Center,
                         )
@@ -351,12 +353,12 @@ fun MultiplierTable() {
                     Text(
                         text = letter,
                         modifier = Modifier.weight(1f),
-                        style = textStyleBody(),
+                        style = textStyleSubhead(),
                     )
                     Text(
                         text = "${Symbols.X}$value",
                         modifier = Modifier.weight(1f),
-                        style = textStyleBody().onSurfaceVariant(),
+                        style = textStyleSubhead().onSurfaceVariant(),
                     )
                 }
             }

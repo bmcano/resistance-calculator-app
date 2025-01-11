@@ -12,8 +12,8 @@ android {
         applicationId = "com.brandoncano.resistancecalculator"
         minSdk = 21
         targetSdk = 35
-        versionCode = 30 // for 3.7.0
-        versionName = "3.7.0"
+        versionCode = 31 // for 3.7.1
+        versionName = "3.7.1"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -21,7 +21,7 @@ android {
     }
     applicationVariants.configureEach {
         resValue("string", "version", versionName)
-        resValue("string", "last_updated", "1/7/2025")
+        resValue("string", "last_updated", "1/11/2025")
     }
     buildTypes {
         release {
