@@ -37,22 +37,22 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.constants.DropdownLists
+import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.data.ESeriesCardContent
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
-import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.AppThemeMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.Sdk
 import com.brandoncano.resistancecalculator.util.resistor.shareableText
+import com.brandoncano.sharedcomponents.composables.AboutAppMenuItem
 import com.brandoncano.sharedcomponents.composables.AppButton
 import com.brandoncano.sharedcomponents.composables.AppDropDownMenu
 import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
 import com.brandoncano.sharedcomponents.composables.AppNavigationBar
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import com.brandoncano.sharedcomponents.composables.AppTextField
+import com.brandoncano.sharedcomponents.composables.AppThemeMenuItem
 import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
 import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
 import com.brandoncano.sharedcomponents.composables.ShareImageMenuItem
@@ -95,13 +95,13 @@ fun ValueToColorScreen(
                 )
                 if (Sdk.isAtLeastAndroid7()) {
                     ShareImageMenuItem(
-                        applicationId = Symbols.APPLICATION_ID,
+                        applicationId = Links.APPLICATION_ID,
                         showMenu = openMenu,
                         picture = picture,
                     )
                 }
                 FeedbackMenuItem(
-                    app = Symbols.APP_NAME,
+                    app = Links.APP_NAME,
                     showMenu = openMenu,
                 )
                 AppThemeMenuItem(openMenu, onOpenThemeDialog)

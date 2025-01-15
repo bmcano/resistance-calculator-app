@@ -28,15 +28,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.constants.Symbols
-import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.AppThemeMenuItem
+import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.sharedcomponents.composables.AboutAppMenuItem
 import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
 import com.brandoncano.sharedcomponents.composables.AppHomeTopAppBar
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
+import com.brandoncano.sharedcomponents.composables.AppThemeMenuItem
 import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
 import com.brandoncano.sharedcomponents.data.ArrowCardButtonContents
+import com.brandoncano.sharedcomponents.screen.OurAppsButtons
 import com.brandoncano.sharedcomponents.text.textStyleHeadline
 
 @Composable
@@ -61,7 +62,7 @@ fun HomeScreen(
                 showMenu = openMenu,
                 appIcon = painterResource(R.drawable.img_app_icon),
                 content = {
-                    FeedbackMenuItem(Symbols.APP_NAME, openMenu)
+                    FeedbackMenuItem(Links.APP_NAME, openMenu)
                     AppThemeMenuItem(openMenu, onOpenThemeDialog)
                     AboutAppMenuItem(onAboutTapped)
                 }

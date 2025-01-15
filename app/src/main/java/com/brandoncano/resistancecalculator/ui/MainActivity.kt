@@ -8,11 +8,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.brandoncano.resistancecalculator.model.MainViewModel
 import com.brandoncano.resistancecalculator.navigation.Navigation
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AppThemeDialog
 import com.brandoncano.sharedcomponents.data.ThemeMode
+import com.brandoncano.sharedcomponents.model.MainViewModel
 
 class MainActivity : ComponentActivity() {
 

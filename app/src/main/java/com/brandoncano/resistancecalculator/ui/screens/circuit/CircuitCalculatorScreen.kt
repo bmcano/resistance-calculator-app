@@ -32,12 +32,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.constants.DropdownLists
+import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.model.circuit.Circuit
-import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.circuit.IsValidNumber
+import com.brandoncano.sharedcomponents.composables.AboutAppMenuItem
 import com.brandoncano.sharedcomponents.composables.AppDivider
 import com.brandoncano.sharedcomponents.composables.AppDropDownMenu
 import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
@@ -72,7 +72,7 @@ fun CircuitCalculatorScreen(
             ) {
                 ClearSelectionsMenuItem(onClearSelectionsTapped)
                 FeedbackMenuItem(
-                    app = Symbols.APP_NAME,
+                    app = Links.APP_NAME,
                     showMenu = openMenu,
                 )
                 AboutAppMenuItem(onAboutTapped)
