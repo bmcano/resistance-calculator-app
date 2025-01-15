@@ -27,7 +27,6 @@ import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import com.brandoncano.sharedcomponents.composables.AppTopAppBar
 import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 import com.brandoncano.sharedcomponents.text.textStyleBody
-import com.brandoncano.sharedcomponents.text.textStyleLargeTitle
 import com.brandoncano.sharedcomponents.text.textStyleTitle
 import com.brandoncano.resistancecalculator.constants.Colors as C
 
@@ -63,29 +62,22 @@ private fun LearnColorCodesScreenContent(paddingValues: PaddingValues) {
             .padding(horizontal = sidePadding),
     ) {
         Text(
-            text = stringResource(R.string.info_intro_title),
+            text = stringResource(R.string.info_color_meaning_title),
             modifier = Modifier.padding(vertical = 12.dp),
-            style = textStyleLargeTitle(),
+            style = textStyleTitle(),
         )
         Text(
-            text = stringResource(R.string.info_color_intro_body),
-            modifier = Modifier.padding(bottom = 32.dp),
+            text = stringResource(R.string.info_color_body1),
+            modifier = Modifier.padding(bottom = 12.dp),
             style = textStyleBody().onSurfaceVariant(),
         )
-
         Text(
-            text = stringResource(R.string.info_color_meaning_title),
-            modifier = Modifier.padding(bottom = 12.dp),
-            style = textStyleLargeTitle(),
-        )
-        Text(
-            text = stringResource(R.string.info_color_meaning_body),
+            text = stringResource(R.string.info_color_body2),
             modifier = Modifier.padding(bottom = 12.dp),
             style = textStyleBody().onSurfaceVariant(),
         )
         ResistorColorCodeTable()
-        Spacer(modifier = Modifier.height(24.dp))
-
+        Spacer(modifier = Modifier.height(32.dp))
         BandSection(
             headlineRes = R.string.info_color_three_band_headline,
             bodyRes = R.string.info_color_three_band_body,
@@ -93,7 +85,7 @@ private fun LearnColorCodesScreenContent(paddingValues: PaddingValues) {
             descriptionRes = R.string.info_color_three_band_description,
             resistor = ResistorCtv(C.RED, C.VIOLET, "", C.ORANGE, "", "", 0),
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(32.dp))
         BandSection(
             headlineRes = R.string.info_color_four_band_headline,
             bodyRes = R.string.info_color_four_band_body,
@@ -101,7 +93,7 @@ private fun LearnColorCodesScreenContent(paddingValues: PaddingValues) {
             descriptionRes = R.string.info_color_four_band_description,
             resistor = ResistorCtv(C.YELLOW, C.VIOLET, "", C.RED, C.GOLD, "", 1),
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(32.dp))
         BandSection(
             headlineRes = R.string.info_color_five_band_headline,
             bodyRes = R.string.info_color_five_band_body,
@@ -109,7 +101,7 @@ private fun LearnColorCodesScreenContent(paddingValues: PaddingValues) {
             descriptionRes = R.string.info_color_five_band_description,
             resistor = ResistorCtv(C.BROWN, C.GREEN, C.BLACK, C.ORANGE, C.BROWN, "", 2),
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(32.dp))
         BandSection(
             headlineRes = R.string.info_color_six_band_headline,
             bodyRes = R.string.info_color_six_band_body,

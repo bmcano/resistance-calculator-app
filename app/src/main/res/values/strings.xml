@@ -70,10 +70,9 @@
     <!-- Info screen/components text -->
     <string name="info_title">IEC 60062 Standard</string>
     <string name="info_title_3">IEC 60063 Standard</string>
-    <string name="info_intro_title">Introduction</string>
-    <string name="info_color_intro_body">The resistor color code uses colored bands to indicate resistance value, tolerance, and sometimes the temperature coefficient of resistors. This system allows for easy identification of resistor values in a compact format.</string>
     <string name="info_color_meaning_title">Color Bands and Their Meanings</string>
-    <string name="info_color_meaning_body">Each color corresponds to a specific value, depending on its position on the resistor. The standard colors and their corresponding values are displayed in the table below.</string>
+    <string name="info_color_body1">The resistor color code uses colored bands to indicate resistance value, tolerance, and temperature coefficient of resistors. This system allows for easy identification of resistor values in a compact format.</string>
+    <string name="info_color_body2">Each color corresponds to a specific value, depending on its position on the resistor. The standard colors and their corresponding values are displayed in the table below.</string>
     <string name="info_color_code_explanation">Explanation:</string>
     <string name="info_color_three_band_headline">Three-Band Resistors</string>
     <string name="info_color_three_band_body">Three-band resistors have two significant figure bands and one multiplier band. If the tolerance is not indicated, it is typically assumed to be ±20%.</string>
@@ -91,9 +90,9 @@
     <string name="info_color_six_band_body">Six-band resistors include a temperature coefficient band in addition to the five-band code, indicating how the resistance changes with temperature.</string>
     <string name="info_color_six_band_code">560 \u00D7 10 ±2%, 100 ppm/°C</string>
     <string name="info_color_six_band_description">"Green (5), Blue (6), Black (0), Brown (×10), Red (±2%), Brown (100 ppm/°C)"</string>
-    <string name="info_smd_intro_body">The IEC 60062 standard defines code markings for resistors. It uses alphanumeric codes to represent resistance values in a compact format, making it suitable for marking small components, such as SMD (Surface-Mount Device) resistors.</string>
     <string name="info_smd_resistor_codes_title">SMD Resistor Codes</string>
-    <string name="info_smd_resistor_codes_body">SMD resistors use different coding systems based on the number of digits or characters used. The most common coding standards are:</string>
+    <string name="info_smd_body1">The IEC 60062 standard defines code markings for resistors. It uses alphanumeric codes to represent resistance values in a compact format, making it suitable for marking small components, such as SMD (Surface-Mount Device) resistors.</string>
+    <string name="info_smd_body2">SMD resistors use different coding systems based on the number of digits or characters used. The most common coding standards are:</string>
     <string name="info_smd_code_example">Example:</string>
     <string name="info_smd_three_code_headline">Three-Digit Code</string>
     <string name="info_smd_three_code_body">The three-digit code is similar to the resistor color code system. The first two digits represent the significant figures, and the third digit is the multiplier. The equation is:</string>
@@ -113,9 +112,9 @@
     <string name="info_smd_code_value_col2">Value</string>
     <string name="info_smd_code_value_headline">Value codes</string>
     <string name="info_smd_code_value_body">"These are the common resistance value codes, but a manufacturer may use a variation on these or even something completely different. It is therefore always important to verify the manufacturer's marking system."</string>
-    <string name="info_values_intro_body">"The standardization of resistor values, known as 'preferred values' or the 'E-series,' simplifies mass production and stock management by spacing resistance values approximately equally on a logarithmic scale. This approach allows manufacturers to limit the number of different values they need to produce."</string>
     <string name="info_values_preferred_values_title">Preferred Values or E-Series</string>
-    <string name="info_values_preferred_values_body">The E-series is a set of preferred resistor values, organized by levels of precision. Each E-series is represented by a number (E-6, E-12, E-24, etc.), indicating the number of values per decade (1–10, 10–100, etc.). The more values in an E-series, the more precise the resistor selection. The values can be calculated using the following equation:</string>
+    <string name="info_values_body1">"The standardization of resistor values, known as 'preferred values' or the 'E-series,' simplifies mass production and stock management by spacing resistance values approximately equally on a logarithmic scale. This approach allows manufacturers to limit the number of different values they need to produce."</string>
+    <string name="info_values_body2">The E-series is a set of preferred resistor values, organized by levels of precision. Each E-series is represented by a number (E-6, E-12, E-24, etc.), indicating the number of values per decade (1–10, 10–100, etc.). The more values in an E-series, the more precise the resistor selection. The values can be calculated using the following equation:</string>
     <string name="info_values_preferred_values_where">Where:</string>
     <string name="info_values_preferred_values_tables_headline">E-Series Tables</string>
     <string name="info_values_preferred_values_low_precision">The E-6 series is typically used for 3-band resistors, offering less precision.</string>

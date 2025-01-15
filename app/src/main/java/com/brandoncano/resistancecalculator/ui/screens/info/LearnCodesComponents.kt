@@ -266,7 +266,7 @@ private val codeValueList = listOf(
 @Composable
 fun CodeValueTable() {
     val rows = codeValueList.chunked(3)
-    Card(modifier = Modifier.fillMaxWidth()) {
+    AppCard(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(vertical = 12.dp)) {
             Row(
                 modifier = Modifier
@@ -324,8 +324,8 @@ fun MultiplierTable() {
         "Z" to "0.001", "Y / R" to "0.01", "X / S" to "0.1", "A" to "1", "B / H" to "10",
         "C" to "100", "D" to "1,000", "E" to "10,000", "F" to "100,000"
     )
-    Card(modifier = Modifier.fillMaxWidth()) {
-        Column(modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)) {
+    AppCard(modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier.padding(vertical = 12.dp, horizontal = 16.dp)) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()

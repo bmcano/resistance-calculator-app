@@ -27,7 +27,6 @@ import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 import com.brandoncano.sharedcomponents.text.textStyleBody
 import com.brandoncano.sharedcomponents.text.textStyleCallout
 import com.brandoncano.sharedcomponents.text.textStyleHeadline
-import com.brandoncano.sharedcomponents.text.textStyleLargeTitle
 import com.brandoncano.sharedcomponents.text.textStyleTitle
 
 /**
@@ -63,27 +62,20 @@ private fun LearnSmdCodesScreenContent(paddingValues: PaddingValues) {
         horizontalAlignment = Alignment.Start,
     ) {
         Text(
-            text = stringResource(R.string.info_intro_title),
+            text = stringResource(R.string.info_smd_resistor_codes_title),
             modifier = Modifier.padding(vertical = 12.dp),
-            style = textStyleLargeTitle(),
+            style = textStyleTitle(),
         )
         Text(
-            text = stringResource(R.string.info_smd_intro_body),
+            text = stringResource(R.string.info_smd_body1),
+            modifier = Modifier.padding(bottom = 12.dp),
+            style = textStyleBody().onSurfaceVariant(),
+        )
+        Text(
+            text = stringResource(R.string.info_smd_body2),
             modifier = Modifier.padding(bottom = 32.dp),
             style = textStyleBody().onSurfaceVariant(),
         )
-
-        Text(
-            text = stringResource(R.string.info_smd_resistor_codes_title),
-            modifier = Modifier.padding(bottom = 12.dp),
-            style = textStyleLargeTitle(),
-        )
-        Text(
-            text = stringResource(R.string.info_smd_resistor_codes_body),
-            modifier = Modifier.padding(bottom = 24.dp),
-            style = textStyleBody().onSurfaceVariant(),
-        )
-
         CodeInfoSection(
             headlineRes = R.string.info_smd_three_code_headline,
             bodyRes = R.string.info_smd_three_code_body,
@@ -92,8 +84,7 @@ private fun LearnSmdCodesScreenContent(paddingValues: PaddingValues) {
             code = "Code: xyz",
             exampleCode = "Code: 472",
         )
-        Spacer(modifier = Modifier.height(24.dp))
-
+        Spacer(modifier = Modifier.height(32.dp))
         CodeInfoSection(
             headlineRes = R.string.info_smd_four_code_headline,
             bodyRes = R.string.info_smd_four_code_body,
@@ -105,10 +96,9 @@ private fun LearnSmdCodesScreenContent(paddingValues: PaddingValues) {
         AppDivider(modifier = Modifier.padding(vertical = 16.dp))
         Text(
             text = stringResource(R.string.info_smd_four_digit_body2),
-            modifier = Modifier.padding(bottom = 24.dp),
+            modifier = Modifier.padding(bottom = 32.dp),
             style = textStyleCallout().onSurfaceVariant(),
         )
-
         Text(
             text = stringResource(R.string.info_smd_eia_headline),
             modifier = Modifier.padding(bottom = 12.dp),
@@ -124,7 +114,6 @@ private fun LearnSmdCodesScreenContent(paddingValues: PaddingValues) {
             description = stringResource(R.string.info_smd_eia_example)
         )
         Spacer(modifier = Modifier.height(24.dp))
-
         Text(
             text = stringResource(R.string.info_smd_multipliers_headline),
             modifier = Modifier.padding(bottom = 12.dp),
@@ -137,7 +126,6 @@ private fun LearnSmdCodesScreenContent(paddingValues: PaddingValues) {
         )
         MultiplierTable()
         Spacer(modifier = Modifier.height(24.dp))
-
         Text(
             text = stringResource(R.string.info_smd_code_value_headline),
             modifier = Modifier.padding(bottom = 12.dp),
