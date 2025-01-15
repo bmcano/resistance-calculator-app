@@ -125,9 +125,6 @@ private fun HomeScreenContent(
                 text = stringResource(id = R.string.home_button_smd),
                 onClick = onSmdTapped
             ),
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        AppArrowCardButton(
             ArrowCardButtonContents(
                 imageVector = Icons.Outlined.LinearScale,
                 text = stringResource(id = R.string.home_button_series_calculator),
