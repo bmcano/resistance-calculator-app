@@ -1,21 +1,21 @@
 [versions]
 # libraries
-activity-compose = "1.9.3" # 11/7/24
+activity-compose = "1.10.1" # 3/16/25
 appcompat = "1.7.0" # 7/7/24
 bmcano = "1.5.2" # 1/14/25 - this is our shared library
 browser = "1.8.0" # 7/7/24
-compose = "1.7.6" # 12/21/24
-compose-bom = "2024.12.01" # 12/21/24
+compose = "1.7.8" # 3/16/25
+compose-bom = "2025.03.00" # 3/16/25
 coreKtx = "1.15.0" # 11/7/24
 gson = "2.10.1" # 7/7/24
 junit = "4.13.2" # 7/7/24
 material3 = "1.3.1" # 11/7/24
 mockk = "1.13.11" # 7/7/24
-navigation-compose = "2.8.5" # 12/21/24
+navigation-compose = "2.8.9" # 3/16/25
 ostermiller = "1.07.00" # 7/21/24
-ui-test-junit4 = "1.7.6" # 12/21/24
+ui-test-junit4 = "1.7.8" # 3/16/25
 # gradle/language
-agp = "8.8.0" # 12/22/24
+agp = "8.9.0" # 3/16/25
 kotlin = "2.0.0" # 7/7/24
 ktlint = "11.3.1" # 7/21/24
 
