@@ -11,9 +11,11 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -27,11 +29,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -40,7 +39,7 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.DropdownLists
 import com.brandoncano.resistancecalculator.constants.Links
-import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
+import com.brandoncano.resistancecalculator.to.ResistorCtv
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.Sdk
@@ -65,7 +64,6 @@ fun ColorToValueScreen(
     openMenu: MutableState<Boolean>,
     reset: MutableState<Boolean>,
     resistor: ResistorCtv,
-    navBarPosition: Int,
     onOpenThemeDialog: () -> Unit,
     onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
@@ -74,7 +72,7 @@ fun ColorToValueScreen(
     onNavBarSelectionChanged: (Int) -> Unit,
     onLearnColorCodesTapped: () -> Unit,
 ) {
-    var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
+    // TODO - find a better way to share the image, can make a nicer looking component that's not directly on the screen
     val picture = remember { Picture() }
     Scaffold(
         topBar = {
@@ -107,11 +105,8 @@ fun ColorToValueScreen(
         },
         bottomBar = {
             AppNavigationBar(
-                selection = navBarSelection,
-                onClick = {
-                    navBarSelection = it
-                    onNavBarSelectionChanged(it)
-                },
+                selection = resistor.navBarSelection,
+                onClick = { onNavBarSelectionChanged(it) },
                 options = listOf(
                     NavigationBarOptions(
                         label = stringResource(id = R.string.navbar_three_band),
@@ -131,14 +126,14 @@ fun ColorToValueScreen(
                     ),
                 ),
             )
-        }
+        },
+        contentWindowInsets = WindowInsets.safeDrawing,
     ) { paddingValues ->
         ColorToValueScreenContent(
             paddingValues = paddingValues,
             picture = picture,
             reset = reset,
             resistor = resistor,
-            navBarSelection = navBarSelection,
             onUpdateBand = onUpdateBand,
             onLearnColorCodesTapped = onLearnColorCodesTapped,
         )
@@ -151,18 +146,17 @@ private fun ColorToValueScreenContent(
     picture: Picture,
     reset: MutableState<Boolean>,
     resistor: ResistorCtv,
-    navBarSelection: Int,
     onUpdateBand: (Int, String) -> Unit,
     onLearnColorCodesTapped: () -> Unit,
 ) {
     val sidePadding = dimensionResource(R.dimen.app_side_padding)
+    val navBarSelection = resistor.navBarSelection
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(paddingValues)
-            .padding(horizontal = sidePadding)
-            ,
+            .padding(horizontal = sidePadding),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         ResistorDisplay(picture, resistor)
@@ -261,7 +255,6 @@ private fun ColorToValueScreen4BandPreview() {
             openMenu = remember { mutableStateOf(false) },
             reset = remember { mutableStateOf(false) },
             resistor = ResistorCtv(),
-            navBarPosition = 1,
             onOpenThemeDialog = {},
             onNavigateBack = {},
             onClearSelectionsTapped = {},

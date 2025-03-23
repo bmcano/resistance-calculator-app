@@ -33,14 +33,12 @@ fun NavGraphBuilder.colorToValueScreen(
         val openMenu = remember { mutableStateOf(false) }
         val reset = remember { mutableStateOf(false) }
         val viewModel: ResistorCtvViewModel = viewModel(factory = ResistorViewModelFactory(context))
-        val resistor by viewModel.resistor.collectAsState()
-        val navBarSelection by viewModel.navBarSelection.collectAsState()
+        val resistor by viewModel.resistorStateTOStateFlow.collectAsState()
 
         ColorToValueScreen(
             openMenu = openMenu,
             reset = reset,
             resistor = resistor,
-            navBarPosition = navBarSelection,
             onOpenThemeDialog = onOpenThemeDialog,
             onNavigateBack = { navHostController.popBackStack() },
             onClearSelectionsTapped = {
@@ -58,7 +56,7 @@ fun NavGraphBuilder.colorToValueScreen(
                 viewModel.updateBand(bandNumber, color)
             },
             onNavBarSelectionChanged = { selection ->
-                viewModel.saveNavBarSelection(selection)
+                viewModel.updateNavBarSelection(selection)
             },
             onLearnColorCodesTapped = { navigateToColorCodeIec(navHostController) },
         )

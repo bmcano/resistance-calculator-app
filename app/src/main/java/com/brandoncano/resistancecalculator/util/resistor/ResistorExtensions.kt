@@ -1,7 +1,7 @@
 package com.brandoncano.resistancecalculator.util.resistor
 
 import com.brandoncano.resistancecalculator.constants.Colors
-import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
+import com.brandoncano.resistancecalculator.to.ResistorCtv
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.util.ColorFinder

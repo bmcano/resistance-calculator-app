@@ -2,10 +2,10 @@ package com.brandoncano.resistancecalculator.data
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
-import androidx.core.content.edit
 
 /**
  * Job: Holds the names, keys, and methods for all shared_prefs data.
@@ -16,13 +16,7 @@ import androidx.core.content.edit
  */
 enum class SharedPreferences(private val _name: String, private val _key: String) {
 
-    NAVBAR_SELECTION_CTV("color_to_value", "navbar_selection"),
-    SIGFIG_BAND_ONE_CTV("color_to_value", "sig_fig_band_1"),
-    SIGFIG_BAND_TWO_CTV("color_to_value", "sig_fig_band_2"),
-    SIGFIG_BAND_THREE_CTV("color_to_value", "sig_fig_band_3"),
-    MULTIPLIER_BAND_CTV("color_to_value", "multiplier_band"),
-    TOLERANCE_BAND_CTV("color_to_value", "tolerance_band"),
-    PPM_BAND_CTV("color_to_value", "ppm_band"),
+    // TODO - Update this so the Enums are in their own file since the functions will be moved to the shared lib
 
     NAVBAR_SELECTION_VTC("value_to_color", "navbar_selection"),
     USER_INPUT_VTC("value_to_color", "user_input"),
@@ -56,7 +50,7 @@ enum class SharedPreferences(private val _name: String, private val _key: String
     fun clearData(context: Context) {
         val sharedPreferences = context.getSharedPreferences(_name, AppCompatActivity.MODE_PRIVATE)
         sharedPreferences.edit {
-            clear()
+            remove(_key)
         }
     }
 }
