@@ -1,14 +1,5 @@
 ---
 name: Defect
-about: Describe this issue template's purpose here.
-title: ''
-labels: ''
-assignees: ''
-
----
-
----
-name: Defect
 about: Create a report to help us improve
 title: "[Defect]"
 labels: defect
