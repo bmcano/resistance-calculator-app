@@ -11,7 +11,6 @@ class ResistorCtvViewModel(private val savedStateHandle: SavedStateHandle, conte
     private companion object {
         private const val TAG = "ResistorCtvViewModel"
         private const val KEY_RESISTOR_STATE_TO = "KEY_RESISTOR_STATE_TO"
-        private const val KEY_NAV_BAR_INT = "KEY_NAV_BAR_INT"
     }
 
     private val application = context.applicationContext
@@ -25,12 +24,15 @@ class ResistorCtvViewModel(private val savedStateHandle: SavedStateHandle, conte
 
     fun loadData() {
         val resistor = repository.loadResistor()
-        val navBar = resistor.navBarSelection
-
         savedStateHandle[KEY_RESISTOR_STATE_TO] = resistor
-        savedStateHandle[KEY_NAV_BAR_INT] = navBar
+    }
 
-        Log.d(TAG, "loadData(): resistor = $resistor, navBar = $navBar")
+    fun clear() {
+        val currentNavBar = resistorStateTOStateFlow.value.navBarSelection
+        repository.clearData(currentNavBar)
+
+        val blankResistor = ResistorCtv(navBarSelection = currentNavBar)
+        savedStateHandle[KEY_RESISTOR_STATE_TO] = blankResistor
     }
 
     fun updateBand(bandNumber: Int, color: String) {
@@ -56,14 +58,5 @@ class ResistorCtvViewModel(private val savedStateHandle: SavedStateHandle, conte
 
         repository.saveResistor(updatedResistor)
         savedStateHandle[KEY_RESISTOR_STATE_TO] = updatedResistor
-        savedStateHandle[KEY_NAV_BAR_INT] = navBar
-    }
-
-    fun clear() {
-        val currentNavBar = resistorStateTOStateFlow.value.navBarSelection
-        repository.clearData(currentNavBar)
-
-        val resetResistor = ResistorCtv(navBarSelection = currentNavBar)
-        savedStateHandle[KEY_RESISTOR_STATE_TO] = resetResistor
     }
 }

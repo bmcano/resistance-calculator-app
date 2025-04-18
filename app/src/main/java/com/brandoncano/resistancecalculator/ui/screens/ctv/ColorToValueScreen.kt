@@ -25,8 +25,8 @@ import androidx.compose.material.icons.outlined.Looks3
 import androidx.compose.material.icons.outlined.Looks4
 import androidx.compose.material.icons.outlined.Looks5
 import androidx.compose.material.icons.outlined.Looks6
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -45,26 +45,20 @@ import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.Sdk
 import com.brandoncano.resistancecalculator.util.resistor.shareableText
 import com.brandoncano.sharedcomponents.composables.AboutAppMenuItem
-import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
-import com.brandoncano.sharedcomponents.composables.AppDivider
 import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
 import com.brandoncano.sharedcomponents.composables.AppNavigationBar
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
-import com.brandoncano.sharedcomponents.composables.AppThemeMenuItem
 import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
 import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
 import com.brandoncano.sharedcomponents.composables.ShareImageMenuItem
 import com.brandoncano.sharedcomponents.composables.ShareTextMenuItem
-import com.brandoncano.sharedcomponents.data.ArrowCardButtonContents
 import com.brandoncano.sharedcomponents.data.NavigationBarOptions
-import com.brandoncano.sharedcomponents.text.textStyleHeadline
 
 @Composable
 fun ColorToValueScreen(
     openMenu: MutableState<Boolean>,
     reset: MutableState<Boolean>,
     resistor: ResistorCtv,
-    onOpenThemeDialog: () -> Unit,
     onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
@@ -99,7 +93,6 @@ fun ColorToValueScreen(
                     app = Links.APP_NAME,
                     showMenu = openMenu,
                 )
-                AppThemeMenuItem(openMenu, onOpenThemeDialog)
                 AboutAppMenuItem(onAboutTapped)
             }
         },
@@ -159,6 +152,7 @@ private fun ColorToValueScreenContent(
             .padding(horizontal = sidePadding),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        Spacer(modifier = Modifier.padding(top = 32.dp))
         ResistorDisplay(picture, resistor)
         ImageTextDropDownMenu(
             modifier = Modifier.padding(top = 32.dp),
@@ -174,9 +168,7 @@ private fun ColorToValueScreenContent(
             selectedOption = resistor.band2,
             items = DropdownLists.NUMBER_LIST,
             reset = reset.value,
-            onOptionSelected = {
-                onUpdateBand(2, it)
-            },
+            onOptionSelected = { onUpdateBand(2, it) },
         )
         AnimatedVisibility(
             visible = navBarSelection == 2 || navBarSelection == 3,
@@ -228,21 +220,19 @@ private fun ColorToValueScreenContent(
                 onOptionSelected = { onUpdateBand(6, it) },
             )
         }
-        AppDivider(modifier = Modifier.padding(vertical = 24.dp))
-        Column(horizontalAlignment = Alignment.Start) {
-            Text(
-                text = stringResource(R.string.ctv_headline_text),
-                modifier = Modifier.padding(bottom = 16.dp),
-                style = textStyleHeadline(),
-            )
-            AppArrowCardButton(
-                ArrowCardButtonContents(
-                    imageVector = Icons.Outlined.Lightbulb,
-                    text = stringResource(R.string.ctv_button_text),
+        Spacer(modifier = Modifier.height(24.dp))
+        AppActionCard(
+            icon = Icons.Outlined.Lightbulb,
+            iconTint = MaterialTheme.colorScheme.primary,
+            cardTitle = stringResource(R.string.ctv_info_card_title_text),
+            cardBody = stringResource(R.string.ctv_info_card_body_text),
+            actions = listOf(
+                CardAction(
+                    buttonLabel = stringResource(R.string.ctv_info_card_cta_text),
                     onClick = onLearnColorCodesTapped,
                 )
             )
-        }
+        )
         Spacer(modifier = Modifier.height(24.dp))
     }
 }
@@ -255,7 +245,60 @@ private fun ColorToValueScreen4BandPreview() {
             openMenu = remember { mutableStateOf(false) },
             reset = remember { mutableStateOf(false) },
             resistor = ResistorCtv(),
-            onOpenThemeDialog = {},
+            onNavigateBack = {},
+            onClearSelectionsTapped = {},
+            onAboutTapped = {},
+            onUpdateBand = { _, _ -> },
+            onNavBarSelectionChanged = { _ -> },
+            onLearnColorCodesTapped = {},
+        )
+    }
+}
+
+@AppScreenPreviews
+@Composable
+private fun ColorToValueScreen3BandPreview() {
+    ResistorCalculatorTheme {
+        ColorToValueScreen(
+            openMenu = remember { mutableStateOf(false) },
+            reset = remember { mutableStateOf(false) },
+            resistor = ResistorCtv(navBarSelection = 0),
+            onNavigateBack = {},
+            onClearSelectionsTapped = {},
+            onAboutTapped = {},
+            onUpdateBand = { _, _ -> },
+            onNavBarSelectionChanged = { _ -> },
+            onLearnColorCodesTapped = {},
+        )
+    }
+}
+
+@AppScreenPreviews
+@Composable
+private fun ColorToValueScreen5BandPreview() {
+    ResistorCalculatorTheme {
+        ColorToValueScreen(
+            openMenu = remember { mutableStateOf(false) },
+            reset = remember { mutableStateOf(false) },
+            resistor = ResistorCtv(navBarSelection = 2),
+            onNavigateBack = {},
+            onClearSelectionsTapped = {},
+            onAboutTapped = {},
+            onUpdateBand = { _, _ -> },
+            onNavBarSelectionChanged = { _ -> },
+            onLearnColorCodesTapped = {},
+        )
+    }
+}
+
+@AppScreenPreviews
+@Composable
+private fun ColorToValueScreen6BandPreview() {
+    ResistorCalculatorTheme {
+        ColorToValueScreen(
+            openMenu = remember { mutableStateOf(false) },
+            reset = remember { mutableStateOf(false) },
+            resistor = ResistorCtv(navBarSelection = 3),
             onNavigateBack = {},
             onClearSelectionsTapped = {},
             onAboutTapped = {},

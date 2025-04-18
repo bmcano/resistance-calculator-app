@@ -30,10 +30,10 @@ fun Navigation(onOpenThemeDialog: () -> Unit) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = Screen.Home.route
+        startDestination = Screen.Home.route,
     ) {
         aboutScreen(navController)
-        colorToValueScreen(navController, onOpenThemeDialog)
+        colorToValueScreen(navController)
         homeScreen(navController, onOpenThemeDialog)
         learnColorCodes(navController)
         learnPreferredValues(navController)

@@ -49,8 +49,9 @@
     <string name="smd_headline_text">Learn about SMD codes</string>
     <string name="smd_button_text">Explore the IEC 60062 standard</string>
     <!-- CtV screen/components text -->
-    <string name="ctv_headline_text">Learn about color codes</string>
-    <string name="ctv_button_text">Explore the IEC 60062 standard</string>
+    <string name="ctv_info_card_title_text">Resistor color codes</string>
+    <string name="ctv_info_card_body_text">Learn to decode each band into precise values and tolerances using the IEC 60062 standard.</string>
+    <string name="ctv_info_card_cta_text">Learn more</string>
     <!-- VtC screen/components text -->
     <string name="vtc_validate_e_series_button">Validate resistance against E-series</string>
     <string name="vtc_valid_card_label">Valid E-series value</string>

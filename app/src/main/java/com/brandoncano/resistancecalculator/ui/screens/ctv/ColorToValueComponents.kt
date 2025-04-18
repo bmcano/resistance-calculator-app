@@ -6,12 +6,19 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -32,6 +39,10 @@ import com.brandoncano.resistancecalculator.util.resistor.formatResistance
 import com.brandoncano.sharedcomponents.composables.AppCard
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
 import com.brandoncano.sharedcomponents.composables.DrawContent
+import com.brandoncano.sharedcomponents.text.onSurfaceVariant
+import com.brandoncano.sharedcomponents.text.textStyleCallout
+import com.brandoncano.sharedcomponents.text.textStyleHeadline
+import com.brandoncano.sharedcomponents.text.textStyleSubhead
 import com.brandoncano.sharedcomponents.text.textStyleTitle
 
 @Composable
@@ -50,7 +61,7 @@ data class ResistorImagePair(@DrawableRes val drawableRes: Int, val color: Strin
 @Composable
 fun ResistorLayout(resistor: ResistorCtv) {
     Column(
-        modifier = Modifier.padding(top = 16.dp, start = 32.dp, end = 32.dp),
+        modifier = Modifier.padding(start = 32.dp, end = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         val resistorColor = resistor.deriveResistorColor()
@@ -119,6 +130,64 @@ private fun ResistorLayoutsPreview() {
             ResistorLayout(ResistorCtv("Red", "Orange", "", "Yellow", "Green", "", 1))
             ResistorLayout(ResistorCtv("Red", "Orange", "Black", "Yellow", "Green", "", 2))
             ResistorLayout(ResistorCtv("Red", "Orange", "Black", "Yellow", "Green", "Blue", 3))
+        }
+    }
+}
+
+// TODO - This will be extracted into the shared lib
+//  - Check spacings
+data class CardAction(
+    val buttonLabel: String,
+    val onClick: () -> Unit
+)
+
+@Composable
+fun AppActionCard(
+    icon: ImageVector,
+    iconTint: Color,
+    cardTitle: String,
+    cardBody: String,
+    actions: List<CardAction> = emptyList(),
+) {
+    AppCard(
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Row(
+            modifier = Modifier.padding(16.dp),
+            verticalAlignment = Alignment.Top
+        ) {
+            Image(
+                modifier = Modifier.size(32.dp),
+                imageVector = icon,
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(iconTint)
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = cardTitle,
+                    modifier = Modifier.padding(bottom = 8.dp),
+                    style = textStyleHeadline(),
+                )
+                Text(
+                    text = cardBody,
+                    style = textStyleSubhead().onSurfaceVariant(),
+                )
+            }
+        }
+        if (actions.isEmpty()) return@AppCard
+        Row(horizontalArrangement = Arrangement.Start) {
+            actions.forEach { action ->
+                TextButton(
+                    onClick = action.onClick,
+                    modifier = Modifier.padding(start = 16.dp, end = 8.dp)
+                ) {
+                    Text(
+                        text = action.buttonLabel,
+                        style = textStyleCallout(),
+                    )
+                }
+            }
         }
     }
 }

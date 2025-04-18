@@ -26,11 +26,8 @@ import androidx.compose.material.icons.outlined.Looks6
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -62,7 +59,6 @@ import com.brandoncano.sharedcomponents.data.NavigationBarOptions
 @Composable
 fun ValueToColorScreen(
     resistor: ResistorVtc,
-    navBarPosition: Int,
     isError: Boolean,
     openMenu: MutableState<Boolean>,
     reset: MutableState<Boolean>,
@@ -77,7 +73,6 @@ fun ValueToColorScreen(
     onUseValueTapped: () -> String,
     onLearnMoreTapped: () -> Unit,
 ) {
-    var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
     val picture = remember { Picture() }
     Scaffold(
         topBar = {
@@ -110,11 +105,8 @@ fun ValueToColorScreen(
         },
         bottomBar = {
             AppNavigationBar(
-                selection = navBarSelection,
-                onClick = {
-                    navBarSelection = it
-                    onNavBarSelectionChanged(it)
-                },
+                selection = resistor.navBarSelection,
+                onClick = { onNavBarSelectionChanged(it) },
                 options = listOf(
                     NavigationBarOptions(
                         label = stringResource(id = R.string.navbar_three_band),
@@ -138,7 +130,6 @@ fun ValueToColorScreen(
     ) { paddingValues ->
         ValueToColorScreenContent(
             paddingValues = paddingValues,
-            navBarSelection = navBarSelection,
             picture = picture,
             resistor = resistor,
             isError = isError,
@@ -155,7 +146,6 @@ fun ValueToColorScreen(
 @Composable
 private fun ValueToColorScreenContent(
     paddingValues: PaddingValues,
-    navBarSelection: Int,
     picture: Picture,
     resistor: ResistorVtc,
     isError: Boolean,
@@ -168,6 +158,7 @@ private fun ValueToColorScreenContent(
 ) {
     val resistance = remember { mutableStateOf(resistor.resistance) }
     val sidePadding = dimensionResource(R.dimen.app_side_padding)
+    val navBarSelection = resistor.navBarSelection
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -254,7 +245,6 @@ private fun ValueToColorScreenPreview() {
     ResistorCalculatorTheme {
         ValueToColorScreen(
             resistor = ResistorVtc(),
-            navBarPosition = 1,
             isError = false,
             openMenu = remember { mutableStateOf(false) },
             reset = remember { mutableStateOf(false) },

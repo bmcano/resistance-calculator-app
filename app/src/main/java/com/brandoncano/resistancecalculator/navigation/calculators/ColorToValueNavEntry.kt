@@ -21,12 +21,13 @@ import com.brandoncano.resistancecalculator.ui.screens.ctv.ColorToValueScreen
 
 fun NavGraphBuilder.colorToValueScreen(
     navHostController: NavHostController,
-    onOpenThemeDialog: () -> Unit,
 ) {
     composable(
         route = Screen.ColorToValue.route,
-        enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
-        exitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
+        enterTransition = { slideInHorizontally(initialOffsetX = { it }) }, // from right
+        exitTransition = { slideOutHorizontally(targetOffsetX = { -it }) }, // to left
+        popEnterTransition = { slideInHorizontally(initialOffsetX = { -it }) }, // from left (back nav)
+        popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) }, // to right (back nav)
     ) {
         val context = LocalContext.current
         val focusManager = LocalFocusManager.current
@@ -39,7 +40,6 @@ fun NavGraphBuilder.colorToValueScreen(
             openMenu = openMenu,
             reset = reset,
             resistor = resistor,
-            onOpenThemeDialog = onOpenThemeDialog,
             onNavigateBack = { navHostController.popBackStack() },
             onClearSelectionsTapped = {
                 openMenu.value = false

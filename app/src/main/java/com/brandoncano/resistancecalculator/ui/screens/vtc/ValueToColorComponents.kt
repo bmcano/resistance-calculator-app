@@ -46,6 +46,8 @@ import com.brandoncano.sharedcomponents.composables.DrawContent
 import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 import com.brandoncano.sharedcomponents.text.textStyleBody
 import com.brandoncano.sharedcomponents.text.textStyleCallout
+import com.brandoncano.sharedcomponents.text.textStyleHeadline
+import com.brandoncano.sharedcomponents.text.textStyleSubhead
 
 @Composable
 fun ResistorDisplay(picture: Picture, resistor: ResistorVtc, isError: Boolean) {
@@ -159,18 +161,29 @@ private fun ESeriesCardContent(
                 Text(
                     text = cardLabel,
                     modifier = Modifier.padding(bottom = 8.dp),
-                    style = textStyleCallout(),
+                    style = textStyleHeadline(),
                 )
                 Text(
                     text = cardBody,
-                    style = textStyleBody().onSurfaceVariant(),
+                    style = textStyleSubhead().onSurfaceVariant(),
                 )
             }
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.End,
+            horizontalArrangement = Arrangement.Start,
         ) {
+            TextButton(
+                modifier = Modifier
+                    .padding(end = 8.dp),
+                onClick = onLearnMoreTapped,
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.vtc_valid_card_action),
+                    style = textStyleCallout(),
+                )
+            }
             if (textButtonLabel.isNotEmpty()) {
                 TextButton(
                     modifier = Modifier
@@ -184,17 +197,7 @@ private fun ESeriesCardContent(
                     )
                 }
             }
-            TextButton(
-                modifier = Modifier
-                    .padding(end = 8.dp),
-                onClick = onLearnMoreTapped,
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
-            ) {
-                Text(
-                    text = stringResource(R.string.vtc_valid_card_action),
-                    style = textStyleCallout(),
-                )
-            }
+
         }
     }
 }

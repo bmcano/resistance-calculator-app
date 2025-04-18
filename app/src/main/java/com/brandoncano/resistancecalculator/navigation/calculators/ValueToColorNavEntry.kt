@@ -44,16 +44,14 @@ fun NavGraphBuilder.valueToColorScreen(
         val openMenu = remember { mutableStateOf(false) }
         val reset = remember { mutableStateOf(false) }
         val viewModel: ResistorVtcViewModel = viewModel(factory = ResistorViewModelFactory(context))
-        val resistor by viewModel.resistor.collectAsState()
-        val isError by viewModel.isError.collectAsState()
-        val navBarSelection by viewModel.navBarSelection.collectAsState()
-        val eSeriesCardContent: ESeriesCardContent by viewModel.eSeriesCardContent.collectAsState()
-        val closestStandardValue by viewModel.closestStandardValue.collectAsState()
+        val resistor by viewModel.resistorStateTOStateFlow.collectAsState()
+        val isError by viewModel.isErrorStateFlow.collectAsState()
+        val eSeriesCardContent: ESeriesCardContent by viewModel.eSeriesCardContentStateTOStateFlow.collectAsState()
+        val closestStandardValue by viewModel.closestStandardValueStateFlow.collectAsState()
         resistor.formatResistor()
 
         ValueToColorScreen(
             resistor = resistor,
-            navBarPosition = navBarSelection,
             isError = isError,
             openMenu = openMenu,
             reset = reset,
@@ -78,25 +76,25 @@ fun NavGraphBuilder.valueToColorScreen(
                 if (clearFocus) focusManager.clearFocus()
             },
             onNavBarSelectionChanged = { selection ->
-                viewModel.saveNavBarSelection(selection)
+                viewModel.updateNavBarSelection(selection)
             },
             onValidateResistanceTapped = {
                 if (resistor.isEmpty() || isError) return@ValueToColorScreen
                 val units = resistor.units
                 val resistanceValue = ParseResistanceValue.execute(resistor.resistance, units) ?: return@ValueToColorScreen
-                val tolerance = if (navBarSelection == 0) "${Symbols.PM}20%" else resistor.band5
+                val tolerance = if (resistor.navBarSelection == 0) "${Symbols.PM}20%" else resistor.band5
 
                 focusManager.clearFocus()
 
-                validateTolerance(tolerance, navBarSelection)?.let {
+                validateTolerance(tolerance, resistor.navBarSelection)?.let {
                     viewModel.updateCardContent(it)
                     return@ValueToColorScreen
                 }
 
                 val tolerancePercentage = tolerance.tolerancePercentage() ?: return@ValueToColorScreen
-                val eSeriesList = DeriveESeries.execute(tolerancePercentage, navBarSelection + 3)
+                val eSeriesList = DeriveESeries.execute(tolerancePercentage, resistor.navBarSelection + 3)
                 if (eSeriesList.isNullOrEmpty()) {
-                    viewModel.updateCardContent(ESeriesCardContent.InvalidTolerance("${navBarSelection + 3}"))
+                    viewModel.updateCardContent(ESeriesCardContent.InvalidTolerance("${resistor.navBarSelection + 3}"))
                     return@ValueToColorScreen
                 }
 

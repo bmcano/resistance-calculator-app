@@ -9,7 +9,8 @@ import com.google.gson.JsonSyntaxException
 
 /**
  * Notes:
- * + Device File Explorer -> /data/data/com.brandoncano.resistancecalculator/shared_prefs/color_to_value.xml
+ * + We store the `ResistorCtv` data class as JSON data
+ * + Device File Explorer: `/data/data/com.brandoncano.resistancecalculator/shared_prefs/color_to_value.xml`
  */
 class ResistorCtvRepository(context: Context) {
 
@@ -46,18 +47,18 @@ class ResistorCtvRepository(context: Context) {
         }
     }
 
-    fun saveResistor(resistor: ResistorCtv) {
-        sharedPreferences.edit {
-            val json = gson.toJson(resistor)
-            putString(KEY_RESISTOR_CTV, json)
-        }
-    }
-
     fun clearData(navBarSelection: Int) {
         val blank = ResistorCtv(navBarSelection = navBarSelection)
         val json = gson.toJson(blank)
         sharedPreferences.edit {
             remove(KEY_RESISTOR_CTV)
+            putString(KEY_RESISTOR_CTV, json)
+        }
+    }
+
+    fun saveResistor(resistor: ResistorCtv) {
+        sharedPreferences.edit {
+            val json = gson.toJson(resistor)
             putString(KEY_RESISTOR_CTV, json)
         }
     }
