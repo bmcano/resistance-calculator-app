@@ -139,6 +139,9 @@
     <string name="content_description_e_series_equation">E-series equation</string>
     <string name="content_description_e_series_values">E-series values</string>
 
+    <!-- Menu items -->
+    <string name="menu_share_image">Share as image</string>
+
     <!-- Error messages -->
     <string name="error_na">N/A</string>
     <string name="error_invalid_resistance">Invalid resistance</string>
