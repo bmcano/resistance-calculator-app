@@ -2,6 +2,7 @@ package com.brandoncano.resistancecalculator.util
 
 import android.os.Build
 
+@Deprecated("No longer need this for the sharing image method.")
 object Sdk {
 
     fun isAtLeastAndroid7(): Boolean {

@@ -4,8 +4,13 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.data.ESeriesCardContent
 import com.brandoncano.resistancecalculator.to.ResistorVtc
+import com.brandoncano.resistancecalculator.util.eseries.CalculateClosestStandardValue
+import com.brandoncano.resistancecalculator.util.eseries.DeriveESeries
+import com.brandoncano.resistancecalculator.util.eseries.ParseResistanceValue
+import com.brandoncano.resistancecalculator.util.eseries.tolerancePercentage
 import com.brandoncano.resistancecalculator.util.resistor.formatResistor
 import com.brandoncano.resistancecalculator.util.resistor.isInputInvalid
 
@@ -21,9 +26,7 @@ class ResistorVtcViewModel(private val savedStateHandle: SavedStateHandle, conte
 
     private val application = context.applicationContext
     private val repository = ResistorVtcRepository.getInstance(application)
-    val resistorStateTOStateFlow = savedStateHandle.getStateFlow(KEY_RESISTOR_STATE_TO,
-        ResistorVtc()
-    )
+    val resistorStateTOStateFlow = savedStateHandle.getStateFlow(KEY_RESISTOR_STATE_TO, ResistorVtc())
     val isErrorStateFlow = savedStateHandle.getStateFlow(KEY_ERROR_STATE_BOOL, false)
     val eSeriesCardContentStateTOStateFlow = savedStateHandle.getStateFlow(KEY_E_SERIES_CONTENT_STATE_TO, ESeriesCardContent.NoContent)
     val closestStandardValueStateFlow = savedStateHandle.getStateFlow(KEY_CLOSEST_STANDARD_VALUE_FLOAT, 10.0)
@@ -67,7 +70,6 @@ class ResistorVtcViewModel(private val savedStateHandle: SavedStateHandle, conte
             repository.saveResistor(updatedResistor)
         }
 
-        // Store back in handle
         savedStateHandle[KEY_RESISTOR_STATE_TO] = updatedResistor
     }
 
@@ -82,7 +84,6 @@ class ResistorVtcViewModel(private val savedStateHandle: SavedStateHandle, conte
             repository.saveResistor(updatedResistor)
         }
 
-        // Store updated in handle
         savedStateHandle[KEY_RESISTOR_STATE_TO] = updatedResistor
     }
 
@@ -90,8 +91,36 @@ class ResistorVtcViewModel(private val savedStateHandle: SavedStateHandle, conte
         savedStateHandle[KEY_E_SERIES_CONTENT_STATE_TO] = content
     }
 
-    fun updateClosestStandardValue(value: Double) {
-        savedStateHandle[KEY_CLOSEST_STANDARD_VALUE_FLOAT] = value
+    fun validateResistance() {
+        val resistor = resistorStateTOStateFlow.value
+        val isError = isErrorStateFlow.value
+        if (resistor.isEmpty() || isError) return
+
+        val units = resistor.units
+        val resistance = resistor.resistance
+        val navBarSelection = resistor.navBarSelection
+        val resistanceValue = ParseResistanceValue.execute(resistance, units) ?: return
+        val tolerance = if (navBarSelection == 0) "${Symbols.PM}20%" else resistor.band5
+
+        val tolerancePercentage = tolerance.tolerancePercentage() ?: run {
+            showInvalidTolerance(navBarSelection)
+            return
+        }
+
+        val eSeriesList = DeriveESeries.execute(tolerancePercentage, navBarSelection + 3)
+        if (eSeriesList.isNullOrEmpty()) {
+            showInvalidTolerance(navBarSelection)
+            return
+        }
+
+        val (content, closestValue) = CalculateClosestStandardValue.execute(resistanceValue, units, eSeriesList)
+        savedStateHandle[KEY_E_SERIES_CONTENT_STATE_TO] = content
+        savedStateHandle[KEY_CLOSEST_STANDARD_VALUE_FLOAT] = closestValue
+    }
+
+    private fun showInvalidTolerance(navBarSelection: Int) {
+        val content = ESeriesCardContent.InvalidTolerance("${navBarSelection + 3}")
+        savedStateHandle[KEY_E_SERIES_CONTENT_STATE_TO] = content
     }
 
     private fun updateErrorState(resistor: ResistorVtc) {
