@@ -1,7 +1,9 @@
 package com.brandoncano.resistancecalculator.navigation.calculators
 
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,17 +29,17 @@ import com.brandoncano.resistancecalculator.util.eseries.FindClosestStandardValu
 import com.brandoncano.resistancecalculator.util.eseries.GenerateStandardValues
 import com.brandoncano.resistancecalculator.util.eseries.ParseResistanceValue
 import com.brandoncano.resistancecalculator.util.eseries.tolerancePercentage
-import com.brandoncano.resistancecalculator.util.resistor.formatResistor
 import kotlin.math.abs
 
 fun NavGraphBuilder.valueToColorScreen(
     navHostController: NavHostController,
-    onOpenThemeDialog: () -> Unit,
 ) {
     composable(
         route = Screen.ValueToColor.route,
-        enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
-        exitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
+        enterTransition = { slideInVertically(initialOffsetY = { it }) },
+        exitTransition = { ExitTransition.None },
+        popEnterTransition = { EnterTransition.None },
+        popExitTransition = { slideOutVertically(targetOffsetY= { it }) },
     ) {
         val context = LocalContext.current
         val focusManager = LocalFocusManager.current
@@ -48,7 +50,6 @@ fun NavGraphBuilder.valueToColorScreen(
         val isError by viewModel.isErrorStateFlow.collectAsState()
         val eSeriesCardContent: ESeriesCardContent by viewModel.eSeriesCardContentStateTOStateFlow.collectAsState()
         val closestStandardValue by viewModel.closestStandardValueStateFlow.collectAsState()
-        resistor.formatResistor()
 
         ValueToColorScreen(
             resistor = resistor,
@@ -56,7 +57,6 @@ fun NavGraphBuilder.valueToColorScreen(
             openMenu = openMenu,
             reset = reset,
             eSeriesCardContent = eSeriesCardContent,
-            onOpenThemeDialog = onOpenThemeDialog,
             onNavigateBack = { navHostController.popBackStack() },
             onClearSelectionsTapped = {
                 openMenu.value = false
@@ -75,10 +75,9 @@ fun NavGraphBuilder.valueToColorScreen(
                 viewModel.updateValues(resistance, units, band5, band6)
                 if (clearFocus) focusManager.clearFocus()
             },
-            onNavBarSelectionChanged = { selection ->
-                viewModel.updateNavBarSelection(selection)
-            },
+            onNavBarSelectionChanged = { viewModel.updateNavBarSelection(it) },
             onValidateResistanceTapped = {
+                // TODO - Extract to viewmodel as we want to have more logic be in that section of the architecture
                 if (resistor.isEmpty() || isError) return@ValueToColorScreen
                 val units = resistor.units
                 val resistanceValue = ParseResistanceValue.execute(resistor.resistance, units) ?: return@ValueToColorScreen
@@ -104,17 +103,17 @@ fun NavGraphBuilder.valueToColorScreen(
             },
             onUseValueTapped = {
                 viewModel.updateCardContent(ESeriesCardContent.NoContent)
+                // TODO - Defect: When say we have 123 and the suggestion is 124, it uses 124.0 which is an error.
                 val resistance = closestStandardValue.toString()
                 viewModel.updateValues(resistance, resistor.units, resistor.band5, resistor.band6)
                 return@ValueToColorScreen resistance
             },
-            onLearnMoreTapped = {
-                navigateToPreferredValuesIec(navHostController)
-            }
+            onLearnMoreTapped = { navigateToPreferredValuesIec(navHostController) },
         )
     }
 }
 
+// TODO - create utils for these functions
 fun validateTolerance(tolerance: String, navBarSelection: Int): ESeriesCardContent? {
     return if (tolerance.isEmpty()) {
         ESeriesCardContent.InvalidTolerance("${navBarSelection + 3}")

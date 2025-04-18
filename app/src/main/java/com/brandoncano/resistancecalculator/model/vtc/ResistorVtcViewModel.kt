@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.brandoncano.resistancecalculator.data.ESeriesCardContent
-import com.brandoncano.resistancecalculator.to.ResistorCtv
+import com.brandoncano.resistancecalculator.to.ResistorVtc
 import com.brandoncano.resistancecalculator.util.resistor.formatResistor
 import com.brandoncano.resistancecalculator.util.resistor.isInputInvalid
 
@@ -21,7 +21,9 @@ class ResistorVtcViewModel(private val savedStateHandle: SavedStateHandle, conte
 
     private val application = context.applicationContext
     private val repository = ResistorVtcRepository.getInstance(application)
-    val resistorStateTOStateFlow = savedStateHandle.getStateFlow(KEY_RESISTOR_STATE_TO, ResistorVtc())
+    val resistorStateTOStateFlow = savedStateHandle.getStateFlow(KEY_RESISTOR_STATE_TO,
+        ResistorVtc()
+    )
     val isErrorStateFlow = savedStateHandle.getStateFlow(KEY_ERROR_STATE_BOOL, false)
     val eSeriesCardContentStateTOStateFlow = savedStateHandle.getStateFlow(KEY_E_SERIES_CONTENT_STATE_TO, ESeriesCardContent.NoContent)
     val closestStandardValueStateFlow = savedStateHandle.getStateFlow(KEY_CLOSEST_STANDARD_VALUE_FLOAT, 10.0)
@@ -44,7 +46,7 @@ class ResistorVtcViewModel(private val savedStateHandle: SavedStateHandle, conte
         val currentNavBar = resistorStateTOStateFlow.value.navBarSelection
         repository.clearData(currentNavBar)
 
-        val blankResistor = ResistorCtv(navBarSelection = currentNavBar)
+        val blankResistor = ResistorVtc(navBarSelection = currentNavBar)
         savedStateHandle[KEY_RESISTOR_STATE_TO] = blankResistor
         savedStateHandle[KEY_ERROR_STATE_BOOL] = false
         savedStateHandle[KEY_E_SERIES_CONTENT_STATE_TO] = ESeriesCardContent.NoContent

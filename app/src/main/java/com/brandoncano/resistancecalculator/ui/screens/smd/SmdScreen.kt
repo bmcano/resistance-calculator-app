@@ -12,7 +12,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.outlined.Explicit
 import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material.icons.outlined.Looks3
@@ -78,10 +78,10 @@ fun SmdScreen(
     Scaffold(
         topBar = {
             AppMenuTopAppBar(
-                titleText = stringResource(R.string.title_smd),
+                titleText = stringResource(R.string.smd_title),
                 interactionSource = remember { MutableInteractionSource() },
                 showMenu = openMenu,
-                navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,
+                navigationIcon = Icons.Filled.Close,
                 onNavigateBack = onNavigateBack,
             ) {
                 ClearSelectionsMenuItem(onClearSelectionsTapped)
@@ -113,15 +113,15 @@ fun SmdScreen(
                 },
                 options = listOf(
                     NavigationBarOptions(
-                        label = stringResource(id = R.string.navbar_three_eia),
+                        label = stringResource(id = R.string.smd_navbar_three_eia),
                         imageVector = Icons.Outlined.Looks3,
                     ),
                     NavigationBarOptions(
-                        label = stringResource(id = R.string.navbar_four_eia),
+                        label = stringResource(id = R.string.smd_navbar_four_eia),
                         imageVector = Icons.Outlined.Looks4,
                     ),
                     NavigationBarOptions(
-                        label = stringResource(id = R.string.navbar_eia_96),
+                        label = stringResource(id = R.string.smd_navbar_eia_96),
                         imageVector = Icons.Outlined.Explicit,
                     ),
                 ),
@@ -162,7 +162,7 @@ private fun SmdScreenContent(
     ) {
         SmdResistorDisplay(picture, resistor, isError)
         AppTextField(
-            label = stringResource(id = R.string.hint_smd_code),
+            label = stringResource(id = R.string.smd_code_hint),
             modifier = Modifier.padding(top = 32.dp),
             value = code,
             reset = reset.value,

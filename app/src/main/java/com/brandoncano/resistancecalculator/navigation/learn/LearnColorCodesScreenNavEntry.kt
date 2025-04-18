@@ -1,7 +1,9 @@
 package com.brandoncano.resistancecalculator.navigation.learn
 
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -13,8 +15,10 @@ fun NavGraphBuilder.learnColorCodes(
 ) {
     composable(
         route = Screen.LearnColorCodes.route,
-        enterTransition = { slideInVertically(initialOffsetY = { it }) },
-        exitTransition = { slideOutVertically(targetOffsetY = { it }) },
+        enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
+        exitTransition = { ExitTransition.None },
+        popEnterTransition = { EnterTransition.None },
+        popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
         LearnColorCodesScreen(
             onNavigateBack = { navHostController.popBackStack() },

@@ -84,7 +84,7 @@ fun ResistorLayout(resistor: ResistorCtv) {
         )
         ResistanceText(
             if (resistor.isEmpty()) {
-                stringResource(id = R.string.default_ctv_value)
+                stringResource(id = R.string.ctv_default_value)
             } else {
                 resistor.formatResistance()
             }

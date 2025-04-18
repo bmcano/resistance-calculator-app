@@ -15,7 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
@@ -67,7 +67,7 @@ fun CircuitCalculatorScreen(
                 titleText = stringResource(circuitTitle),
                 interactionSource = remember { MutableInteractionSource() },
                 showMenu = openMenu,
-                navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,
+                navigationIcon = Icons.Filled.Close,
                 onNavigateBack = onNavigateBack,
             ) {
                 ClearSelectionsMenuItem(onClearSelectionsTapped)
@@ -205,7 +205,7 @@ private fun getResistanceLabelText(sameValues: Boolean, units: String, count: In
 private fun CircuitCalculatorScreenSeriesPreview() {
     ResistorCalculatorTheme {
         CircuitCalculatorScreen(
-            circuitTitle = R.string.title_series_resistors,
+            circuitTitle = R.string.circuit_title_series,
             circuitVector = R.drawable.img_series_resistors,
             circuit = Circuit(),
             openMenu = remember { mutableStateOf(false) },
@@ -223,7 +223,7 @@ private fun CircuitCalculatorScreenSeriesPreview() {
 private fun CircuitCalculatorScreenParallelPreview() {
     ResistorCalculatorTheme {
         CircuitCalculatorScreen(
-            circuitTitle = R.string.title_parallel_resistors,
+            circuitTitle = R.string.circuit_title_parallel,
             circuitVector = R.drawable.img_parallel_resistors,
             circuit = Circuit(),
             openMenu = remember { mutableStateOf(false) },

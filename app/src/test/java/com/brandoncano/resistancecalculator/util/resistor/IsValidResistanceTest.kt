@@ -1,6 +1,6 @@
 package com.brandoncano.resistancecalculator.util.resistor
 
-import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
+import com.brandoncano.resistancecalculator.to.ResistorVtc
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test

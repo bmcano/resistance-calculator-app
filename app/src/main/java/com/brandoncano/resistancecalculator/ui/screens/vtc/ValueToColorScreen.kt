@@ -18,7 +18,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.outlined.Looks3
 import androidx.compose.material.icons.outlined.Looks4
 import androidx.compose.material.icons.outlined.Looks5
@@ -37,7 +37,7 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.DropdownLists
 import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.data.ESeriesCardContent
-import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
+import com.brandoncano.resistancecalculator.to.ResistorVtc
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.Sdk
@@ -49,7 +49,6 @@ import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
 import com.brandoncano.sharedcomponents.composables.AppNavigationBar
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import com.brandoncano.sharedcomponents.composables.AppTextField
-import com.brandoncano.sharedcomponents.composables.AppThemeMenuItem
 import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
 import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
 import com.brandoncano.sharedcomponents.composables.ShareImageMenuItem
@@ -63,7 +62,6 @@ fun ValueToColorScreen(
     openMenu: MutableState<Boolean>,
     reset: MutableState<Boolean>,
     eSeriesCardContent: ESeriesCardContent,
-    onOpenThemeDialog: () -> Unit,
     onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
@@ -73,14 +71,15 @@ fun ValueToColorScreen(
     onUseValueTapped: () -> String,
     onLearnMoreTapped: () -> Unit,
 ) {
+    // TODO - find a better way to share the image, can make a nicer looking component that's not directly on the screen
     val picture = remember { Picture() }
     Scaffold(
         topBar = {
             AppMenuTopAppBar(
-                titleText = stringResource(R.string.title_value_to_color),
+                titleText = stringResource(R.string.vtc_title),
                 interactionSource = remember { MutableInteractionSource() },
                 showMenu = openMenu,
-                navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,
+                navigationIcon = Icons.Filled.Close,
                 onNavigateBack = onNavigateBack,
             ) {
                 ClearSelectionsMenuItem(onClearSelectionsTapped)
@@ -99,7 +98,6 @@ fun ValueToColorScreen(
                     app = Links.APP_NAME,
                     showMenu = openMenu,
                 )
-                AppThemeMenuItem(openMenu, onOpenThemeDialog)
                 AboutAppMenuItem(onAboutTapped)
             }
         },
@@ -165,8 +163,9 @@ private fun ValueToColorScreenContent(
             .verticalScroll(rememberScrollState())
             .padding(paddingValues)
             .padding(horizontal = sidePadding),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        Spacer(modifier = Modifier.padding(top = 32.dp))
         ResistorDisplay(picture, resistor, isError)
         AppTextField(
             label = stringResource(id = R.string.type_resistance_hint),
@@ -230,6 +229,7 @@ private fun ValueToColorScreenContent(
             enabled = !resistor.isEmpty() && !isError,
             onClick = onValidateResistanceTapped,
         )
+        Spacer(modifier = Modifier.height(24.dp))
         ESeriesCard(
             eSeriesCardContent = eSeriesCardContent,
             onLearnMoreTapped = onLearnMoreTapped,
@@ -249,7 +249,6 @@ private fun ValueToColorScreenPreview() {
             openMenu = remember { mutableStateOf(false) },
             reset = remember { mutableStateOf(false) },
             eSeriesCardContent = ESeriesCardContent.NoContent,
-            onOpenThemeDialog = {},
             onNavigateBack = {},
             onClearSelectionsTapped = {},
             onAboutTapped = {},

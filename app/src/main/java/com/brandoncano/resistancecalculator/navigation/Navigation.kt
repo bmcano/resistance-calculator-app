@@ -41,7 +41,7 @@ fun Navigation(onOpenThemeDialog: () -> Unit) {
         parallelCalculatorScreen(navController)
         seriesCalculatorScreen(navController)
         smdScreen(navController, onOpenThemeDialog)
-        valueToColorScreen(navController, onOpenThemeDialog)
+        valueToColorScreen(navController)
         // from shared library
         donateScreen(navController)
         viewOurAppsScreen(navController, Apps.Resistor)

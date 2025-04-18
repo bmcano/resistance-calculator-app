@@ -1,7 +1,9 @@
 package com.brandoncano.resistancecalculator.navigation.calculators
 
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,10 +26,10 @@ fun NavGraphBuilder.colorToValueScreen(
 ) {
     composable(
         route = Screen.ColorToValue.route,
-        enterTransition = { slideInHorizontally(initialOffsetX = { it }) }, // from right
-        exitTransition = { slideOutHorizontally(targetOffsetX = { -it }) }, // to left
-        popEnterTransition = { slideInHorizontally(initialOffsetX = { -it }) }, // from left (back nav)
-        popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) }, // to right (back nav)
+        enterTransition = { slideInVertically(initialOffsetY = { it }) },
+        exitTransition = { ExitTransition.None },
+        popEnterTransition = { EnterTransition.None },
+        popExitTransition = { slideOutVertically(targetOffsetY= { it }) },
     ) {
         val context = LocalContext.current
         val focusManager = LocalFocusManager.current
@@ -55,9 +57,7 @@ fun NavGraphBuilder.colorToValueScreen(
                 reset.value = false
                 viewModel.updateBand(bandNumber, color)
             },
-            onNavBarSelectionChanged = { selection ->
-                viewModel.updateNavBarSelection(selection)
-            },
+            onNavBarSelectionChanged = { viewModel.updateNavBarSelection(it) },
             onLearnColorCodesTapped = { navigateToColorCodeIec(navHostController) },
         )
     }

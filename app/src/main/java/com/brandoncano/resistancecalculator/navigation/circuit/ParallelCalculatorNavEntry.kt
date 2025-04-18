@@ -1,7 +1,9 @@
 package com.brandoncano.resistancecalculator.navigation.circuit
 
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,8 +24,10 @@ fun NavGraphBuilder.parallelCalculatorScreen(
 ) {
     composable(
         route = Screen.ParallelCalculator.route,
-        enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
-        exitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
+        enterTransition = { slideInVertically(initialOffsetY = { it }) },
+        exitTransition = { ExitTransition.None },
+        popEnterTransition = { EnterTransition.None },
+        popExitTransition = { slideOutVertically(targetOffsetY= { it }) },
     ) {
         val focusManager = LocalFocusManager.current
         val openMenu = remember { mutableStateOf(false) }
@@ -32,7 +36,7 @@ fun NavGraphBuilder.parallelCalculatorScreen(
         val circuit by viewModel.circuit.collectAsState()
 
         CircuitCalculatorScreen(
-            circuitTitle = R.string.title_parallel_resistors,
+            circuitTitle = R.string.circuit_title_parallel,
             circuitVector = R.drawable.img_parallel_resistors,
             circuit = circuit,
             openMenu = openMenu,

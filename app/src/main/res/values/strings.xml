@@ -1,12 +1,26 @@
 <resources>
-    <!-- Screen titles -->
     <string name="app_name">Resistor Calculator</string>
-    <string name="title_color_to_value">Color to Value</string>
-    <string name="title_value_to_color">Value to Color</string>
-    <string name="title_smd">SMD Resistor</string>
-    <string name="title_series_resistors">Series Resistors</string>
-    <string name="title_parallel_resistors">Parallel Resistors</string>
-    <!-- OutlinedTextField hints -->
+
+    <!-- Home screen/components text -->
+    <string name="home_calculators_header_text">Calculators</string>
+    <string name="home_button_color_to_value">Color to value</string>
+    <string name="home_button_value_to_color">Value to color</string>
+    <string name="home_button_smd">SMD resistor</string>
+    <string name="home_button_series_calculator">Resistors in series</string>
+    <string name="home_button_parallel_calculator">Resistors in parallel</string>
+
+    <!-- About screen/components text -->
+    <string name="about_title">About The App</string>
+    <string name="about_view_privacy_policy">View privacy policy</string>
+    <string name="about_overview_title">Overview &amp; standards</string>
+    <string name="about_overview_body_01">This app includes a range of calculators to determine and convert resistance values for color-band resistors, SMD resistors, and more, supporting various resistor configurations and coding formats.</string>
+    <string name="about_overview_body_02">All calculations follow IEC 60062 and IEC 60063 standards for resistor color codes and preferred values to ensure precision and accuracy.</string>
+    <string name="about_iec_header_text">Resistor standards &amp; guides</string>
+    <string name="about_standard_iec_button">View resistor color code</string>
+    <string name="about_smd_iec_button">View resistor SMD code</string>
+    <string name="about_preferred_values_iec_button">View resistor preferred values</string>
+
+    <!-- Calculator screens shared text -->
     <string name="number_band_hint1">First band</string>
     <string name="number_band_hint2">Second band</string>
     <string name="number_band_hint3">Third band</string>
@@ -15,44 +29,21 @@
     <string name="ppm_band_hint">Temperature coefficient</string>
     <string name="type_resistance_hint">Resistance</string>
     <string name="units_hint">Units</string>
-    <string name="hint_smd_code">Code</string>
-    <!-- Default text -->
-    <string name="default_ctv_value">Select colors</string>
-    <string name="default_vtc_value">Enter resistance</string>
-    <string name="default_smd_value">Enter code</string>
-    <!-- Bottom navigation -->
     <string name="navbar_three_band">Three Bands</string>
     <string name="navbar_four_band">Four Bands</string>
     <string name="navbar_five_band">Five Bands</string>
     <string name="navbar_six_band">Six Bands</string>
-    <string name="navbar_three_eia">Three Digit EIA</string>
-    <string name="navbar_four_eia">Four Digit EIA</string>
-    <string name="navbar_eia_96">EIA-96</string>
-    <!-- About screen/components text -->
-    <string name="about_title">About The App</string>
-    <string name="about_description">Description</string>
-    <string name="about_description_01">This app includes a range of calculators to help determine and convert resistance values for standard color-band resistors, SMD resistors, and more, supporting a variety of coding standards and configurations.</string>
-    <string name="about_description_02">This app follows the IEC 60062 and IEC 60063 international standards for resistor coding and calculations to help ensure accuracy. For more detailed information, you can refer to the IEC 60062/60063 pages below.</string>
-    <string name="about_iec_header_text">International standard IEC 60062/60063</string>
-    <string name="about_standard_iec_button">View resistor color code</string>
-    <string name="about_smd_iec_button">View resistor SMD code</string>
-    <string name="about_preferred_values_iec_button">View resistor preferred values</string>
-    <string name="about_view_privacy_policy">View privacy policy</string>
-    <!-- Home screen/components text -->
-    <string name="home_calculators_header_text">Calculators</string>
-    <string name="home_button_color_to_value">Color to value</string>
-    <string name="home_button_value_to_color">Value to color</string>
-    <string name="home_button_smd">SMD resistor</string>
-    <string name="home_button_series_calculator">Resistors in series</string>
-    <string name="home_button_parallel_calculator">Resistors in parallel</string>
-    <!-- SMD screen/components text -->
-    <string name="smd_headline_text">Learn about SMD codes</string>
-    <string name="smd_button_text">Explore the IEC 60062 standard</string>
+
     <!-- CtV screen/components text -->
+    <string name="ctv_title">Color to Value</string>
     <string name="ctv_info_card_title_text">Resistor color codes</string>
     <string name="ctv_info_card_body_text">Learn to decode each band into precise values and tolerances using the IEC 60062 standard.</string>
     <string name="ctv_info_card_cta_text">Learn more</string>
+    <string name="ctv_default_value">Select colors</string>
+
     <!-- VtC screen/components text -->
+    <string name="vtc_title">Value to Color</string>
+    <string name="vtc_default_value">Enter resistance</string>
     <string name="vtc_validate_e_series_button">Validate resistance against E-series</string>
     <string name="vtc_valid_card_label">Valid E-series value</string>
     <string name="vtc_valid_card_body">The entered resistance value is part of the %1$s series.</string>
@@ -62,12 +53,26 @@
     <string name="vtc_invalid_card_action">Use closest value</string>
     <string name="vtc_invalid_tolerance_label">Invalid tolerance for resistor type</string>
     <string name="vtc_invalid_tolerance_body">Adjust your selection to match the supported tolerances for a %1$s-band resistor.</string>
+
+    <!-- SMD screen/components text -->
+    <string name="smd_title">SMD Resistor</string>
+    <string name="smd_default_value">Enter code</string>
+    <string name="smd_code_hint">Code</string>
+    <string name="smd_headline_text">Learn about SMD codes</string>
+    <string name="smd_button_text">Explore the IEC 60062 standard</string>
+    <string name="smd_navbar_three_eia">Three Digit EIA</string>
+    <string name="smd_navbar_four_eia">Four Digit EIA</string>
+    <string name="smd_navbar_eia_96">EIA-96</string>
+
     <!-- Series/Parallel screen text -->
+    <string name="circuit_title_series">Series Resistors</string>
+    <string name="circuit_title_parallel">Parallel Resistors</string>
     <string name="circuit_use_same_values">Use the same resistor values?</string>
     <string name="circuit_num_resistors_label">Number of resistors</string>
     <string name="circuit_units_label">Units</string>
     <string name="circuit_text_field_label">Resistance (%1$s)</string>
     <string name="circuit_text_field_label_multiple">Resistance %1$s (%2$s)</string>
+
     <!-- Info screen/components text -->
     <string name="info_title">IEC 60062 Standard</string>
     <string name="info_title_3">IEC 60063 Standard</string>
@@ -128,10 +133,12 @@
     <string name="info_values_e96_header">E-96 Series (Tolerance: 1%)</string>
     <string name="info_values_e192_header">E-192 Series (Tolerance: ≤0.5%)</string>
     <string name="info_disclaimer_footer">The information provided here regarding IEC standards is intended for general guidance. Please note that not all components may strictly adhere to these standards, as manufacturers may have variations or different interpretations. Always consult the specific datasheet or contact the manufacturer directly if you are unsure about the specifications or standards for a particular component.</string>
+
     <!-- Content descriptions -->
     <string name="content_description_app_icon">App icon</string>
     <string name="content_description_e_series_equation">E-series equation</string>
     <string name="content_description_e_series_values">E-series values</string>
+
     <!-- Error messages -->
     <string name="error_na">N/A</string>
     <string name="error_invalid_resistance">Invalid resistance</string>

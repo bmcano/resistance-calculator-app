@@ -3,11 +3,13 @@ package com.brandoncano.resistancecalculator.model.vtc
 import android.content.Context
 import android.util.Log
 import androidx.core.content.edit
+import com.brandoncano.resistancecalculator.to.ResistorVtc
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 
 /**
  * Notes:
+ * + We store the `ResistorVtc` data class as JSON data
  * + Device File Explorer -> `/data/data/com.brandoncano.resistancecalculator/shared_prefs/value_to_color.xml`
  */
 class ResistorVtcRepository(context: Context) {
@@ -45,18 +47,18 @@ class ResistorVtcRepository(context: Context) {
         }
     }
 
-    fun saveResistor(resistor: ResistorVtc) {
-        sharedPreferences.edit {
-            val json = gson.toJson(resistor)
-            putString(KEY_RESISTOR_VTC, json)
-        }
-    }
-
     fun clearData(navBarSelection: Int) {
         val blank = ResistorVtc(navBarSelection = navBarSelection)
         val json = gson.toJson(blank)
         sharedPreferences.edit {
             remove(KEY_RESISTOR_VTC)
+            putString(KEY_RESISTOR_VTC, json)
+        }
+    }
+
+    fun saveResistor(resistor: ResistorVtc) {
+        sharedPreferences.edit {
+            val json = gson.toJson(resistor)
             putString(KEY_RESISTOR_VTC, json)
         }
     }

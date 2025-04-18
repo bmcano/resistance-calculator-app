@@ -62,7 +62,7 @@ fun SmdResistorLayout(resistor: SmdResistor, isError: Boolean) {
             )
         }
         val text = when {
-            resistor.isEmpty() -> stringResource(id = R.string.default_smd_value)
+            resistor.isEmpty() -> stringResource(id = R.string.smd_default_value)
             isError -> stringResource(id = R.string.error_na)
             else -> resistor.formatResistance()
         }
