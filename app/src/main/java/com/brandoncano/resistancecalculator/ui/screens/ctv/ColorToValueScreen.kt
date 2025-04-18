@@ -226,11 +226,9 @@ private fun ColorToValueScreenContent(
             iconTint = MaterialTheme.colorScheme.primary,
             cardTitle = stringResource(R.string.ctv_info_card_title_text),
             cardBody = stringResource(R.string.ctv_info_card_body_text),
-            actions = listOf(
-                CardAction(
-                    buttonLabel = stringResource(R.string.ctv_info_card_cta_text),
-                    onClick = onLearnColorCodesTapped,
-                )
+            leftActionButton = CardAction(
+                buttonLabel = stringResource(R.string.ctv_info_card_cta_text),
+                onClick = onLearnColorCodesTapped,
             )
         )
         Spacer(modifier = Modifier.height(24.dp))

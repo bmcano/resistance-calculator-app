@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -21,6 +22,8 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Colors
@@ -135,7 +138,6 @@ private fun ResistorLayoutsPreview() {
 }
 
 // TODO - This will be extracted into the shared lib
-//  - Check spacings
 data class CardAction(
     val buttonLabel: String,
     val onClick: () -> Unit
@@ -147,43 +149,60 @@ fun AppActionCard(
     iconTint: Color,
     cardTitle: String,
     cardBody: String,
-    actions: List<CardAction> = emptyList(),
+    leftActionButton: CardAction? = null,
+    rightActionButton: CardAction? = null,
 ) {
-    AppCard(
-        modifier = Modifier.fillMaxWidth(),
-    ) {
-        Row(
-            modifier = Modifier.padding(16.dp),
-            verticalAlignment = Alignment.Top
+    AppCard {
+        Column(
+            modifier = Modifier.padding(start = 24.dp, top = 24.dp, end = 24.dp, bottom = 16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Image(
-                modifier = Modifier.size(32.dp),
-                imageVector = icon,
-                contentDescription = null,
-                colorFilter = ColorFilter.tint(iconTint)
-            )
-            Spacer(modifier = Modifier.width(16.dp))
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = cardTitle,
-                    modifier = Modifier.padding(bottom = 8.dp),
-                    style = textStyleHeadline(),
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Image(
+                    modifier = Modifier.size(48.dp),
+                    contentDescription = null,
+                    imageVector = icon,
+                    colorFilter = ColorFilter.tint(iconTint),
                 )
-                Text(
-                    text = cardBody,
-                    style = textStyleSubhead().onSurfaceVariant(),
-                )
-            }
-        }
-        if (actions.isEmpty()) return@AppCard
-        Row(horizontalArrangement = Arrangement.Start) {
-            actions.forEach { action ->
-                TextButton(
-                    onClick = action.onClick,
-                    modifier = Modifier.padding(start = 16.dp, end = 8.dp)
+                Spacer(modifier = Modifier.width(16.dp))
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(
-                        text = action.buttonLabel,
+                        text = cardTitle,
+                        modifier = Modifier.semantics { heading() },
+                        style = textStyleHeadline(),
+                    )
+                    Text(
+                        text = cardBody,
+                        modifier = Modifier.padding(top = 8.dp),
+                        style = textStyleSubhead().onSurfaceVariant(),
+                    )
+                }
+            }
+            if (leftActionButton == null) return@AppCard
+            Spacer(modifier = Modifier.height(16.dp))
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                TextButton(
+                    onClick = leftActionButton.onClick,
+                    modifier = if (rightActionButton == null) Modifier.fillMaxWidth() else Modifier,
+                ) {
+                    Text(
+                        text = leftActionButton.buttonLabel,
+                        style = textStyleCallout(),
+                    )
+                }
+                if (rightActionButton == null) return@Row
+                TextButton(
+                    onClick = rightActionButton.onClick,
+                    modifier = Modifier.padding(start = 24.dp),
+                ) {
+                    Text(
+                        text = rightActionButton.buttonLabel,
                         style = textStyleCallout(),
                     )
                 }

@@ -89,11 +89,9 @@ fun ESeriesCard(
                 iconTint = validGreen,
                 cardTitle = stringResource(R.string.vtc_valid_card_label),
                 cardBody = stringResource(R.string.vtc_valid_card_body, eSeriesCardContent.value),
-                actions = listOf(
-                    CardAction(
-                        buttonLabel = stringResource(R.string.vtc_valid_card_action),
-                        onClick = onLearnMoreTapped
-                    )
+                leftActionButton = CardAction(
+                    buttonLabel = stringResource(R.string.vtc_valid_card_action),
+                    onClick = onLearnMoreTapped
                 )
             )
         }
@@ -103,11 +101,9 @@ fun ESeriesCard(
                 iconTint = warningGold,
                 cardTitle = stringResource(R.string.vtc_invalid_tolerance_label),
                 cardBody = stringResource(R.string.vtc_invalid_tolerance_body, eSeriesCardContent.value),
-                actions = listOf(
-                    CardAction(
-                        buttonLabel = stringResource(R.string.vtc_valid_card_action),
-                        onClick = onLearnMoreTapped
-                    )
+                leftActionButton = CardAction(
+                    buttonLabel = stringResource(R.string.vtc_valid_card_action),
+                    onClick = onLearnMoreTapped
                 )
             )
         }
@@ -117,15 +113,13 @@ fun ESeriesCard(
                 iconTint = warningGold,
                 cardTitle = stringResource(R.string.vtc_invalid_card_label),
                 cardBody = stringResource(R.string.vtc_invalid_card_body, eSeriesCardContent.value),
-                actions = listOf(
-                    CardAction(
-                        buttonLabel = stringResource(R.string.vtc_valid_card_action),
-                        onClick = onLearnMoreTapped
-                    ),
-                    CardAction(
-                        buttonLabel = stringResource(R.string.vtc_invalid_card_action),
-                        onClick = onUseValueTapped
-                    )
+                leftActionButton = CardAction(
+                    buttonLabel = stringResource(R.string.vtc_valid_card_action),
+                    onClick = onLearnMoreTapped
+                ),
+                rightActionButton = CardAction(
+                    buttonLabel = stringResource(R.string.vtc_invalid_card_action),
+                    onClick = onUseValueTapped
                 )
             )
         }
