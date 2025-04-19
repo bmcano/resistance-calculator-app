@@ -17,6 +17,7 @@ import androidx.compose.material.icons.outlined.Explicit
 import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material.icons.outlined.Looks3
 import androidx.compose.material.icons.outlined.Looks4
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,6 +39,8 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.DropdownLists
 import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
+import com.brandoncano.resistancecalculator.ui.screens.ctv.AppActionCard
+import com.brandoncano.resistancecalculator.ui.screens.ctv.CardAction
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.Sdk
 import com.brandoncano.sharedcomponents.composables.AboutAppMenuItem
@@ -186,21 +189,17 @@ private fun SmdScreenContent(
             reset = reset.value,
             onOptionSelected = { onValueChanged(code.value, it, true) }
         )
-        AppDivider(modifier = Modifier.padding(vertical = 24.dp))
-        Column(horizontalAlignment = Alignment.Start) {
-            Text(
-                text = stringResource(R.string.smd_headline_text),
-                modifier = Modifier.padding(bottom = 16.dp),
-                style = textStyleHeadline(),
+        Spacer(modifier = Modifier.height(24.dp))
+        AppActionCard(
+            icon = Icons.Outlined.Lightbulb,
+            iconTint = MaterialTheme.colorScheme.primary,
+            cardTitle = stringResource(R.string.smd_info_card_title_text),
+            cardBody = stringResource(R.string.smd_info_card_body_text),
+            leftActionButton = CardAction(
+                buttonLabel = stringResource(R.string.smd_info_card_cta_text),
+                onClick = onLearnSmdCodesTapped,
             )
-            AppArrowCardButton(
-                ArrowCardButtonContents(
-                    imageVector = Icons.Outlined.Lightbulb,
-                    text = stringResource(R.string.smd_button_text),
-                    onClick = onLearnSmdCodesTapped,
-                )
-            )
-        }
+        )
         Spacer(modifier = Modifier.height(24.dp))
     }
 }

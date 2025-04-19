@@ -28,7 +28,7 @@ class ResistorVtcViewModel(private val savedStateHandle: SavedStateHandle, conte
     private val repository = ResistorVtcRepository.getInstance(application)
     val resistorStateTOStateFlow = savedStateHandle.getStateFlow(KEY_RESISTOR_STATE_TO, ResistorVtc())
     val isErrorStateFlow = savedStateHandle.getStateFlow(KEY_ERROR_STATE_BOOL, false)
-    val eSeriesCardContentStateTOStateFlow = savedStateHandle.getStateFlow(KEY_E_SERIES_CONTENT_STATE_TO, ESeriesCardContent.NoContent)
+    val eSeriesCardContentStateTOStateFlow = savedStateHandle.getStateFlow(KEY_E_SERIES_CONTENT_STATE_TO, ESeriesCardContent.DefaultContent)
     val closestStandardValueStateFlow = savedStateHandle.getStateFlow(KEY_CLOSEST_STANDARD_VALUE_FLOAT, 10.0)
 
     init {
@@ -52,7 +52,7 @@ class ResistorVtcViewModel(private val savedStateHandle: SavedStateHandle, conte
         val blankResistor = ResistorVtc(navBarSelection = currentNavBar)
         savedStateHandle[KEY_RESISTOR_STATE_TO] = blankResistor
         savedStateHandle[KEY_ERROR_STATE_BOOL] = false
-        savedStateHandle[KEY_E_SERIES_CONTENT_STATE_TO] = ESeriesCardContent.NoContent
+        savedStateHandle[KEY_E_SERIES_CONTENT_STATE_TO] = ESeriesCardContent.DefaultContent
     }
 
     fun updateValues(resistance: String, units: String, band5: String, band6: String) {

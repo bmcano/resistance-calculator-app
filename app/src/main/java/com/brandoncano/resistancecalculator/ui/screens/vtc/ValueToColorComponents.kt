@@ -4,7 +4,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CheckCircle
+import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material.icons.rounded.WarningAmber
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -77,10 +79,10 @@ fun ESeriesCard(
             AppActionCard(
                 icon = Icons.Outlined.CheckCircle,
                 iconTint = validGreen,
-                cardTitle = stringResource(R.string.vtc_valid_card_label),
+                cardTitle = stringResource(R.string.vtc_valid_card_title),
                 cardBody = stringResource(R.string.vtc_valid_card_body, eSeriesCardContent.value),
                 leftActionButton = CardAction(
-                    buttonLabel = stringResource(R.string.vtc_valid_card_action),
+                    buttonLabel = stringResource(R.string.vtc_info_card_action),
                     onClick = onLearnMoreTapped
                 )
             )
@@ -92,7 +94,7 @@ fun ESeriesCard(
                 cardTitle = stringResource(R.string.vtc_invalid_tolerance_label),
                 cardBody = stringResource(R.string.vtc_invalid_tolerance_body, eSeriesCardContent.value),
                 leftActionButton = CardAction(
-                    buttonLabel = stringResource(R.string.vtc_valid_card_action),
+                    buttonLabel = stringResource(R.string.vtc_info_card_action),
                     onClick = onLearnMoreTapped
                 )
             )
@@ -101,10 +103,10 @@ fun ESeriesCard(
             AppActionCard(
                 icon = Icons.Rounded.WarningAmber,
                 iconTint = warningGold,
-                cardTitle = stringResource(R.string.vtc_invalid_card_label),
+                cardTitle = stringResource(R.string.vtc_invalid_card_title),
                 cardBody = stringResource(R.string.vtc_invalid_card_body, eSeriesCardContent.value),
                 leftActionButton = CardAction(
-                    buttonLabel = stringResource(R.string.vtc_valid_card_action),
+                    buttonLabel = stringResource(R.string.vtc_info_card_action),
                     onClick = onLearnMoreTapped
                 ),
                 rightActionButton = CardAction(
@@ -113,6 +115,17 @@ fun ESeriesCard(
                 )
             )
         }
-        ESeriesCardContent.NoContent -> { /* left intentionally empty to show no card */ }
+        ESeriesCardContent.DefaultContent -> {
+            AppActionCard(
+                icon = Icons.Outlined.Lightbulb,
+                iconTint = MaterialTheme.colorScheme.primary,
+                cardTitle = stringResource(R.string.vtc_info_card_title),
+                cardBody = stringResource(R.string.vtc_info_card_body),
+                leftActionButton = CardAction(
+                    buttonLabel = stringResource(R.string.vtc_info_card_action),
+                    onClick = onLearnMoreTapped,
+                )
+            )
+        }
     }
 }

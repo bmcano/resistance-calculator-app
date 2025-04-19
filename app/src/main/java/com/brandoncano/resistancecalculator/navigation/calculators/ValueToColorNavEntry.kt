@@ -53,7 +53,7 @@ fun NavGraphBuilder.valueToColorScreen(
             onClearSelectionsTapped = {
                 openMenu.value = false
                 reset.value = true
-                viewModel.updateCardContent(ESeriesCardContent.NoContent)
+                viewModel.updateCardContent(ESeriesCardContent.DefaultContent)
                 viewModel.clear()
                 focusManager.clearFocus()
             },
@@ -63,14 +63,14 @@ fun NavGraphBuilder.valueToColorScreen(
             },
             onValueChanged = { resistance, units, band5, band6, clearFocus ->
                 reset.value = false
-                viewModel.updateCardContent(ESeriesCardContent.NoContent)
+                viewModel.updateCardContent(ESeriesCardContent.DefaultContent)
                 viewModel.updateValues(resistance, units, band5, band6)
                 if (clearFocus) focusManager.clearFocus()
             },
             onNavBarSelectionChanged = { viewModel.updateNavBarSelection(it) },
             onValidateResistanceTapped = { viewModel.validateResistance() },
             onUseValueTapped = {
-                viewModel.updateCardContent(ESeriesCardContent.NoContent)
+                viewModel.updateCardContent(ESeriesCardContent.DefaultContent)
                 val sigFigs = if (resistor.navBarSelection <= 1) 2 else 3
                 val resistance = closestStandardValue.formatResistanceString(sigFigs)
                 viewModel.updateValues(resistance, resistor.units, resistor.band5, resistor.band6)

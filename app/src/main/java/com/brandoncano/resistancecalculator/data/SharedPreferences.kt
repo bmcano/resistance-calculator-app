@@ -18,12 +18,6 @@ enum class SharedPreferences(private val _name: String, private val _key: String
 
     // TODO - Update this so the Enums are in their own file since the functions will be moved to the shared lib
 
-    NAVBAR_SELECTION_VTC("value_to_color", "navbar_selection"),
-    USER_INPUT_VTC("value_to_color", "user_input"),
-    UNITS_DROPDOWN_VTC("value_to_color", "units_dropdown"),
-    TOLERANCE_DROPDOWN_VTC("value_to_color", "tolerance_dropdown"),
-    PPM_DROPDOWN_VTC("value_to_color", "ppm_dropdown"),
-
     NAVBAR_SELECTION_SMD("smd", "navbar_selection"),
     CODE_INPUT_SMD("smd", "code_input"),
     UNITS_DROPDOWN_SMD("smd", "units_dropdown"),

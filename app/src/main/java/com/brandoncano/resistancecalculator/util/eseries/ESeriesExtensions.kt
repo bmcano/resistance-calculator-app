@@ -2,10 +2,6 @@ package com.brandoncano.resistancecalculator.util.eseries
 
 import java.math.BigDecimal
 import java.math.RoundingMode
-import kotlin.math.abs
-import kotlin.math.floor
-import kotlin.math.log10
-import kotlin.math.max
 
 fun String.tolerancePercentage(): Double? {
     if (this.length < 3) return null

@@ -219,7 +219,7 @@ private fun ValueToColorScreenPreview() {
             isError = false,
             openMenu = remember { mutableStateOf(false) },
             reset = remember { mutableStateOf(false) },
-            eSeriesCardContent = ESeriesCardContent.NoContent,
+            eSeriesCardContent = ESeriesCardContent.DefaultContent,
             onNavigateBack = {},
             onClearSelectionsTapped = {},
             onAboutTapped = {},

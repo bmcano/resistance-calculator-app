@@ -37,7 +37,7 @@
     <!-- CtV screen/components text -->
     <string name="ctv_title">Color to Value</string>
     <string name="ctv_info_card_title_text">Resistor color codes</string>
-    <string name="ctv_info_card_body_text">Learn to decode each band into precise values and tolerances using the IEC 60062 standard.</string>
+    <string name="ctv_info_card_body_text">Learn to decode each band into precise values using the IEC 60062 standard.</string>
     <string name="ctv_info_card_cta_text">Learn more</string>
     <string name="ctv_default_value">Select colors</string>
 
@@ -45,14 +45,16 @@
     <string name="vtc_title">Value to Color</string>
     <string name="vtc_default_value">Enter resistance</string>
     <string name="vtc_validate_e_series_button">Validate resistance against E-series</string>
-    <string name="vtc_valid_card_label">Valid E-series value</string>
-    <string name="vtc_valid_card_body">The entered resistance value is part of the %1$s series.</string>
-    <string name="vtc_valid_card_action">Learn more</string>
-    <string name="vtc_invalid_card_label">Your value is not in the E-series</string>
+    <string name="vtc_info_card_title">Discover E-series values</string>
+    <string name="vtc_info_card_body">"Tap \"Validate\" to see if your resistance matches a standard E‑series value for the chosen tolerance."</string>
+    <string name="vtc_info_card_action">Learn more</string>
+    <string name="vtc_valid_card_title">Valid E-series value</string>
+    <string name="vtc_valid_card_body">Your resistance value is part of the %1$s series.</string>
+    <string name="vtc_invalid_card_title">Your value is not in the E-series</string>
     <string name="vtc_invalid_card_body">With the selected tolerance, the closest E-series value is %1$s.</string>
     <string name="vtc_invalid_card_action">Use closest value</string>
-    <string name="vtc_invalid_tolerance_label">Invalid tolerance for resistor type</string>
-    <string name="vtc_invalid_tolerance_body">Adjust your selection to match the supported tolerances for a %1$s-band resistor.</string>
+    <string name="vtc_invalid_tolerance_label">Unsupported tolerance</string>
+    <string name="vtc_invalid_tolerance_body">Adjust your selection to use a supported tolerance for a %1$s-band resistor.</string>
 
     <!-- SMD screen/components text -->
     <string name="smd_title">SMD Resistor</string>
@@ -60,6 +62,9 @@
     <string name="smd_code_hint">Code</string>
     <string name="smd_headline_text">Learn about SMD codes</string>
     <string name="smd_button_text">Explore the IEC 60062 standard</string>
+    <string name="smd_info_card_title_text">SMD resistor codes</string>
+    <string name="smd_info_card_body_text">Learn how 3‑ and 4‑digit markings on SMD resistors correspond to resistance and tolerance.</string>
+    <string name="smd_info_card_cta_text">Learn more</string>
     <string name="smd_navbar_three_eia">Three Digit EIA</string>
     <string name="smd_navbar_four_eia">Four Digit EIA</string>
     <string name="smd_navbar_eia_96">EIA-96</string>

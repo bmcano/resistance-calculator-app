@@ -71,7 +71,7 @@ fun SmdResistorLayout(resistor: SmdResistor, isError: Boolean) {
                 text = text,
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-                    .padding(top = 6.dp, bottom = 6.dp, start = 12.dp, end = 12.dp),
+                    .padding(vertical = 8.dp, horizontal = 16.dp),
                 style = textStyleTitle(),
             )
         }
