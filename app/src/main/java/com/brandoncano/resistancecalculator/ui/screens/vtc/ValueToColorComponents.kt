@@ -18,8 +18,6 @@ import com.brandoncano.resistancecalculator.constants.Colors
 import com.brandoncano.resistancecalculator.data.ESeriesCardContent
 import com.brandoncano.resistancecalculator.data.ResistorImageColorPair
 import com.brandoncano.resistancecalculator.to.ResistorVtc
-import com.brandoncano.resistancecalculator.ui.screens.ctv.AppActionCard
-import com.brandoncano.resistancecalculator.ui.screens.ctv.CardAction
 import com.brandoncano.resistancecalculator.ui.screens.ctv.ResistanceText
 import com.brandoncano.resistancecalculator.ui.screens.ctv.ResistorRow
 import com.brandoncano.resistancecalculator.ui.theme.validGreen
@@ -31,6 +29,8 @@ import com.brandoncano.resistancecalculator.util.resistor.bandSixForDisplay
 import com.brandoncano.resistancecalculator.util.resistor.bandThreeForDisplay
 import com.brandoncano.resistancecalculator.util.resistor.bandTwoForDisplay
 import com.brandoncano.resistancecalculator.util.resistor.deriveResistorColor
+import com.brandoncano.sharedcomponents.composables.AppActionCard
+import com.brandoncano.sharedcomponents.data.CardAction
 
 @Composable
 fun ResistorLayout(resistor: ResistorVtc, isError: Boolean) {

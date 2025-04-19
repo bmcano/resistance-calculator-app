@@ -40,12 +40,14 @@ import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.resistor.shareableText
 import com.brandoncano.sharedcomponents.composables.AboutAppMenuItem
+import com.brandoncano.sharedcomponents.composables.AppActionCard
 import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
 import com.brandoncano.sharedcomponents.composables.AppNavigationBar
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
 import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
 import com.brandoncano.sharedcomponents.composables.ShareTextMenuItem
+import com.brandoncano.sharedcomponents.data.CardAction
 
 @Composable
 fun ColorToValueScreen(

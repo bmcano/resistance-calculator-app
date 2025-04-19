@@ -37,10 +37,9 @@ import com.brandoncano.resistancecalculator.constants.DropdownLists
 import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.to.SmdResistor
 import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
-import com.brandoncano.resistancecalculator.ui.screens.ctv.AppActionCard
-import com.brandoncano.resistancecalculator.ui.screens.ctv.CardAction
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AboutAppMenuItem
+import com.brandoncano.sharedcomponents.composables.AppActionCard
 import com.brandoncano.sharedcomponents.composables.AppDropDownMenu
 import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
 import com.brandoncano.sharedcomponents.composables.AppNavigationBar
@@ -49,6 +48,7 @@ import com.brandoncano.sharedcomponents.composables.AppTextField
 import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
 import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
 import com.brandoncano.sharedcomponents.composables.ShareTextMenuItem
+import com.brandoncano.sharedcomponents.data.CardAction
 import com.brandoncano.sharedcomponents.data.NavigationBarOptions
 import java.util.Locale
 

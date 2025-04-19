@@ -100,22 +100,27 @@
     <string name="info_color_six_band_body">Six-band resistors include a temperature coefficient band in addition to the five-band code, indicating how the resistance changes with temperature.</string>
     <string name="info_color_six_band_code">560 \u00D7 10 ±2%, 100 ppm/°C</string>
     <string name="info_color_six_band_description">"Green (5), Blue (6), Black (0), Brown (×10), Red (±2%), Brown (100 ppm/°C)"</string>
-    <string name="info_smd_resistor_codes_title">SMD Resistor Codes</string>
+    <string name="info_smd_title">SMD Resistor Codes</string>
+    <string name="info_smd_resistor_codes_intro">Introduction</string>
     <string name="info_smd_body1">The IEC 60062 standard defines code markings for resistors. It uses alphanumeric codes to represent resistance values in a compact format, making it suitable for marking small components, such as SMD (Surface-Mount Device) resistors.</string>
     <string name="info_smd_body2">SMD resistors use different coding systems based on the number of digits or characters used. The most common coding standards are:</string>
     <string name="info_smd_code_example">Example:</string>
     <string name="info_smd_three_code_headline">Three-Digit Code</string>
-    <string name="info_smd_three_code_body">The three-digit code is similar to the resistor color code system. The first two digits represent the significant figures, and the third digit is the multiplier. The equation is:</string>
+    <string name="info_smd_three_code_body">The three-digit code is similar to the resistor color code system. The first two digits represent the significant figures, and the third digit is the multiplier. The general format can be expressed as:</string>
     <string name="info_smd_three_digit_formula">xy \u00D7 10\u1dbb = R</string>
+    <string name="info_smd_three_digit_example_label">For example, a resistor labeled 472 equates to:</string>
     <string name="info_smd_three_digit_example">47 \u00D7 10\u00b2 = 4700 \u03A9</string>
     <string name="info_smd_four_code_headline">Four-Digit Code</string>
-    <string name="info_smd_four_code_body">The four-digit code is used for high-precision resistors. The first three digits represent the significant figures, and the fourth digit is the multiplier. The equation is:</string>
+    <string name="info_smd_four_code_body">The four-digit code is used for high-precision resistors. The first three digits represent the significant figures, and the fourth digit is the multiplier. The general format can be expressed as:</string>
     <string name="info_smd_four_digit_formula">wxy \u00D7 10\u1dbb = R</string>
+    <string name="info_smd_four_digit_example_label">For example, a resistor labeled 1201 equates to:</string>
     <string name="info_smd_four_digit_example">120 \u00D7 10\u00b9 = 1200 \u03A9</string>
     <string name="info_smd_four_digit_body2">"The letter 'R' indicates the position of the decimal point for resistance values lower than 10 \u03A9. For example, 0R5 would be 0.5 \u03A9 and 0R01 would be 0.01 \u03A9."</string>
     <string name="info_smd_eia_headline">EIA-96 Code</string>
-    <string name="info_smd_eia_body">The EIA-96 code is a two-digit code followed by a letter, used for precision resistors with 1% tolerance. The two digits represent a value in the E96 series, while the letter indicates the multiplier. For example:</string>
-    <string name="info_smd_eia_example">"'43' corresponds to 274 \u03A9, while 'C' indicated a multiplier of \u00D7100. Thus, 274 \u00D7 100 = 27,400 \u03A9."</string>
+    <string name="info_smd_eia_body">The EIA-96 code is a two-digit code followed by a letter, used for precision resistors with 1% tolerance. The two digits represent a value in the E96 series, while the letter indicates the multiplier. The general format can be expressed as:</string>
+    <string name="info_smd_eia_formula">xy \u00D7 z = R</string>
+    <string name="info_smd_eia_example_label">For example, a resistor labeled 43C equates to:</string>
+    <string name="info_smd_eia_example">"43 => 274; C => 100; &#10;274 \u00D7 100 = 27,400 \u03A9."</string>
     <string name="info_smd_multipliers_headline">Multipliers</string>
     <string name="info_smd_multipliers_body">The multiplier indicates the factor by which to multiply the significant figures. In the EIA-96 code, letters represent multipliers as follows:</string>
     <string name="info_smd_code_value_col1">Code</string>
