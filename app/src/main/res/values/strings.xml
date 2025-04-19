@@ -78,9 +78,7 @@
     <string name="circuit_text_field_label_multiple">Resistance %1$s (%2$s)</string>
 
     <!-- Info screen/components text -->
-    <string name="info_title">IEC 60062 Standard</string>
-    <string name="info_title_3">IEC 60063 Standard</string>
-    <string name="info_color_meaning_title">Color Bands and Their Meanings</string>
+    <string name="info_color_title">Resistor Color Bands</string>
     <string name="info_color_body1">The resistor color code uses colored bands to indicate resistance value, tolerance, and temperature coefficient of resistors. This system allows for easy identification of resistor values in a compact format.</string>
     <string name="info_color_body2">Each color corresponds to a specific value, depending on its position on the resistor. The standard colors and their corresponding values are displayed in the table below.</string>
     <string name="info_color_code_explanation">Explanation:</string>
@@ -117,20 +115,20 @@
     <string name="info_smd_four_digit_example">120 \u00D7 10\u00b9 = 1200 \u03A9</string>
     <string name="info_smd_four_digit_body2">"The letter 'R' indicates the position of the decimal point for resistance values lower than 10 \u03A9. For example, 0R5 would be 0.5 \u03A9 and 0R01 would be 0.01 \u03A9."</string>
     <string name="info_smd_eia_headline">EIA-96 Code</string>
-    <string name="info_smd_eia_body">The EIA-96 code is a two-digit code followed by a letter, used for precision resistors with 1% tolerance. The two digits represent a value in the E96 series, while the letter indicates the multiplier. The general format can be expressed as:</string>
+    <string name="info_smd_eia_body">The EIA-96 code is a two-digit code followed by a letter, used for precision resistors with 1% tolerance. The two digits represent a value in the E-96 series, while the letter indicates the multiplier. The general format can be expressed as:</string>
     <string name="info_smd_eia_formula">xy \u00D7 z = R</string>
     <string name="info_smd_eia_example_label">For example, a resistor labeled 43C equates to:</string>
-    <string name="info_smd_eia_example">"43 => 274; C => 100; &#10;274 \u00D7 100 = 27,400 \u03A9."</string>
+    <string name="info_smd_eia_example">"43 \u2013 274; C \u2013 100; &#10;274 \u00D7 100 = 27400 \u03A9."</string>
     <string name="info_smd_multipliers_headline">Multipliers</string>
     <string name="info_smd_multipliers_body">The multiplier indicates the factor by which to multiply the significant figures. In the EIA-96 code, letters represent multipliers as follows:</string>
     <string name="info_smd_code_value_col1">Code</string>
     <string name="info_smd_code_value_col2">Value</string>
     <string name="info_smd_code_value_headline">Value codes</string>
     <string name="info_smd_code_value_body">"These are the common resistance value codes, but a manufacturer may use a variation on these or even something completely different. It is therefore always important to verify the manufacturer's marking system."</string>
-    <string name="info_values_preferred_values_title">Preferred Values or E-Series</string>
-    <string name="info_values_body1">"The standardization of resistor values, known as 'preferred values' or the 'E-series,' simplifies mass production and stock management by spacing resistance values approximately equally on a logarithmic scale. This approach allows manufacturers to limit the number of different values they need to produce."</string>
-    <string name="info_values_body2">The E-series is a set of preferred resistor values, organized by levels of precision. Each E-series is represented by a number (E-6, E-12, E-24, etc.), indicating the number of values per decade (1–10, 10–100, etc.). The more values in an E-series, the more precise the resistor selection. The values can be calculated using the following equation:</string>
-    <string name="info_values_preferred_values_where">Where:</string>
+    <string name="info_values_preferred_values_title">Preferred Values</string>
+    <string name="info_values_body1">"The IEC 60063 standard defines 'preferred values' or the 'E-series' system which standardizes resistor values by spacing them on a logarithmic scale. This makes mass production and inventory management far simpler, since manufacturers only need to stock a small set of values instead of every possible resistance."</string>
+    <string name="info_values_body2">Each E–series (E–6, E–12, E–24, etc.), corresponds to the number of values per decade (e.g. 6 values between 1–10 Ω for E–6). Higher series numbers yield finer precision. You can compute the nth value in an E‑series with the formula</string>
+    <string name="info_values_preferred_values_where">where:</string>
     <string name="info_values_preferred_values_tables_headline">E-Series Tables</string>
     <string name="info_values_preferred_values_low_precision">The E-6 series is typically used for 3-band resistors, offering less precision.</string>
     <string name="info_values_preferred_values_medium_precision">The E-12 and E-24 series are used for 4-band resistors, providing better precision.</string>

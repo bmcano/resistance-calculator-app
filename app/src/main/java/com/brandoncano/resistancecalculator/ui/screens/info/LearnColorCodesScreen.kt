@@ -43,7 +43,7 @@ fun LearnColorCodesScreen(
     Scaffold(
         topBar = {
             AppTopAppBar(
-                titleText = stringResource(R.string.info_title),
+                titleText = stringResource(R.string.info_color_title),
                 navigationIcon =  Icons.AutoMirrored.Filled.ArrowBack,
                 onNavigateBack = onNavigateBack,
             )
@@ -64,11 +64,7 @@ private fun LearnColorCodesScreenContent(paddingValues: PaddingValues) {
             .padding(paddingValues)
             .padding(horizontal = sidePadding),
     ) {
-        Text(
-            text = stringResource(R.string.info_color_meaning_title),
-            modifier = Modifier.padding(vertical = 12.dp),
-            style = textStyleTitle(),
-        )
+        Spacer(modifier = Modifier.height(24.dp))
         Text(
             text = stringResource(R.string.info_color_body1),
             modifier = Modifier.padding(bottom = 12.dp),

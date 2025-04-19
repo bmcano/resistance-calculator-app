@@ -33,7 +33,8 @@ import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import com.brandoncano.sharedcomponents.composables.AppTopAppBar
 import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 import com.brandoncano.sharedcomponents.text.textStyleBody
-import com.brandoncano.sharedcomponents.text.textStyleTitle
+import com.brandoncano.sharedcomponents.text.textStyleHeadline
+import com.brandoncano.sharedcomponents.text.textStyleSubhead
 
 /**
  * Note: Information originated from - https://eepower.com/resistor-guide/resistor-standards-and-codes/resistor-values/
@@ -46,7 +47,7 @@ fun LearnPreferredValuesScreen(
     Scaffold(
         topBar = {
             AppTopAppBar(
-                titleText = stringResource(R.string.info_title_3),
+                titleText = stringResource(R.string.info_values_preferred_values_title),
                 navigationIcon =  Icons.AutoMirrored.Filled.ArrowBack,
                 onNavigateBack = onNavigateBack,
             )
@@ -67,11 +68,7 @@ private fun LearnPreferredValuesScreenContent(paddingValues: PaddingValues) {
             .padding(paddingValues)
             .padding(horizontal = sidePadding),
     ) {
-        Text(
-            text = stringResource(R.string.info_values_preferred_values_title),
-            modifier = Modifier.padding(vertical = 12.dp),
-            style = textStyleTitle(),
-        )
+        Spacer(modifier = Modifier.height(24.dp))
         Text(
             text = stringResource(R.string.info_values_body1),
             modifier = Modifier.padding(bottom = 12.dp),
@@ -104,33 +101,33 @@ private fun LearnPreferredValuesScreenContent(paddingValues: PaddingValues) {
         Text(
             text = stringResource(R.string.info_values_preferred_values_tables_headline),
             modifier = Modifier.padding(bottom = 12.dp),
-            style = textStyleTitle(),
+            style = textStyleHeadline().onSurfaceVariant(),
         )
         Text(
             text = stringResource(R.string.info_values_preferred_values_low_precision),
             modifier = Modifier.padding(bottom = 12.dp),
-            style = textStyleBody().onSurfaceVariant(),
+            style = textStyleSubhead().onSurfaceVariant(),
         )
         ESeriesTable(stringResource(R.string.info_values_e6_header), ESeries.E6)
         AppDivider(modifier = Modifier.padding(vertical = 16.dp))
         Text(
             text = stringResource(R.string.info_values_preferred_values_medium_precision),
             modifier = Modifier.padding(bottom = 12.dp),
-            style = textStyleBody().onSurfaceVariant(),
+            style = textStyleSubhead().onSurfaceVariant(),
         )
         ESeriesTable(stringResource(R.string.info_values_e12_header), ESeries.E12)
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(24.dp))
         ESeriesTable(stringResource(R.string.info_values_e24_header), ESeries.E24)
         AppDivider(modifier = Modifier.padding(vertical = 16.dp))
         Text(
             text = stringResource(R.string.info_values_preferred_values_high_precision),
             modifier = Modifier.padding(bottom = 12.dp),
-            style = textStyleBody().onSurfaceVariant(),
+            style = textStyleSubhead().onSurfaceVariant(),
         )
         ESeriesTable(stringResource(R.string.info_values_e48_header), ESeries.E48)
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(24.dp))
         ESeriesTable(stringResource(R.string.info_values_e96_header), ESeries.E96)
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(24.dp))
         ESeriesTable(stringResource(R.string.info_values_e192_header), ESeries.E192)
         DisclaimerText()
         Spacer(modifier = Modifier.height(48.dp))
