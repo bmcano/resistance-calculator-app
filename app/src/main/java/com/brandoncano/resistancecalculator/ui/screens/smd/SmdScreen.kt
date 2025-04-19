@@ -1,6 +1,5 @@
 package com.brandoncano.resistancecalculator.ui.screens.smd
 
-import android.graphics.Picture
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -19,7 +18,6 @@ import androidx.compose.material.icons.outlined.Looks3
 import androidx.compose.material.icons.outlined.Looks4
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -39,13 +37,11 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.DropdownLists
 import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
+import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
 import com.brandoncano.resistancecalculator.ui.screens.ctv.AppActionCard
 import com.brandoncano.resistancecalculator.ui.screens.ctv.CardAction
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
-import com.brandoncano.resistancecalculator.util.Sdk
 import com.brandoncano.sharedcomponents.composables.AboutAppMenuItem
-import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
-import com.brandoncano.sharedcomponents.composables.AppDivider
 import com.brandoncano.sharedcomponents.composables.AppDropDownMenu
 import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
 import com.brandoncano.sharedcomponents.composables.AppNavigationBar
@@ -54,11 +50,8 @@ import com.brandoncano.sharedcomponents.composables.AppTextField
 import com.brandoncano.sharedcomponents.composables.AppThemeMenuItem
 import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
 import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
-import com.brandoncano.sharedcomponents.composables.ShareImageMenuItem
 import com.brandoncano.sharedcomponents.composables.ShareTextMenuItem
-import com.brandoncano.sharedcomponents.data.ArrowCardButtonContents
 import com.brandoncano.sharedcomponents.data.NavigationBarOptions
-import com.brandoncano.sharedcomponents.text.textStyleHeadline
 import java.util.Locale
 
 @Composable
@@ -77,7 +70,6 @@ fun SmdScreen(
     onLearnSmdCodesTapped: () -> Unit,
 ) {
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
-    val picture = remember { Picture() }
     Scaffold(
         topBar = {
             AppMenuTopAppBar(
@@ -92,13 +84,11 @@ fun SmdScreen(
                     text = resistor.toString(),
                     showMenu = openMenu,
                 )
-                if (Sdk.isAtLeastAndroid7()) {
-                    ShareImageMenuItem(
-                        applicationId = Links.APPLICATION_ID,
-                        showMenu = openMenu,
-                        picture = picture,
-                    )
-                }
+                ShareImageMenuItem(
+                    applicationId = Links.APPLICATION_ID,
+                    showMenu = openMenu,
+                    content = { SmdResistorLayout(resistor, isError) }
+                )
                 FeedbackMenuItem(
                     app = Links.APP_NAME,
                     showMenu = openMenu,
@@ -133,7 +123,6 @@ fun SmdScreen(
     ) { paddingValues ->
         SmdScreenContent(
             paddingValues = paddingValues,
-            picture = picture,
             reset = reset,
             resistor = resistor,
             isError = isError,
@@ -146,7 +135,6 @@ fun SmdScreen(
 @Composable
 private fun SmdScreenContent(
     paddingValues: PaddingValues,
-    picture: Picture,
     reset: MutableState<Boolean>,
     resistor: SmdResistor,
     isError: Boolean,
@@ -163,7 +151,8 @@ private fun SmdScreenContent(
             .padding(horizontal = sidePadding),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        SmdResistorDisplay(picture, resistor, isError)
+        Spacer(modifier = Modifier.padding(top = 32.dp))
+        SmdResistorLayout(resistor, isError)
         AppTextField(
             label = stringResource(id = R.string.smd_code_hint),
             modifier = Modifier.padding(top = 32.dp),

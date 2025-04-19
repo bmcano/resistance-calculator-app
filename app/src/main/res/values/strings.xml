@@ -58,6 +58,7 @@
 
     <!-- SMD screen/components text -->
     <string name="smd_title">SMD Resistor</string>
+    <string name="smd_resistor_content_description">SMD Resistor</string>
     <string name="smd_default_value">Enter code</string>
     <string name="smd_code_hint">Code</string>
     <string name="smd_headline_text">Learn about SMD codes</string>
@@ -131,6 +132,8 @@
     <string name="info_values_preferred_values_low_precision">The E-6 series is typically used for 3-band resistors, offering less precision.</string>
     <string name="info_values_preferred_values_medium_precision">The E-12 and E-24 series are used for 4-band resistors, providing better precision.</string>
     <string name="info_values_preferred_values_high_precision">The E-48, E-96, and E-192 series are used for 5 and 6-band resistors, providing high precision with tolerances as low as 0.05%. These series also introduce a third significant digit.</string>
+    <string name="info_content_description_e_series_equation">E-series equation</string>
+    <string name="info_content_description_e_series_values">E-series values</string>
     <string name="info_values_e6_header">E-6 Series (Tolerance: 20%)</string>
     <string name="info_values_e12_header">E-12 Series (Tolerance: 10%)</string>
     <string name="info_values_e24_header">E-24 Series (Tolerance: 5%, 1%)</string>
@@ -138,11 +141,6 @@
     <string name="info_values_e96_header">E-96 Series (Tolerance: 1%)</string>
     <string name="info_values_e192_header">E-192 Series (Tolerance: ≤0.5%)</string>
     <string name="info_disclaimer_footer">The information provided here regarding IEC standards is intended for general guidance. Please note that not all components may strictly adhere to these standards, as manufacturers may have variations or different interpretations. Always consult the specific datasheet or contact the manufacturer directly if you are unsure about the specifications or standards for a particular component.</string>
-
-    <!-- Content descriptions -->
-    <string name="content_description_app_icon">App icon</string>
-    <string name="content_description_e_series_equation">E-series equation</string>
-    <string name="content_description_e_series_values">E-series values</string>
 
     <!-- Menu items -->
     <string name="menu_share_image">Share as image</string>

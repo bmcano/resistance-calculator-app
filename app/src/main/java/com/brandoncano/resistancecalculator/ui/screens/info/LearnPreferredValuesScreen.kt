@@ -80,7 +80,7 @@ private fun LearnPreferredValuesScreenContent(paddingValues: PaddingValues) {
         )
         Image(
             painter = painterResource(R.drawable.e_series_equation),
-            contentDescription = stringResource(R.string.content_description_e_series_equation),
+            contentDescription = stringResource(R.string.info_content_description_e_series_equation),
             modifier = Modifier
                 .size(128.dp, 56.dp)
                 .align(Alignment.CenterHorizontally),
@@ -92,7 +92,7 @@ private fun LearnPreferredValuesScreenContent(paddingValues: PaddingValues) {
         )
         Image(
             painter = painterResource(R.drawable.e_series_values),
-            contentDescription = stringResource(R.string.content_description_e_series_values),
+            contentDescription = stringResource(R.string.info_content_description_e_series_values),
             modifier = Modifier
                 .padding(top = 8.dp, bottom = 32.dp)
                 .align(Alignment.Start),
