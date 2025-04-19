@@ -12,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Colors
@@ -33,7 +34,7 @@ import com.brandoncano.sharedcomponents.composables.AppActionCard
 import com.brandoncano.sharedcomponents.data.CardAction
 
 @Composable
-fun ResistorLayout(resistor: ResistorVtc, isError: Boolean) {
+fun ResistorLayout(resistor: ResistorVtc, isError: Boolean, verticalPadding: Dp = 0.dp) {
     val resistorColor = resistor.deriveResistorColor()
     val imageColorPairs = remember(resistor) {
         listOf(
@@ -60,7 +61,7 @@ fun ResistorLayout(resistor: ResistorVtc, isError: Boolean) {
         else -> resistor.getResistorValue()
     }
     Column(
-        modifier = Modifier.padding(start = 32.dp, end = 32.dp),
+        modifier = Modifier.padding(horizontal = 32.dp, vertical = verticalPadding),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         ResistorRow(imageColorPairs)

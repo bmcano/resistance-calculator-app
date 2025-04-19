@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.to.SmdResistor
@@ -24,7 +25,7 @@ import com.brandoncano.sharedcomponents.text.textStyleLargeTitle
 import com.brandoncano.sharedcomponents.text.textStyleTitle
 
 @Composable
-fun SmdResistorLayout(resistor: SmdResistor, isError: Boolean) {
+fun SmdResistorLayout(resistor: SmdResistor, isError: Boolean, verticalPadding: Dp = 0.dp) {
     val code = if (isError) {
         stringResource(id = R.string.error_na)
     }  else {
@@ -36,6 +37,7 @@ fun SmdResistorLayout(resistor: SmdResistor, isError: Boolean) {
         else -> resistor.formatResistance()
     }
     Column(
+        modifier = Modifier.padding(horizontal = 32.dp, vertical = verticalPadding),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Box(

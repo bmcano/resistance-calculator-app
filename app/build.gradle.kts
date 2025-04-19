@@ -22,7 +22,7 @@ android {
     applicationVariants.configureEach {
         val suffix = if (buildType.name == "debug") ", DEBUG" else ""
         resValue("string", "version", "$versionName$suffix")
-        resValue("string", "last_updated", "1/11/2025")
+        resValue("string", "last_updated", "4/19/2025")
     }
     buildTypes {
         release {

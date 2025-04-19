@@ -84,7 +84,7 @@ fun ValueToColorScreen(
                 ShareImageMenuItem(
                     applicationId = Links.APPLICATION_ID,
                     showMenu = openMenu,
-                    content = { ResistorLayout(resistor, isError) }
+                    content = { ResistorLayout(resistor, isError, 32.dp) }
                 )
                 FeedbackMenuItem(
                     app = Links.APP_NAME,

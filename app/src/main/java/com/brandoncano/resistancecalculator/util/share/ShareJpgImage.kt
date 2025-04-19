@@ -1,5 +1,6 @@
 package com.brandoncano.resistancecalculator.util.share
 
+import android.content.ClipData
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -10,12 +11,12 @@ import android.net.Uri
 object ShareJpgImage {
 
     fun execute(uri: Uri, context: Context) {
-        val shareIntent: Intent = Intent().apply {
-            action = Intent.ACTION_SEND
+        val intent = Intent(Intent.ACTION_SEND).apply {
             putExtra(Intent.EXTRA_STREAM, uri)
-            type = "image/jpg"
+            clipData = ClipData.newRawUri("Image Preview", uri)
+            type = context.contentResolver.getType(uri) ?: "image/jpg"
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
-        context.startActivity(Intent.createChooser(shareIntent, "Share via"))
+        context.startActivity(Intent.createChooser(intent, "Share via"))
     }
 }

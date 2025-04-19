@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Colors
@@ -61,7 +62,7 @@ fun navigationBarOptions(): List<NavigationBarOptions> {
 }
 
 @Composable
-fun ResistorLayout(resistor: ResistorCtv) {
+fun ResistorLayout(resistor: ResistorCtv, verticalPadding: Dp = 0.dp) {
     val resistorColor = resistor.deriveResistorColor()
     val imageColorPairs = remember(resistor) {
         listOf(
@@ -83,7 +84,7 @@ fun ResistorLayout(resistor: ResistorCtv) {
         ).map { (res, color) -> ResistorImageColorPair(res, color) }
     }
     Column(
-        modifier = Modifier.padding(horizontal = 32.dp),
+        modifier = Modifier.padding(horizontal = 32.dp, vertical = verticalPadding),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         ResistorRow(imageColorPairs)

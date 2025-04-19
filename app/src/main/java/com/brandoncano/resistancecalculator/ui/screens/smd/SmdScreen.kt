@@ -82,7 +82,7 @@ fun SmdScreen(
                 ShareImageMenuItem(
                     applicationId = Links.APPLICATION_ID,
                     showMenu = openMenu,
-                    content = { SmdResistorLayout(resistor, isError) }
+                    content = { SmdResistorLayout(resistor, isError, 32.dp) }
                 )
                 FeedbackMenuItem(
                     app = Links.APP_NAME,
