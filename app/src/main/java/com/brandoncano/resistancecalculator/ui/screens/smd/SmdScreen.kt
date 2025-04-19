@@ -20,11 +20,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -36,7 +33,7 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.DropdownLists
 import com.brandoncano.resistancecalculator.constants.Links
-import com.brandoncano.resistancecalculator.model.smd.SmdResistor
+import com.brandoncano.resistancecalculator.to.SmdResistor
 import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
 import com.brandoncano.resistancecalculator.ui.screens.ctv.AppActionCard
 import com.brandoncano.resistancecalculator.ui.screens.ctv.CardAction
@@ -47,7 +44,6 @@ import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
 import com.brandoncano.sharedcomponents.composables.AppNavigationBar
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import com.brandoncano.sharedcomponents.composables.AppTextField
-import com.brandoncano.sharedcomponents.composables.AppThemeMenuItem
 import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
 import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
 import com.brandoncano.sharedcomponents.composables.ShareTextMenuItem
@@ -60,16 +56,13 @@ fun SmdScreen(
     reset: MutableState<Boolean>,
     resistor: SmdResistor,
     isError: Boolean,
-    onOpenThemeDialog: () -> Unit,
     onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
     onValueChanged: (String, String, Boolean) -> Unit,
     onNavBarSelectionChanged: (Int) -> Unit,
-    navBarPosition: Int,
     onLearnSmdCodesTapped: () -> Unit,
 ) {
-    var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
     Scaffold(
         topBar = {
             AppMenuTopAppBar(
@@ -93,17 +86,13 @@ fun SmdScreen(
                     app = Links.APP_NAME,
                     showMenu = openMenu,
                 )
-                AppThemeMenuItem(openMenu, onOpenThemeDialog)
                 AboutAppMenuItem(onAboutTapped)
             }
         },
         bottomBar = {
             AppNavigationBar(
-                selection = navBarSelection,
-                onClick = {
-                    navBarSelection = it
-                    onNavBarSelectionChanged(it)
-                },
+                selection = resistor.navBarSelection,
+                onClick = { onNavBarSelectionChanged(it) },
                 options = listOf(
                     NavigationBarOptions(
                         label = stringResource(id = R.string.smd_navbar_three_eia),
@@ -202,13 +191,11 @@ private fun SmdScreenPreview() {
             reset = remember { mutableStateOf(false) },
             resistor = SmdResistor(),
             isError = false,
-            onOpenThemeDialog = {},
             onNavigateBack = {},
             onClearSelectionsTapped = {},
             onAboutTapped = {},
             onValueChanged = { _, _, _-> },
             onNavBarSelectionChanged = { _ -> },
-            navBarPosition = 1,
             onLearnSmdCodesTapped = {},
         )
     }

@@ -61,8 +61,6 @@
     <string name="smd_resistor_content_description">SMD Resistor</string>
     <string name="smd_default_value">Enter code</string>
     <string name="smd_code_hint">Code</string>
-    <string name="smd_headline_text">Learn about SMD codes</string>
-    <string name="smd_button_text">Explore the IEC 60062 standard</string>
     <string name="smd_info_card_title_text">SMD resistor codes</string>
     <string name="smd_info_card_body_text">Learn how 3‑ and 4‑digit markings on SMD resistors correspond to resistance and tolerance.</string>
     <string name="smd_info_card_cta_text">Learn more</string>

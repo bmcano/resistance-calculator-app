@@ -14,7 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.model.smd.SmdResistor
+import com.brandoncano.resistancecalculator.to.SmdResistor
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.white
 import com.brandoncano.resistancecalculator.util.resistor.formatResistance
@@ -48,7 +48,7 @@ fun SmdResistorLayout(resistor: SmdResistor, isError: Boolean) {
             )
             Text(
                 text = code,
-                style = textStyleLargeTitle().white()
+                style = textStyleLargeTitle().white(),
             )
         }
         SmdResistanceText(resistance)

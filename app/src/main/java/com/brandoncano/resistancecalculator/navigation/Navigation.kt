@@ -40,7 +40,7 @@ fun Navigation(onOpenThemeDialog: () -> Unit) {
         learnSmdCodes(navController)
         parallelCalculatorScreen(navController)
         seriesCalculatorScreen(navController)
-        smdScreen(navController, onOpenThemeDialog)
+        smdScreen(navController)
         valueToColorScreen(navController)
         // from shared library
         donateScreen(navController)

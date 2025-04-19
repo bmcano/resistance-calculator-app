@@ -22,7 +22,7 @@ class ResistorViewModelFactory(private val context: Context): AbstractSavedState
         return when (modelClass.canonicalName) {
             ResistorCtvViewModel::class.java.canonicalName -> ResistorCtvViewModel(handle, context) as T
             ResistorVtcViewModel::class.java.canonicalName -> ResistorVtcViewModel(handle, context) as T
-            SmdResistorViewModel::class.java.canonicalName -> SmdResistorViewModel(context) as T
+            SmdResistorViewModel::class.java.canonicalName -> SmdResistorViewModel(handle, context) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class: $modelClass")
         }
     }

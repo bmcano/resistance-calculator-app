@@ -1,11 +1,7 @@
 package com.brandoncano.resistancecalculator.util.resistor
 
-import android.content.Context
-import com.brandoncano.resistancecalculator.data.SharedPreferences
 import com.brandoncano.resistancecalculator.to.ResistorCtv
 import io.mockk.clearAllMocks
-import io.mockk.every
-import io.mockk.mockk
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -61,7 +57,6 @@ class ResistanceFormatterTest {
 
     @Test
     fun `five band resistors resistance text testing`() {
-        val context: Context = mockk<Context>()
         val resistors = listOf(
             // general
             ResistorCtv(),
@@ -90,8 +85,6 @@ class ResistanceFormatterTest {
             "789 ${S.MOHMS} ${S.PM}5%",
         )
 
-        every { SharedPreferences.NAVBAR_SELECTION_CTV.saveData(context, "5") } answers { }
-
         for (i in answers.indices) {
             resistors[i].navBarSelection = 5
             assertEquals(answers[i], ResistanceFormatter.calculate(resistors[i]))
@@ -100,7 +93,6 @@ class ResistanceFormatterTest {
 
     @Test
     fun `six band resistors ppm bands`() {
-        val context: Context = mockk<Context>()
         val ppmBands = listOf(
             C.BLACK, C.BROWN, C.RED, C.ORANGE, C.YELLOW, C.GREEN, C.BLUE, C.VIOLET, C.GRAY
         )
@@ -116,8 +108,6 @@ class ResistanceFormatterTest {
             "12.5 ${S.KOHMS} ${S.PM}5%, 5 ${S.PPM}",
             "12.5 ${S.KOHMS} ${S.PM}5%, 1 ${S.PPM}",
         )
-
-        every { SharedPreferences.NAVBAR_SELECTION_CTV.saveData(context, "6") } answers { }
 
         val resistor = ResistorCtv(C.BROWN, C.RED, C.GREEN, C.RED, C.GOLD, C.BLACK, 3)
         for (i in answers.indices) {

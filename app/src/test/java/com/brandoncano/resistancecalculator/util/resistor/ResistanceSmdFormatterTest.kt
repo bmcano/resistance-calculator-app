@@ -1,7 +1,7 @@
 package com.brandoncano.resistancecalculator.util.resistor
 
 import com.brandoncano.resistancecalculator.constants.Symbols
-import com.brandoncano.resistancecalculator.model.smd.SmdResistor
+import com.brandoncano.resistancecalculator.to.SmdResistor
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
