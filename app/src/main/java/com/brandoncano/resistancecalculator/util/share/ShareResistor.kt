@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import com.brandoncano.sharedcomponents.utils.SaveBitmap
 
 /**
  * Job: Combines all aspects of the sharing logic together to share a composable as a JPG.
