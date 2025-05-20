@@ -15,45 +15,20 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.constants.Colors
 import com.brandoncano.resistancecalculator.data.ESeriesCardContent
-import com.brandoncano.resistancecalculator.data.ResistorImageColorPair
 import com.brandoncano.resistancecalculator.to.ResistorVtc
 import com.brandoncano.resistancecalculator.ui.screens.ctv.ResistanceText
 import com.brandoncano.resistancecalculator.ui.screens.ctv.ResistorRow
 import com.brandoncano.resistancecalculator.ui.theme.validGreen
 import com.brandoncano.resistancecalculator.ui.theme.warningGold
-import com.brandoncano.resistancecalculator.util.resistor.bandFiveForDisplay
-import com.brandoncano.resistancecalculator.util.resistor.bandFourForDisplay
-import com.brandoncano.resistancecalculator.util.resistor.bandOneForDisplay
-import com.brandoncano.resistancecalculator.util.resistor.bandSixForDisplay
-import com.brandoncano.resistancecalculator.util.resistor.bandThreeForDisplay
-import com.brandoncano.resistancecalculator.util.resistor.bandTwoForDisplay
-import com.brandoncano.resistancecalculator.util.resistor.deriveResistorColor
+import com.brandoncano.resistancecalculator.util.resistor.ResistorImageBuilder
 import com.brandoncano.sharedcomponents.composables.AppActionCard
 import com.brandoncano.sharedcomponents.data.CardAction
 
 @Composable
 fun ResistorLayout(resistor: ResistorVtc, isError: Boolean, verticalPadding: Dp = 0.dp) {
-    val resistorColor = resistor.deriveResistorColor()
     val imageColorPairs = remember(resistor) {
-        listOf(
-            R.drawable.img_resistor_wire to Colors.RESISTOR_WIRE,
-            R.drawable.img_resistor_end_left to resistorColor,
-            R.drawable.img_resistor_band_96 to resistor.bandOneForDisplay(),
-            R.drawable.img_resistor_curve_left to resistorColor,
-            R.drawable.img_resistor_band_64 to resistor.bandTwoForDisplay(),
-            R.drawable.img_resistor_band_64 to resistorColor,
-            R.drawable.img_resistor_band_64 to resistor.bandThreeForDisplay(),
-            R.drawable.img_resistor_band_64 to resistorColor,
-            R.drawable.img_resistor_band_64 to resistor.bandFourForDisplay(),
-            R.drawable.img_resistor_band_64_wide to resistorColor,
-            R.drawable.img_resistor_band_64_wide to resistor.bandFiveForDisplay(),
-            R.drawable.img_resistor_curve_right to resistorColor,
-            R.drawable.img_resistor_band_96 to resistor.bandSixForDisplay(),
-            R.drawable.img_resistor_end_right to resistorColor,
-            R.drawable.img_resistor_wire to Colors.RESISTOR_WIRE
-        ).map { (res, color) -> ResistorImageColorPair(res, color) }
+        ResistorImageBuilder.execute(resistor)
     }
     val text = when {
         resistor.isEmpty() -> stringResource(id = R.string.vtc_default_value)

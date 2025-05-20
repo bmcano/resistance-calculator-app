@@ -29,6 +29,7 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.ESeries
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AppDivider
+import com.brandoncano.sharedcomponents.composables.AppLongScreenPreview
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import com.brandoncano.sharedcomponents.composables.AppTopAppBar
 import com.brandoncano.sharedcomponents.text.onSurfaceVariant
@@ -90,6 +91,7 @@ private fun LearnPreferredValuesScreenContent(paddingValues: PaddingValues) {
             text = stringResource(R.string.info_values_preferred_values_where),
             style = textStyleBody().onSurfaceVariant(),
         )
+        // TODO - make as a bullet list instead
         Image(
             painter = painterResource(R.drawable.e_series_values),
             contentDescription = stringResource(R.string.info_content_description_e_series_values),
@@ -130,11 +132,12 @@ private fun LearnPreferredValuesScreenContent(paddingValues: PaddingValues) {
         Spacer(modifier = Modifier.height(24.dp))
         ESeriesTable(stringResource(R.string.info_values_e192_header), ESeries.E192)
         DisclaimerText()
-        Spacer(modifier = Modifier.height(48.dp))
+        BottomScreenSpacer()
     }
 }
 
 @AppScreenPreviews
+@AppLongScreenPreview
 @Composable
 private fun LearnPreferredValuesScreenPreview() {
     ResistorCalculatorTheme { LearnPreferredValuesScreen {} }

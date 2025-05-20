@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AppCard
+import com.brandoncano.sharedcomponents.composables.AppLongScreenPreview
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import com.brandoncano.sharedcomponents.composables.AppTopAppBar
 import com.brandoncano.sharedcomponents.text.onSurfaceVariant
@@ -130,7 +131,7 @@ private fun LearnSmdCodesScreenContent(paddingValues: PaddingValues) {
         )
         CodeValueTable()
         DisclaimerText()
-        Spacer(modifier = Modifier.height(48.dp))
+        BottomScreenSpacer()
     }
 }
 
@@ -178,6 +179,7 @@ private fun EquationCard(equation: String) {
 }
 
 @AppScreenPreviews
+@AppLongScreenPreview
 @Composable
 private fun LearnSmdCodesScreenPreview() {
     ResistorCalculatorTheme { LearnSmdCodesScreen {} }

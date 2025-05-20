@@ -78,26 +78,31 @@
     <string name="circuit_text_field_label_multiple">Resistance %1$s (%2$s)</string>
 
     <!-- Info screen/components text -->
+    <string name="info_color">Color</string>
+    <string name="info_digit">Digit</string>
+    <string name="info_multiplier">Multiplier</string>
+    <string name="info_tolerance">Tolerance</string>
     <string name="info_color_title">Resistor Color Bands</string>
-    <string name="info_color_body1">The resistor color code uses colored bands to indicate resistance value, tolerance, and temperature coefficient of resistors. This system allows for easy identification of resistor values in a compact format.</string>
-    <string name="info_color_body2">Each color corresponds to a specific value, depending on its position on the resistor. The standard colors and their corresponding values are displayed in the table below.</string>
-    <string name="info_color_code_explanation">Explanation:</string>
+    <string name="info_color_body1">"The resistor color code system, standardized by IEC 60062, uses colored bands to represent a resistor's value, tolerance, and, in some cases, temperature coefficient. This method enables compact and quick identification of resistor specifications."</string>
+    <string name="info_color_body2">Each color corresponds to a specific value, depending on its position on the resistor body. The standard colors and their corresponding values are displayed in the table below.</string>
+    <string name="info_color_code_calculation">Calculation:</string>
+    <string name="info_color_code_band_breakdown">Band breakdown:</string>
     <string name="info_color_three_band_headline">Three-Band Resistors</string>
     <string name="info_color_three_band_body">Three-band resistors have two significant figure bands and one multiplier band. If the tolerance is not indicated, it is typically assumed to be ±20%.</string>
     <string name="info_color_three_band_code">27 \u00D7 1,000 ±20%</string>
-    <string name="info_color_three_band_description">Red (2), Violet (7), Orange (×1,000)</string>
+    <string name="info_color_three_band_description">Red[2], Violet[7], Orange[×1,000]</string>
     <string name="info_color_four_band_headline">Four-Band Resistors</string>
     <string name="info_color_four_band_body">Four-band resistors are the most common type. They have two significant figure bands, one multiplier band, and one tolerance band, which is typically larger than the other bands.</string>
     <string name="info_color_four_band_code">47 \u00D7 100 ±5%</string>
-    <string name="info_color_four_band_description">Yellow (4), Violet (7), Red (×100), Gold (±5%)</string>
+    <string name="info_color_four_band_description">Yellow[4], Violet[7], Red[×100], Gold[±5%]</string>
     <string name="info_color_five_band_headline">Five-Band Resistors</string>
     <string name="info_color_five_band_body">Five-band resistors are used for higher precision. They have three significant figure bands, one multiplier band, and one tolerance band. These resistors are sometimes blue.</string>
     <string name="info_color_five_band_code">150 \u00D7 1000 ±1%</string>
-    <string name="info_color_five_band_description">Brown (1), Green (5), Black (0), Orange (×1,000), Brown (±1%)</string>
+    <string name="info_color_five_band_description">Brow[1], Green[5], Black[0], Orange[×1,000], Brown[±1%]</string>
     <string name="info_color_six_band_headline">Six-Band Resistors</string>
-    <string name="info_color_six_band_body">Six-band resistors include a temperature coefficient band in addition to the five-band code, indicating how the resistance changes with temperature.</string>
+    <string name="info_color_six_band_body">Six-band resistors offer high precision and include a sixth band that represents the temperature coefficient (ppm/°C). This value indicates how much the resistance changes with temperature — for example, 100 ppm/°C means the resistance changes by 0.01% for every 1°C change in temperature.</string>
     <string name="info_color_six_band_code">560 \u00D7 10 ±2%, 100 ppm/°C</string>
-    <string name="info_color_six_band_description">"Green (5), Blue (6), Black (0), Brown (×10), Red (±2%), Brown (100 ppm/°C)"</string>
+    <string name="info_color_six_band_description">"Green[5], Blue[6], Black[0], Brown[×10], Red[±2%], Brown[100 ppm/°C]"</string>
     <string name="info_smd_title">SMD Resistor Codes</string>
     <string name="info_smd_resistor_codes_intro">Introduction</string>
     <string name="info_smd_body1">The IEC 60062 standard defines code markings for resistors. It uses alphanumeric codes to represent resistance values in a compact format, making it suitable for marking small components, such as SMD (Surface-Mount Device) resistors.</string>
@@ -127,7 +132,7 @@
     <string name="info_smd_code_value_body">"These are the common resistance value codes, but a manufacturer may use a variation on these or even something completely different. It is therefore always important to verify the manufacturer's marking system."</string>
     <string name="info_values_preferred_values_title">Preferred Values</string>
     <string name="info_values_body1">"The IEC 60063 standard defines 'preferred values' or the 'E-series' system which standardizes resistor values by spacing them on a logarithmic scale. This makes mass production and inventory management far simpler, since manufacturers only need to stock a small set of values instead of every possible resistance."</string>
-    <string name="info_values_body2">Each E–series (E–6, E–12, E–24, etc.), corresponds to the number of values per decade (e.g. 6 values between 1–10 Ω for E–6). Higher series numbers yield finer precision. You can compute the nth value in an E‑series with the formula</string>
+    <string name="info_values_body2">Each E–series (E–6, E–12, E–24, etc.), corresponds to the number of values per decade (e.g. 6 values between 1–10 Ω for E–6). Higher series numbers yield finer precision. You can compute the n-th value in an E‑series with the formula</string>
     <string name="info_values_preferred_values_where">where:</string>
     <string name="info_values_preferred_values_tables_headline">E-Series Tables</string>
     <string name="info_values_preferred_values_low_precision">The E-6 series is typically used for 3-band resistors, offering less precision.</string>
@@ -142,6 +147,21 @@
     <string name="info_values_e96_header">E-96 Series (Tolerance: 1%)</string>
     <string name="info_values_e192_header">E-192 Series (Tolerance: ≤0.5%)</string>
     <string name="info_disclaimer_footer">The information provided here regarding IEC standards is intended for general guidance. Please note that not all components may strictly adhere to these standards, as manufacturers may have variations or different interpretations. Always consult the specific datasheet or contact the manufacturer directly if you are unsure about the specifications or standards for a particular component.</string>
+
+    <!-- resistor colors -->
+    <string name="color_black">Black</string>
+    <string name="color_brown">Brown</string>
+    <string name="color_red">Red</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_yellow">Yellow</string>
+    <string name="color_green">Green</string>
+    <string name="color_blue">Blue</string>
+    <string name="color_violet">Violet</string>
+    <string name="color_gray">Gray</string>
+    <string name="color_white">White</string>
+    <string name="color_gold">Gold</string>
+    <string name="color_silver">Silver</string>
+    <string name="color_none">None</string>
 
     <!-- Menu items -->
     <string name="menu_share_image">Share as image</string>
