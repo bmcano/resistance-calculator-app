@@ -9,6 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -37,7 +38,8 @@ fun NavGraphBuilder.parallelCalculatorScreen(
 
         CircuitCalculatorScreen(
             circuitTitle = R.string.circuit_title_parallel,
-            circuitVector = R.drawable.img_parallel_resistors,
+            circuitVector = R.drawable.img_resistors_parallel,
+            vectorSize = Pair(301.dp, 177.dp),
             circuit = circuit,
             openMenu = openMenu,
             reset = reset,

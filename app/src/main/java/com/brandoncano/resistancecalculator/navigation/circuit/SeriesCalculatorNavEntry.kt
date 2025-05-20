@@ -9,6 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -37,7 +38,8 @@ fun NavGraphBuilder.seriesCalculatorScreen(
 
         CircuitCalculatorScreen(
             circuitTitle = R.string.circuit_title_series,
-            circuitVector = R.drawable.img_series_resistors,
+            circuitVector = R.drawable.img_resistors_series,
+            vectorSize = Pair(390.dp, 106.dp),
             circuit = circuit,
             openMenu = openMenu,
             reset = reset,

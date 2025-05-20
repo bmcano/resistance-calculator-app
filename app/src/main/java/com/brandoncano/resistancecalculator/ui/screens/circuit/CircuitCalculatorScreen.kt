@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.DropdownLists
@@ -55,6 +56,7 @@ import com.brandoncano.sharedcomponents.text.textStyleLargeTitle
 fun CircuitCalculatorScreen(
     circuitTitle: Int,
     circuitVector: Int,
+    vectorSize: Pair<Dp, Dp>,
     circuit: Circuit,
     openMenu: MutableState<Boolean>,
     reset: MutableState<Boolean>,
@@ -85,6 +87,7 @@ fun CircuitCalculatorScreen(
         CircuitCalculatorScreenContent(
             paddingValues = paddingValues,
             circuitVector = circuitVector,
+            vectorSize = vectorSize,
             circuit = circuit,
             reset = reset,
             onValueChanged = onValueChanged,
@@ -96,6 +99,7 @@ fun CircuitCalculatorScreen(
 private fun CircuitCalculatorScreenContent(
     paddingValues: PaddingValues,
     circuitVector: Int,
+    vectorSize: Pair<Dp, Dp>,
     circuit: Circuit,
     reset: MutableState<Boolean>,
     onValueChanged: (Boolean, Int, String) -> Unit,
@@ -113,8 +117,8 @@ private fun CircuitCalculatorScreenContent(
             painter = painterResource(circuitVector),
             contentDescription = null,
             modifier = Modifier
-                .padding(top = 32.dp)
-                .size(width = 288.dp, height = 128.dp)
+                .padding(top = 16.dp)
+                .size(width = vectorSize.first, height = vectorSize.second)
                 .align(Alignment.CenterHorizontally),
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant)
         )
@@ -209,7 +213,8 @@ private fun CircuitCalculatorScreenSeriesPreview() {
     ResistorCalculatorTheme {
         CircuitCalculatorScreen(
             circuitTitle = R.string.circuit_title_series,
-            circuitVector = R.drawable.img_series_resistors,
+            circuitVector = R.drawable.img_resistors_series,
+            vectorSize = Pair(390.dp, 106.dp),
             circuit = Circuit(),
             openMenu = remember { mutableStateOf(false) },
             reset = remember { mutableStateOf(false) },
@@ -227,7 +232,8 @@ private fun CircuitCalculatorScreenParallelPreview() {
     ResistorCalculatorTheme {
         CircuitCalculatorScreen(
             circuitTitle = R.string.circuit_title_parallel,
-            circuitVector = R.drawable.img_parallel_resistors,
+            circuitVector = R.drawable.img_resistors_parallel,
+            vectorSize = Pair(301.dp, 177.dp),
             circuit = Circuit(),
             openMenu = remember { mutableStateOf(false) },
             reset = remember { mutableStateOf(false) },
