@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.ESeries
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.sharedcomponents.composables.AppBulletList
 import com.brandoncano.sharedcomponents.composables.AppDivider
 import com.brandoncano.sharedcomponents.composables.AppLongScreenPreview
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
@@ -72,7 +73,7 @@ private fun LearnPreferredValuesScreenContent(paddingValues: PaddingValues) {
         Spacer(modifier = Modifier.height(24.dp))
         Text(
             text = stringResource(R.string.info_values_body1),
-            modifier = Modifier.padding(bottom = 12.dp),
+            modifier = Modifier.padding(bottom = 16.dp),
             style = textStyleBody().onSurfaceVariant(),
         )
         Text(
@@ -83,38 +84,41 @@ private fun LearnPreferredValuesScreenContent(paddingValues: PaddingValues) {
             painter = painterResource(R.drawable.e_series_equation),
             contentDescription = stringResource(R.string.info_content_description_e_series_equation),
             modifier = Modifier
+                .padding(vertical = 8.dp)
                 .size(128.dp, 56.dp)
                 .align(Alignment.CenterHorizontally),
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant)
         )
         Text(
             text = stringResource(R.string.info_values_preferred_values_where),
+            modifier = Modifier.padding(bottom = 8.dp),
             style = textStyleBody().onSurfaceVariant(),
         )
-        // TODO - make as a bullet list instead
-        Image(
-            painter = painterResource(R.drawable.e_series_values),
-            contentDescription = stringResource(R.string.info_content_description_e_series_values),
-            modifier = Modifier
-                .padding(top = 8.dp, bottom = 32.dp)
-                .align(Alignment.Start),
-            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant)
+        AppBulletList(
+            bulletStrings = listOf(
+                stringResource(R.string.info_values_preferred_values_bullet1),
+                stringResource(R.string.info_values_preferred_values_bullet2),
+                stringResource(R.string.info_values_preferred_values_bullet3),
+            ),
+            textStyle = textStyleBody().onSurfaceVariant(),
+            bulletVerticalSpace = 4.dp,
         )
+        Spacer(modifier = Modifier.height(32.dp))
         Text(
             text = stringResource(R.string.info_values_preferred_values_tables_headline),
             modifier = Modifier.padding(bottom = 12.dp),
-            style = textStyleHeadline().onSurfaceVariant(),
+            style = textStyleHeadline(),
         )
         Text(
             text = stringResource(R.string.info_values_preferred_values_low_precision),
-            modifier = Modifier.padding(bottom = 12.dp),
+            modifier = Modifier.padding(bottom = 16.dp),
             style = textStyleSubhead().onSurfaceVariant(),
         )
         ESeriesTable(stringResource(R.string.info_values_e6_header), ESeries.E6)
         AppDivider(modifier = Modifier.padding(vertical = 16.dp))
         Text(
             text = stringResource(R.string.info_values_preferred_values_medium_precision),
-            modifier = Modifier.padding(bottom = 12.dp),
+            modifier = Modifier.padding(bottom = 16.dp),
             style = textStyleSubhead().onSurfaceVariant(),
         )
         ESeriesTable(stringResource(R.string.info_values_e12_header), ESeries.E12)
@@ -123,7 +127,7 @@ private fun LearnPreferredValuesScreenContent(paddingValues: PaddingValues) {
         AppDivider(modifier = Modifier.padding(vertical = 16.dp))
         Text(
             text = stringResource(R.string.info_values_preferred_values_high_precision),
-            modifier = Modifier.padding(bottom = 12.dp),
+            modifier = Modifier.padding(bottom = 16.dp),
             style = textStyleSubhead().onSurfaceVariant(),
         )
         ESeriesTable(stringResource(R.string.info_values_e48_header), ESeries.E48)

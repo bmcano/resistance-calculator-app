@@ -134,6 +134,9 @@
     <string name="info_values_body1">"The IEC 60063 standard defines 'preferred values' or the 'E-series' system which standardizes resistor values by spacing them on a logarithmic scale. This makes mass production and inventory management far simpler, since manufacturers only need to stock a small set of values instead of every possible resistance."</string>
     <string name="info_values_body2">Each E–series (E–6, E–12, E–24, etc.), corresponds to the number of values per decade (e.g. 6 values between 1–10 Ω for E–6). Higher series numbers yield finer precision. You can compute the n-th value in an E‑series with the formula</string>
     <string name="info_values_preferred_values_where">where:</string>
+    <string name="info_values_preferred_values_bullet1">d = decade multiplier (1, 10, etc.)</string>
+    <string name="info_values_preferred_values_bullet2">n = series (6, 12, 24, etc.)</string>
+    <string name="info_values_preferred_values_bullet3">i = value index in series: 0…(n-1)</string>
     <string name="info_values_preferred_values_tables_headline">E-Series Tables</string>
     <string name="info_values_preferred_values_low_precision">The E-6 series is typically used for 3-band resistors, offering less precision.</string>
     <string name="info_values_preferred_values_medium_precision">The E-12 and E-24 series are used for 4-band resistors, providing better precision.</string>

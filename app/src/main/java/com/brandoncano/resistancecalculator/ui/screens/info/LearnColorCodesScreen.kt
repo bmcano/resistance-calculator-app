@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.rememberScrollState
@@ -74,7 +73,7 @@ private fun LearnColorCodesScreenContent(paddingValues: PaddingValues) {
             style = textStyleBody().onSurfaceVariant(),
         )
         ResistorColorCodeTable()
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(32.dp))
         BandSection(
             headlineRes = R.string.info_color_three_band_headline,
             bodyRes = R.string.info_color_three_band_body,
@@ -82,7 +81,7 @@ private fun LearnColorCodesScreenContent(paddingValues: PaddingValues) {
             descriptionRes = R.string.info_color_three_band_description,
             resistor = ResistorCtv(C.RED, C.VIOLET, "", C.ORANGE, "", "", 0),
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(32.dp))
         BandSection(
             headlineRes = R.string.info_color_four_band_headline,
             bodyRes = R.string.info_color_four_band_body,
@@ -90,7 +89,7 @@ private fun LearnColorCodesScreenContent(paddingValues: PaddingValues) {
             descriptionRes = R.string.info_color_four_band_description,
             resistor = ResistorCtv(C.YELLOW, C.VIOLET, "", C.RED, C.GOLD, "", 1),
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(32.dp))
         BandSection(
             headlineRes = R.string.info_color_five_band_headline,
             bodyRes = R.string.info_color_five_band_body,
@@ -98,7 +97,7 @@ private fun LearnColorCodesScreenContent(paddingValues: PaddingValues) {
             descriptionRes = R.string.info_color_five_band_description,
             resistor = ResistorCtv(C.BROWN, C.GREEN, C.BLACK, C.ORANGE, C.BROWN, "", 2),
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(32.dp))
         BandSection(
             headlineRes = R.string.info_color_six_band_headline,
             bodyRes = R.string.info_color_six_band_body,

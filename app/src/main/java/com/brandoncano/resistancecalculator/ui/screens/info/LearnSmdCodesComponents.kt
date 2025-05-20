@@ -1,85 +1,89 @@
 package com.brandoncano.resistancecalculator.ui.screens.info
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.sharedcomponents.composables.AppCard
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
-import com.brandoncano.sharedcomponents.composables.AppDivider
-import com.brandoncano.sharedcomponents.composables.AppStandardDivider
+import com.brandoncano.sharedcomponents.composables.AppTable
 import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 import com.brandoncano.sharedcomponents.text.textStyleCallout
 import com.brandoncano.sharedcomponents.text.textStyleHeadline
 import com.brandoncano.sharedcomponents.text.textStyleSubhead
 
+@Composable
+fun CodeInfoSection(
+    headlineRes: Int,
+    bodyRes: Int,
+    formulaRes: Int,
+    exampleLabelRes: Int,
+    exampleRes: Int,
+) {
+    Text(
+        text = stringResource(headlineRes),
+        modifier = Modifier.padding(bottom = 12.dp),
+        style = textStyleHeadline(),
+    )
+    Text(
+        text = stringResource(bodyRes),
+        modifier = Modifier.padding(bottom = 12.dp),
+        style = textStyleSubhead().onSurfaceVariant(),
+    )
+    EquationCard(stringResource(formulaRes))
+    Text(
+        text = stringResource(exampleLabelRes),
+        modifier = Modifier.padding(vertical = 12.dp),
+        style = textStyleSubhead().onSurfaceVariant(),
+    )
+    EquationCard(stringResource(exampleRes))
+}
+
+@Composable
+private fun EquationCard(equation: String) {
+    AppCard(
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Text(
+            text = equation,
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            style = textStyleCallout(),
+            textAlign = TextAlign.Center,
+        )
+    }
+}
+
 @AppComponentPreviews
 @Composable
 fun MultiplierTable() {
-    val multipliers = listOf(
-        "Z" to "0.001", "Y / R" to "0.01", "X / S" to "0.1", "A" to "1", "B / H" to "10",
-        "C" to "100", "D" to "1,000", "E" to "10,000", "F" to "100,000"
-    )
-    AppCard(modifier = Modifier.padding(top = 12.dp)) {
-        val colHeader1 = stringResource(id = R.string.info_smd_code_value_col1)
-        val colHeader2 = stringResource(id = R.string.info_smd_code_value_col2)
-        TableScreen(colHeader1, colHeader2, multipliers)
+    AppCard {
+        AppTable(
+            columnTitles = listOf(
+                stringResource(id = R.string.info_smd_code_value_col1),
+                stringResource(id = R.string.info_smd_code_value_col2),
+            ),
+            rows = listOf(
+                listOf("Z", "0.001"),
+                listOf("Y / R", "0.01"),
+                listOf("X / S", "0.1"),
+                listOf("A", "1"),
+                listOf("B / H", "10"),
+                listOf("C", "100"),
+                listOf("D", "1,000"),
+                listOf("E", "10,000"),
+                listOf("R", "100,000"),
+            ),
+        )
     }
 }
 
-@Composable
-private fun TableScreen(
-    columnTitle1: String,
-    columnTitle2: String,
-    columnContents: List<Pair<String, String>>
-) {
-    val column1Weight = .3f // 30%
-    val column2Weight = .7f // 70%
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 12.dp)
-    ) {
-        Row {
-            TableCell(text = columnTitle1, weight = column1Weight, style = textStyleCallout())
-            TableCell(text = columnTitle2, weight = column2Weight, style = textStyleCallout())
-        }
-        AppDivider(modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp))
-        columnContents.forEach { pair ->
-            val (id, text) = pair
-            Row(Modifier.fillMaxWidth()) {
-                TableCell(text = id, weight = column1Weight, style = textStyleSubhead().onSurfaceVariant())
-                TableCell(text = text, weight = column2Weight, style = textStyleSubhead().onSurfaceVariant())
-            }
-            if (columnContents[columnContents.lastIndex] != pair) {
-                AppDivider(modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp))
-            }
-        }
-    }
-}
-
-@Composable
-private fun RowScope.TableCell(text: String, weight: Float, style: TextStyle) {
-    Text(
-        text = text,
-        modifier = Modifier
-            .weight(weight)
-            .padding(start = 8.dp, end = 8.dp, top = 8.dp),
-        style = style,
-        textAlign = TextAlign.Center,
-    )
-}
 
 private data class CodeValue(val code: String, val value: String)
 private val codeValueList = listOf(
@@ -112,54 +116,22 @@ private val codeValueList = listOf(
 @AppComponentPreviews
 @Composable
 fun CodeValueTable() {
-    val rows = codeValueList.chunked(2)
-    AppCard(modifier = Modifier.fillMaxWidth()) {
-        Column(modifier = Modifier.padding(vertical = 12.dp)) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 4.dp),
-            ) {
-                (1..2).forEach { _ ->
-                    Text(
-                        text = stringResource(R.string.info_smd_code_value_col1),
-                        modifier = Modifier.weight(1f),
-                        style = textStyleHeadline(),
-                        textAlign = TextAlign.Center,
-                    )
-                    Text(
-                        text = stringResource(R.string.info_smd_code_value_col2),
-                        modifier = Modifier.weight(1f),
-                        style = textStyleHeadline(),
-                        textAlign = TextAlign.Center,
-                    )
-                }
-            }
-            AppStandardDivider()
-            rows.forEach { rowItems ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 4.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceEvenly,
-                ) {
-                    rowItems.forEach { codeValue ->
-                        Text(
-                            text = codeValue.code,
-                            style = textStyleSubhead(),
-                            modifier = Modifier.weight(1f),
-                            textAlign = TextAlign.Center,
-                        )
-                        Text(
-                            text = codeValue.value,
-                            style = textStyleSubhead().onSurfaceVariant(),
-                            modifier = Modifier.weight(1f),
-                            textAlign = TextAlign.Center,
-                        )
-                    }
-                }
+    val rows: List<List<String>> = codeValueList
+        .chunked(2)
+        .map { pair ->
+            pair.flatMap { codeValue ->
+                listOf(codeValue.code, codeValue.value)
             }
         }
+    AppCard {
+        AppTable(
+            columnTitles = listOf(
+                stringResource(id = R.string.info_smd_code_value_col1),
+                stringResource(id = R.string.info_smd_code_value_col2),
+                stringResource(id = R.string.info_smd_code_value_col1),
+                stringResource(id = R.string.info_smd_code_value_col2),
+            ),
+            rows = rows,
+        )
     }
 }

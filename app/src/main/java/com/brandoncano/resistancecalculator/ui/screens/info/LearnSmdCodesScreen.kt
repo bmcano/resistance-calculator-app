@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
@@ -20,17 +19,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
-import com.brandoncano.sharedcomponents.composables.AppCard
 import com.brandoncano.sharedcomponents.composables.AppLongScreenPreview
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import com.brandoncano.sharedcomponents.composables.AppTopAppBar
 import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 import com.brandoncano.sharedcomponents.text.textStyleBody
-import com.brandoncano.sharedcomponents.text.textStyleCallout
 import com.brandoncano.sharedcomponents.text.textStyleHeadline
 import com.brandoncano.sharedcomponents.text.textStyleSubhead
 
@@ -70,7 +66,7 @@ private fun LearnSmdCodesScreenContent(paddingValues: PaddingValues) {
         Spacer(modifier = Modifier.height(24.dp))
         Text(
             text = stringResource(R.string.info_smd_body1),
-            modifier = Modifier.padding(bottom = 12.dp),
+            modifier = Modifier.padding(bottom = 16.dp),
             style = textStyleBody().onSurfaceVariant(),
         )
         Text(
@@ -110,11 +106,11 @@ private fun LearnSmdCodesScreenContent(paddingValues: PaddingValues) {
         Text(
             text = stringResource(R.string.info_smd_multipliers_headline),
             modifier = Modifier.padding(bottom = 12.dp),
-            style = textStyleHeadline().onSurfaceVariant(),
+            style = textStyleHeadline(),
         )
         Text(
             text = stringResource(R.string.info_smd_multipliers_body),
-            modifier = Modifier.padding(bottom = 12.dp),
+            modifier = Modifier.padding(bottom = 16.dp),
             style = textStyleSubhead().onSurfaceVariant(),
         )
         MultiplierTable()
@@ -122,59 +118,16 @@ private fun LearnSmdCodesScreenContent(paddingValues: PaddingValues) {
         Text(
             text = stringResource(R.string.info_smd_code_value_headline),
             modifier = Modifier.padding(bottom = 12.dp),
-            style = textStyleHeadline().onSurfaceVariant(),
+            style = textStyleHeadline(),
         )
         Text(
             text = stringResource(R.string.info_smd_code_value_body),
-            modifier = Modifier.padding(bottom = 12.dp),
+            modifier = Modifier.padding(bottom = 16.dp),
             style = textStyleSubhead().onSurfaceVariant(),
         )
         CodeValueTable()
         DisclaimerText()
         BottomScreenSpacer()
-    }
-}
-
-@Composable
-fun CodeInfoSection(
-    headlineRes: Int,
-    bodyRes: Int,
-    formulaRes: Int,
-    exampleLabelRes: Int,
-    exampleRes: Int,
-) {
-    Text(
-        text = stringResource(headlineRes),
-        modifier = Modifier.padding(bottom = 12.dp),
-        style = textStyleHeadline().onSurfaceVariant(),
-    )
-    Text(
-        text = stringResource(bodyRes),
-        modifier = Modifier.padding(bottom = 12.dp),
-        style = textStyleSubhead().onSurfaceVariant(),
-    )
-    EquationCard(stringResource(formulaRes))
-    Text(
-        text = stringResource(exampleLabelRes),
-        modifier = Modifier.padding(vertical = 12.dp),
-        style = textStyleSubhead().onSurfaceVariant(),
-    )
-    EquationCard(stringResource(exampleRes))
-}
-
-@Composable
-private fun EquationCard(equation: String) {
-    AppCard(
-        modifier = Modifier.fillMaxWidth(),
-    ) {
-        Text(
-            text = equation,
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth(),
-            style = textStyleCallout(),
-            textAlign = TextAlign.Center,
-        )
     }
 }
 
