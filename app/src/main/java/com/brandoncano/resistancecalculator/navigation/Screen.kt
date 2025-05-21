@@ -2,11 +2,14 @@ package com.brandoncano.resistancecalculator.navigation
 
 /**
  * Note: Keep screens in alphabetical order
+ *
+ * TODO - Convert to type safe navigation
  */
 sealed class Screen(val route: String) {
     data object About : Screen("about")
     data object ColorToValue: Screen("color_to_value")
     data object Home : Screen("home")
+    data object LearnCircuitEquations : Screen("circuit/learn")
     data object LearnColorCodes : Screen("color_to_value/learn")
     data object LearnPreferredValues : Screen("value_to_color/learn")
     data object LearnSmdCodes : Screen("smd/learn")

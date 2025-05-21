@@ -1,67 +1,81 @@
 package com.brandoncano.resistancecalculator.model.smd
 
 import android.content.Context
+import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.brandoncano.resistancecalculator.to.SmdResistor
 import com.brandoncano.resistancecalculator.util.resistor.formatResistance
 import com.brandoncano.resistancecalculator.util.resistor.isSmdInputInvalid
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 
-class SmdResistorViewModel(context: Context): ViewModel() {
+class SmdResistorViewModel(private val savedStateHandle: SavedStateHandle, context: Context): ViewModel() {
 
-    private val repository = SmdResistorRepository.getInstance(context)
+    private companion object {
+        private const val TAG = "SmdResistorViewModel"
+        private const val KEY_RESISTOR_STATE_TO = "KEY_RESISTOR_STATE_TO"
+        private const val KEY_ERROR_STATE_BOOL = "KEY_ERROR_STATE_BOOL"
+    }
 
-    private val _resistor = MutableStateFlow(SmdResistor())
-    val resistor: StateFlow<SmdResistor> get() = _resistor
-
-    private val _isError = MutableStateFlow(false)
-    val isError: StateFlow<Boolean> get() = _isError
+    private val application = context.applicationContext
+    private val repository = SmdResistorRepository.getInstance(application)
+    val resistorStateTOStateFlow = savedStateHandle.getStateFlow(KEY_RESISTOR_STATE_TO, SmdResistor())
+    val isErrorStateFlow = savedStateHandle.getStateFlow(KEY_ERROR_STATE_BOOL, false)
 
     init {
-        viewModelScope.launch {
-            val loadedResistor = repository.loadResistor()
-            _resistor.value = loadedResistor
-            updateErrorState()
-        }
+        Log.d(TAG, "Init: $this")
+        loadData()
+    }
+
+    fun loadData() {
+        val resistor = repository.loadResistor()
+        val navBar = resistor.navBarSelection
+
+        savedStateHandle[KEY_RESISTOR_STATE_TO] = resistor
+        Log.d(TAG, "loadData(): resistor = $resistor, navBar = $navBar")
+        updateErrorState(resistor)
     }
 
     fun clear() {
-        _resistor.value = SmdResistor(navBarSelection = getNavBarSelection())
-        _isError.value = false
-        repository.clear()
+        val currentNavBar = resistorStateTOStateFlow.value.navBarSelection
+        repository.clearData(currentNavBar)
+
+        val blankResistor = SmdResistor(navBarSelection = currentNavBar)
+        savedStateHandle[KEY_RESISTOR_STATE_TO] = blankResistor
+        savedStateHandle[KEY_ERROR_STATE_BOOL] = false
     }
 
     fun updateValues(code: String, units: String) {
-        _resistor.value = _resistor.value.copy(code = code, units = units)
-        updateErrorState()
-        if (!_isError.value) {
-            _resistor.value.formatResistance()
-            saveResistorValues()
+        val currentResistor = resistorStateTOStateFlow.value
+        val updatedResistor = currentResistor.copy(
+            code = code,
+            units = units,
+        )
+
+        updateErrorState(updatedResistor)
+        if (!isErrorStateFlow.value) {
+            updatedResistor.formatResistance()
+            repository.saveResistor(updatedResistor)
         }
+
+        savedStateHandle[KEY_RESISTOR_STATE_TO] = updatedResistor
     }
 
-    fun getNavBarSelection(): Int {
-        return _resistor.value.navBarSelection
-    }
+    fun updateNavBarSelection(number: Int) {
+        val navBar = number.coerceIn(0..2)
+        val currentResistor = resistorStateTOStateFlow.value
+        val updatedResistor = currentResistor.copy(navBarSelection = navBar)
 
-    fun saveNavBarSelection(number: Int) {
-        val navBarSelection = number.coerceIn(0..2)
-        _resistor.value = _resistor.value.copy(navBarSelection = navBarSelection)
-        updateErrorState()
-        if (!_isError.value) {
-            _resistor.value.formatResistance()
-            saveResistorValues()
+        updateErrorState(updatedResistor)
+        if (!isErrorStateFlow.value) {
+            updatedResistor.formatResistance()
+            repository.saveResistor(updatedResistor)
         }
-        repository.saveNavBarSelection(navBarSelection)
+
+        savedStateHandle[KEY_RESISTOR_STATE_TO] = updatedResistor
     }
 
-    private fun saveResistorValues() {
-        repository.saveResistor(_resistor.value)
-    }
-
-    private fun updateErrorState() {
-        _isError.value = _resistor.value.isSmdInputInvalid()
+    private fun updateErrorState(resistor: SmdResistor) {
+        val isInvalid = resistor.isSmdInputInvalid()
+        savedStateHandle[KEY_ERROR_STATE_BOOL] = isInvalid
     }
 }

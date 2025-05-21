@@ -1,39 +1,38 @@
 package com.brandoncano.resistancecalculator.model.circuit
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.brandoncano.resistancecalculator.to.Circuit
 import com.brandoncano.resistancecalculator.util.circuit.TotalResistanceParallel
 import com.brandoncano.resistancecalculator.util.circuit.TotalResistanceSeries
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 
-class CircuitViewModel : ViewModel() {
+class CircuitViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
 
-    private val _circuit = MutableStateFlow(Circuit())
-    val circuit: StateFlow<Circuit> get() = _circuit
-
-    fun updateValues(isSame: Boolean, count: Int, units: String, isSeriesCalculation: Boolean) {
-        _circuit.value = _circuit.value.copy(sameValues = isSame, resistorCount = count, units = units)
-        calculateTotalResistance(isSeriesCalculation)
+    private companion object {
+        private const val KEY_CIRCUIT_STATE_TO = "KEY_RESISTOR_STATE_TO"
     }
+
+    val circuitStateTOStateFlow = savedStateHandle.getStateFlow(KEY_CIRCUIT_STATE_TO, Circuit())
 
     fun clear() {
-        _circuit.value = Circuit(
-            resistorCount = _circuit.value.resistorCount,
-            units = _circuit.value.units,
-        )
+        val sameValues = circuitStateTOStateFlow.value.isSameValues
+        val resistorCount = circuitStateTOStateFlow.value.resistorCount
+        val units = circuitStateTOStateFlow.value.units
+
+        val blankCircuit = Circuit(isSameValues = sameValues, resistorCount = resistorCount, units = units)
+        savedStateHandle[KEY_CIRCUIT_STATE_TO] = blankCircuit
     }
 
-    private fun calculateTotalResistance(isSeriesCalculation: Boolean) {
-        val resistorInputs = _circuit.value.resistorInputs.take(_circuit.value.resistorCount)
-        val sameValues = _circuit.value.sameValues
-        val resistorCount = _circuit.value.resistorCount
-
+    fun updateValues(isSameValues: Boolean, resistorCount: Int, units: String, isSeriesCalculation: Boolean) {
+        val currentCircuit = circuitStateTOStateFlow.value
+        val resistorInputs = currentCircuit.resistorInputs.take(resistorCount)
         val totalResistance = if (isSeriesCalculation) {
-            TotalResistanceSeries.execute(sameValues, resistorCount, resistorInputs)
+            TotalResistanceSeries.execute(isSameValues, resistorCount, resistorInputs)
         } else {
-            TotalResistanceParallel.execute(sameValues, resistorCount, resistorInputs)
+            TotalResistanceParallel.execute(isSameValues, resistorCount, resistorInputs)
         }
+        val updatedCircuit = currentCircuit.copy(isSameValues = isSameValues, resistorCount = resistorCount, units = units, totalResistance = totalResistance)
 
-        _circuit.value = _circuit.value.copy(totalResistance = totalResistance)
+        savedStateHandle[KEY_CIRCUIT_STATE_TO] = updatedCircuit
     }
 }

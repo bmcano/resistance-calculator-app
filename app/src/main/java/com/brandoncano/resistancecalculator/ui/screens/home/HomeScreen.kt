@@ -4,9 +4,11 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -29,6 +31,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Links
+import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
+import com.brandoncano.resistancecalculator.ui.screens.about.InformationCardButtons
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AboutAppMenuItem
 import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
@@ -50,6 +54,10 @@ fun HomeScreen(
     onSmdTapped: () -> Unit,
     onSeriesCalculatorTapped: () -> Unit,
     onParallelCalculatorTapped: () -> Unit,
+    onViewColorCodeIecTapped: () -> Unit,
+    onViewPreferredValuesIecTapped: () -> Unit,
+    onViewSmdCodeIecTapped: () -> Unit,
+    onViewCircuitEquationsTapped: () -> Unit,
     onRateThisAppTapped: () -> Unit,
     onViewOurAppsTapped: () -> Unit,
     onDonateTapped: () -> Unit,
@@ -68,6 +76,7 @@ fun HomeScreen(
                 }
             )
         },
+        contentWindowInsets = WindowInsets.safeDrawing,
     ) { paddingValues ->
         HomeScreenContent(
             paddingValues = paddingValues,
@@ -76,6 +85,10 @@ fun HomeScreen(
             onSmdTapped = onSmdTapped,
             onSeriesCalculatorTapped = onSeriesCalculatorTapped,
             onParallelCalculatorTapped = onParallelCalculatorTapped,
+            onViewColorCodeIecTapped = onViewColorCodeIecTapped,
+            onViewPreferredValuesIecTapped = onViewPreferredValuesIecTapped,
+            onViewSmdCodeIecTapped = onViewSmdCodeIecTapped,
+            onViewCircuitEquationsTapped = onViewCircuitEquationsTapped,
             onRateThisAppTapped = onRateThisAppTapped,
             onViewOurAppsTapped = onViewOurAppsTapped,
             onDonateTapped = onDonateTapped,
@@ -91,6 +104,10 @@ private fun HomeScreenContent(
     onSmdTapped: () -> Unit,
     onSeriesCalculatorTapped: () -> Unit,
     onParallelCalculatorTapped: () -> Unit,
+    onViewColorCodeIecTapped: () -> Unit,
+    onViewPreferredValuesIecTapped: () -> Unit,
+    onViewSmdCodeIecTapped: () -> Unit,
+    onViewCircuitEquationsTapped: () -> Unit,
     onRateThisAppTapped: () -> Unit,
     onViewOurAppsTapped: () -> Unit,
     onDonateTapped: () -> Unit,
@@ -106,7 +123,7 @@ private fun HomeScreenContent(
     ) {
         Text(
             text = stringResource(id = R.string.home_calculators_header_text),
-            modifier = Modifier.padding(top = 16.dp, bottom = 12.dp),
+            modifier = Modifier.padding(top = 24.dp, bottom = 12.dp),
             style = textStyleHeadline(),
         )
         AppArrowCardButton(
@@ -137,12 +154,19 @@ private fun HomeScreenContent(
             ),
         )
         Spacer(modifier = Modifier.height(32.dp))
+        InformationCardButtons(
+            onViewColorCodeIecTapped = onViewColorCodeIecTapped,
+            onViewPreferredValuesIecTapped = onViewPreferredValuesIecTapped,
+            onViewSmdCodeIecTapped = onViewSmdCodeIecTapped,
+            onViewCircuitEquationsTapped = onViewCircuitEquationsTapped,
+        )
+        Spacer(modifier = Modifier.height(32.dp))
         OurAppsButtons(
             onRateThisAppTapped = onRateThisAppTapped,
             onViewOurAppsTapped = onViewOurAppsTapped,
             onDonateTapped = onDonateTapped,
         )
-        Spacer(modifier = Modifier.height(48.dp))
+        BottomScreenSpacer()
     }
 }
 
@@ -159,6 +183,10 @@ private fun HomePreview() {
             onSmdTapped = {},
             onSeriesCalculatorTapped = {},
             onParallelCalculatorTapped = {},
+            onViewColorCodeIecTapped = {},
+            onViewPreferredValuesIecTapped = {},
+            onViewSmdCodeIecTapped = {},
+            onViewCircuitEquationsTapped = {},
             onRateThisAppTapped = {},
             onViewOurAppsTapped = {},
             onDonateTapped = {},

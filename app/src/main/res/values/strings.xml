@@ -1,12 +1,27 @@
 <resources>
-    <!-- Screen titles -->
     <string name="app_name">Resistor Calculator</string>
-    <string name="title_color_to_value">Color to Value</string>
-    <string name="title_value_to_color">Value to Color</string>
-    <string name="title_smd">SMD Resistor</string>
-    <string name="title_series_resistors">Series Resistors</string>
-    <string name="title_parallel_resistors">Parallel Resistors</string>
-    <!-- OutlinedTextField hints -->
+
+    <!-- Home screen/components text -->
+    <string name="home_calculators_header_text">Calculators</string>
+    <string name="home_button_color_to_value">Color to value</string>
+    <string name="home_button_value_to_color">Value to color</string>
+    <string name="home_button_smd">SMD resistor</string>
+    <string name="home_button_series_calculator">Resistors in series</string>
+    <string name="home_button_parallel_calculator">Resistors in parallel</string>
+
+    <!-- About screen/components text -->
+    <string name="about_title">About The App</string>
+    <string name="about_view_privacy_policy">View privacy policy</string>
+    <string name="about_overview_title">Overview &amp; standards</string>
+    <string name="about_overview_body_01">This app includes a range of calculators to determine and convert resistance values for color-band resistors, SMD resistors, and more, supporting various resistor configurations and coding formats.</string>
+    <string name="about_overview_body_02">All calculations follow IEC 60062 and IEC 60063 standards for resistor color codes and preferred values to ensure precision and accuracy.</string>
+    <string name="about_iec_header_text">Resistor standards &amp; guides</string>
+    <string name="about_standard_iec_button">View resistor color code</string>
+    <string name="about_smd_iec_button">View resistor SMD code</string>
+    <string name="about_circuit_equations_button">View series &amp; parallel formulas</string>
+    <string name="about_preferred_values_iec_button">View resistor preferred values</string>
+
+    <!-- Calculator screens shared text -->
     <string name="number_band_hint1">First band</string>
     <string name="number_band_hint2">Second band</string>
     <string name="number_band_hint3">Third band</string>
@@ -15,111 +30,120 @@
     <string name="ppm_band_hint">Temperature coefficient</string>
     <string name="type_resistance_hint">Resistance</string>
     <string name="units_hint">Units</string>
-    <string name="hint_smd_code">Code</string>
-    <!-- Default text -->
-    <string name="default_ctv_value">Select colors</string>
-    <string name="default_vtc_value">Enter resistance</string>
-    <string name="default_smd_value">Enter code</string>
-    <!-- Bottom navigation -->
     <string name="navbar_three_band">Three Bands</string>
     <string name="navbar_four_band">Four Bands</string>
     <string name="navbar_five_band">Five Bands</string>
     <string name="navbar_six_band">Six Bands</string>
-    <string name="navbar_three_eia">Three Digit EIA</string>
-    <string name="navbar_four_eia">Four Digit EIA</string>
-    <string name="navbar_eia_96">EIA-96</string>
-    <!-- About screen/components text -->
-    <string name="about_title">About The App</string>
-    <string name="about_description">Description</string>
-    <string name="about_description_01">This app includes a range of calculators to help determine and convert resistance values for standard color-band resistors, SMD resistors, and more, supporting a variety of coding standards and configurations.</string>
-    <string name="about_description_02">This app follows the IEC 60062 and IEC 60063 international standards for resistor coding and calculations to help ensure accuracy. For more detailed information, you can refer to the IEC 60062/60063 pages below.</string>
-    <string name="about_iec_header_text">International standard IEC 60062/60063</string>
-    <string name="about_standard_iec_button">View resistor color code</string>
-    <string name="about_smd_iec_button">View resistor SMD code</string>
-    <string name="about_preferred_values_iec_button">View resistor preferred values</string>
-    <string name="about_view_privacy_policy">View privacy policy</string>
-    <!-- Home screen/components text -->
-    <string name="home_calculators_header_text">Calculators</string>
-    <string name="home_button_color_to_value">Color to value</string>
-    <string name="home_button_value_to_color">Value to color</string>
-    <string name="home_button_smd">SMD resistor</string>
-    <string name="home_button_series_calculator">Resistors in series</string>
-    <string name="home_button_parallel_calculator">Resistors in parallel</string>
-    <!-- SMD screen/components text -->
-    <string name="smd_headline_text">Learn about SMD codes</string>
-    <string name="smd_button_text">Explore the IEC 60062 standard</string>
+
     <!-- CtV screen/components text -->
-    <string name="ctv_headline_text">Learn about color codes</string>
-    <string name="ctv_button_text">Explore the IEC 60062 standard</string>
+    <string name="ctv_title">Color to Value</string>
+    <string name="ctv_info_card_title_text">Resistor color codes</string>
+    <string name="ctv_info_card_body_text">Learn to decode each band into precise values using the IEC 60062 standard.</string>
+    <string name="ctv_info_card_cta_text">Learn more</string>
+    <string name="ctv_default_value">Select colors</string>
+
     <!-- VtC screen/components text -->
+    <string name="vtc_title">Value to Color</string>
+    <string name="vtc_default_value">Enter resistance</string>
     <string name="vtc_validate_e_series_button">Validate resistance against E-series</string>
-    <string name="vtc_valid_card_label">Valid E-series value</string>
-    <string name="vtc_valid_card_body">The entered resistance value is part of the %1$s series.</string>
-    <string name="vtc_valid_card_action">Learn more</string>
-    <string name="vtc_invalid_card_label">Your value is not in the E-series</string>
+    <string name="vtc_info_card_title">Discover E-series values</string>
+    <string name="vtc_info_card_body">"Tap \"Validate\" to see if your resistance matches a standard E‑series value for the chosen tolerance."</string>
+    <string name="vtc_info_card_action">Learn more</string>
+    <string name="vtc_valid_card_title">Valid E-series value</string>
+    <string name="vtc_valid_card_body">Your resistance value is part of the %1$s series.</string>
+    <string name="vtc_invalid_card_title">Your value is not in the E-series</string>
     <string name="vtc_invalid_card_body">With the selected tolerance, the closest E-series value is %1$s.</string>
     <string name="vtc_invalid_card_action">Use closest value</string>
-    <string name="vtc_invalid_tolerance_label">Invalid tolerance for resistor type</string>
-    <string name="vtc_invalid_tolerance_body">Adjust your selection to match the supported tolerances for a %1$s-band resistor.</string>
+    <string name="vtc_invalid_tolerance_label">Unsupported tolerance</string>
+    <string name="vtc_invalid_tolerance_body">Adjust your selection to use a supported tolerance for a %1$s-band resistor.</string>
+
+    <!-- SMD screen/components text -->
+    <string name="smd_title">SMD Resistor</string>
+    <string name="smd_resistor_content_description">SMD Resistor</string>
+    <string name="smd_default_value">Enter code</string>
+    <string name="smd_code_hint">Code</string>
+    <string name="smd_info_card_title_text">SMD resistor codes</string>
+    <string name="smd_info_card_body_text">Learn how 3‑ and 4‑digit markings on SMD resistors correspond to resistance and tolerance.</string>
+    <string name="smd_info_card_cta_text">Learn more</string>
+    <string name="smd_navbar_three_eia">Three Digit EIA</string>
+    <string name="smd_navbar_four_eia">Four Digit EIA</string>
+    <string name="smd_navbar_eia_96">EIA-96</string>
+
     <!-- Series/Parallel screen text -->
+    <string name="circuit_title_series">Series Resistors</string>
+    <string name="circuit_title_parallel">Parallel Resistors</string>
     <string name="circuit_use_same_values">Use the same resistor values?</string>
     <string name="circuit_num_resistors_label">Number of resistors</string>
     <string name="circuit_units_label">Units</string>
     <string name="circuit_text_field_label">Resistance (%1$s)</string>
     <string name="circuit_text_field_label_multiple">Resistance %1$s (%2$s)</string>
+    <string name="circuit_info_card_title_text">Resistor equations</string>
+    <string name="circuit_info_card_body_text">Discover how series &amp; parallel formulas determine total resistance.</string>
+    <string name="circuit_info_card_cta_text">Learn more</string>
+
     <!-- Info screen/components text -->
-    <string name="info_title">IEC 60062 Standard</string>
-    <string name="info_title_3">IEC 60063 Standard</string>
-    <string name="info_color_meaning_title">Color Bands and Their Meanings</string>
-    <string name="info_color_body1">The resistor color code uses colored bands to indicate resistance value, tolerance, and temperature coefficient of resistors. This system allows for easy identification of resistor values in a compact format.</string>
-    <string name="info_color_body2">Each color corresponds to a specific value, depending on its position on the resistor. The standard colors and their corresponding values are displayed in the table below.</string>
-    <string name="info_color_code_explanation">Explanation:</string>
+    <string name="info_color">Color</string>
+    <string name="info_digit">Digit</string>
+    <string name="info_multiplier">Multiplier</string>
+    <string name="info_tolerance">Tolerance</string>
+    <string name="info_color_title">Resistor Color Bands</string>
+    <string name="info_color_body1">"The resistor color code system, standardized by IEC 60062, uses colored bands to represent a resistor's value, tolerance, and, in some cases, temperature coefficient. This method enables compact and quick identification of resistor specifications."</string>
+    <string name="info_color_body2">Each color corresponds to a specific value, depending on its position on the resistor body. The standard colors and their corresponding values are displayed in the table below.</string>
+    <string name="info_color_code_calculation">Calculation:</string>
+    <string name="info_color_code_band_breakdown">Band breakdown:</string>
     <string name="info_color_three_band_headline">Three-Band Resistors</string>
     <string name="info_color_three_band_body">Three-band resistors have two significant figure bands and one multiplier band. If the tolerance is not indicated, it is typically assumed to be ±20%.</string>
     <string name="info_color_three_band_code">27 \u00D7 1,000 ±20%</string>
-    <string name="info_color_three_band_description">Red (2), Violet (7), Orange (×1,000)</string>
+    <string name="info_color_three_band_description">Red[2], Violet[7], Orange[×1,000]</string>
     <string name="info_color_four_band_headline">Four-Band Resistors</string>
     <string name="info_color_four_band_body">Four-band resistors are the most common type. They have two significant figure bands, one multiplier band, and one tolerance band, which is typically larger than the other bands.</string>
     <string name="info_color_four_band_code">47 \u00D7 100 ±5%</string>
-    <string name="info_color_four_band_description">Yellow (4), Violet (7), Red (×100), Gold (±5%)</string>
+    <string name="info_color_four_band_description">Yellow[4], Violet[7], Red[×100], Gold[±5%]</string>
     <string name="info_color_five_band_headline">Five-Band Resistors</string>
     <string name="info_color_five_band_body">Five-band resistors are used for higher precision. They have three significant figure bands, one multiplier band, and one tolerance band. These resistors are sometimes blue.</string>
     <string name="info_color_five_band_code">150 \u00D7 1000 ±1%</string>
-    <string name="info_color_five_band_description">Brown (1), Green (5), Black (0), Orange (×1,000), Brown (±1%)</string>
+    <string name="info_color_five_band_description">Brow[1], Green[5], Black[0], Orange[×1,000], Brown[±1%]</string>
     <string name="info_color_six_band_headline">Six-Band Resistors</string>
-    <string name="info_color_six_band_body">Six-band resistors include a temperature coefficient band in addition to the five-band code, indicating how the resistance changes with temperature.</string>
+    <string name="info_color_six_band_body" formatted="false">Six-band resistors offer high precision and include a sixth band that represents the temperature coefficient (ppm/°C). This value indicates how much the resistance changes with temperature — for example, 100 ppm/°C means the resistance changes by 0.01% for every 1°C change in temperature.</string>
     <string name="info_color_six_band_code">560 \u00D7 10 ±2%, 100 ppm/°C</string>
-    <string name="info_color_six_band_description">"Green (5), Blue (6), Black (0), Brown (×10), Red (±2%), Brown (100 ppm/°C)"</string>
-    <string name="info_smd_resistor_codes_title">SMD Resistor Codes</string>
+    <string name="info_color_six_band_description">"Green[5], Blue[6], Black[0], Brown[×10], Red[±2%], Brown[100 ppm/°C]"</string>
+    <string name="info_smd_title">SMD Resistor Codes</string>
     <string name="info_smd_body1">The IEC 60062 standard defines code markings for resistors. It uses alphanumeric codes to represent resistance values in a compact format, making it suitable for marking small components, such as SMD (Surface-Mount Device) resistors.</string>
     <string name="info_smd_body2">SMD resistors use different coding systems based on the number of digits or characters used. The most common coding standards are:</string>
-    <string name="info_smd_code_example">Example:</string>
     <string name="info_smd_three_code_headline">Three-Digit Code</string>
-    <string name="info_smd_three_code_body">The three-digit code is similar to the resistor color code system. The first two digits represent the significant figures, and the third digit is the multiplier. The equation is:</string>
+    <string name="info_smd_three_code_body">The three-digit code is similar to the resistor color code system. The first two digits represent the significant figures, and the third digit is the multiplier. The general format can be expressed as:</string>
     <string name="info_smd_three_digit_formula">xy \u00D7 10\u1dbb = R</string>
+    <string name="info_smd_three_digit_example_label">For example, a resistor labeled 472 equates to:</string>
     <string name="info_smd_three_digit_example">47 \u00D7 10\u00b2 = 4700 \u03A9</string>
     <string name="info_smd_four_code_headline">Four-Digit Code</string>
-    <string name="info_smd_four_code_body">The four-digit code is used for high-precision resistors. The first three digits represent the significant figures, and the fourth digit is the multiplier. The equation is:</string>
+    <string name="info_smd_four_code_body">The four-digit code is used for high-precision resistors. The first three digits represent the significant figures, and the fourth digit is the multiplier. The general format can be expressed as:</string>
     <string name="info_smd_four_digit_formula">wxy \u00D7 10\u1dbb = R</string>
+    <string name="info_smd_four_digit_example_label">For example, a resistor labeled 1201 equates to:</string>
     <string name="info_smd_four_digit_example">120 \u00D7 10\u00b9 = 1200 \u03A9</string>
     <string name="info_smd_four_digit_body2">"The letter 'R' indicates the position of the decimal point for resistance values lower than 10 \u03A9. For example, 0R5 would be 0.5 \u03A9 and 0R01 would be 0.01 \u03A9."</string>
     <string name="info_smd_eia_headline">EIA-96 Code</string>
-    <string name="info_smd_eia_body">The EIA-96 code is a two-digit code followed by a letter, used for precision resistors with 1% tolerance. The two digits represent a value in the E96 series, while the letter indicates the multiplier. For example:</string>
-    <string name="info_smd_eia_example">"'43' corresponds to 274 \u03A9, while 'C' indicated a multiplier of \u00D7100. Thus, 274 \u00D7 100 = 27,400 \u03A9."</string>
+    <string name="info_smd_eia_body">The EIA-96 code is a two-digit code followed by a letter, used for precision resistors with 1% tolerance. The two digits represent a value in the E-96 series, while the letter indicates the multiplier. The general format can be expressed as:</string>
+    <string name="info_smd_eia_formula">xy \u00D7 z = R</string>
+    <string name="info_smd_eia_example_label">For example, a resistor labeled 43C equates to:</string>
+    <string name="info_smd_eia_example">"43 \u2013 274; C \u2013 100; &#10;274 \u00D7 100 = 27400 \u03A9"</string>
     <string name="info_smd_multipliers_headline">Multipliers</string>
     <string name="info_smd_multipliers_body">The multiplier indicates the factor by which to multiply the significant figures. In the EIA-96 code, letters represent multipliers as follows:</string>
     <string name="info_smd_code_value_col1">Code</string>
     <string name="info_smd_code_value_col2">Value</string>
     <string name="info_smd_code_value_headline">Value codes</string>
     <string name="info_smd_code_value_body">"These are the common resistance value codes, but a manufacturer may use a variation on these or even something completely different. It is therefore always important to verify the manufacturer's marking system."</string>
-    <string name="info_values_preferred_values_title">Preferred Values or E-Series</string>
-    <string name="info_values_body1">"The standardization of resistor values, known as 'preferred values' or the 'E-series,' simplifies mass production and stock management by spacing resistance values approximately equally on a logarithmic scale. This approach allows manufacturers to limit the number of different values they need to produce."</string>
-    <string name="info_values_body2">The E-series is a set of preferred resistor values, organized by levels of precision. Each E-series is represented by a number (E-6, E-12, E-24, etc.), indicating the number of values per decade (1–10, 10–100, etc.). The more values in an E-series, the more precise the resistor selection. The values can be calculated using the following equation:</string>
-    <string name="info_values_preferred_values_where">Where:</string>
+    <string name="info_values_preferred_values_title">Preferred Values</string>
+    <string name="info_values_body1">"The IEC 60063 standard defines 'preferred values' or the 'E-series' system which standardizes resistor values by spacing them on a logarithmic scale. This makes mass production and inventory management far simpler, since manufacturers only need to stock a small set of values instead of every possible resistance."</string>
+    <string name="info_values_body2">Each E–series (E–6, E–12, E–24, etc.), corresponds to the number of values per decade (e.g. 6 values between 1–10 Ω for E–6). Higher series numbers yield finer precision. You can compute the n-th value in an E‑series with the formula</string>
+    <string name="info_values_preferred_values_where">where:</string>
+    <string name="info_values_preferred_values_bullet1">d = decade multiplier (1, 10, etc.)</string>
+    <string name="info_values_preferred_values_bullet2">n = series (6, 12, 24, etc.)</string>
+    <string name="info_values_preferred_values_bullet3">i = value index in series: 0…(n-1)</string>
     <string name="info_values_preferred_values_tables_headline">E-Series Tables</string>
     <string name="info_values_preferred_values_low_precision">The E-6 series is typically used for 3-band resistors, offering less precision.</string>
     <string name="info_values_preferred_values_medium_precision">The E-12 and E-24 series are used for 4-band resistors, providing better precision.</string>
     <string name="info_values_preferred_values_high_precision">The E-48, E-96, and E-192 series are used for 5 and 6-band resistors, providing high precision with tolerances as low as 0.05%. These series also introduce a third significant digit.</string>
+    <string name="info_content_description_e_series_equation">E-series equation</string>
     <string name="info_values_e6_header">E-6 Series (Tolerance: 20%)</string>
     <string name="info_values_e12_header">E-12 Series (Tolerance: 10%)</string>
     <string name="info_values_e24_header">E-24 Series (Tolerance: 5%, 1%)</string>
@@ -127,10 +151,36 @@
     <string name="info_values_e96_header">E-96 Series (Tolerance: 1%)</string>
     <string name="info_values_e192_header">E-192 Series (Tolerance: ≤0.5%)</string>
     <string name="info_disclaimer_footer">The information provided here regarding IEC standards is intended for general guidance. Please note that not all components may strictly adhere to these standards, as manufacturers may have variations or different interpretations. Always consult the specific datasheet or contact the manufacturer directly if you are unsure about the specifications or standards for a particular component.</string>
-    <!-- Content descriptions -->
-    <string name="content_description_app_icon">App icon</string>
-    <string name="content_description_e_series_equation">E-series equation</string>
-    <string name="content_description_e_series_values">E-series values</string>
+
+    <string name="info_circuit_title">Resistor Equations</string>
+    <string name="info_circuit_series_header">Resistors in series</string>
+    <string name="info_circuit_series_body1">When resistors are connected in series, the same current flows through each one, and the supply voltage is divided across them in proportion to their resistance. The total resistance is the sum of all individual resistances.</string>
+    <string name="info_circuit_series_body2">However, for two resistors in series the total resistance can be written concisely as:</string>
+    <string name="info_circuit_series_equation_cd">Series resistor formula</string>
+    <string name="info_circuit_parallel_header">Resistors in parallel</string>
+    <string name="info_circuit_parallel_body1">When resistors are connected in parallel, the voltage across each resistor is the same, and the total current is the sum of the currents through each branch. The reciprocal of the total resistance equals the sum of reciprocals of each resistor.</string>
+    <string name="info_circuit_parallel_body2">Alternatively, the parallel resistance can be expressed as:</string>
+    <string name="info_circuit_parallel_body3">There is also a two-resistor shortcut for parallel resistors, which can be written as:</string>
+    <string name="info_circuit_parallel_equation_cd">Parallel resistor formula</string>
+
+    <!-- resistor colors -->
+    <string name="color_black">Black</string>
+    <string name="color_brown">Brown</string>
+    <string name="color_red">Red</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_yellow">Yellow</string>
+    <string name="color_green">Green</string>
+    <string name="color_blue">Blue</string>
+    <string name="color_violet">Violet</string>
+    <string name="color_gray">Gray</string>
+    <string name="color_white">White</string>
+    <string name="color_gold">Gold</string>
+    <string name="color_silver">Silver</string>
+    <string name="color_none">None</string>
+
+    <!-- Menu items -->
+    <string name="menu_share_image">Share as image</string>
+
     <!-- Error messages -->
     <string name="error_na">N/A</string>
     <string name="error_invalid_resistance">Invalid resistance</string>

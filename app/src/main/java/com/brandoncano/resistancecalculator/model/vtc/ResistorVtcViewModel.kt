@@ -1,88 +1,130 @@
 package com.brandoncano.resistancecalculator.model.vtc
 
 import android.content.Context
+import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.data.ESeriesCardContent
+import com.brandoncano.resistancecalculator.to.ResistorVtc
+import com.brandoncano.resistancecalculator.util.eseries.CalculateClosestStandardValue
+import com.brandoncano.resistancecalculator.util.eseries.DeriveESeries
+import com.brandoncano.resistancecalculator.util.eseries.ParseResistanceValue
+import com.brandoncano.resistancecalculator.util.eseries.tolerancePercentage
 import com.brandoncano.resistancecalculator.util.resistor.formatResistor
 import com.brandoncano.resistancecalculator.util.resistor.isInputInvalid
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 
-class ResistorVtcViewModel(context: Context) : ViewModel() {
+class ResistorVtcViewModel(private val savedStateHandle: SavedStateHandle, context: Context) : ViewModel() {
 
-    private val repository = ResistorVtcRepository.getInstance(context)
+    private companion object {
+        private const val TAG = "ResistorVtcViewModel"
+        private const val KEY_RESISTOR_STATE_TO = "KEY_RESISTOR_STATE_TO"
+        private const val KEY_ERROR_STATE_BOOL = "KEY_ERROR_STATE_BOOL"
+        private const val KEY_E_SERIES_CONTENT_STATE_TO = "KEY_E_SERIES_CONTENT_STATE_TO"
+        private const val KEY_CLOSEST_STANDARD_VALUE_FLOAT = "KEY_CLOSEST_STANDARD_VALUE_FLOAT"
+    }
 
-    private val _resistor = MutableStateFlow(ResistorVtc())
-    val resistor: StateFlow<ResistorVtc> get() = _resistor
-
-    private val _navBarSelection = MutableStateFlow(1)
-    val navBarSelection: StateFlow<Int> get() = _navBarSelection
-
-    private val _isError = MutableStateFlow(false)
-    val isError: StateFlow<Boolean> get() = _isError
-
-    private val _eSeriesCardContent: MutableStateFlow<ESeriesCardContent> = MutableStateFlow(ESeriesCardContent.NoContent)
-    val eSeriesCardContent: StateFlow<ESeriesCardContent> get() = _eSeriesCardContent
-
-    private val _closestStandardValue = MutableStateFlow(10.0)
-    val closestStandardValue: StateFlow<Double> get() = _closestStandardValue
+    private val application = context.applicationContext
+    private val repository = ResistorVtcRepository.getInstance(application)
+    val resistorStateTOStateFlow = savedStateHandle.getStateFlow(KEY_RESISTOR_STATE_TO, ResistorVtc())
+    val isErrorStateFlow = savedStateHandle.getStateFlow(KEY_ERROR_STATE_BOOL, false)
+    val eSeriesCardContentStateTOStateFlow = savedStateHandle.getStateFlow(KEY_E_SERIES_CONTENT_STATE_TO, ESeriesCardContent.DefaultContent)
+    val closestStandardValueStateFlow = savedStateHandle.getStateFlow(KEY_CLOSEST_STANDARD_VALUE_FLOAT, 10.0)
 
     init {
-        viewModelScope.launch {
-            val loadedResistor = repository.loadResistor()
-            _resistor.value = loadedResistor
-            _navBarSelection.value = loadedResistor.navBarSelection
-            updateErrorState()
-        }
+        Log.d(TAG, "Init: $this")
+        loadData()
+    }
+
+    fun loadData() {
+        val resistor = repository.loadResistor()
+        val navBar = resistor.navBarSelection
+
+        savedStateHandle[KEY_RESISTOR_STATE_TO] = resistor
+        Log.d(TAG, "loadData(): resistor = $resistor, navBar = $navBar")
+        updateErrorState(resistor)
     }
 
     fun clear() {
-        _resistor.value = ResistorVtc(navBarSelection = _navBarSelection.value)
-        _isError.value = false
-        repository.clear()
+        val currentNavBar = resistorStateTOStateFlow.value.navBarSelection
+        repository.clearData(currentNavBar)
+
+        val blankResistor = ResistorVtc(navBarSelection = currentNavBar)
+        savedStateHandle[KEY_RESISTOR_STATE_TO] = blankResistor
+        savedStateHandle[KEY_ERROR_STATE_BOOL] = false
+        savedStateHandle[KEY_E_SERIES_CONTENT_STATE_TO] = ESeriesCardContent.DefaultContent
     }
 
     fun updateValues(resistance: String, units: String, band5: String, band6: String) {
-        _resistor.value = _resistor.value.copy(
+        val currentResistor = resistorStateTOStateFlow.value
+        val updatedResistor = currentResistor.copy(
             resistance = resistance,
             units = units,
             band5 = band5,
             band6 = band6
         )
-        updateErrorState()
-        if (!_isError.value) {
-            _resistor.value.formatResistor()
-            saveResistorValues()
+
+        updateErrorState(updatedResistor)
+        if (!isErrorStateFlow.value) {
+            updatedResistor.formatResistor()
+            repository.saveResistor(updatedResistor)
         }
+
+        savedStateHandle[KEY_RESISTOR_STATE_TO] = updatedResistor
     }
 
-    fun saveNavBarSelection(number: Int) {
-        val navBarSelection = number.coerceIn(0..3)
-        _navBarSelection.value = navBarSelection
-        _resistor.value = _resistor.value.copy(navBarSelection = navBarSelection)
-        updateErrorState()
-        if (!_isError.value) {
-            _resistor.value.formatResistor()
-            saveResistorValues()
+    fun updateNavBarSelection(number: Int) {
+        val navBar = number.coerceIn(0..3)
+        val currentResistor = resistorStateTOStateFlow.value
+        val updatedResistor = currentResistor.copy(navBarSelection = navBar)
+
+        updateErrorState(updatedResistor)
+        if (!isErrorStateFlow.value) {
+            updatedResistor.formatResistor()
+            repository.saveResistor(updatedResistor)
         }
-        repository.saveNavBarSelection(navBarSelection)
+
+        savedStateHandle[KEY_RESISTOR_STATE_TO] = updatedResistor
     }
 
     fun updateCardContent(content: ESeriesCardContent) {
-        _eSeriesCardContent.value = content
+        savedStateHandle[KEY_E_SERIES_CONTENT_STATE_TO] = content
     }
 
-    fun updateClosestStandardValue(value: Double) {
-        _closestStandardValue.value = value
+    fun validateResistance() {
+        val resistor = resistorStateTOStateFlow.value
+        val isError = isErrorStateFlow.value
+        if (resistor.isEmpty() || isError) return
+
+        val units = resistor.units
+        val resistance = resistor.resistance
+        val navBarSelection = resistor.navBarSelection
+        val resistanceValue = ParseResistanceValue.execute(resistance, units) ?: return
+        val tolerance = if (navBarSelection == 0) "${Symbols.PM}20%" else resistor.band5
+
+        val tolerancePercentage = tolerance.tolerancePercentage() ?: run {
+            showInvalidTolerance(navBarSelection)
+            return
+        }
+
+        val eSeriesList = DeriveESeries.execute(tolerancePercentage, navBarSelection + 3)
+        if (eSeriesList.isNullOrEmpty()) {
+            showInvalidTolerance(navBarSelection)
+            return
+        }
+
+        val (content, closestValue) = CalculateClosestStandardValue.execute(resistanceValue, units, eSeriesList)
+        savedStateHandle[KEY_E_SERIES_CONTENT_STATE_TO] = content
+        savedStateHandle[KEY_CLOSEST_STANDARD_VALUE_FLOAT] = closestValue
     }
 
-    private fun updateErrorState() {
-        _isError.value = _resistor.value.isInputInvalid()
+    private fun showInvalidTolerance(navBarSelection: Int) {
+        val content = ESeriesCardContent.InvalidTolerance("${navBarSelection + 3}")
+        savedStateHandle[KEY_E_SERIES_CONTENT_STATE_TO] = content
     }
 
-    private fun saveResistorValues() {
-        repository.saveResistor(_resistor.value)
+    private fun updateErrorState(resistor: ResistorVtc) {
+        val isInvalid = resistor.isInputInvalid()
+        savedStateHandle[KEY_ERROR_STATE_BOOL] = isInvalid
     }
 }

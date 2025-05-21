@@ -1,4 +1,6 @@
-package com.brandoncano.resistancecalculator.model.ctv
+package com.brandoncano.resistancecalculator.to
+
+import java.io.Serializable
 
 data class ResistorCtv(
     var band1: String = "",
@@ -8,7 +10,7 @@ data class ResistorCtv(
     var band5: String = "",
     var band6: String = "",
     var navBarSelection: Int = 1,
-) {
+) : Serializable {
     fun isThreeBand() = navBarSelection == 0
     fun isThreeFourBand() = navBarSelection == 0 || navBarSelection == 1
     fun isFiveSixBand() = navBarSelection == 2 || navBarSelection == 3

@@ -1,12 +1,15 @@
 package com.brandoncano.resistancecalculator.navigation.circuit
 
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -15,6 +18,7 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.model.circuit.CircuitViewModel
 import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
+import com.brandoncano.resistancecalculator.navigation.navigateToCircuitEquations
 import com.brandoncano.resistancecalculator.ui.screens.circuit.CircuitCalculatorScreen
 
 fun NavGraphBuilder.seriesCalculatorScreen(
@@ -22,18 +26,21 @@ fun NavGraphBuilder.seriesCalculatorScreen(
 ) {
     composable(
         route = Screen.SeriesCalculator.route,
-        enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
-        exitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
+        enterTransition = { slideInVertically(initialOffsetY = { it }) },
+        exitTransition = { ExitTransition.None },
+        popEnterTransition = { EnterTransition.None },
+        popExitTransition = { slideOutVertically(targetOffsetY= { it }) },
     ) {
         val focusManager = LocalFocusManager.current
         val openMenu = remember { mutableStateOf(false) }
         val reset = remember { mutableStateOf(false) }
         val viewModel: CircuitViewModel = viewModel()
-        val circuit by viewModel.circuit.collectAsState()
+        val circuit by viewModel.circuitStateTOStateFlow.collectAsState()
 
         CircuitCalculatorScreen(
-            circuitTitle = R.string.title_series_resistors,
-            circuitVector = R.drawable.img_series_resistors,
+            circuitTitle = R.string.circuit_title_series,
+            circuitVector = R.drawable.img_resistors_series,
+            vectorSize = Pair(390.dp, 106.dp),
             circuit = circuit,
             openMenu = openMenu,
             reset = reset,
@@ -52,6 +59,7 @@ fun NavGraphBuilder.seriesCalculatorScreen(
                 reset.value = false
                 viewModel.updateValues(sameValues, resistorCount, units, true)
             },
+            onLearnCircuitEquationsTapped = { navigateToCircuitEquations(navHostController) },
         )
     }
 }

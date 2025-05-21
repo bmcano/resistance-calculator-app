@@ -1,7 +1,9 @@
 package com.brandoncano.resistancecalculator.navigation.calculators
 
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -21,27 +23,27 @@ import com.brandoncano.resistancecalculator.ui.screens.smd.SmdScreen
 
 fun NavGraphBuilder.smdScreen(
     navHostController: NavHostController,
-    onOpenThemeDialog: () -> Unit,
 ) {
     composable(
         route = Screen.Smd.route,
-        enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
-        exitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
+        enterTransition = { slideInVertically(initialOffsetY = { it }) },
+        exitTransition = { ExitTransition.None },
+        popEnterTransition = { EnterTransition.None },
+        popExitTransition = { slideOutVertically(targetOffsetY = { it }) },
     ) {
         val context = LocalContext.current
         val focusManager = LocalFocusManager.current
         val openMenu = remember { mutableStateOf(false) }
         val reset = remember { mutableStateOf(false) }
         val viewModel: SmdResistorViewModel = viewModel(factory = ResistorViewModelFactory(context))
-        val resistor by viewModel.resistor.collectAsState()
-        val isError by viewModel.isError.collectAsState()
+        val resistor by viewModel.resistorStateTOStateFlow.collectAsState()
+        val isError by viewModel.isErrorStateFlow.collectAsState()
 
         SmdScreen(
             openMenu = openMenu,
             reset = reset,
             resistor = resistor,
             isError = isError,
-            onOpenThemeDialog = onOpenThemeDialog,
             onNavigateBack = { navHostController.popBackStack() },
             onClearSelectionsTapped = {
                 openMenu.value = false
@@ -58,10 +60,7 @@ fun NavGraphBuilder.smdScreen(
                 viewModel.updateValues(code, units)
                 if (clearFocus) focusManager.clearFocus()
             },
-            onNavBarSelectionChanged = { selection ->
-                viewModel.saveNavBarSelection(selection)
-            },
-            navBarPosition = viewModel.getNavBarSelection(),
+            onNavBarSelectionChanged = { viewModel.updateNavBarSelection(it) },
             onLearnSmdCodesTapped = { navigateToSmdCodeIec(navHostController) },
         )
     }

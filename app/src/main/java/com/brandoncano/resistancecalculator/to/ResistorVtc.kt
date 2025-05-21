@@ -1,7 +1,8 @@
-package com.brandoncano.resistancecalculator.model.vtc
+package com.brandoncano.resistancecalculator.to
 
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.util.resistor.adjustValueForSharing
+import java.io.Serializable
 
 data class ResistorVtc(
     var resistance: String = "",
@@ -9,13 +10,12 @@ data class ResistorVtc(
     var band5: String = "",
     var band6: String = "",
     var navBarSelection: Int = 1,
-) {
     // needed for the resistor image
-    var band1 = ""
-    var band2 = ""
-    var band3 = ""
-    var band4 = ""
-
+    var band1: String = "",
+    var band2: String = "",
+    var band3: String = "",
+    var band4: String = "",
+) : Serializable {
     fun isThreeBand() = navBarSelection == 0
     fun isThreeFourBand() = navBarSelection == 0 || navBarSelection == 1
     fun isFiveSixBand() = navBarSelection == 2 || navBarSelection == 3

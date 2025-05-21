@@ -1,8 +1,10 @@
 package com.brandoncano.resistancecalculator.navigation
 
 import android.content.Context
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -16,8 +18,10 @@ fun NavGraphBuilder.aboutScreen(
 ) {
     composable(
         route = Screen.About.route,
-        enterTransition = { slideInVertically(initialOffsetY = { it }) },
-        exitTransition = { slideOutVertically(targetOffsetY = { it }) },
+        enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
+        exitTransition = { ExitTransition.None },
+        popEnterTransition = { EnterTransition.None },
+        popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
         val context = LocalContext.current
         AboutScreen(
@@ -26,6 +30,7 @@ fun NavGraphBuilder.aboutScreen(
             onViewColorCodeIecTapped = { navigateToColorCodeIec(navHostController) },
             onViewPreferredValuesIecTapped = { navigateToPreferredValuesIec(navHostController) },
             onViewSmdCodeIecTapped = { navigateToSmdCodeIec(navHostController) },
+            onViewCircuitEquationsTapped = { navigateToCircuitEquations(navHostController) },
             onRateThisAppTapped = { navigateToGooglePlay(context) },
             onViewOurAppsTapped = { navigateToOurApps(navHostController) },
             onDonateTapped = { navigateToDonate(navHostController) },

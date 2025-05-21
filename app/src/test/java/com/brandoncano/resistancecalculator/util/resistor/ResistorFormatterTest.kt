@@ -1,6 +1,6 @@
 package com.brandoncano.resistancecalculator.util.resistor
 
-import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
+import com.brandoncano.resistancecalculator.to.ResistorVtc
 import com.brandoncano.resistancecalculator.constants.Colors as C
 import com.brandoncano.resistancecalculator.constants.Symbols as S
 import org.junit.Assert.assertEquals
