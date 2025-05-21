@@ -126,7 +126,7 @@ private fun CircuitCalculatorScreenContent(
                 .padding(vertical = 16.dp)
                 .size(width = vectorSize.first, height = vectorSize.second)
                 .align(Alignment.CenterHorizontally),
-            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
         )
         CircuitResistanceText("${circuit.totalResistance} ${circuit.units}")
         Spacer(modifier = Modifier.height(24.dp))

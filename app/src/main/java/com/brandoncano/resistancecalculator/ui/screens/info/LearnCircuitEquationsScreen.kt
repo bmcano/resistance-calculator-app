@@ -14,10 +14,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -76,6 +78,7 @@ private fun LearnCircuitEquationsScreenContent(paddingValues: PaddingValues) {
             painter = painterResource(R.drawable.img_series_equation),
             contentDescription = stringResource(R.string.info_circuit_series_equation_cd),
             modifier = Modifier.fillMaxWidth(),
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
         )
         Text(
             text = stringResource(R.string.info_circuit_series_body2),
@@ -86,6 +89,7 @@ private fun LearnCircuitEquationsScreenContent(paddingValues: PaddingValues) {
             painter = painterResource(R.drawable.img_series_special_case),
             contentDescription = stringResource(R.string.info_circuit_series_equation_cd),
             modifier = Modifier.fillMaxWidth(),
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
         )
         AppDivider(modifier = Modifier.padding(vertical = 24.dp))
         Text(
@@ -102,6 +106,7 @@ private fun LearnCircuitEquationsScreenContent(paddingValues: PaddingValues) {
             painter = painterResource(R.drawable.img_parallel_equation_1),
             contentDescription = stringResource(R.string.info_circuit_series_equation_cd),
             modifier = Modifier.fillMaxWidth(),
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
         )
         Text(
             text = stringResource(R.string.info_circuit_parallel_body2),
@@ -112,6 +117,7 @@ private fun LearnCircuitEquationsScreenContent(paddingValues: PaddingValues) {
             painter = painterResource(R.drawable.img_parallel_equation_2),
             contentDescription = stringResource(R.string.info_circuit_series_equation_cd),
             modifier = Modifier.fillMaxWidth(),
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
         )
         Spacer(modifier = Modifier.height(24.dp))
         Text(
@@ -123,6 +129,7 @@ private fun LearnCircuitEquationsScreenContent(paddingValues: PaddingValues) {
             painter = painterResource(R.drawable.img_parallel_special_case),
             contentDescription = stringResource(R.string.info_circuit_series_equation_cd),
             modifier = Modifier.fillMaxWidth(),
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
         )
         BottomScreenSpacer()
     }
