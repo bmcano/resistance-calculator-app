@@ -67,6 +67,7 @@ fun CircuitCalculatorScreen(
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
     onValueChanged: (Boolean, Int, String) -> Unit,
+    onLearnCircuitEquationsTapped: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -94,6 +95,7 @@ fun CircuitCalculatorScreen(
             circuit = circuit,
             reset = reset,
             onValueChanged = onValueChanged,
+            onLearnCircuitEquationsTapped = onLearnCircuitEquationsTapped,
         )
     }
 }
@@ -106,6 +108,7 @@ private fun CircuitCalculatorScreenContent(
     circuit: Circuit,
     reset: MutableState<Boolean>,
     onValueChanged: (Boolean, Int, String) -> Unit,
+    onLearnCircuitEquationsTapped: () -> Unit,
 ) {
     val sidePadding = dimensionResource(R.dimen.app_side_padding)
     Column(
@@ -201,7 +204,7 @@ private fun CircuitCalculatorScreenContent(
             cardBody = stringResource(R.string.circuit_info_card_body_text),
             leftActionButton = CardAction(
                 buttonLabel = stringResource(R.string.circuit_info_card_cta_text),
-                onClick = {},
+                onClick = onLearnCircuitEquationsTapped,
             )
         )
         BottomScreenSpacer()
@@ -223,6 +226,7 @@ private fun CircuitCalculatorScreenSeriesPreview() {
             onClearSelectionsTapped = {},
             onAboutTapped = {},
             onValueChanged = { _, _, _ -> },
+            onLearnCircuitEquationsTapped = {},
         )
     }
 }
@@ -242,6 +246,7 @@ private fun CircuitCalculatorScreenParallelPreview() {
             onClearSelectionsTapped = {},
             onAboutTapped = {},
             onValueChanged = { _, _, _ -> },
+            onLearnCircuitEquationsTapped = {},
         )
     }
 }

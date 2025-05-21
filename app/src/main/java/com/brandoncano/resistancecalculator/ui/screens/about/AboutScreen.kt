@@ -38,6 +38,7 @@ fun AboutScreen(
     onViewColorCodeIecTapped: () -> Unit,
     onViewPreferredValuesIecTapped: () -> Unit,
     onViewSmdCodeIecTapped: () -> Unit,
+    onViewCircuitEquationsTapped: () -> Unit,
     onRateThisAppTapped: () -> Unit,
     onViewOurAppsTapped: () -> Unit,
     onDonateTapped: () -> Unit,
@@ -58,6 +59,7 @@ fun AboutScreen(
             onViewColorCodeIecTapped = onViewColorCodeIecTapped,
             onViewPreferredValuesIecTapped = onViewPreferredValuesIecTapped,
             onViewSmdCodeIecTapped = onViewSmdCodeIecTapped,
+            onViewCircuitEquationsTapped = onViewCircuitEquationsTapped,
             onRateThisAppTapped = onRateThisAppTapped,
             onViewOurAppsTapped = onViewOurAppsTapped,
             onDonateTapped = onDonateTapped,
@@ -72,6 +74,7 @@ private fun AboutScreenContent(
     onViewColorCodeIecTapped: () -> Unit,
     onViewPreferredValuesIecTapped: () -> Unit,
     onViewSmdCodeIecTapped: () -> Unit,
+    onViewCircuitEquationsTapped: () -> Unit,
     onRateThisAppTapped: () -> Unit,
     onViewOurAppsTapped: () -> Unit,
     onDonateTapped: () -> Unit,
@@ -104,6 +107,7 @@ private fun AboutScreenContent(
             onViewColorCodeIecTapped = onViewColorCodeIecTapped,
             onViewPreferredValuesIecTapped = onViewPreferredValuesIecTapped,
             onViewSmdCodeIecTapped = onViewSmdCodeIecTapped,
+            onViewCircuitEquationsTapped = onViewCircuitEquationsTapped,
         )
         Spacer(modifier = Modifier.height(32.dp))
         OurAppsButtons(
@@ -125,6 +129,7 @@ private fun AboutPreview() {
             onViewColorCodeIecTapped = {},
             onViewPreferredValuesIecTapped = {},
             onViewSmdCodeIecTapped = {},
+            onViewCircuitEquationsTapped = {},
             onRateThisAppTapped = {},
             onViewOurAppsTapped = {},
             onDonateTapped = {},

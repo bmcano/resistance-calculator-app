@@ -36,6 +36,7 @@ fun NavGraphBuilder.homeScreen(
             onViewColorCodeIecTapped = { navigateToColorCodeIec(navHostController) },
             onViewPreferredValuesIecTapped = { navigateToPreferredValuesIec(navHostController) },
             onViewSmdCodeIecTapped = { navigateToSmdCodeIec(navHostController) },
+            onViewCircuitEquationsTapped = { navigateToCircuitEquations(navHostController) },
             onRateThisAppTapped = { navigateToGooglePlay(context) },
             onViewOurAppsTapped = { navigateToOurApps(navHostController) },
             onDonateTapped = { navigateToDonate(navHostController) },

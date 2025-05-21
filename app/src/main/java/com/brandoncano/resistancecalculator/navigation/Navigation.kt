@@ -12,6 +12,7 @@ import com.brandoncano.resistancecalculator.navigation.calculators.smdScreen
 import com.brandoncano.resistancecalculator.navigation.calculators.valueToColorScreen
 import com.brandoncano.resistancecalculator.navigation.circuit.parallelCalculatorScreen
 import com.brandoncano.resistancecalculator.navigation.circuit.seriesCalculatorScreen
+import com.brandoncano.resistancecalculator.navigation.learn.learnCircuitEquations
 import com.brandoncano.resistancecalculator.navigation.learn.learnColorCodes
 import com.brandoncano.resistancecalculator.navigation.learn.learnPreferredValues
 import com.brandoncano.resistancecalculator.navigation.learn.learnSmdCodes
@@ -35,6 +36,7 @@ fun Navigation(onOpenThemeDialog: () -> Unit) {
         aboutScreen(navController)
         colorToValueScreen(navController)
         homeScreen(navController, onOpenThemeDialog)
+        learnCircuitEquations(navController)
         learnColorCodes(navController)
         learnPreferredValues(navController)
         learnSmdCodes(navController)
@@ -80,6 +82,10 @@ fun navigateToParallelCalculator(navController: NavController) {
     navController.navigate(Screen.ParallelCalculator.route) {
         popUpTo(Screen.Home.route)
     }
+}
+
+fun navigateToCircuitEquations(navController: NavHostController) {
+    navController.navigate(Screen.LearnCircuitEquations.route)
 }
 
 fun navigateToColorCodeIec(navController: NavHostController) {

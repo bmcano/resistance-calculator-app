@@ -18,6 +18,7 @@
     <string name="about_iec_header_text">Resistor standards &amp; guides</string>
     <string name="about_standard_iec_button">View resistor color code</string>
     <string name="about_smd_iec_button">View resistor SMD code</string>
+    <string name="about_circuit_equations_button">View series &amp; parallel formulas</string>
     <string name="about_preferred_values_iec_button">View resistor preferred values</string>
 
     <!-- Calculator screens shared text -->
@@ -150,6 +151,17 @@
     <string name="info_values_e96_header">E-96 Series (Tolerance: 1%)</string>
     <string name="info_values_e192_header">E-192 Series (Tolerance: ≤0.5%)</string>
     <string name="info_disclaimer_footer">The information provided here regarding IEC standards is intended for general guidance. Please note that not all components may strictly adhere to these standards, as manufacturers may have variations or different interpretations. Always consult the specific datasheet or contact the manufacturer directly if you are unsure about the specifications or standards for a particular component.</string>
+
+    <string name="info_circuit_title">Resistor Equations</string>
+    <string name="info_circuit_series_header">Resistors in series</string>
+    <string name="info_circuit_series_body1">When resistors are connected in series, the same current flows through each one, and the supply voltage is divided across them in proportion to their resistance. The total resistance is the sum of all individual resistances.</string>
+    <string name="info_circuit_series_body2">However, for two resistors in series the total resistance can be written concisely as:</string>
+    <string name="info_circuit_series_equation_cd">Series resistor formula</string>
+    <string name="info_circuit_parallel_header">Resistors in parallel</string>
+    <string name="info_circuit_parallel_body1">When resistors are connected in parallel, the voltage across each resistor is the same, and the total current is the sum of the currents through each branch. The reciprocal of the total resistance equals the sum of reciprocals of each resistor.</string>
+    <string name="info_circuit_parallel_body2">Alternatively, the parallel resistance can be expressed as:</string>
+    <string name="info_circuit_parallel_body3">There is also a two-resistor shortcut for parallel resistors, which can be written as:</string>
+    <string name="info_circuit_parallel_equation_cd">Parallel resistor formula</string>
 
     <!-- resistor colors -->
     <string name="color_black">Black</string>

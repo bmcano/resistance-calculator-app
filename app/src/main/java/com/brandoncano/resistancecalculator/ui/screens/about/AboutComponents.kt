@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Colorize
+import androidx.compose.material.icons.outlined.Functions
 import androidx.compose.material.icons.outlined.Memory
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Text
@@ -49,6 +50,7 @@ fun InformationCardButtons(
     onViewColorCodeIecTapped: () -> Unit,
     onViewPreferredValuesIecTapped: () -> Unit,
     onViewSmdCodeIecTapped: () -> Unit,
+    onViewCircuitEquationsTapped: () -> Unit,
 ) {
     Column {
         Text(
@@ -73,6 +75,11 @@ fun InformationCardButtons(
                 imageVector = Icons.Outlined.Memory,
                 text = stringResource(id = R.string.about_smd_iec_button),
                 onClick = onViewSmdCodeIecTapped,
+            ),
+            ArrowCardButtonContents(
+                imageVector = Icons.Outlined.Functions,
+                text = stringResource(id = R.string.about_circuit_equations_button),
+                onClick = onViewCircuitEquationsTapped,
             ),
         )
     }

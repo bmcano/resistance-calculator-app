@@ -18,6 +18,7 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.model.circuit.CircuitViewModel
 import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
+import com.brandoncano.resistancecalculator.navigation.navigateToCircuitEquations
 import com.brandoncano.resistancecalculator.ui.screens.circuit.CircuitCalculatorScreen
 
 fun NavGraphBuilder.seriesCalculatorScreen(
@@ -58,6 +59,7 @@ fun NavGraphBuilder.seriesCalculatorScreen(
                 reset.value = false
                 viewModel.updateValues(sameValues, resistorCount, units, true)
             },
+            onLearnCircuitEquationsTapped = { navigateToCircuitEquations(navHostController) },
         )
     }
 }
