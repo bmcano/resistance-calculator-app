@@ -1,5 +1,7 @@
 package com.brandoncano.resistancecalculator.ui.screens.circuit
 
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -169,7 +171,9 @@ private fun CircuitCalculatorScreenContent(
             )
         }
         Column(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .animateContentSize(animationSpec = tween(durationMillis = 300)),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             val fieldsToShow = if (circuit.isSameValues) 1 else circuit.resistorCount
@@ -188,8 +192,8 @@ private fun CircuitCalculatorScreenContent(
                     onValueChanged(circuit.isSameValues, circuit.resistorCount, circuit.units)
                 }
             }
+            Spacer(modifier = Modifier.height(24.dp))
         }
-        Spacer(modifier = Modifier.height(24.dp))
         AppActionCard(
             icon = Icons.Outlined.Lightbulb,
             iconTint = MaterialTheme.colorScheme.primary,
