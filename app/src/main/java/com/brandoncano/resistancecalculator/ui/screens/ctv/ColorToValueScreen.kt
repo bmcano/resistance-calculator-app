@@ -35,6 +35,7 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.DropdownLists
 import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.to.ResistorCtv
+import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
@@ -203,7 +204,7 @@ private fun ColorToValueScreenContent(
                 onClick = onLearnColorCodesTapped,
             )
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        BottomScreenSpacer()
     }
 }
 

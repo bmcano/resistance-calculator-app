@@ -38,6 +38,7 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.DropdownLists
 import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.model.circuit.Circuit
+import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.circuit.IsValidNumber
 import com.brandoncano.sharedcomponents.composables.AboutAppMenuItem
@@ -194,7 +195,7 @@ private fun CircuitCalculatorScreenContent(
                 }
             }
         }
-        Spacer(modifier = Modifier.height(48.dp))
+        BottomScreenSpacer()
     }
 }
 

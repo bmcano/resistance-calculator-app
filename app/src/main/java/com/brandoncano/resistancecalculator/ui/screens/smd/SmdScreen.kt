@@ -36,6 +36,7 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.DropdownLists
 import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.to.SmdResistor
+import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AboutAppMenuItem
@@ -181,7 +182,7 @@ private fun SmdScreenContent(
                 onClick = onLearnSmdCodesTapped,
             )
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        BottomScreenSpacer()
     }
 }
 

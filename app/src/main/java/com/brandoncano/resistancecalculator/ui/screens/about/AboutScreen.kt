@@ -21,6 +21,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
@@ -110,7 +111,7 @@ private fun AboutScreenContent(
             onViewOurAppsTapped = onViewOurAppsTapped,
             onDonateTapped = onDonateTapped,
         )
-        Spacer(modifier = Modifier.height(48.dp))
+        BottomScreenSpacer()
     }
 }
 

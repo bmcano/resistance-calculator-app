@@ -5,10 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -227,15 +224,5 @@ fun DisclaimerText() {
     Text(
         text = stringResource(R.string.info_disclaimer_footer),
         style = textStyleCaption().onSurfaceVariant(),
-    )
-}
-
-// TODO - make shared component
-@Composable
-fun BottomScreenSpacer() {
-    Spacer(
-        modifier = Modifier
-            .height(24.dp)
-            .navigationBarsPadding(),
     )
 }
