@@ -104,7 +104,7 @@ private fun LearnCircuitEquationsScreenContent(paddingValues: PaddingValues) {
         )
         Image(
             painter = painterResource(R.drawable.img_parallel_equation_1),
-            contentDescription = stringResource(R.string.info_circuit_series_equation_cd),
+            contentDescription = stringResource(R.string.info_circuit_parallel_equation_cd),
             modifier = Modifier.fillMaxWidth(),
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
         )
@@ -115,7 +115,7 @@ private fun LearnCircuitEquationsScreenContent(paddingValues: PaddingValues) {
         )
         Image(
             painter = painterResource(R.drawable.img_parallel_equation_2),
-            contentDescription = stringResource(R.string.info_circuit_series_equation_cd),
+            contentDescription = stringResource(R.string.info_circuit_parallel_equation_cd),
             modifier = Modifier.fillMaxWidth(),
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
         )
@@ -127,7 +127,7 @@ private fun LearnCircuitEquationsScreenContent(paddingValues: PaddingValues) {
         )
         Image(
             painter = painterResource(R.drawable.img_parallel_special_case),
-            contentDescription = stringResource(R.string.info_circuit_series_equation_cd),
+            contentDescription = stringResource(R.string.info_circuit_parallel_equation_cd),
             modifier = Modifier.fillMaxWidth(),
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
         )

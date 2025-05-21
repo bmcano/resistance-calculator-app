@@ -13,7 +13,7 @@ material3 = "1.3.2" # 4/18/25
 mockk = "1.13.11" # 7/7/24
 navigation-compose = "2.9.0" # 5/19/25
 ostermiller = "1.07.00" # 7/21/24
-ui-test-junit4 = "1.8.1" # 5/19/25
+ui-test-junit4 = "1.8.2" # 5/21/25
 # gradle/language
 agp = "8.9.3" # 5/19/25
 kotlin = "2.0.0" # 7/7/24
