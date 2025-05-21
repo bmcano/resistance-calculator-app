@@ -34,7 +34,7 @@ fun NavGraphBuilder.parallelCalculatorScreen(
         val openMenu = remember { mutableStateOf(false) }
         val reset = remember { mutableStateOf(false) }
         val viewModel: CircuitViewModel = viewModel()
-        val circuit by viewModel.circuit.collectAsState()
+        val circuit by viewModel.circuitStateTOStateFlow.collectAsState()
 
         CircuitCalculatorScreen(
             circuitTitle = R.string.circuit_title_parallel,

@@ -18,6 +18,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
@@ -37,21 +38,20 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.DropdownLists
 import com.brandoncano.resistancecalculator.constants.Links
-import com.brandoncano.resistancecalculator.model.circuit.Circuit
+import com.brandoncano.resistancecalculator.to.Circuit
 import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.circuit.IsValidNumber
 import com.brandoncano.sharedcomponents.composables.AboutAppMenuItem
-import com.brandoncano.sharedcomponents.composables.AppDivider
+import com.brandoncano.sharedcomponents.composables.AppActionCard
 import com.brandoncano.sharedcomponents.composables.AppDropDownMenu
 import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import com.brandoncano.sharedcomponents.composables.AppTextField
 import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
 import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
-import com.brandoncano.sharedcomponents.text.onSurfaceVariant
+import com.brandoncano.sharedcomponents.data.CardAction
 import com.brandoncano.sharedcomponents.text.textStyleBody
-import com.brandoncano.sharedcomponents.text.textStyleLargeTitle
 
 @Composable
 fun CircuitCalculatorScreen(
@@ -118,17 +118,12 @@ private fun CircuitCalculatorScreenContent(
             painter = painterResource(circuitVector),
             contentDescription = null,
             modifier = Modifier
-                .padding(top = 16.dp)
+                .padding(vertical = 16.dp)
                 .size(width = vectorSize.first, height = vectorSize.second)
                 .align(Alignment.CenterHorizontally),
-            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant)
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
         )
-        Spacer(modifier = Modifier.height(24.dp))
-        Text(
-            text = "${circuit.totalResistance} ${circuit.units}",
-            modifier = Modifier,
-            style = textStyleLargeTitle()
-        )
+        CircuitResistanceText("${circuit.totalResistance} ${circuit.units}")
         Spacer(modifier = Modifier.height(24.dp))
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -137,17 +132,17 @@ private fun CircuitCalculatorScreenContent(
             Text(
                 text = stringResource(id = R.string.circuit_use_same_values),
                 modifier = Modifier.weight(1f),
-                style = textStyleBody().onSurfaceVariant(),
+                style = textStyleBody(),
             )
             Switch(
                 modifier = Modifier.padding(start = 16.dp),
-                checked = circuit.sameValues,
+                checked = circuit.isSameValues,
                 onCheckedChange = {
                     onValueChanged(it, circuit.resistorCount, circuit.units)
                 }
             )
         }
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(24.dp))
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly,
@@ -161,7 +156,7 @@ private fun CircuitCalculatorScreenContent(
                 items = DropdownLists.RESISTOR_COUNT_LIST,
             ) {
                 val resistorCount = it.toIntOrNull() ?: 2
-                onValueChanged(circuit.sameValues, resistorCount, circuit.units)
+                onValueChanged(circuit.isSameValues, resistorCount, circuit.units)
             }
             AppDropDownMenu(
                 label = stringResource(id = R.string.circuit_units_label),
@@ -170,41 +165,42 @@ private fun CircuitCalculatorScreenContent(
                     .padding(start = 8.dp),
                 selectedOption = circuit.units,
                 items = DropdownLists.UNITS_LIST,
-                onOptionSelected = { onValueChanged(circuit.sameValues, circuit.resistorCount, it) }
+                onOptionSelected = { onValueChanged(circuit.isSameValues, circuit.resistorCount, it) }
             )
         }
-        AppDivider(modifier = Modifier.padding(top = 16.dp, bottom = 4.dp))
         Column(
             modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            val fieldsToShow = if (circuit.sameValues) 1 else circuit.resistorCount
+            val fieldsToShow = if (circuit.isSameValues) 1 else circuit.resistorCount
             repeat(fieldsToShow) { index ->
-                val labelText = getResistanceLabelText(circuit.sameValues, circuit.units, index + 1)
+                val labelText = getResistanceLabelText(circuit.isSameValues, circuit.units, index + 1)
                 AppTextField(
                     label = labelText,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 8.dp),
+                        .padding(top = 12.dp),
                     value = remember { mutableStateOf(circuit.resistorInputs[index]) },
                     reset = reset.value,
                     isError = !IsValidNumber.execute(circuit.resistorInputs[index]),
                 ) { newValue ->
                     circuit.resistorInputs[index] = newValue
-                    onValueChanged(circuit.sameValues, circuit.resistorCount, circuit.units)
+                    onValueChanged(circuit.isSameValues, circuit.resistorCount, circuit.units)
                 }
             }
         }
+        Spacer(modifier = Modifier.height(24.dp))
+        AppActionCard(
+            icon = Icons.Outlined.Lightbulb,
+            iconTint = MaterialTheme.colorScheme.primary,
+            cardTitle = stringResource(R.string.circuit_info_card_title_text),
+            cardBody = stringResource(R.string.circuit_info_card_body_text),
+            leftActionButton = CardAction(
+                buttonLabel = stringResource(R.string.circuit_info_card_cta_text),
+                onClick = {},
+            )
+        )
         BottomScreenSpacer()
-    }
-}
-
-@Composable
-private fun getResistanceLabelText(sameValues: Boolean, units: String, count: Int): String {
-    return if (sameValues) {
-        stringResource(id = R.string.circuit_text_field_label, units)
-    } else {
-        stringResource(id = R.string.circuit_text_field_label_multiple, count, units)
     }
 }
 

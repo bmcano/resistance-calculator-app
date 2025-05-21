@@ -76,6 +76,9 @@
     <string name="circuit_units_label">Units</string>
     <string name="circuit_text_field_label">Resistance (%1$s)</string>
     <string name="circuit_text_field_label_multiple">Resistance %1$s (%2$s)</string>
+    <string name="circuit_info_card_title_text">Resistor equations</string>
+    <string name="circuit_info_card_body_text">Discover how series &amp; parallel formulas determine total resistance.</string>
+    <string name="circuit_info_card_cta_text">Learn more</string>
 
     <!-- Info screen/components text -->
     <string name="info_color">Color</string>
@@ -121,7 +124,7 @@
     <string name="info_smd_eia_body">The EIA-96 code is a two-digit code followed by a letter, used for precision resistors with 1% tolerance. The two digits represent a value in the E-96 series, while the letter indicates the multiplier. The general format can be expressed as:</string>
     <string name="info_smd_eia_formula">xy \u00D7 z = R</string>
     <string name="info_smd_eia_example_label">For example, a resistor labeled 43C equates to:</string>
-    <string name="info_smd_eia_example">"43 \u2013 274; C \u2013 100; &#10;274 \u00D7 100 = 27400 \u03A9."</string>
+    <string name="info_smd_eia_example">"43 \u2013 274; C \u2013 100; &#10;274 \u00D7 100 = 27400 \u03A9"</string>
     <string name="info_smd_multipliers_headline">Multipliers</string>
     <string name="info_smd_multipliers_body">The multiplier indicates the factor by which to multiply the significant figures. In the EIA-96 code, letters represent multipliers as follows:</string>
     <string name="info_smd_code_value_col1">Code</string>
