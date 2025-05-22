@@ -81,6 +81,11 @@
     <string name="circuit_info_card_body_text">Discover how series &amp; parallel formulas determine total resistance.</string>
     <string name="circuit_info_card_cta_text">Learn more</string>
 
+    <!-- LED Resistance screen text -->
+    <string name="led_navbar_single">Single</string>
+    <string name="led_navbar_series">Series</string>
+    <string name="led_navbar_parallel">Parallel</string>
+
     <!-- Info screen/components text -->
     <string name="info_color">Color</string>
     <string name="info_digit">Digit</string>
@@ -151,7 +156,6 @@
     <string name="info_values_e96_header">E-96 Series (Tolerance: 1%)</string>
     <string name="info_values_e192_header">E-192 Series (Tolerance: ≤0.5%)</string>
     <string name="info_disclaimer_footer">The information provided here regarding IEC standards is intended for general guidance. Please note that not all components may strictly adhere to these standards, as manufacturers may have variations or different interpretations. Always consult the specific datasheet or contact the manufacturer directly if you are unsure about the specifications or standards for a particular component.</string>
-
     <string name="info_circuit_title">Resistor Equations</string>
     <string name="info_circuit_series_header">Resistors in series</string>
     <string name="info_circuit_series_body1">When resistors are connected in series, the same current flows through each one, and the supply voltage is divided across them in proportion to their resistance. The total resistance is the sum of all individual resistances.</string>

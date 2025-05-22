@@ -12,8 +12,8 @@ android {
         applicationId = "com.brandoncano.resistancecalculator"
         minSdk = 21
         targetSdk = 35
-        versionCode = 32 // for 4.0.0
-        versionName = "4.0.0"
+        versionCode = 33 // for 4.1.0
+        versionName = "4.1.0-develop"
 
         vectorDrawables {
             useSupportLibrary = true
