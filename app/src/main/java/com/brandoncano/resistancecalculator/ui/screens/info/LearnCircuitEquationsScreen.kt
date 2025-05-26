@@ -32,8 +32,8 @@ import com.brandoncano.sharedcomponents.composables.AppLongScreenPreview
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import com.brandoncano.sharedcomponents.composables.AppTopAppBar
 import com.brandoncano.sharedcomponents.text.onSurfaceVariant
-import com.brandoncano.sharedcomponents.text.textStyleBody
 import com.brandoncano.sharedcomponents.text.textStyleHeadline
+import com.brandoncano.sharedcomponents.text.textStyleSubhead
 
 @Composable
 fun LearnCircuitEquationsScreen(
@@ -72,7 +72,7 @@ private fun LearnCircuitEquationsScreenContent(paddingValues: PaddingValues) {
         Text(
             text = stringResource(R.string.info_circuit_series_body1),
             modifier = Modifier.padding(bottom = 24.dp),
-            style = textStyleBody().onSurfaceVariant(),
+            style = textStyleSubhead().onSurfaceVariant(),
         )
         Image(
             painter = painterResource(R.drawable.img_series_equation),
@@ -83,7 +83,7 @@ private fun LearnCircuitEquationsScreenContent(paddingValues: PaddingValues) {
         Text(
             text = stringResource(R.string.info_circuit_series_body2),
             modifier = Modifier.padding(vertical = 24.dp),
-            style = textStyleBody().onSurfaceVariant(),
+            style = textStyleSubhead().onSurfaceVariant(),
         )
         Image(
             painter = painterResource(R.drawable.img_series_special_case),
@@ -100,7 +100,7 @@ private fun LearnCircuitEquationsScreenContent(paddingValues: PaddingValues) {
         Text(
             text = stringResource(R.string.info_circuit_parallel_body1),
             modifier = Modifier.padding(bottom = 24.dp),
-            style = textStyleBody().onSurfaceVariant(),
+            style = textStyleSubhead().onSurfaceVariant(),
         )
         Image(
             painter = painterResource(R.drawable.img_parallel_equation_1),
@@ -111,7 +111,7 @@ private fun LearnCircuitEquationsScreenContent(paddingValues: PaddingValues) {
         Text(
             text = stringResource(R.string.info_circuit_parallel_body2),
             modifier = Modifier.padding(vertical  = 24.dp),
-            style = textStyleBody().onSurfaceVariant(),
+            style = textStyleSubhead().onSurfaceVariant(),
         )
         Image(
             painter = painterResource(R.drawable.img_parallel_equation_2),
@@ -123,7 +123,7 @@ private fun LearnCircuitEquationsScreenContent(paddingValues: PaddingValues) {
         Text(
             text = stringResource(R.string.info_circuit_parallel_body3),
             modifier = Modifier.padding(bottom = 24.dp),
-            style = textStyleBody().onSurfaceVariant(),
+            style = textStyleSubhead().onSurfaceVariant(),
         )
         Image(
             painter = painterResource(R.drawable.img_parallel_special_case),
