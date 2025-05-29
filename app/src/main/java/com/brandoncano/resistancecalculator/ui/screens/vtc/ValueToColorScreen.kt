@@ -140,7 +140,7 @@ private fun ValueToColorScreenContent(
             .padding(horizontal = sidePadding),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Spacer(modifier = Modifier.padding(top = 32.dp))
+        Spacer(modifier = Modifier.height(32.dp))
         ResistorLayout(resistor, isError)
         AppTextField(
             label = stringResource(id = R.string.type_resistance_hint),

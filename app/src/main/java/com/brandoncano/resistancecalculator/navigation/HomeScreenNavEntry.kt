@@ -33,6 +33,7 @@ fun NavGraphBuilder.homeScreen(
             onSmdTapped = { navigateToSmd(navHostController) },
             onSeriesCalculatorTapped = { navigateToSeriesCalculator(navHostController) },
             onParallelCalculatorTapped = { navigateToParallelCalculator(navHostController) },
+            onLedCalculatorTapped = { navigateToLedCalculator(navHostController) },
             onViewColorCodeIecTapped = { navigateToColorCodeIec(navHostController) },
             onViewPreferredValuesIecTapped = { navigateToPreferredValuesIec(navHostController) },
             onViewSmdCodeIecTapped = { navigateToSmdCodeIec(navHostController) },

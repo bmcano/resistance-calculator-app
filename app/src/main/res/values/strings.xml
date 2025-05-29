@@ -8,6 +8,7 @@
     <string name="home_button_smd">SMD resistor</string>
     <string name="home_button_series_calculator">Resistors in series</string>
     <string name="home_button_parallel_calculator">Resistors in parallel</string>
+    <string name="home_button_led_calculator">LED resistance</string>
 
     <!-- About screen/components text -->
     <string name="about_title">About The App</string>
@@ -82,9 +83,19 @@
     <string name="circuit_info_card_cta_text">Learn more</string>
 
     <!-- LED Resistance screen text -->
+    <string name="led_title">LED Resistance</string>
     <string name="led_navbar_single">Single</string>
     <string name="led_navbar_series">Series</string>
     <string name="led_navbar_parallel">Parallel</string>
+    <string name="led_source_voltage_text_field_label">Source voltage (V)</string>
+    <string name="led_type_dropdown_label">LED type</string>
+    <string name="led_forward_voltage_text_field_label">Forward voltage per LED (V)</string>
+    <string name="led_current_text_field_label">Forward current per LED (mA)</string>
+    <string name="led_tolerance_dropdown_label">Resistor tolerance (E-series)</string>
+    <string name="led_per_branch_series">Number of LEDs in series</string>
+    <string name="led_per_branch_parallel">Number of LEDs per branch</string>
+    <string name="led_number_of_branches_label">Number of branches</string>
+    <string name="led_calculate_button">Calculate</string>
 
     <!-- Info screen/components text -->
     <string name="info_color">Color</string>
@@ -189,4 +200,7 @@
     <string name="error_na">N/A</string>
     <string name="error_invalid_resistance">Invalid resistance</string>
     <string name="error_invalid_code">Invalid code</string>
+    <string name="error_invalid_voltage">Invalid voltage</string>
+    <string name="error_invalid_current">Invalid current</string>
+    <string name="error_invalid_number">Invalid number (WIP)</string>
 </resources>

@@ -1,14 +1,18 @@
 package com.brandoncano.resistancecalculator.ui.screens.led
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
@@ -22,6 +26,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,18 +36,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.constants.Symbols
+import com.brandoncano.resistancecalculator.data.LedType
 import com.brandoncano.resistancecalculator.to.ResistorCtv
+import com.brandoncano.resistancecalculator.to.led.LedCircuit
 import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
-import com.brandoncano.resistancecalculator.ui.screens.ctv.ResistorLayout
 import com.brandoncano.resistancecalculator.ui.screens.ctv.ResistorRow
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.resistor.ResistorImageBuilder
 import com.brandoncano.sharedcomponents.composables.AboutAppMenuItem
-import com.brandoncano.sharedcomponents.composables.AppBulletList
 import com.brandoncano.sharedcomponents.composables.AppButton
 import com.brandoncano.sharedcomponents.composables.AppDivider
 import com.brandoncano.sharedcomponents.composables.AppDropDownMenu
@@ -54,25 +60,28 @@ import com.brandoncano.sharedcomponents.composables.AppTextField
 import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
 import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
 import com.brandoncano.sharedcomponents.text.onSurfaceVariant
-import com.brandoncano.sharedcomponents.text.textStyleBody
 import com.brandoncano.sharedcomponents.text.textStyleHeadline
 import com.brandoncano.sharedcomponents.text.textStyleSubhead
 import kotlinx.coroutines.launch
 
 @Composable
 fun LedResistanceCalculatorScreen(
+    ledCircuit: LedCircuit,
     isError: Boolean,
     openMenu: MutableState<Boolean>,
     reset: MutableState<Boolean>,
     onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
+    onValueChanged: (String, String, String) -> Unit,
+    onOptionSelected: (String) -> Unit,
+    onNavBarSelectionChanged: (Int) -> Unit,
     onLearnMoreTapped: () -> Unit,
 ) {
     Scaffold(
         topBar = {
             AppMenuTopAppBar(
-                titleText = "LED Resistance",
+                titleText = stringResource(R.string.led_title),
                 interactionSource = remember { MutableInteractionSource() },
                 showMenu = openMenu,
                 navigationIcon = Icons.Filled.Close,
@@ -88,8 +97,8 @@ fun LedResistanceCalculatorScreen(
         },
         bottomBar = {
             AppNavigationBar(
-                selection = 0,
-                onClick = {},
+                selection = ledCircuit.navBarSelection,
+                onClick = { onNavBarSelectionChanged(it) },
                 options = ledNavigationBarOptions(),
             )
         },
@@ -97,8 +106,11 @@ fun LedResistanceCalculatorScreen(
     ) { paddingValues ->
         LedResistanceCalculatorScreenContent(
             paddingValues = paddingValues,
+            ledCircuit = ledCircuit,
             isError = isError,
             reset = reset,
+            onValueChanged = onValueChanged,
+            onOptionSelected = onOptionSelected,
             onLearnMoreTapped = onLearnMoreTapped,
         )
     }
@@ -107,13 +119,30 @@ fun LedResistanceCalculatorScreen(
 @Composable
 private fun LedResistanceCalculatorScreenContent(
     paddingValues: PaddingValues,
+    ledCircuit: LedCircuit,
     isError: Boolean,
     reset: MutableState<Boolean>,
+    onValueChanged: (String, String, String) -> Unit,
+    onOptionSelected: (String) -> Unit,
     onLearnMoreTapped: () -> Unit,
 ) {
+    val sourceVoltage = remember { mutableStateOf(ledCircuit.sourceVoltage) }
+    val ledForwardVoltage = remember { mutableStateOf(ledCircuit.ledForwardVoltage) }
+    val ledCurrent = remember { mutableStateOf(ledCircuit.ledCurrent) }
+    val navBarSelection = ledCircuit.navBarSelection
+
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
     val coroutineScope = rememberCoroutineScope()
     val scrollState = rememberScrollState()
+
+    LaunchedEffect(ledCircuit.ledForwardVoltage) {
+        ledForwardVoltage.value = ledCircuit.ledForwardVoltage
+    }
+
+    LaunchedEffect(ledCircuit.ledCurrent) {
+        ledCurrent.value = ledCircuit.ledCurrent
+    }
+
 
     val sidePadding = dimensionResource(R.dimen.app_side_padding)
     Column(
@@ -124,7 +153,6 @@ private fun LedResistanceCalculatorScreenContent(
             .padding(horizontal = sidePadding),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        //Spacer(modifier = Modifier.padding(top = 32.dp))
         // TODO - Create LED circuit SVGs
         Image(
             painter = painterResource(R.drawable.img_resistors_parallel),
@@ -137,71 +165,90 @@ private fun LedResistanceCalculatorScreenContent(
         )
 
         AppTextField(
-            label = "Source voltage [volts]",
-            value = remember { mutableStateOf("") },
-            onOptionSelected = {},
+            label = stringResource(R.string.led_source_voltage_text_field_label),
+            value = sourceVoltage,
+            reset = reset.value,
+            isError = false,
+            errorMessage = stringResource(R.string.error_invalid_voltage),
+            onOptionSelected = {
+                onValueChanged(it, ledForwardVoltage.value, ledCurrent.value)
+            },
         )
         AppDropDownMenu(
-            label = "LED",
+            label = stringResource(R.string.led_type_dropdown_label),
             modifier = Modifier.padding(top = 12.dp),
-            selectedOption = "Custom",
-            items = listOf("Custom"),
+            selectedOption = ledCircuit.led.display,
+            items = LedType.getDropDownList(),
+            reset = reset.value,
+            onOptionSelected = { onOptionSelected(it) },
+        )
+        AppTextField(
+            label = stringResource(R.string.led_forward_voltage_text_field_label),
+            modifier = Modifier.padding(top = 12.dp),
+            value = ledForwardVoltage,
+            reset = reset.value,
+            isError = false,
+            errorMessage = stringResource(R.string.error_invalid_voltage),
+            onOptionSelected = {
+                onValueChanged(sourceVoltage.value, it, ledCurrent.value)
+            },
+        )
+        AppTextField(
+            label = stringResource(R.string.led_current_text_field_label),
+            modifier = Modifier.padding(top = 12.dp),
+            value = ledCurrent,
+            reset = reset.value,
+            isError = false,
+            errorMessage = stringResource(R.string.error_invalid_current),
+            onOptionSelected = {
+                onValueChanged(sourceVoltage.value, ledForwardVoltage.value, it)
+            },
+        )
+        AppDropDownMenu(
+            label = stringResource(R.string.led_tolerance_dropdown_label),
+            modifier = Modifier.padding(top = 12.dp),
+            selectedOption = ledCircuit.resistorTolerance,
+            items = listOf(Symbols.E12, Symbols.E24),
             reset = reset.value,
             onOptionSelected = { _ -> },
         )
-
-        AppTextField(
-            label = "LED forward voltage [volts]",
-            modifier = Modifier.padding(top = 12.dp),
-            value = remember { mutableStateOf("") },
-            onOptionSelected = {},
-        )
-        AppTextField(
-            label = "LED current [mA]",
-            modifier = Modifier.padding(top = 12.dp),
-            value = remember { mutableStateOf("") },
-            onOptionSelected = {},
-        )
-
-        AppDropDownMenu(
-            label = "Resistor tolerance (E-series)",
-            modifier = Modifier.padding(top = 12.dp),
-            selectedOption = "E24 (5%)",
-            items = listOf("E12 (10%)", "E24 (5%)"),
-            reset = reset.value,
-            onOptionSelected = { _ -> },
-        )
-        Spacer(modifier = Modifier.height(12.dp))
-        // TODO - will need to modify based on navbar, temp logic for placeholder, will add animated visibility
-        //  0 - Single: No more Text Fields
-        //  1 - Series: 1 extra text field
-        //  2 - Parallel: 2 extra text fields
-        val navBarSelection = 2
-        if (navBarSelection == 1) {
+        // Might make these dropdowns similar to circuit calculations with number of resistors
+        // Would not need to validate selection other than type conversion
+        AnimatedVisibility(
+            visible = navBarSelection != 0,
+            enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
+            exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically(),
+        ) {
+            val labelRes = if (navBarSelection == 1) R.string.led_per_branch_series else R.string.led_per_branch_parallel
             AppTextField(
-                label = "Number of LEDs in series",
+                label = stringResource(id = labelRes),
+                modifier = Modifier.padding(top = 12.dp),
                 value = remember { mutableStateOf("") },
+                reset = reset.value,
+                isError = false,
+                errorMessage = stringResource(R.string.error_invalid_number), // error message WIP
                 onOptionSelected = {},
             )
         }
-
-        if (navBarSelection == 2) {
+        AnimatedVisibility(
+            visible = navBarSelection == 2,
+            enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
+            exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically(),
+        ) {
             AppTextField(
-                label = "Number of LEDs in one branch",
+                label = stringResource(R.string.led_number_of_branches_label),
+                modifier = Modifier.padding(top = 12.dp),
                 value = remember { mutableStateOf("") },
-                onOptionSelected = {},
-            )
-            Spacer(modifier = Modifier.height(12.dp))
-            AppTextField(
-                label = "Number of branches",
-                value = remember { mutableStateOf("") },
+                reset = reset.value,
+                isError = false,
+                errorMessage = stringResource(R.string.error_invalid_number), // error message WIP
                 onOptionSelected = {},
             )
         }
 
         // Might want to disable if not ready to calculate
         AppButton(
-            label = "Calculate",
+            label = stringResource(R.string.led_calculate_button),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 24.dp),
@@ -226,6 +273,12 @@ private fun LedResistanceCalculatorScreenContent(
         // - Total current
         // - Total dissipation
         // - Power Efficiency
+
+        // 2nd app items
+        // - total current
+        // - power at resistor
+        // - power at single LED
+        // - total power
 
         // "You need 1 resistor and 1 LED"
         Column(
@@ -370,12 +423,16 @@ private fun LedResistanceCalculatorScreenContent(
 private fun LedResistanceCalculatorScreenPreview() {
     ResistorCalculatorTheme {
         LedResistanceCalculatorScreen(
+            ledCircuit = LedCircuit(),
             isError = false,
             openMenu = remember { mutableStateOf(false) },
             reset = remember { mutableStateOf(false) },
             onNavigateBack = {},
             onClearSelectionsTapped = {},
             onAboutTapped = {},
+            onValueChanged = { _, _, _ -> },
+            onOptionSelected = {},
+            onNavBarSelectionChanged = {},
             onLearnMoreTapped = {},
         )
     }

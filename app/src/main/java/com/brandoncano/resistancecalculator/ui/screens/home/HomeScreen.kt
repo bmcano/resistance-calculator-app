@@ -13,6 +13,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Colorize
+import androidx.compose.material.icons.outlined.LightbulbCircle
 import androidx.compose.material.icons.outlined.LinearScale
 import androidx.compose.material.icons.outlined.Memory
 import androidx.compose.material.icons.outlined.Search
@@ -54,6 +55,7 @@ fun HomeScreen(
     onSmdTapped: () -> Unit,
     onSeriesCalculatorTapped: () -> Unit,
     onParallelCalculatorTapped: () -> Unit,
+    onLedCalculatorTapped: () -> Unit,
     onViewColorCodeIecTapped: () -> Unit,
     onViewPreferredValuesIecTapped: () -> Unit,
     onViewSmdCodeIecTapped: () -> Unit,
@@ -85,6 +87,7 @@ fun HomeScreen(
             onSmdTapped = onSmdTapped,
             onSeriesCalculatorTapped = onSeriesCalculatorTapped,
             onParallelCalculatorTapped = onParallelCalculatorTapped,
+            onLedCalculatorTapped = onLedCalculatorTapped,
             onViewColorCodeIecTapped = onViewColorCodeIecTapped,
             onViewPreferredValuesIecTapped = onViewPreferredValuesIecTapped,
             onViewSmdCodeIecTapped = onViewSmdCodeIecTapped,
@@ -104,6 +107,7 @@ private fun HomeScreenContent(
     onSmdTapped: () -> Unit,
     onSeriesCalculatorTapped: () -> Unit,
     onParallelCalculatorTapped: () -> Unit,
+    onLedCalculatorTapped: () -> Unit,
     onViewColorCodeIecTapped: () -> Unit,
     onViewPreferredValuesIecTapped: () -> Unit,
     onViewSmdCodeIecTapped: () -> Unit,
@@ -152,6 +156,11 @@ private fun HomeScreenContent(
                 text = stringResource(id = R.string.home_button_parallel_calculator),
                 onClick = onParallelCalculatorTapped
             ),
+            ArrowCardButtonContents(
+                imageVector = Icons.Outlined.LightbulbCircle,
+                text = stringResource(id = R.string.home_button_led_calculator),
+                onClick = onLedCalculatorTapped,
+            ),
         )
         Spacer(modifier = Modifier.height(32.dp))
         InformationCardButtons(
@@ -183,6 +192,7 @@ private fun HomePreview() {
             onSmdTapped = {},
             onSeriesCalculatorTapped = {},
             onParallelCalculatorTapped = {},
+            onLedCalculatorTapped = {},
             onViewColorCodeIecTapped = {},
             onViewPreferredValuesIecTapped = {},
             onViewSmdCodeIecTapped = {},
