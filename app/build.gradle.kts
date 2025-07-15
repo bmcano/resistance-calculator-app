@@ -12,8 +12,8 @@ android {
         applicationId = "com.brandoncano.resistancecalculator"
         minSdk = 21
         targetSdk = 35
-        versionCode = 32 // for 4.0.0
-        versionName = "4.0.0"
+        versionCode = 33 // for 4.0.1
+        versionName = "4.0.1"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -22,7 +22,7 @@ android {
     applicationVariants.configureEach {
         val suffix = if (buildType.name == "debug") ", DEBUG" else ""
         resValue("string", "version", "$versionName$suffix")
-        resValue("string", "last_updated", "5/21/2025")
+        resValue("string", "last_updated", "5/25/2025")
     }
     buildTypes {
         release {
