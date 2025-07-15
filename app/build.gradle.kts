@@ -54,7 +54,7 @@ composeCompiler {
 }
 
 dependencies {
-    // androidx
+    // AndroidX
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.browser)
     implementation(libs.androidx.core.ktx)
