@@ -27,7 +27,7 @@ import com.brandoncano.sharedcomponents.utils.OpenLink
  */
 
 @Composable
-fun Navigation(onOpenThemeDialog: () -> Unit) {
+fun Navigation(onOpenAppThemeDialog: () -> Unit) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
@@ -35,7 +35,7 @@ fun Navigation(onOpenThemeDialog: () -> Unit) {
     ) {
         aboutScreen(navController)
         colorToValueScreen(navController)
-        homeScreen(navController, onOpenThemeDialog)
+        homeScreen(navController, onOpenAppThemeDialog)
         learnCircuitEquations(navController)
         learnColorCodes(navController)
         learnPreferredValues(navController)

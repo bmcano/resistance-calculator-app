@@ -15,6 +15,27 @@ android {
         versionCode = 33 // for 4.0.1
         versionName = "4.0.1"
 
+        // Notes for 4.1.0
+        // :Started:
+        // - App theme controlled in app not shared lib
+        // - New SharedPreferenceAdapter
+        // - Create app wide Application for universal context retrieval
+
+        // :Not Started:
+        // - Update Dependencies to be organized better
+        // - Update to target SDK 36
+        // - Bring about, donate, and view apps screens into app code, remove from shared lib
+        // - Bring billing manager into app code
+        // - Bring menu items into app code
+        // - Update shared lib to be just pre-defined M3 components
+        // - Update remaining elements using old structure (menu items)
+        // - val openMenu = remember { mutableStateOf(false) } and val reset = remember { mutableStateOf(false) } - we want to remove MutableState<Boolean> from a param type if possible
+        // - Make app wide VM more useful for more menu related states (or app wide states)
+        // - App obfuscation? R8?
+        // - "Pro" version - can pay 1.99 for access to PDFs
+
+        // Overall, this should make it easier to do the simple apps and their features without lots of redundancies in the app itself
+
         vectorDrawables {
             useSupportLibrary = true
         }

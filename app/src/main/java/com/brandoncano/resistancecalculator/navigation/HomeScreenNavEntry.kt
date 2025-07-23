@@ -12,7 +12,7 @@ import com.brandoncano.resistancecalculator.ui.screens.home.HomeScreen
 
 fun NavGraphBuilder.homeScreen(
     navHostController: NavHostController,
-    onOpenThemeDialog: () -> Unit,
+    onOpenAppThemeDialog: () -> Unit,
 ) {
     composable(
         route = Screen.Home.route,
@@ -23,7 +23,7 @@ fun NavGraphBuilder.homeScreen(
         val openMenu = remember { mutableStateOf(false) }
         HomeScreen(
             openMenu = openMenu,
-            onOpenThemeDialog = onOpenThemeDialog,
+            onOpenAppThemeDialog = onOpenAppThemeDialog,
             onAboutTapped = {
                 openMenu.value = false
                 navigateToAbout(navHostController)

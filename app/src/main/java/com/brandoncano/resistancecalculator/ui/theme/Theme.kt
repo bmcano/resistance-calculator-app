@@ -11,6 +11,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import com.brandoncano.resistancecalculator.keys.AppAppearance
 import com.brandoncano.sharedcomponents.data.ThemeMode
 
 private val lightColorScheme = lightColorScheme(
@@ -93,13 +94,13 @@ val LocalIsDarkTheme = compositionLocalOf { false }
 
 @Composable
 fun ResistorCalculatorTheme(
-    themeMode: ThemeMode = ThemeMode.SYSTEM_DEFAULT,
+    appAppearance: AppAppearance = AppAppearance.SYSTEM_DEFAULT,
     content: @Composable () -> Unit
 ) {
-    val isDarkTheme = when (themeMode) {
-        ThemeMode.SYSTEM_DEFAULT -> isSystemInDarkTheme()
-        ThemeMode.LIGHT -> false
-        ThemeMode.DARK -> true
+    val isDarkTheme = when (appAppearance) {
+        AppAppearance.SYSTEM_DEFAULT -> isSystemInDarkTheme()
+        AppAppearance.LIGHT -> false
+        AppAppearance.DARK -> true
     }
 
     val colorScheme = if (isDarkTheme) darkColorScheme else lightColorScheme

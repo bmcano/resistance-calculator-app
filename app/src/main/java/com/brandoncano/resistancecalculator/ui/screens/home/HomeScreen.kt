@@ -47,7 +47,7 @@ import com.brandoncano.sharedcomponents.text.textStyleHeadline
 @Composable
 fun HomeScreen(
     openMenu: MutableState<Boolean>,
-    onOpenThemeDialog: () -> Unit,
+    onOpenAppThemeDialog: () -> Unit,
     onAboutTapped: () -> Unit,
     onColorToValueTapped: () -> Unit,
     onValueToColorTapped: () -> Unit,
@@ -71,7 +71,7 @@ fun HomeScreen(
                 appIcon = painterResource(R.drawable.img_app_icon),
                 content = {
                     FeedbackMenuItem(Links.APP_NAME, openMenu)
-                    AppThemeMenuItem(openMenu, onOpenThemeDialog)
+                    AppThemeMenuItem(openMenu, onOpenAppThemeDialog)
                     AboutAppMenuItem(onAboutTapped)
                 }
             )
@@ -176,7 +176,7 @@ private fun HomePreview() {
     ResistorCalculatorTheme {
         HomeScreen(
             openMenu = remember { mutableStateOf(false) },
-            onOpenThemeDialog = {},
+            onOpenAppThemeDialog = {},
             onAboutTapped = {},
             onColorToValueTapped = {},
             onValueToColorTapped = {},
