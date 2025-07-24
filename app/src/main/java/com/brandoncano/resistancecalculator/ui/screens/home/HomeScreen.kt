@@ -42,8 +42,13 @@ import com.brandoncano.resistancecalculator.ui.composables.ArrowCardButtonConten
 import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.MenuIconButton
+import com.brandoncano.resistancecalculator.ui.composables.elevatedCardColor
+import com.brandoncano.resistancecalculator.ui.composables.filledCardColor
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3Card
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3ElevatedCard
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
+import com.brandoncano.resistancecalculator.ui.composables.outlinedCardColor
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 
@@ -147,11 +152,11 @@ private fun HomeScreenContent(
             modifier = Modifier.padding(top = 24.dp, bottom = 12.dp),
             style = MaterialTheme.typography.titleMedium,
         )
-        M3OutlinedCard(
+        M3ElevatedCard(
             modifier = Modifier.fillMaxWidth(),
         ) {
             ArrowCardButtonContent(
-                isOutlinedCard = true,
+                color = elevatedCardColor(),
                 ArrowCardButtonPO(
                     text = stringResource(id = R.string.home_button_color_to_value),
                     imageVector = Icons.Outlined.Colorize,

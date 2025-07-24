@@ -24,6 +24,7 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.data.ArrowCardButtonPO
 import com.brandoncano.resistancecalculator.ui.composables.ArrowCardButtonContent
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
+import com.brandoncano.resistancecalculator.ui.composables.outlinedCardColor
 
 @Composable
 fun InformationCardButtons(
@@ -44,7 +45,7 @@ fun InformationCardButtons(
             modifier = Modifier.fillMaxWidth(),
         ) {
             ArrowCardButtonContent(
-                isOutlinedCard = true,
+                color = outlinedCardColor(),
                 ArrowCardButtonPO(
                     imageVector = Icons.Outlined.Colorize,
                     text = stringResource(id = R.string.home_standard_iec_button),
@@ -88,7 +89,7 @@ fun OurAppsButtons(
             modifier = Modifier.fillMaxWidth(),
         ) {
             ArrowCardButtonContent(
-                isOutlinedCard = true,
+                color = outlinedCardColor(),
                 ArrowCardButtonPO(
                     imageVector = Icons.Outlined.Grade,
                     text = stringResource(id = R.string.home_rate_us),

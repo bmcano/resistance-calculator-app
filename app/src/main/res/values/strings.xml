@@ -20,6 +20,10 @@
 
     <!-- About screen/components text -->
     <string name="about_title">About The App</string>
+    <string name="about_created_by">Created by</string>
+    <string name="about_author">Brandon Cano</string>
+    <string name="about_app_version">App version</string>
+    <string name="about_last_updated_on">Last updated on</string>
     <string name="about_view_privacy_policy">View privacy policy</string>
     <string name="about_overview_title">Overview &amp; standards</string>
     <string name="about_overview_body_01">This app includes a range of calculators to determine and convert resistance values for color-band resistors, SMD resistors, and more, supporting various resistor configurations and coding formats.</string>

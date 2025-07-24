@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
@@ -13,25 +14,30 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.outlined.Policy
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.data.ArrowCardButtonPO
+import com.brandoncano.resistancecalculator.ui.composables.ArrowCardButtonContent
 import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
+import com.brandoncano.resistancecalculator.ui.composables.elevatedCardColor
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3ElevatedCard
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
 import com.brandoncano.resistancecalculator.ui.screens.home.InformationCardButtons
+import com.brandoncano.resistancecalculator.ui.screens.home.OurAppsButtons
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
-import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
-import com.brandoncano.sharedcomponents.composables.AppTopAppBar
-import com.brandoncano.sharedcomponents.data.ArrowCardButtonContents
-import com.brandoncano.sharedcomponents.screen.AppInfoCard
-import com.brandoncano.sharedcomponents.screen.AuthorCard
-import com.brandoncano.sharedcomponents.screen.OurAppsButtons
 
+
+@OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
 @Composable
 fun AboutScreen(
     onNavigateBack: () -> Unit,
@@ -44,12 +50,16 @@ fun AboutScreen(
     onViewOurAppsTapped: () -> Unit,
     onDonateTapped: () -> Unit,
 ) {
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            AppTopAppBar(
+            M3TopAppBar(
                 titleText = stringResource(R.string.about_title),
                 navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,
                 onNavigateBack = onNavigateBack,
+                scrollBehavior = scrollBehavior,
             )
         },
         contentWindowInsets = WindowInsets.safeDrawing,
@@ -90,18 +100,24 @@ private fun AboutScreenContent(
         horizontalAlignment = Alignment.Start,
     ) {
         Spacer(modifier = Modifier.height(24.dp))
-        AuthorCard()
-        Spacer(modifier = Modifier.height(12.dp))
-        AppInfoCard(R.string.version, R.string.last_updated)
-        Spacer(modifier = Modifier.height(12.dp))
-        AppArrowCardButton(
-            ArrowCardButtonContents(
-                imageVector = Icons.Outlined.Policy,
-                text = stringResource(id = R.string.about_view_privacy_policy),
-                onClick = onViewPrivacyPolicyTapped,
-            )
+        AppInformationCard(
+            version = stringResource(R.string.version),
+            lastUpdated = stringResource(R.string.last_updated),
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(12.dp))
+        M3ElevatedCard(
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            ArrowCardButtonContent(
+                color = elevatedCardColor(),
+                ArrowCardButtonPO(
+                    text = stringResource(id = R.string.about_view_privacy_policy),
+                    imageVector = Icons.Outlined.Policy,
+                    onClick = onViewPrivacyPolicyTapped,
+                )
+            )
+        }
+        Spacer(modifier = Modifier.height(32.dp))
         AboutOverviewCard()
         Spacer(modifier = Modifier.height(32.dp))
         InformationCardButtons(
