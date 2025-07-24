@@ -8,6 +8,15 @@
     <string name="home_button_smd">SMD resistor</string>
     <string name="home_button_series_calculator">Resistors in series</string>
     <string name="home_button_parallel_calculator">Resistors in parallel</string>
+    <string name="home_info_header">Resistor standards &amp; guides</string>
+    <string name="home_standard_iec_button">View resistor color code</string>
+    <string name="home_smd_iec_button">View resistor SMD code</string>
+    <string name="home_circuit_equations_button">View series &amp; parallel formulas</string>
+    <string name="home_preferred_values_iec_button">View resistor preferred values</string>
+    <string name="home_support_us_header">Support us</string>
+    <string name="home_rate_us">Rate this app on Google Play</string>
+    <string name="home_view_our_apps">Check out our other apps</string>
+    <string name="home_donate">Donate</string>
 
     <!-- About screen/components text -->
     <string name="about_title">About The App</string>
@@ -15,11 +24,6 @@
     <string name="about_overview_title">Overview &amp; standards</string>
     <string name="about_overview_body_01">This app includes a range of calculators to determine and convert resistance values for color-band resistors, SMD resistors, and more, supporting various resistor configurations and coding formats.</string>
     <string name="about_overview_body_02">All calculations follow IEC 60062 and IEC 60063 standards for resistor color codes and preferred values to ensure precision and accuracy.</string>
-    <string name="about_iec_header_text">Resistor standards &amp; guides</string>
-    <string name="about_standard_iec_button">View resistor color code</string>
-    <string name="about_smd_iec_button">View resistor SMD code</string>
-    <string name="about_circuit_equations_button">View series &amp; parallel formulas</string>
-    <string name="about_preferred_values_iec_button">View resistor preferred values</string>
 
     <!-- Calculator screens shared text -->
     <string name="number_band_hint1">First band</string>
@@ -179,6 +183,10 @@
     <string name="color_none">None</string>
 
     <!-- Menu items -->
+    <string name="menu_icon_cd">Menu</string>
+    <string name="menu_about">About the app</string>
+    <string name="menu_app_theme">App appearance</string>
+    <string name="menu_feedback">Send feedback</string>
     <string name="menu_share_image">Share as image</string>
 
     <!-- Error messages -->

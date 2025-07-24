@@ -2,8 +2,6 @@ package com.brandoncano.resistancecalculator.navigation
 
 /**
  * Note: Keep screens in alphabetical order
- *
- * TODO - Convert to type safe navigation
  */
 sealed class Screen(val route: String) {
     data object About : Screen("about")

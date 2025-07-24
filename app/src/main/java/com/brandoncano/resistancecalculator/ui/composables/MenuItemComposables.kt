@@ -2,15 +2,59 @@ package com.brandoncano.resistancecalculator.ui.composables
 
 import androidx.activity.compose.LocalActivity
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.outlined.Feedback
 import androidx.compose.material.icons.outlined.Image
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.util.share.ShareResistor
 import com.brandoncano.sharedcomponents.composables.MenuIcon
 import com.brandoncano.sharedcomponents.composables.MenuText
+
+@Composable
+fun MenuIconButton(onClick: () -> Unit) {
+    IconButton(onClick = onClick) {
+        Icon(
+            imageVector = Icons.Filled.MoreVert,
+            contentDescription = stringResource(R.string.menu_icon_cd),
+        )
+    }
+}
+
+@Composable
+fun AboutAppMenuItem(onClick: () -> Unit) {
+    DropdownMenuItem(
+        text = { MenuText(stringRes = R.string.menu_about) },
+        onClick = onClick,
+        leadingIcon = { MenuIcon(Icons.Outlined.Info) },
+    )
+}
+
+@Composable
+fun AppThemeMenuItem(onClick: () -> Unit) {
+    DropdownMenuItem(
+        text = { MenuText(stringRes = R.string.menu_app_theme) },
+        onClick = onClick,
+        leadingIcon = { MenuIcon(Icons.Outlined.Palette) },
+    )
+}
+
+@Composable
+fun FeedbackMenuItem(onClick: () -> Unit) {
+    DropdownMenuItem(
+        text = { MenuText(stringRes = R.string.menu_feedback) },
+        onClick = onClick,
+        leadingIcon = { MenuIcon(Icons.Outlined.Feedback) },
+    )
+}
 
 @Composable
 fun ShareImageMenuItem(
@@ -35,3 +79,4 @@ fun ShareImageMenuItem(
         }
     )
 }
+

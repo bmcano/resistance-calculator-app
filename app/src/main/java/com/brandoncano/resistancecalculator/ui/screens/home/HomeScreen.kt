@@ -1,11 +1,11 @@
 package com.brandoncano.resistancecalculator.ui.screens.home
 
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
@@ -17,36 +17,40 @@ import androidx.compose.material.icons.outlined.LinearScale
 import androidx.compose.material.icons.outlined.Memory
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.Tune
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.constants.Links
+import com.brandoncano.resistancecalculator.data.ArrowCardButtonPO
+import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.AppThemeMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.ArrowCardButtonContent
 import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
-import com.brandoncano.resistancecalculator.ui.screens.about.InformationCardButtons
+import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.MenuIconButton
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
-import com.brandoncano.sharedcomponents.composables.AboutAppMenuItem
-import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
-import com.brandoncano.sharedcomponents.composables.AppHomeTopAppBar
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
-import com.brandoncano.sharedcomponents.composables.AppThemeMenuItem
-import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
-import com.brandoncano.sharedcomponents.data.ArrowCardButtonContents
-import com.brandoncano.sharedcomponents.screen.OurAppsButtons
-import com.brandoncano.sharedcomponents.text.textStyleHeadline
 
+@OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
 @Composable
 fun HomeScreen(
-    openMenu: MutableState<Boolean>,
+    onFeedbackTapped: () -> Unit,
     onOpenAppThemeDialog: () -> Unit,
     onAboutTapped: () -> Unit,
     onColorToValueTapped: () -> Unit,
@@ -62,18 +66,35 @@ fun HomeScreen(
     onViewOurAppsTapped: () -> Unit,
     onDonateTapped: () -> Unit,
 ) {
+    var showMenu by remember { mutableStateOf(false) }
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            AppHomeTopAppBar(
+            M3TopAppBar(
                 titleText = stringResource(R.string.app_name),
-                interactionSource = remember { MutableInteractionSource() },
-                showMenu = openMenu,
-                appIcon = painterResource(R.drawable.img_app_icon),
-                content = {
-                    FeedbackMenuItem(Links.APP_NAME, openMenu)
-                    AppThemeMenuItem(openMenu, onOpenAppThemeDialog)
-                    AboutAppMenuItem(onAboutTapped)
-                }
+                actions = {
+                    MenuIconButton { showMenu = true }
+                    DropdownMenu(
+                        expanded = showMenu,
+                        onDismissRequest = { showMenu = false },
+                    ) {
+                        FeedbackMenuItem {
+                            onFeedbackTapped.invoke()
+                            showMenu = false
+                        }
+                        AppThemeMenuItem {
+                            onOpenAppThemeDialog.invoke()
+                            showMenu = false
+                        }
+                        AboutAppMenuItem {
+                            onAboutTapped.invoke()
+                            showMenu = false
+                        }
+                    }
+                },
+                scrollBehavior = scrollBehavior,
             )
         },
         contentWindowInsets = WindowInsets.safeDrawing,
@@ -124,35 +145,40 @@ private fun HomeScreenContent(
         Text(
             text = stringResource(id = R.string.home_calculators_header_text),
             modifier = Modifier.padding(top = 24.dp, bottom = 12.dp),
-            style = textStyleHeadline(),
+            style = MaterialTheme.typography.titleMedium,
         )
-        AppArrowCardButton(
-            ArrowCardButtonContents(
-                imageVector = Icons.Outlined.Colorize,
-                text = stringResource(id = R.string.home_button_color_to_value),
-                onClick = onColorToValueTapped
-            ),
-            ArrowCardButtonContents(
-                imageVector = Icons.Outlined.Search,
-                text = stringResource(id = R.string.home_button_value_to_color),
-                onClick = onValueToColorTapped
-            ),
-            ArrowCardButtonContents(
-                imageVector = Icons.Outlined.Memory,
-                text = stringResource(id = R.string.home_button_smd),
-                onClick = onSmdTapped
-            ),
-            ArrowCardButtonContents(
-                imageVector = Icons.Outlined.LinearScale,
-                text = stringResource(id = R.string.home_button_series_calculator),
-                onClick = onSeriesCalculatorTapped
-            ),
-            ArrowCardButtonContents(
-                imageVector = Icons.Outlined.Tune,
-                text = stringResource(id = R.string.home_button_parallel_calculator),
-                onClick = onParallelCalculatorTapped
-            ),
-        )
+        M3OutlinedCard(
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            ArrowCardButtonContent(
+                isOutlinedCard = true,
+                ArrowCardButtonPO(
+                    text = stringResource(id = R.string.home_button_color_to_value),
+                    imageVector = Icons.Outlined.Colorize,
+                    onClick = onColorToValueTapped,
+                ),
+                ArrowCardButtonPO(
+                    text = stringResource(id = R.string.home_button_value_to_color),
+                    imageVector = Icons.Outlined.Search,
+                    onClick = onValueToColorTapped,
+                ),
+                ArrowCardButtonPO(
+                    text = stringResource(id = R.string.home_button_smd),
+                    imageVector = Icons.Outlined.Memory,
+                    onClick = onSmdTapped,
+                ),
+                ArrowCardButtonPO(
+                    text = stringResource(id = R.string.home_button_series_calculator),
+                    imageVector = Icons.Outlined.LinearScale,
+                    onClick = onSeriesCalculatorTapped,
+                ),
+                ArrowCardButtonPO(
+                    text = stringResource(id = R.string.home_button_parallel_calculator),
+                    imageVector = Icons.Outlined.Tune,
+                    onClick = onParallelCalculatorTapped,
+                ),
+            )
+        }
         Spacer(modifier = Modifier.height(32.dp))
         InformationCardButtons(
             onViewColorCodeIecTapped = onViewColorCodeIecTapped,
@@ -175,7 +201,7 @@ private fun HomeScreenContent(
 private fun HomePreview() {
     ResistorCalculatorTheme {
         HomeScreen(
-            openMenu = remember { mutableStateOf(false) },
+            onFeedbackTapped = {},
             onOpenAppThemeDialog = {},
             onAboutTapped = {},
             onColorToValueTapped = {},

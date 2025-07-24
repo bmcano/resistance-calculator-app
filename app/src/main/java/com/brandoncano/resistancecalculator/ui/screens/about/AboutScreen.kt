@@ -22,6 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
+import com.brandoncano.resistancecalculator.ui.screens.home.InformationCardButtons
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
