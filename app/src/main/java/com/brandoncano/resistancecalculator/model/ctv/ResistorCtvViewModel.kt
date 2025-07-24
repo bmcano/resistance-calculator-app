@@ -1,20 +1,19 @@
 package com.brandoncano.resistancecalculator.model.ctv
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.brandoncano.resistancecalculator.adapter.SharedPreferencesAdapter
 import com.brandoncano.resistancecalculator.to.ResistorCtv
 
-class ResistorCtvViewModel(private val savedStateHandle: SavedStateHandle, context: Context): ViewModel() {
+class ResistorCtvViewModel(private val savedStateHandle: SavedStateHandle): ViewModel() {
 
     private companion object {
         private const val TAG = "ResistorCtvViewModel"
         private const val KEY_RESISTOR_STATE_TO = "KEY_RESISTOR_STATE_TO"
     }
 
-    private val application = context.applicationContext
-    private val repository = ResistorCtvRepository.getInstance(application)
+    private val sharedPreferencesAdapter = SharedPreferencesAdapter()
     val resistorStateTOStateFlow = savedStateHandle.getStateFlow(KEY_RESISTOR_STATE_TO, ResistorCtv())
 
     init {
@@ -23,15 +22,15 @@ class ResistorCtvViewModel(private val savedStateHandle: SavedStateHandle, conte
     }
 
     fun loadData() {
-        val resistor = repository.loadResistor()
+        val resistor = sharedPreferencesAdapter.getResistorCtvPreference()
         savedStateHandle[KEY_RESISTOR_STATE_TO] = resistor
     }
 
     fun clear() {
         val currentNavBar = resistorStateTOStateFlow.value.navBarSelection
-        repository.clearData(currentNavBar)
-
         val blankResistor = ResistorCtv(navBarSelection = currentNavBar)
+
+        sharedPreferencesAdapter.setResistorCtvPreference(blankResistor)
         savedStateHandle[KEY_RESISTOR_STATE_TO] = blankResistor
     }
 
@@ -47,7 +46,7 @@ class ResistorCtvViewModel(private val savedStateHandle: SavedStateHandle, conte
             else -> currentResistor
         }
 
-        repository.saveResistor(updatedResistor)
+        sharedPreferencesAdapter.setResistorCtvPreference(updatedResistor)
         savedStateHandle[KEY_RESISTOR_STATE_TO] = updatedResistor
     }
 
@@ -56,7 +55,7 @@ class ResistorCtvViewModel(private val savedStateHandle: SavedStateHandle, conte
         val currentResistor = resistorStateTOStateFlow.value
         val updatedResistor = currentResistor.copy(navBarSelection = navBar)
 
-        repository.saveResistor(updatedResistor)
+        sharedPreferencesAdapter.setResistorCtvPreference(updatedResistor)
         savedStateHandle[KEY_RESISTOR_STATE_TO] = updatedResistor
     }
 }

@@ -10,6 +10,7 @@ import androidx.compose.material.icons.outlined.Looks3
 import androidx.compose.material.icons.outlined.Looks4
 import androidx.compose.material.icons.outlined.Looks5
 import androidx.compose.material.icons.outlined.Looks6
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -23,14 +24,13 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.data.ResistorImageColorPair
 import com.brandoncano.resistancecalculator.to.ResistorCtv
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3Card
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.resistancecalculator.util.resistor.ResistorImageBuilder
 import com.brandoncano.resistancecalculator.util.resistor.formatResistance
-import com.brandoncano.sharedcomponents.composables.AppCard
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
 import com.brandoncano.sharedcomponents.data.NavigationBarOptions
-import com.brandoncano.sharedcomponents.text.textStyleTitle
 
 @Composable
 fun navigationBarOptions(): List<NavigationBarOptions> {
@@ -60,7 +60,7 @@ fun ResistorLayout(resistor: ResistorCtv, verticalPadding: Dp = 0.dp) {
         ResistorImageBuilder.execute(resistor)
     }
     Column(
-        modifier = Modifier.padding(horizontal = 32.dp, vertical = verticalPadding),
+        modifier = Modifier.padding(horizontal = 0.dp, vertical = verticalPadding),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         ResistorRow(imageColorPairs)
@@ -92,13 +92,13 @@ fun ResistorRow(resistorImages: List<ResistorImageColorPair>) {
 
 @Composable
 fun ResistanceText(resistance: String) {
-    AppCard(modifier = Modifier.padding(top = 12.dp)) {
+    M3Card(modifier = Modifier.padding(top = 16.dp)) {
         Text(
             text = resistance,
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .padding(vertical = 8.dp, horizontal = 16.dp),
-            style = textStyleTitle(),
+                .padding(vertical = 12.dp, horizontal = 16.dp),
+            style = MaterialTheme.typography.headlineLarge,
         )
     }
 }

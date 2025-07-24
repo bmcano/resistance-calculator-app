@@ -3,10 +3,12 @@ package com.brandoncano.resistancecalculator.ui.composables
 import androidx.activity.compose.LocalActivity
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.outlined.Cancel
 import androidx.compose.material.icons.outlined.Feedback
 import androidx.compose.material.icons.outlined.Image
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Palette
+import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -48,11 +50,29 @@ fun AppThemeMenuItem(onClick: () -> Unit) {
 }
 
 @Composable
+fun ClearSelectionsMenuItem(onClick: (() -> Unit)) {
+    DropdownMenuItem(
+        text = { MenuText(stringRes = R.string.menu_clear_selections) },
+        onClick = onClick,
+        leadingIcon = { MenuIcon(Icons.Outlined.Cancel) },
+    )
+}
+
+@Composable
 fun FeedbackMenuItem(onClick: () -> Unit) {
     DropdownMenuItem(
         text = { MenuText(stringRes = R.string.menu_feedback) },
         onClick = onClick,
         leadingIcon = { MenuIcon(Icons.Outlined.Feedback) },
+    )
+}
+
+@Composable
+fun ShareImageMenuItem(onClick: () -> Unit) {
+    DropdownMenuItem(
+        text = { MenuText(stringRes = R.string.menu_share_image) },
+        onClick = onClick,
+        leadingIcon = { MenuIcon(Icons.Outlined.Image) }
     )
 }
 
@@ -80,3 +100,11 @@ fun ShareImageMenuItem(
     )
 }
 
+@Composable
+fun ShareTextMenuItem(onClick: () -> Unit) {
+    DropdownMenuItem(
+        text = { MenuText(stringRes = R.string.menu_share_text) },
+        onClick = onClick,
+        leadingIcon = { MenuIcon(Icons.Outlined.Share) },
+    )
+}

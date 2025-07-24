@@ -46,7 +46,8 @@
     <!-- CtV screen/components text -->
     <string name="ctv_title">Color to Value</string>
     <string name="ctv_info_card_title_text">Resistor color codes</string>
-    <string name="ctv_info_card_body_text">Learn to decode each band into precise values using the IEC 60062 standard.</string>
+    <string name="ctv_info_card_subhead_text">IEC 60062</string>
+    <string name="ctv_info_card_body_text">Use the color code chart to translate each band into its exact resistance value.</string>
     <string name="ctv_info_card_cta_text">Learn more</string>
     <string name="ctv_default_value">Select colors</string>
 
@@ -190,8 +191,10 @@
     <string name="menu_icon_cd">Menu</string>
     <string name="menu_about">About the app</string>
     <string name="menu_app_theme">App appearance</string>
+    <string name="menu_clear_selections">Clear selections</string>
     <string name="menu_feedback">Send feedback</string>
     <string name="menu_share_image">Share as image</string>
+    <string name="menu_share_text">Share as text</string>
 
     <!-- Error messages -->
     <string name="error_na">N/A</string>

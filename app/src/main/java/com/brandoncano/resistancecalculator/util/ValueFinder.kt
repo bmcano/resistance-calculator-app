@@ -33,7 +33,7 @@ object ValueFinder {
 
     fun getPPM(color: String, isSixBand: Boolean): String {
         val ppm = getValue(color).third
-        return if (isSixBand && ppm.isNotEmpty()) "$ppm ${S.PPM}" else ""
+        return if (isSixBand && ppm.isNotEmpty()) "$ppm${S.NBSP}${S.PPM}" else ""
     }
 
     // sigfig | tolerance | ppm -> if val="" then color does not have an associated value

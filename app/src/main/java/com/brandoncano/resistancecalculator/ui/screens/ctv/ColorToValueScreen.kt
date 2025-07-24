@@ -6,7 +6,6 @@ import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -19,74 +18,96 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.outlined.Lightbulb
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.DropdownLists
-import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.to.ResistorCtv
+import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
+import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
+import com.brandoncano.resistancecalculator.ui.composables.M3CardContent
+import com.brandoncano.resistancecalculator.ui.composables.MenuIconButton
 import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.ShareTextMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.resistor.shareableText
-import com.brandoncano.sharedcomponents.composables.AboutAppMenuItem
-import com.brandoncano.sharedcomponents.composables.AppActionCard
-import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
 import com.brandoncano.sharedcomponents.composables.AppNavigationBar
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
-import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
-import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
-import com.brandoncano.sharedcomponents.composables.ShareTextMenuItem
-import com.brandoncano.sharedcomponents.data.CardAction
 
+@OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
 @Composable
 fun ColorToValueScreen(
-    openMenu: MutableState<Boolean>,
-    reset: MutableState<Boolean>,
     resistor: ResistorCtv,
     onNavigateBack: () -> Unit,
+    onShareImageTapped: (@Composable (() -> Unit)) -> Unit,
+    onShareTextTapped: (String) -> Unit,
     onClearSelectionsTapped: () -> Unit,
+    onFeedbackTapped: () -> Unit,
     onAboutTapped: () -> Unit,
     onUpdateBand: (Int, String) -> Unit,
     onNavBarSelectionChanged: (Int) -> Unit,
     onLearnColorCodesTapped: () -> Unit,
 ) {
+    var showMenu by remember { mutableStateOf(false) }
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            AppMenuTopAppBar(
+            M3TopAppBar(
                 titleText = stringResource(R.string.ctv_title),
-                interactionSource = remember { MutableInteractionSource() },
-                showMenu = openMenu,
                 navigationIcon = Icons.Filled.Close,
                 onNavigateBack = onNavigateBack,
-            ) {
-                ClearSelectionsMenuItem(onClearSelectionsTapped)
-                ShareTextMenuItem(
-                    text = resistor.shareableText(),
-                    showMenu = openMenu,
-                )
-                ShareImageMenuItem(
-                    applicationId = Links.APPLICATION_ID,
-                    showMenu = openMenu,
-                    content = { ResistorLayout(resistor, 32.dp) }
-                )
-                FeedbackMenuItem(
-                    app = Links.APP_NAME,
-                    showMenu = openMenu,
-                )
-                AboutAppMenuItem(onAboutTapped)
-            }
+                actions = {
+                    MenuIconButton { showMenu = true }
+                    DropdownMenu(
+                        expanded = showMenu,
+                        onDismissRequest = { showMenu = false },
+                    ) {
+                        ClearSelectionsMenuItem {
+                            onClearSelectionsTapped.invoke()
+                            showMenu = false
+                        }
+                        ShareTextMenuItem {
+                            onShareTextTapped.invoke(resistor.shareableText())
+                            showMenu = false
+                        }
+                        ShareImageMenuItem {
+                            onShareImageTapped.invoke {
+                                ResistorLayout(resistor, 32.dp)
+                            }
+                            showMenu = false
+                        }
+                        FeedbackMenuItem {
+                            onFeedbackTapped.invoke()
+                            showMenu = false
+                        }
+                        AboutAppMenuItem {
+                            onAboutTapped.invoke()
+                            showMenu = false
+                        }
+                    }
+                },
+                scrollBehavior = scrollBehavior,
+            )
         },
         bottomBar = {
             AppNavigationBar(
@@ -99,7 +120,6 @@ fun ColorToValueScreen(
     ) { paddingValues ->
         ColorToValueScreenContent(
             paddingValues = paddingValues,
-            reset = reset,
             resistor = resistor,
             onUpdateBand = onUpdateBand,
             onLearnColorCodesTapped = onLearnColorCodesTapped,
@@ -110,7 +130,6 @@ fun ColorToValueScreen(
 @Composable
 private fun ColorToValueScreenContent(
     paddingValues: PaddingValues,
-    reset: MutableState<Boolean>,
     resistor: ResistorCtv,
     onUpdateBand: (Int, String) -> Unit,
     onLearnColorCodesTapped: () -> Unit,
@@ -129,18 +148,16 @@ private fun ColorToValueScreenContent(
         ResistorLayout(resistor)
         ImageTextDropDownMenu(
             modifier = Modifier.padding(top = 32.dp),
-            label = R.string.number_band_hint1,
+            label = stringResource(R.string.number_band_hint1),
             selectedOption = resistor.band1,
             items = DropdownLists.NUMBER_LIST_NO_BLACK,
-            reset = reset.value,
             onOptionSelected = { onUpdateBand(1, it) },
         )
         ImageTextDropDownMenu(
             modifier = Modifier.padding(top = 12.dp),
-            label = R.string.number_band_hint2,
+            label = stringResource(R.string.number_band_hint2),
             selectedOption = resistor.band2,
             items = DropdownLists.NUMBER_LIST,
-            reset = reset.value,
             onOptionSelected = { onUpdateBand(2, it) },
         )
         AnimatedVisibility(
@@ -150,19 +167,17 @@ private fun ColorToValueScreenContent(
         ) {
             ImageTextDropDownMenu(
                 modifier = Modifier.padding(top = 12.dp),
-                label = R.string.number_band_hint3,
+                label = stringResource(R.string.number_band_hint3),
                 selectedOption = resistor.band3,
                 items = DropdownLists.NUMBER_LIST,
-                reset = reset.value,
                 onOptionSelected = { onUpdateBand(3, it) },
             )
         }
         ImageTextDropDownMenu(
             modifier = Modifier.padding(top = 12.dp),
-            label = R.string.multiplier_band_hint,
+            label = stringResource(R.string.multiplier_band_hint),
             selectedOption = resistor.band4,
             items = DropdownLists.MULTIPLIER_LIST,
-            reset = reset.value,
             onOptionSelected = { onUpdateBand(4, it) },
         )
         AnimatedVisibility(
@@ -172,10 +187,9 @@ private fun ColorToValueScreenContent(
         ) {
             ImageTextDropDownMenu(
                 modifier = Modifier.padding(top = 12.dp),
-                label = R.string.tolerance_band_hint,
+                label = stringResource(R.string.tolerance_band_hint),
                 selectedOption = resistor.band5,
                 items = DropdownLists.TOLERANCE_LIST,
-                reset = reset.value,
                 onOptionSelected = { onUpdateBand(5, it) },
             )
         }
@@ -186,24 +200,34 @@ private fun ColorToValueScreenContent(
         ) {
             ImageTextDropDownMenu(
                 modifier = Modifier.padding(top = 12.dp),
-                label = R.string.ppm_band_hint,
+                label = stringResource(R.string.ppm_band_hint),
                 selectedOption = resistor.band6,
                 items = DropdownLists.PPM_LIST,
-                reset = reset.value,
                 onOptionSelected = { onUpdateBand(6, it) },
             )
         }
         Spacer(modifier = Modifier.height(24.dp))
-        AppActionCard(
-            icon = Icons.Outlined.Lightbulb,
-            iconTint = MaterialTheme.colorScheme.primary,
-            cardTitle = stringResource(R.string.ctv_info_card_title_text),
-            cardBody = stringResource(R.string.ctv_info_card_body_text),
-            leftActionButton = CardAction(
-                buttonLabel = stringResource(R.string.ctv_info_card_cta_text),
-                onClick = onLearnColorCodesTapped,
+        M3OutlinedCard {
+//            ActionCardContent(
+//                icon = Icons.Outlined.Lightbulb,
+//                iconTint = MaterialTheme.colorScheme.primary,
+//                cardTitle = stringResource(R.string.ctv_info_card_title_text),
+//                cardBody = stringResource(R.string.ctv_info_card_body_text),
+//                leftActionButton = CardAction(
+//                    buttonLabel = stringResource(R.string.ctv_info_card_cta_text),
+//                    onClick = onLearnColorCodesTapped,
+//                )
+//            )
+            M3CardContent(
+                headline = stringResource(R.string.ctv_info_card_title_text),
+                subhead = stringResource(R.string.ctv_info_card_subhead_text),
+                bodyText = stringResource(R.string.ctv_info_card_body_text),
+                primaryButtonText = stringResource(R.string.ctv_info_card_cta_text),
+                onPrimaryClick = onLearnColorCodesTapped,
+                // secondaryButtonText = "View PDF",
+                // onSecondaryClick = {},
             )
-        )
+        }
         BottomScreenSpacer()
     }
 }
@@ -213,11 +237,12 @@ private fun ColorToValueScreenContent(
 private fun ColorToValueScreen4BandPreview() {
     ResistorCalculatorTheme {
         ColorToValueScreen(
-            openMenu = remember { mutableStateOf(false) },
-            reset = remember { mutableStateOf(false) },
             resistor = ResistorCtv(),
             onNavigateBack = {},
             onClearSelectionsTapped = {},
+            onShareImageTapped = {},
+            onShareTextTapped = {},
+            onFeedbackTapped = {},
             onAboutTapped = {},
             onUpdateBand = { _, _ -> },
             onNavBarSelectionChanged = { _ -> },
@@ -231,11 +256,12 @@ private fun ColorToValueScreen4BandPreview() {
 private fun ColorToValueScreen3BandPreview() {
     ResistorCalculatorTheme {
         ColorToValueScreen(
-            openMenu = remember { mutableStateOf(false) },
-            reset = remember { mutableStateOf(false) },
             resistor = ResistorCtv(navBarSelection = 0),
             onNavigateBack = {},
             onClearSelectionsTapped = {},
+            onShareImageTapped = {},
+            onShareTextTapped = {},
+            onFeedbackTapped = {},
             onAboutTapped = {},
             onUpdateBand = { _, _ -> },
             onNavBarSelectionChanged = { _ -> },
@@ -249,11 +275,12 @@ private fun ColorToValueScreen3BandPreview() {
 private fun ColorToValueScreen5BandPreview() {
     ResistorCalculatorTheme {
         ColorToValueScreen(
-            openMenu = remember { mutableStateOf(false) },
-            reset = remember { mutableStateOf(false) },
             resistor = ResistorCtv(navBarSelection = 2),
             onNavigateBack = {},
             onClearSelectionsTapped = {},
+            onShareImageTapped = {},
+            onShareTextTapped = {},
+            onFeedbackTapped = {},
             onAboutTapped = {},
             onUpdateBand = { _, _ -> },
             onNavBarSelectionChanged = { _ -> },
@@ -267,11 +294,12 @@ private fun ColorToValueScreen5BandPreview() {
 private fun ColorToValueScreen6BandPreview() {
     ResistorCalculatorTheme {
         ColorToValueScreen(
-            openMenu = remember { mutableStateOf(false) },
-            reset = remember { mutableStateOf(false) },
             resistor = ResistorCtv(navBarSelection = 3),
             onNavigateBack = {},
+            onShareImageTapped = {},
+            onShareTextTapped = {},
             onClearSelectionsTapped = {},
+            onFeedbackTapped = {},
             onAboutTapped = {},
             onUpdateBand = { _, _ -> },
             onNavBarSelectionChanged = { _ -> },

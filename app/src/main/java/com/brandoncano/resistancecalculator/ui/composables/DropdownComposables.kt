@@ -4,8 +4,10 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -13,6 +15,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -27,16 +30,75 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.data.DropdownItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.RoundedSquare
 import com.brandoncano.resistancecalculator.ui.theme.resistor_beige
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
-import com.brandoncano.sharedcomponents.text.textStyleCaption
-import com.brandoncano.sharedcomponents.text.textStyleSubhead
+import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 
+@OptIn(ExperimentalMaterial3Api::class) // For ExposedDropdownMenuBox
+@Composable
+fun ImageTextDropDownMenu(
+    modifier: Modifier = Modifier,
+    label: String,
+    selectedOption: String = "",
+    items: List<DropdownItem>,
+    isValueToColor: Boolean = false,
+    onOptionSelected: (String) -> Unit,
+) {
+    val focusManager = LocalFocusManager.current
+    var expanded by remember { mutableStateOf(false) }
+    val leadingColor = remember(selectedOption) {
+        ColorFinder.textToColor(selectedOption)
+    }
+    val displayText = selectedOption
+
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded },
+        modifier = modifier.fillMaxWidth(),
+    ) {
+        OutlinedTextField(
+            value = displayText,
+            onValueChange = {},
+            readOnly = true,
+            label = { Text(text = label) },
+            leadingIcon = if (displayText.isNotEmpty()) {
+                { RoundedSquare(color = leadingColor, size = 24.dp) }
+            } else {
+                null
+            },
+            trailingIcon = {
+                Icon(
+                    imageVector = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
+                    contentDescription = null,
+                    modifier = Modifier.clickable { expanded = !expanded },
+                )
+            },
+            modifier = Modifier
+                .menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
+                .fillMaxWidth(),
+            colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
+        )
+        ExposedDropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+        ) {
+            items.forEach {
+                DropdownItemView(it) {
+                    val newVal = if (isValueToColor) it.value else it.name
+                    onOptionSelected(newVal)
+                    expanded = false
+                    focusManager.clearFocus()
+                }
+            }
+        }
+    }
+}
+
+@Deprecated("User other format")
 @OptIn(ExperimentalMaterial3Api::class) // For ExposedDropdownMenuBox
 @Composable
 fun ImageTextDropDownMenu(
@@ -108,25 +170,30 @@ fun ImageTextDropDownMenu(
 
 @Composable
 private fun DropdownItemView(item: DropdownItem, onClick: () -> Unit) {
-    Row(
+    val color = ColorFinder.textToColor(item.name)
+    Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 4.dp)
-            .clickable { onClick() }
+            .clickable { onClick() },
     ) {
-        val color = ColorFinder.textToColor(item.name)
-        RoundedSquare(color = color, size = 40.dp)
-        Column(modifier = Modifier.align(Alignment.CenterVertically)) {
-            Text(
-                text = item.name,
-                style = textStyleSubhead(),
-                modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 2.dp)
-            )
-            Text(
-                text = item.value,
-                style = textStyleCaption(),
-                modifier = Modifier.padding(start = 8.dp, end = 8.dp)
-            )
+        Row(
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            RoundedSquare(color = color, size = 40.dp)
+            Spacer(modifier = Modifier.width(8.dp))
+            Column {
+                Text(
+                    text = item.name,
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(start = 8.dp, end = 8.dp)
+                )
+                Text(
+                    text = item.value,
+                    style = MaterialTheme.typography.bodySmall.onSurfaceVariant(),
+                    modifier = Modifier.padding(start = 8.dp, end = 8.dp)
+                )
+            }
         }
     }
 }
@@ -147,16 +214,11 @@ private fun CustomDropdownRowPreview() {
 @Composable
 private fun CustomDropdownPreview() {
     val item1 = DropdownItem(name = "Item 1", value = "Value 1")
-    val item2 = DropdownItem(name = "Item 2", value = "Value 2")
-    val item3 = DropdownItem(name = "Item 3", value = "Value 3")
-    val item4 = DropdownItem(name = "Item 4", value = "Value 4")
-    val item5 = DropdownItem(name = "Item 5", value = "Value 5")
-    val item6 = DropdownItem(name = "Item 6", value = "Value 6")
-    val list = listOf(item1, item2, item3, item4, item5, item6)
+    val list = listOf(item1)
     ResistorCalculatorTheme {
         Column {
-            ImageTextDropDownMenu(Modifier, R.string.number_band_hint1, "", list) { }
-            ImageTextDropDownMenu(Modifier, R.string.number_band_hint1, "Red", list) { }
+            ImageTextDropDownMenu(Modifier, "Default Text", "", list) { }
+            ImageTextDropDownMenu(Modifier, "", "Red", list) { }
         }
     }
 }

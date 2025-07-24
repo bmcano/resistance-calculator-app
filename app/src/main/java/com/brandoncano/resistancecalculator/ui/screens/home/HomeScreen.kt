@@ -43,12 +43,8 @@ import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.MenuIconButton
 import com.brandoncano.resistancecalculator.ui.composables.elevatedCardColor
-import com.brandoncano.resistancecalculator.ui.composables.filledCardColor
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3Card
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3ElevatedCard
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
-import com.brandoncano.resistancecalculator.ui.composables.outlinedCardColor
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 

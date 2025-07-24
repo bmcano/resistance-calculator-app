@@ -7,4 +7,5 @@ enum class SharedPreferencesKey(val key: String) {
     // Language (if we ever add any)
 
     // Calculator data
+    KEY_COLOR_TO_VALUE("resistancecalculator.color.to.value")
 }
