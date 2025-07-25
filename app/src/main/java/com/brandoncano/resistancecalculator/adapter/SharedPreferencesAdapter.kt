@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.core.content.edit
 import com.brandoncano.resistancecalculator.keys.AppAppearance
 import com.brandoncano.resistancecalculator.keys.SharedPreferencesKey
+import com.brandoncano.resistancecalculator.to.Circuit
 import com.brandoncano.resistancecalculator.to.ResistorCtv
 import com.brandoncano.resistancecalculator.to.ResistorVtc
 import com.brandoncano.resistancecalculator.to.SmdResistor
@@ -21,6 +22,8 @@ class SharedPreferencesAdapter {
 
     private companion object {
         const val NAME = "ResistorSharedPrefs"
+        const val NO_EXISTING_ITEM_MESSAGE = "No existing JSON, returning default value."
+        const val FAILED_PARSE_ERROR_MESSAGE = "Failed to parse JSON, returning default. Error:"
     }
 
     fun getAppAppearancePreference(): String {
@@ -36,14 +39,14 @@ class SharedPreferencesAdapter {
     fun getResistorCtvPreference(): ResistorCtv {
         val json = getString(SharedPreferencesKey.KEY_COLOR_TO_VALUE, null)
         if (json.isNullOrEmpty()) {
-            Log.d(NAME, "No existing JSON, returning default ResistorCtv")
+            Log.d(NAME, NO_EXISTING_ITEM_MESSAGE)
             return ResistorCtv()
         }
 
         return try {
             Gson().fromJson(json, ResistorCtv::class.java)
         } catch (e: JsonSyntaxException) {
-            Log.e(NAME, "Failed to parse JSON, returning default. Error:", e)
+            Log.e(NAME, FAILED_PARSE_ERROR_MESSAGE, e)
             ResistorCtv()
         }
     }
@@ -56,14 +59,14 @@ class SharedPreferencesAdapter {
     fun getResistorVtcPreference(): ResistorVtc {
         val json = getString(SharedPreferencesKey.KEY_VALUE_TO_COLOR, null)
         if (json.isNullOrEmpty()) {
-            Log.d(NAME, "No existing JSON, returning default ResistorCtv")
+            Log.d(NAME, NO_EXISTING_ITEM_MESSAGE)
             return ResistorVtc()
         }
 
         return try {
             Gson().fromJson(json, ResistorVtc::class.java)
         } catch (e: JsonSyntaxException) {
-            Log.e(NAME, "Failed to parse JSON, returning default. Error:", e)
+            Log.e(NAME, FAILED_PARSE_ERROR_MESSAGE, e)
             ResistorVtc()
         }
     }
@@ -76,14 +79,14 @@ class SharedPreferencesAdapter {
     fun getSmdResistorPreference(): SmdResistor {
         val json = getString(SharedPreferencesKey.KEY_SMD_RESISTOR, null)
         if (json.isNullOrEmpty()) {
-            Log.d(NAME, "No existing JSON, returning default ResistorCtv")
+            Log.d(NAME, NO_EXISTING_ITEM_MESSAGE)
             return SmdResistor()
         }
 
         return try {
             Gson().fromJson(json, SmdResistor::class.java)
         } catch (e: JsonSyntaxException) {
-            Log.e(NAME, "Failed to parse JSON, returning default. Error:", e)
+            Log.e(NAME, FAILED_PARSE_ERROR_MESSAGE, e)
             SmdResistor()
         }
     }
@@ -91,6 +94,26 @@ class SharedPreferencesAdapter {
     fun setSmdResistorPreference(resistor: SmdResistor) {
         val json = Gson().toJson(resistor)
         setString(SharedPreferencesKey.KEY_SMD_RESISTOR, json)
+    }
+
+    fun getCircuitPreference(): Circuit {
+        val json = getString(SharedPreferencesKey.KEY_CIRCUIT, null)
+        if (json.isNullOrEmpty()) {
+            Log.d(NAME, NO_EXISTING_ITEM_MESSAGE)
+            return Circuit()
+        }
+
+        return try {
+            Gson().fromJson(json, Circuit::class.java)
+        } catch (e: JsonSyntaxException) {
+            Log.e(NAME, FAILED_PARSE_ERROR_MESSAGE, e)
+            Circuit()
+        }
+    }
+
+    fun setCircuitPreference(circuit: Circuit) {
+        val json = Gson().toJson(circuit)
+        setString(SharedPreferencesKey.KEY_CIRCUIT, json)
     }
 
     private fun getString(sharedPreferencesKey: SharedPreferencesKey, default: String?): String? {

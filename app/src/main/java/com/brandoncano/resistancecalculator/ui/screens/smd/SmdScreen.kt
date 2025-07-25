@@ -55,7 +55,7 @@ import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import com.brandoncano.sharedcomponents.data.NavigationBarOptions
 import java.util.Locale
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
 @Composable
 fun SmdScreen(
     resistor: SmdResistor,
@@ -78,7 +78,7 @@ fun SmdScreen(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             M3TopAppBar(
-                titleText = stringResource(R.string.vtc_title),
+                titleText = stringResource(R.string.smd_title),
                 navigationIcon = Icons.Filled.Close,
                 onNavigateBack = onNavigateBack,
                 actions = {

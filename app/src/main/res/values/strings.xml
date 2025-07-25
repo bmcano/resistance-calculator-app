@@ -60,7 +60,6 @@
     <string name="vtc_info_card_body">"Tap \"Validate\" to see if your resistance matches a standard E‑series value for the chosen tolerance."</string>
     <string name="vtc_info_card_action">Learn more</string>
     <string name="vtc_valid_card_title">Valid E-series value</string>
-    <string name="vtc_valid_card_subhead">IEC 60063</string>
     <string name="vtc_valid_card_body">Your resistance value is part of the %1$s series.</string>
     <string name="vtc_invalid_card_title">Your value is not in the E-series</string>
     <string name="vtc_invalid_card_body">With the selected tolerance, the closest E-series value is %1$s.</string>
@@ -70,7 +69,6 @@
 
     <!-- SMD screen/components text -->
     <string name="smd_title">SMD Resistor</string>
-    <string name="smd_resistor_content_description">SMD Resistor</string>
     <string name="smd_default_value">Enter code</string>
     <string name="smd_code_hint">Code</string>
     <string name="smd_info_card_title_text">SMD resistor codes</string>
@@ -89,8 +87,9 @@
     <string name="circuit_units_label">Units</string>
     <string name="circuit_text_field_label">Resistance (%1$s)</string>
     <string name="circuit_text_field_label_multiple">Resistance %1$s (%2$s)</string>
-    <string name="circuit_info_card_title_text">Resistor equations</string>
-    <string name="circuit_info_card_body_text">Discover how series &amp; parallel formulas determine total resistance.</string>
+    <string name="circuit_info_card_header">Resistor equations</string>
+    <string name="circuit_info_card_subhead">Series &amp; parallel</string>
+    <string name="circuit_info_card_body">Discover how series &amp; parallel formulas determine total resistance.</string>
     <string name="circuit_info_card_cta_text">Learn more</string>
 
     <!-- Info screen/components text -->

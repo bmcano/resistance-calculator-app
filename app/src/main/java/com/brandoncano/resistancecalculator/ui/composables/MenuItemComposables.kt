@@ -1,6 +1,5 @@
 package com.brandoncano.resistancecalculator.ui.composables
 
-import androidx.activity.compose.LocalActivity
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.outlined.Cancel
@@ -13,11 +12,8 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.util.share.ShareResistor
 import com.brandoncano.sharedcomponents.composables.MenuIcon
 import com.brandoncano.sharedcomponents.composables.MenuText
 
@@ -73,30 +69,6 @@ fun ShareImageMenuItem(onClick: () -> Unit) {
         text = { MenuText(stringRes = R.string.menu_share_image) },
         onClick = onClick,
         leadingIcon = { MenuIcon(Icons.Outlined.Image) }
-    )
-}
-
-@Composable
-fun ShareImageMenuItem(
-    applicationId: String,
-    showMenu: MutableState<Boolean>,
-    content: @Composable () -> Unit,
-) {
-    // In case this returns null, we can simply not show the option
-    val activity = LocalActivity.current ?: return
-    val context = LocalContext.current
-    DropdownMenuItem(
-        text = { MenuText(stringRes = R.string.menu_share_image) },
-        leadingIcon = { MenuIcon(Icons.Outlined.Image) },
-        onClick = {
-            showMenu.value = false
-            ShareResistor.execute(
-                activity = activity,
-                context = context,
-                applicationId = applicationId,
-                content = content,
-            )
-        }
     )
 }
 
