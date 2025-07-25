@@ -208,16 +208,6 @@ private fun ColorToValueScreenContent(
         }
         Spacer(modifier = Modifier.height(24.dp))
         M3OutlinedCard {
-//            ActionCardContent(
-//                icon = Icons.Outlined.Lightbulb,
-//                iconTint = MaterialTheme.colorScheme.primary,
-//                cardTitle = stringResource(R.string.ctv_info_card_title_text),
-//                cardBody = stringResource(R.string.ctv_info_card_body_text),
-//                leftActionButton = CardAction(
-//                    buttonLabel = stringResource(R.string.ctv_info_card_cta_text),
-//                    onClick = onLearnColorCodesTapped,
-//                )
-//            )
             M3CardContent(
                 headline = stringResource(R.string.ctv_info_card_title_text),
                 subhead = stringResource(R.string.ctv_info_card_subhead_text),

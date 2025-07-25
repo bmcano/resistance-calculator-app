@@ -8,18 +8,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 /**
- * A horizontal divider that spans the full width of its parent container.
- *
- * @param modifier Optional [Modifier] for styling.
- */
-@Composable
-fun FullWidthDivider(
-    modifier: Modifier = Modifier
-) {
-    HorizontalDivider(modifier = modifier)
-}
-
-/**
  * A horizontal divider with optional inset padding on both sides.
  *
  * @param insetPadding Horizontal [Dp] inset to apply on the start and end.
@@ -32,4 +20,3 @@ fun M3Divider(
 ) {
     HorizontalDivider(modifier = modifier.padding(horizontal = insetPadding))
 }
-

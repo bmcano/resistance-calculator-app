@@ -55,10 +55,12 @@
     <string name="vtc_title">Value to Color</string>
     <string name="vtc_default_value">Enter resistance</string>
     <string name="vtc_validate_e_series_button">Validate resistance against E-series</string>
-    <string name="vtc_info_card_title">Discover E-series values</string>
+    <string name="vtc_info_card_title">Preferred values</string>
+    <string name="vtc_info_card_subhead">IEC 60063</string>
     <string name="vtc_info_card_body">"Tap \"Validate\" to see if your resistance matches a standard E‑series value for the chosen tolerance."</string>
     <string name="vtc_info_card_action">Learn more</string>
     <string name="vtc_valid_card_title">Valid E-series value</string>
+    <string name="vtc_valid_card_subhead">IEC 60063</string>
     <string name="vtc_valid_card_body">Your resistance value is part of the %1$s series.</string>
     <string name="vtc_invalid_card_title">Your value is not in the E-series</string>
     <string name="vtc_invalid_card_body">With the selected tolerance, the closest E-series value is %1$s.</string>

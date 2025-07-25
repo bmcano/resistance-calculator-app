@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.model.ctv
+package com.brandoncano.resistancecalculator.model
 
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
@@ -14,7 +14,9 @@ class ResistorCtvViewModel(private val savedStateHandle: SavedStateHandle): View
     }
 
     private val sharedPreferencesAdapter = SharedPreferencesAdapter()
-    val resistorStateTOStateFlow = savedStateHandle.getStateFlow(KEY_RESISTOR_STATE_TO, ResistorCtv())
+    val resistorStateTOStateFlow = savedStateHandle.getStateFlow(KEY_RESISTOR_STATE_TO,
+        ResistorCtv()
+    )
 
     init {
         Log.d(TAG, "Init: $this")

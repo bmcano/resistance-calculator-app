@@ -1,6 +1,5 @@
 package com.brandoncano.resistancecalculator.ui.composables
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,7 +19,6 @@ import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,15 +26,80 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.data.DropdownItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.RoundedSquare
-import com.brandoncano.resistancecalculator.ui.theme.resistor_beige
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
 import com.brandoncano.sharedcomponents.text.onSurfaceVariant
+
+@OptIn(ExperimentalMaterial3Api::class) // For ExposedDropdownMenuBox
+@Composable
+fun TextDropDownMenu(
+    label: String,
+    modifier: Modifier = Modifier,
+    selectedOption: String = "",
+    items: List<String>,
+    onOptionSelected: (String) -> Unit,
+) {
+    val focusManager = LocalFocusManager.current
+    var expanded by remember { mutableStateOf(false) }
+    val displayText = selectedOption
+
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded },
+        modifier = modifier.fillMaxWidth(),
+    ) {
+        OutlinedTextField(
+            value = displayText,
+            onValueChange = {},
+            readOnly = true,
+            label = { Text(text = label) },
+            trailingIcon = {
+                Icon(
+                    imageVector = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
+                    contentDescription = null,
+                    modifier = Modifier.clickable { expanded = !expanded }
+                )
+            },
+            modifier = Modifier
+                .menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
+                .fillMaxWidth(),
+            colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
+        )
+        ExposedDropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false }
+        ) {
+            items.forEach {
+                TextDropDownItemView(it) {
+                    onOptionSelected(it)
+                    expanded = false
+                    focusManager.clearFocus()
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun TextDropDownItemView(item: String, onClick: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick() },
+    ) {
+        Column {
+            Text(
+                text = item,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+                style = MaterialTheme.typography.bodyLarge,
+            )
+        }
+    }
+}
 
 @OptIn(ExperimentalMaterial3Api::class) // For ExposedDropdownMenuBox
 @Composable
@@ -91,76 +154,6 @@ fun ImageTextDropDownMenu(
                     val newVal = if (isValueToColor) it.value else it.name
                     onOptionSelected(newVal)
                     expanded = false
-                    focusManager.clearFocus()
-                }
-            }
-        }
-    }
-}
-
-@Deprecated("User other format")
-@OptIn(ExperimentalMaterial3Api::class) // For ExposedDropdownMenuBox
-@Composable
-fun ImageTextDropDownMenu(
-    modifier: Modifier = Modifier,
-    @StringRes label: Int,
-    selectedOption: String = "",
-    items: List<DropdownItem>,
-    reset: Boolean = false,
-    isValueToColor: Boolean = false,
-    onOptionSelected: (String) -> Unit,
-) {
-    var expanded by remember { mutableStateOf(false) }
-    var selectedText by remember { mutableStateOf(selectedOption) }
-    var selectedLeadingIconColor by remember {
-        val color = ColorFinder.textToColor(selectedOption)
-        mutableStateOf(color)
-    }
-    val icon = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown
-    val focusManager = LocalFocusManager.current
-
-    LaunchedEffect(reset) {
-        if (reset) {
-            selectedText = ""
-            selectedLeadingIconColor = resistor_beige
-        }
-    }
-
-    ExposedDropdownMenuBox(
-        expanded = expanded,
-        onExpandedChange = { expanded = !expanded },
-        modifier = modifier.fillMaxWidth(),
-    ) {
-        OutlinedTextField(
-            value = selectedText,
-            onValueChange = {},
-            readOnly = true,
-            label = { Text(stringResource(label)) },
-            leadingIcon = if (selectedLeadingIconColor != resistor_beige) {
-                { RoundedSquare(color = selectedLeadingIconColor, size = 24.dp) }
-            } else null,
-            trailingIcon = {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = null,
-                    modifier = Modifier.clickable { expanded = !expanded }
-                )
-            },
-            modifier = Modifier
-                .menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
-                .fillMaxWidth(),
-            colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
-        )
-        ExposedDropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false },
-        ) {
-            items.forEach {
-                DropdownItemView(it) {
-                    selectedText = if (isValueToColor) it.value else it.name
-                    selectedLeadingIconColor = ColorFinder.textToColor(it.name)
-                    expanded = false
-                    onOptionSelected(if (isValueToColor) it.value else it.name)
                     focusManager.clearFocus()
                 }
             }

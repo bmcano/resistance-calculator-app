@@ -1,9 +1,9 @@
-package com.brandoncano.resistancecalculator.model.vtc
+package com.brandoncano.resistancecalculator.model
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.brandoncano.resistancecalculator.adapter.SharedPreferencesAdapter
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.data.ESeriesCardContent
 import com.brandoncano.resistancecalculator.to.ResistorVtc
@@ -14,7 +14,7 @@ import com.brandoncano.resistancecalculator.util.eseries.tolerancePercentage
 import com.brandoncano.resistancecalculator.util.resistor.formatResistor
 import com.brandoncano.resistancecalculator.util.resistor.isInputInvalid
 
-class ResistorVtcViewModel(private val savedStateHandle: SavedStateHandle, context: Context) : ViewModel() {
+class ResistorVtcViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
 
     private companion object {
         private const val TAG = "ResistorVtcViewModel"
@@ -24,9 +24,10 @@ class ResistorVtcViewModel(private val savedStateHandle: SavedStateHandle, conte
         private const val KEY_CLOSEST_STANDARD_VALUE_FLOAT = "KEY_CLOSEST_STANDARD_VALUE_FLOAT"
     }
 
-    private val application = context.applicationContext
-    private val repository = ResistorVtcRepository.getInstance(application)
-    val resistorStateTOStateFlow = savedStateHandle.getStateFlow(KEY_RESISTOR_STATE_TO, ResistorVtc())
+    private val sharedPreferencesAdapter = SharedPreferencesAdapter()
+    val resistorStateTOStateFlow = savedStateHandle.getStateFlow(KEY_RESISTOR_STATE_TO,
+        ResistorVtc()
+    )
     val isErrorStateFlow = savedStateHandle.getStateFlow(KEY_ERROR_STATE_BOOL, false)
     val eSeriesCardContentStateTOStateFlow = savedStateHandle.getStateFlow(KEY_E_SERIES_CONTENT_STATE_TO, ESeriesCardContent.DefaultContent)
     val closestStandardValueStateFlow = savedStateHandle.getStateFlow(KEY_CLOSEST_STANDARD_VALUE_FLOAT, 10.0)
@@ -37,7 +38,7 @@ class ResistorVtcViewModel(private val savedStateHandle: SavedStateHandle, conte
     }
 
     fun loadData() {
-        val resistor = repository.loadResistor()
+        val resistor = sharedPreferencesAdapter.getResistorVtcPreference()
         val navBar = resistor.navBarSelection
 
         savedStateHandle[KEY_RESISTOR_STATE_TO] = resistor
@@ -47,9 +48,9 @@ class ResistorVtcViewModel(private val savedStateHandle: SavedStateHandle, conte
 
     fun clear() {
         val currentNavBar = resistorStateTOStateFlow.value.navBarSelection
-        repository.clearData(currentNavBar)
-
         val blankResistor = ResistorVtc(navBarSelection = currentNavBar)
+
+        sharedPreferencesAdapter.setResistorVtcPreference(blankResistor)
         savedStateHandle[KEY_RESISTOR_STATE_TO] = blankResistor
         savedStateHandle[KEY_ERROR_STATE_BOOL] = false
         savedStateHandle[KEY_E_SERIES_CONTENT_STATE_TO] = ESeriesCardContent.DefaultContent
@@ -67,7 +68,7 @@ class ResistorVtcViewModel(private val savedStateHandle: SavedStateHandle, conte
         updateErrorState(updatedResistor)
         if (!isErrorStateFlow.value) {
             updatedResistor.formatResistor()
-            repository.saveResistor(updatedResistor)
+            sharedPreferencesAdapter.setResistorVtcPreference(updatedResistor)
         }
 
         savedStateHandle[KEY_RESISTOR_STATE_TO] = updatedResistor
@@ -81,7 +82,7 @@ class ResistorVtcViewModel(private val savedStateHandle: SavedStateHandle, conte
         updateErrorState(updatedResistor)
         if (!isErrorStateFlow.value) {
             updatedResistor.formatResistor()
-            repository.saveResistor(updatedResistor)
+            sharedPreferencesAdapter.setResistorVtcPreference(updatedResistor)
         }
 
         savedStateHandle[KEY_RESISTOR_STATE_TO] = updatedResistor
