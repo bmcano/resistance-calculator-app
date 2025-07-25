@@ -1,5 +1,7 @@
 package com.brandoncano.resistancecalculator.ui.composables
 
+import androidx.annotation.StringRes
+import androidx.compose.foundation.Image
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.outlined.Cancel
@@ -11,11 +13,14 @@ import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.sharedcomponents.composables.MenuIcon
-import com.brandoncano.sharedcomponents.composables.MenuText
+import com.brandoncano.resistancecalculator.ui.theme.gray
 
 @Composable
 fun MenuIconButton(onClick: () -> Unit) {
@@ -78,5 +83,22 @@ fun ShareTextMenuItem(onClick: () -> Unit) {
         text = { MenuText(stringRes = R.string.menu_share_text) },
         onClick = onClick,
         leadingIcon = { MenuIcon(Icons.Outlined.Share) },
+    )
+}
+
+@Composable
+private fun MenuText(@StringRes stringRes: Int) {
+    Text(
+        text = stringResource(id = stringRes),
+        style = MaterialTheme.typography.bodyLarge.gray(),
+    )
+}
+
+@Composable
+private fun MenuIcon(imageVector: ImageVector) {
+    Image(
+        imageVector = imageVector,
+        contentDescription = null,
+        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant)
     )
 }

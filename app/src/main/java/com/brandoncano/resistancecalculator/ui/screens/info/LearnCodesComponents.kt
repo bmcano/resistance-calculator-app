@@ -22,23 +22,19 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.to.ResistorCtv
+import com.brandoncano.resistancecalculator.ui.composables.CalloutCard
+import com.brandoncano.resistancecalculator.ui.composables.elevatedCardColor
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3Divider
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
 import com.brandoncano.resistancecalculator.ui.theme.black
 import com.brandoncano.resistancecalculator.ui.theme.blue
+import com.brandoncano.resistancecalculator.ui.theme.gray
 import com.brandoncano.resistancecalculator.ui.theme.red
 import com.brandoncano.resistancecalculator.ui.theme.violet
 import com.brandoncano.resistancecalculator.ui.theme.white
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.resistancecalculator.util.resistor.ResistorImageBuilder
-import com.brandoncano.sharedcomponents.composables.AppCard
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
-import com.brandoncano.sharedcomponents.composables.AppDivider
-import com.brandoncano.sharedcomponents.composables.AppStandardDivider
-import com.brandoncano.sharedcomponents.composables.CalloutCard
-import com.brandoncano.sharedcomponents.text.onSurfaceVariant
-import com.brandoncano.sharedcomponents.text.textStyleBody
-import com.brandoncano.sharedcomponents.text.textStyleCaption
-import com.brandoncano.sharedcomponents.text.textStyleHeadline
-import com.brandoncano.sharedcomponents.text.textStyleSubhead
 
 @Composable
 fun BandSection(
@@ -51,26 +47,26 @@ fun BandSection(
     Text(
         text = stringResource(headlineRes),
         modifier = Modifier.padding(bottom = 12.dp),
-        style = textStyleHeadline(),
+        style = MaterialTheme.typography.titleMedium,
     )
     Text(
         text = stringResource(bodyRes),
-        style = textStyleSubhead().onSurfaceVariant(),
+        style = MaterialTheme.typography.bodyMedium.gray(),
         modifier = Modifier.padding(bottom = 16.dp),
     )
     InfoResistorLayout(resistor)
     Text(
         text = stringResource(R.string.info_color_code_calculation),
         modifier = Modifier.padding(vertical = 12.dp),
-        style = textStyleBody().onSurfaceVariant(),
+        style = MaterialTheme.typography.bodyLarge.gray(),
     )
-    CalloutCard(stringResource(codeRes))
+    CalloutCard(stringResource(codeRes), color = elevatedCardColor())
     Text(
         text = stringResource(R.string.info_color_code_band_breakdown),
         modifier = Modifier.padding(vertical = 12.dp),
-        style = textStyleBody().onSurfaceVariant(),
+        style = MaterialTheme.typography.bodyLarge.gray(),
     )
-    CalloutCard(stringResource(descriptionRes))
+    CalloutCard(stringResource(descriptionRes), color = elevatedCardColor())
 }
 
 @Composable
@@ -122,7 +118,9 @@ val resistorColorCodes = listOf(
 @AppComponentPreviews
 @Composable
 fun ResistorColorCodeTable() {
-    AppCard(modifier = Modifier.fillMaxWidth()) {
+    M3OutlinedCard(
+        modifier = Modifier.fillMaxWidth()
+    ) {
         Column {
             Row(
                 modifier = Modifier
@@ -136,10 +134,10 @@ fun ResistorColorCodeTable() {
                 HeaderCell(Modifier.weight(1f), stringResource(R.string.info_tolerance))
                 HeaderCell(Modifier.weight(1f), Symbols.PPM)
             }
-            AppStandardDivider()
+            M3Divider(insetPadding = 16.dp)
             resistorColorCodes.forEachIndexed { index, code ->
                 ColorCodeRow(code)
-                if (index != resistorColorCodes.lastIndex) AppStandardDivider()
+                if (index != resistorColorCodes.lastIndex) M3Divider(insetPadding = 16.dp)
             }
         }
     }
@@ -177,7 +175,7 @@ private fun HeaderCell(modifier: Modifier, text: String) {
     Text(
         text = text,
         modifier = modifier,
-        style = textStyleSubhead(),
+        style = MaterialTheme.typography.labelMedium,
         textAlign = TextAlign.Center,
     )
 }
@@ -190,7 +188,7 @@ private fun TableCell(modifier: Modifier, text: String) {
     ) {
         Text(
             text = text,
-            style = textStyleCaption().onSurfaceVariant(),
+            style = MaterialTheme.typography.bodySmall.gray(),
             textAlign = TextAlign.Center,
         )
     }
@@ -204,8 +202,8 @@ private fun TableColorCell(modifier: Modifier, text: String, backgroundColor: Co
     ) {
         val darkColors = setOf(black, red, blue, violet)
         val style = when (backgroundColor) {
-            in darkColors -> textStyleCaption().white()
-            else -> textStyleCaption().black()
+            in darkColors -> MaterialTheme.typography.bodySmall.white()
+            else -> MaterialTheme.typography.bodySmall.black()
         }
         Text(
             text = text,
@@ -220,9 +218,9 @@ private fun TableColorCell(modifier: Modifier, text: String, backgroundColor: Co
  */
 @Composable
 fun DisclaimerText() {
-    AppDivider(modifier = Modifier.padding(vertical = 24.dp))
+    M3Divider(modifier = Modifier.padding(vertical = 24.dp))
     Text(
         text = stringResource(R.string.info_disclaimer_footer),
-        style = textStyleCaption().onSurfaceVariant(),
+        style = MaterialTheme.typography.bodySmall.gray(),
     )
 }

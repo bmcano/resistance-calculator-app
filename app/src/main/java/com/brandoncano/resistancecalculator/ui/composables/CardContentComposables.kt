@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForwardIos
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -22,6 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.data.ArrowCardButtonPO
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3Divider
@@ -44,6 +48,28 @@ fun outlinedCardColor(): Color {
 @Composable
 fun elevatedCardColor(): Color {
     return MaterialTheme.colorScheme.surfaceContainerLow
+}
+
+@Composable
+fun CalloutCard(
+    text: String,
+    style: TextStyle = MaterialTheme.typography.titleMedium,
+    color: Color = filledCardColor(),
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = MaterialTheme.shapes.large,
+        colors = CardDefaults.cardColors(containerColor = color)
+    ) {
+        Text(
+            text = text,
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            style = style,
+            textAlign = TextAlign.Center,
+        )
+    }
 }
 
 @Composable

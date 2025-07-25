@@ -1,21 +1,19 @@
 package com.brandoncano.resistancecalculator.ui.screens.info
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.sharedcomponents.composables.AppCard
+import com.brandoncano.resistancecalculator.ui.composables.CalloutCard
+import com.brandoncano.resistancecalculator.ui.composables.elevatedCardColor
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
+import com.brandoncano.resistancecalculator.ui.theme.gray
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
 import com.brandoncano.sharedcomponents.composables.AppTable
-import com.brandoncano.sharedcomponents.text.onSurfaceVariant
-import com.brandoncano.sharedcomponents.text.textStyleCallout
-import com.brandoncano.sharedcomponents.text.textStyleHeadline
-import com.brandoncano.sharedcomponents.text.textStyleSubhead
 
 @Composable
 fun CodeInfoSection(
@@ -28,42 +26,26 @@ fun CodeInfoSection(
     Text(
         text = stringResource(headlineRes),
         modifier = Modifier.padding(bottom = 12.dp),
-        style = textStyleHeadline(),
+        style = MaterialTheme.typography.titleMedium,
     )
     Text(
         text = stringResource(bodyRes),
         modifier = Modifier.padding(bottom = 12.dp),
-        style = textStyleSubhead().onSurfaceVariant(),
+        style = MaterialTheme.typography.bodyMedium.gray(),
     )
-    EquationCard(stringResource(formulaRes))
+    CalloutCard(stringResource(id = formulaRes), color = elevatedCardColor())
     Text(
         text = stringResource(exampleLabelRes),
         modifier = Modifier.padding(vertical = 12.dp),
-        style = textStyleSubhead().onSurfaceVariant(),
+        style = MaterialTheme.typography.bodyMedium.gray(),
     )
-    EquationCard(stringResource(exampleRes))
-}
-
-@Composable
-private fun EquationCard(equation: String) {
-    AppCard(
-        modifier = Modifier.fillMaxWidth(),
-    ) {
-        Text(
-            text = equation,
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth(),
-            style = textStyleCallout(),
-            textAlign = TextAlign.Center,
-        )
-    }
+    CalloutCard(stringResource(id = exampleRes), color = elevatedCardColor())
 }
 
 @AppComponentPreviews
 @Composable
 fun MultiplierTable() {
-    AppCard {
+    M3OutlinedCard {
         AppTable(
             columnTitles = listOf(
                 stringResource(id = R.string.info_smd_code_value_col1),
@@ -123,7 +105,7 @@ fun CodeValueTable() {
                 listOf(codeValue.code, codeValue.value)
             }
         }
-    AppCard {
+    M3OutlinedCard {
         AppTable(
             columnTitles = listOf(
                 stringResource(id = R.string.info_smd_code_value_col1),

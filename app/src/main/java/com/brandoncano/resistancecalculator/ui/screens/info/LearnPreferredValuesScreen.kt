@@ -14,13 +14,16 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -28,35 +31,37 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.ESeries
 import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3Divider
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.ui.theme.gray
 import com.brandoncano.sharedcomponents.composables.AppBulletList
-import com.brandoncano.sharedcomponents.composables.AppDivider
 import com.brandoncano.sharedcomponents.composables.AppLongScreenPreview
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
-import com.brandoncano.sharedcomponents.composables.AppTopAppBar
-import com.brandoncano.sharedcomponents.text.onSurfaceVariant
-import com.brandoncano.sharedcomponents.text.textStyleBody
-import com.brandoncano.sharedcomponents.text.textStyleHeadline
-import com.brandoncano.sharedcomponents.text.textStyleSubhead
 
 /**
  * Note: Information originated from - https://eepower.com/resistor-guide/resistor-standards-and-codes/resistor-values/
  */
 
+@OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
 @Composable
 fun LearnPreferredValuesScreen(
     onNavigateBack: () -> Unit,
 ) {
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            AppTopAppBar(
+            M3TopAppBar(
                 titleText = stringResource(R.string.info_values_preferred_values_title),
                 navigationIcon =  Icons.AutoMirrored.Filled.ArrowBack,
                 onNavigateBack = onNavigateBack,
+                scrollBehavior = scrollBehavior,
             )
         },
         contentWindowInsets = WindowInsets.safeDrawing,
-    ) { paddingValues ->
+    )  { paddingValues ->
         LearnPreferredValuesScreenContent(paddingValues)
     }
 }
@@ -75,11 +80,11 @@ private fun LearnPreferredValuesScreenContent(paddingValues: PaddingValues) {
         Text(
             text = stringResource(R.string.info_values_body1),
             modifier = Modifier.padding(bottom = 16.dp),
-            style = textStyleBody().onSurfaceVariant(),
+            style = MaterialTheme.typography.bodyMedium.gray(),
         )
         Text(
             text = stringResource(R.string.info_values_body2),
-            style = textStyleBody().onSurfaceVariant(),
+            style = MaterialTheme.typography.bodyMedium.gray(),
         )
         Image(
             painter = painterResource(R.drawable.e_series_equation),
@@ -93,7 +98,7 @@ private fun LearnPreferredValuesScreenContent(paddingValues: PaddingValues) {
         Text(
             text = stringResource(R.string.info_values_preferred_values_where),
             modifier = Modifier.padding(bottom = 8.dp),
-            style = textStyleBody().onSurfaceVariant(),
+            style = MaterialTheme.typography.bodyMedium.gray(),
         )
         AppBulletList(
             bulletStrings = listOf(
@@ -101,35 +106,35 @@ private fun LearnPreferredValuesScreenContent(paddingValues: PaddingValues) {
                 stringResource(R.string.info_values_preferred_values_bullet2),
                 stringResource(R.string.info_values_preferred_values_bullet3),
             ),
-            textStyle = textStyleBody().onSurfaceVariant(),
+            textStyle = MaterialTheme.typography.bodyMedium.gray(),
             bulletVerticalSpace = 4.dp,
         )
         Spacer(modifier = Modifier.height(32.dp))
         Text(
             text = stringResource(R.string.info_values_preferred_values_tables_headline),
             modifier = Modifier.padding(bottom = 12.dp),
-            style = textStyleHeadline(),
+            style = MaterialTheme.typography.titleMedium.gray(),
         )
         Text(
             text = stringResource(R.string.info_values_preferred_values_low_precision),
             modifier = Modifier.padding(bottom = 16.dp),
-            style = textStyleSubhead().onSurfaceVariant(),
+            style = MaterialTheme.typography.bodyMedium.gray(),
         )
         ESeriesTable(stringResource(R.string.info_values_e6_header), ESeries.E6)
-        AppDivider(modifier = Modifier.padding(vertical = 16.dp))
+        M3Divider(modifier = Modifier.padding(vertical = 16.dp))
         Text(
             text = stringResource(R.string.info_values_preferred_values_medium_precision),
             modifier = Modifier.padding(bottom = 16.dp),
-            style = textStyleSubhead().onSurfaceVariant(),
+            style = MaterialTheme.typography.bodyMedium.gray(),
         )
         ESeriesTable(stringResource(R.string.info_values_e12_header), ESeries.E12)
         Spacer(modifier = Modifier.height(24.dp))
         ESeriesTable(stringResource(R.string.info_values_e24_header), ESeries.E24)
-        AppDivider(modifier = Modifier.padding(vertical = 16.dp))
+        M3Divider(modifier = Modifier.padding(vertical = 16.dp))
         Text(
             text = stringResource(R.string.info_values_preferred_values_high_precision),
             modifier = Modifier.padding(bottom = 16.dp),
-            style = textStyleSubhead().onSurfaceVariant(),
+            style = MaterialTheme.typography.bodyMedium.gray(),
         )
         ESeriesTable(stringResource(R.string.info_values_e48_header), ESeries.E48)
         Spacer(modifier = Modifier.height(24.dp))

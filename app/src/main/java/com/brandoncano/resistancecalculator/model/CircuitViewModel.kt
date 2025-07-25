@@ -27,15 +27,14 @@ class CircuitViewModel(private val savedStateHandle: SavedStateHandle) : ViewMod
         val circuit = sharedPreferencesAdapter.getCircuitPreference()
 
         savedStateHandle[KEY_CIRCUIT_STATE_TO] = circuit
-        Log.d(TAG, "loadData(): resistor = $circuit")
+        Log.d(TAG, "loadData(): circuit = $circuit")
     }
 
     fun clear() {
         val sameValues = circuitStateTOStateFlow.value.isSameValues
         val resistorCount = circuitStateTOStateFlow.value.resistorCount
         val units = circuitStateTOStateFlow.value.units
-        val blankCircuit =
-            Circuit(isSameValues = sameValues, resistorCount = resistorCount, units = units)
+        val blankCircuit = Circuit(isSameValues = sameValues, resistorCount = resistorCount, units = units)
 
         sharedPreferencesAdapter.setCircuitPreference(blankCircuit)
         savedStateHandle[KEY_CIRCUIT_STATE_TO] = blankCircuit

@@ -12,20 +12,25 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.to.ResistorCtv
 import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.ui.theme.gray
 import com.brandoncano.sharedcomponents.composables.AppLongScreenPreview
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
-import com.brandoncano.sharedcomponents.composables.AppTopAppBar
 import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 import com.brandoncano.sharedcomponents.text.textStyleBody
 import com.brandoncano.resistancecalculator.constants.Colors as C
@@ -34,20 +39,25 @@ import com.brandoncano.resistancecalculator.constants.Colors as C
  * Note: Information originated from - https://eepower.com/resistor-guide/resistor-standards-and-codes/resistor-color-code/#
  */
 
+@OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
 @Composable
 fun LearnColorCodesScreen(
     onNavigateBack: () -> Unit,
 ) {
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            AppTopAppBar(
+            M3TopAppBar(
                 titleText = stringResource(R.string.info_color_title),
                 navigationIcon =  Icons.AutoMirrored.Filled.ArrowBack,
                 onNavigateBack = onNavigateBack,
+                scrollBehavior = scrollBehavior,
             )
         },
         contentWindowInsets = WindowInsets.safeDrawing,
-    ) { paddingValues ->
+    )  { paddingValues ->
         LearnColorCodesScreenContent(paddingValues)
     }
 }
@@ -66,12 +76,12 @@ private fun LearnColorCodesScreenContent(paddingValues: PaddingValues) {
         Text(
             text = stringResource(R.string.info_color_body1),
             modifier = Modifier.padding(bottom = 16.dp),
-            style = textStyleBody().onSurfaceVariant(),
+            style = MaterialTheme.typography.bodyMedium.gray(),
         )
         Text(
             text = stringResource(R.string.info_color_body2),
             modifier = Modifier.padding(bottom = 24.dp),
-            style = textStyleBody().onSurfaceVariant(),
+            style = MaterialTheme.typography.bodyMedium.gray(),
         )
         ResistorColorCodeTable()
         Spacer(modifier = Modifier.height(32.dp))
