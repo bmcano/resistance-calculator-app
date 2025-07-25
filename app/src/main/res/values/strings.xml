@@ -74,6 +74,7 @@
     <string name="smd_default_value">Enter code</string>
     <string name="smd_code_hint">Code</string>
     <string name="smd_info_card_title_text">SMD resistor codes</string>
+    <string name="smd_info_card_subhead_text">IEC 60062</string>
     <string name="smd_info_card_body_text">Learn how 3‑ and 4‑digit markings on SMD resistors correspond to resistance and tolerance.</string>
     <string name="smd_info_card_cta_text">Learn more</string>
     <string name="smd_navbar_three_eia">Three Digit EIA</string>
@@ -197,6 +198,13 @@
     <string name="menu_feedback">Send feedback</string>
     <string name="menu_share_image">Share as image</string>
     <string name="menu_share_text">Share as text</string>
+
+    <!-- Dialogs -->
+    <string name="dialog_app_appearance">App appearance</string>
+    <string name="dialog_confirm_button">Done</string>
+    <string name="dialog_system_default">System default</string>
+    <string name="dialog_light">Light</string>
+    <string name="dialog_dark">Dark</string>
 
     <!-- Error messages -->
     <string name="error_na">N/A</string>

@@ -8,6 +8,7 @@ import com.brandoncano.resistancecalculator.keys.AppAppearance
 import com.brandoncano.resistancecalculator.keys.SharedPreferencesKey
 import com.brandoncano.resistancecalculator.to.ResistorCtv
 import com.brandoncano.resistancecalculator.to.ResistorVtc
+import com.brandoncano.resistancecalculator.to.SmdResistor
 import com.brandoncano.resistancecalculator.ui.MainApplication
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
@@ -70,6 +71,26 @@ class SharedPreferencesAdapter {
     fun setResistorVtcPreference(resistor: ResistorVtc) {
         val json = Gson().toJson(resistor)
         setString(SharedPreferencesKey.KEY_VALUE_TO_COLOR, json)
+    }
+
+    fun getSmdResistorPreference(): SmdResistor {
+        val json = getString(SharedPreferencesKey.KEY_SMD_RESISTOR, null)
+        if (json.isNullOrEmpty()) {
+            Log.d(NAME, "No existing JSON, returning default ResistorCtv")
+            return SmdResistor()
+        }
+
+        return try {
+            Gson().fromJson(json, SmdResistor::class.java)
+        } catch (e: JsonSyntaxException) {
+            Log.e(NAME, "Failed to parse JSON, returning default. Error:", e)
+            SmdResistor()
+        }
+    }
+
+    fun setSmdResistorPreference(resistor: SmdResistor) {
+        val json = Gson().toJson(resistor)
+        setString(SharedPreferencesKey.KEY_SMD_RESISTOR, json)
     }
 
     private fun getString(sharedPreferencesKey: SharedPreferencesKey, default: String?): String? {

@@ -1,23 +1,16 @@
 package com.brandoncano.resistancecalculator.ui.composables
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.RadioButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.keys.AppAppearance
-import com.brandoncano.sharedcomponents.R
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3RadioButtonGroup
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
-import com.brandoncano.sharedcomponents.text.textStyleBody
-import com.brandoncano.sharedcomponents.text.textStyleCallout
-import com.brandoncano.sharedcomponents.text.textStyleHeadline
 
 @Composable
 fun AppThemeDialog(
@@ -25,43 +18,40 @@ fun AppThemeDialog(
     onThemeSelected: (AppAppearance) -> Unit,
     onDismissRequest: () -> Unit,
 ) {
+    val appearanceOptions = listOf(
+        AppAppearance.SYSTEM_DEFAULT to stringResource(R.string.dialog_system_default),
+        AppAppearance.LIGHT to stringResource(R.string.dialog_light),
+        AppAppearance.DARK to stringResource(R.string.dialog_dark),
+    )
+    val options = appearanceOptions.map { it.second }
+    val selectedOption = appearanceOptions
+        .first { it.first == currentAppAppearance }
+        .second
+
     AlertDialog(
         onDismissRequest = onDismissRequest,
         title = {
             Text(
                 text = stringResource(R.string.dialog_app_appearance),
-                style = textStyleHeadline(),
+                style = MaterialTheme.typography.titleLarge,
             )
         },
         text = {
-            Column {
-                AppAppearance.entries.forEach { themeMode ->
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .selectable(
-                                selected = (themeMode == currentAppAppearance),
-                                onClick = { onThemeSelected(themeMode) }
-                            )
-                    ) {
-                        RadioButton(
-                            selected = (themeMode == currentAppAppearance),
-                            onClick = { onThemeSelected(themeMode) }
-                        )
-                        Text(
-                            text = themeMode.displayText(),
-                            style = textStyleBody(),
-                        )
-                    }
-                }
-            }
+            M3RadioButtonGroup(
+                options = options,
+                optionSelected = selectedOption,
+                onOptionSelected = { option ->
+                    val picked = appearanceOptions.first { it.second == option }.first
+                    onThemeSelected(picked)
+               },
+                verticalPadding = 12.dp,
+            )
         },
         confirmButton = {
             TextButton(onClick = onDismissRequest) {
                 Text(
                     text = stringResource(R.string.dialog_confirm_button),
-                    style = textStyleCallout(),
+                    style = MaterialTheme.typography.titleMedium,
                 )
             }
         }

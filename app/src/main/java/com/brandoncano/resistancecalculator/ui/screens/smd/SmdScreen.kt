@@ -1,6 +1,5 @@
 package com.brandoncano.resistancecalculator.ui.screens.smd
 
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -15,17 +14,20 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.outlined.Explicit
-import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material.icons.outlined.Looks3
 import androidx.compose.material.icons.outlined.Looks4
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -34,63 +36,83 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.DropdownLists
-import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.to.SmdResistor
+import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.AppTextField
 import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
+import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.M3CardContent
+import com.brandoncano.resistancecalculator.ui.composables.MenuIconButton
 import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.ShareTextMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.TextDropDownMenu
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
-import com.brandoncano.sharedcomponents.composables.AboutAppMenuItem
-import com.brandoncano.sharedcomponents.composables.AppActionCard
-import com.brandoncano.sharedcomponents.composables.AppDropDownMenu
-import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
 import com.brandoncano.sharedcomponents.composables.AppNavigationBar
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
-import com.brandoncano.sharedcomponents.composables.AppTextField
-import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
-import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
-import com.brandoncano.sharedcomponents.composables.ShareTextMenuItem
-import com.brandoncano.sharedcomponents.data.CardAction
 import com.brandoncano.sharedcomponents.data.NavigationBarOptions
 import java.util.Locale
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SmdScreen(
-    openMenu: MutableState<Boolean>,
-    reset: MutableState<Boolean>,
     resistor: SmdResistor,
     isError: Boolean,
     onNavigateBack: () -> Unit,
+    onShareImageTapped: (@Composable (() -> Unit)) -> Unit,
+    onShareTextTapped: (String) -> Unit,
     onClearSelectionsTapped: () -> Unit,
+    onFeedbackTapped: () -> Unit,
     onAboutTapped: () -> Unit,
-    onValueChanged: (String, String, Boolean) -> Unit,
+    onValueChanged: (String) -> Unit,
+    onOptionSelected: (String) -> Unit,
     onNavBarSelectionChanged: (Int) -> Unit,
     onLearnSmdCodesTapped: () -> Unit,
 ) {
+    var showMenu by remember { mutableStateOf(false) }
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            AppMenuTopAppBar(
-                titleText = stringResource(R.string.smd_title),
-                interactionSource = remember { MutableInteractionSource() },
-                showMenu = openMenu,
+            M3TopAppBar(
+                titleText = stringResource(R.string.vtc_title),
                 navigationIcon = Icons.Filled.Close,
                 onNavigateBack = onNavigateBack,
-            ) {
-                ClearSelectionsMenuItem(onClearSelectionsTapped)
-                ShareTextMenuItem(
-                    text = resistor.toString(),
-                    showMenu = openMenu,
-                )
-                ShareImageMenuItem(
-                    applicationId = Links.APPLICATION_ID,
-                    showMenu = openMenu,
-                    content = { SmdResistorLayout(resistor, isError, 32.dp) }
-                )
-                FeedbackMenuItem(
-                    app = Links.APP_NAME,
-                    showMenu = openMenu,
-                )
-                AboutAppMenuItem(onAboutTapped)
-            }
+                actions = {
+                    MenuIconButton { showMenu = true }
+                    DropdownMenu(
+                        expanded = showMenu,
+                        onDismissRequest = { showMenu = false },
+                    ) {
+                        ClearSelectionsMenuItem {
+                            onClearSelectionsTapped.invoke()
+                            showMenu = false
+                        }
+                        ShareTextMenuItem {
+                            onShareTextTapped.invoke(resistor.toString())
+                            showMenu = false
+                        }
+                        ShareImageMenuItem {
+                            onShareImageTapped.invoke {
+                                SmdResistorLayout(resistor, isError, 32.dp)
+                            }
+                            showMenu = false
+                        }
+                        FeedbackMenuItem {
+                            onFeedbackTapped.invoke()
+                            showMenu = false
+                        }
+                        AboutAppMenuItem {
+                            onAboutTapped.invoke()
+                            showMenu = false
+                        }
+                    }
+                },
+                scrollBehavior = scrollBehavior,
+            )
         },
         bottomBar = {
             AppNavigationBar(
@@ -116,10 +138,10 @@ fun SmdScreen(
     ) { paddingValues ->
         SmdScreenContent(
             paddingValues = paddingValues,
-            reset = reset,
             resistor = resistor,
             isError = isError,
             onValueChanged = onValueChanged,
+            onOptionSelected = onOptionSelected,
             onLearnSmdCodesTapped = onLearnSmdCodesTapped,
         )
     }
@@ -128,13 +150,12 @@ fun SmdScreen(
 @Composable
 private fun SmdScreenContent(
     paddingValues: PaddingValues,
-    reset: MutableState<Boolean>,
     resistor: SmdResistor,
     isError: Boolean,
-    onValueChanged: (String, String, Boolean) -> Unit,
+    onValueChanged: (String) -> Unit,
+    onOptionSelected: (String) -> Unit,
     onLearnSmdCodesTapped: () -> Unit,
 ) {
-    val code = remember { mutableStateOf(resistor.code) }
     val sidePadding = dimensionResource(R.dimen.app_side_padding)
     Column(
         modifier = Modifier
@@ -149,39 +170,34 @@ private fun SmdScreenContent(
         AppTextField(
             label = stringResource(id = R.string.smd_code_hint),
             modifier = Modifier.padding(top = 32.dp),
-            value = code,
-            reset = reset.value,
+            value = resistor.code,
             isError = isError,
             errorMessage = stringResource(id = R.string.error_invalid_code),
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.Characters,
                 autoCorrectEnabled = false,
                 keyboardType = KeyboardType.Text,
-                imeAction = ImeAction.Done
-            )
-        ) {
-            code.value = it.uppercase(Locale.getDefault())
-            onValueChanged(code.value, resistor.units, false)
-        }
-        AppDropDownMenu(
+                imeAction = ImeAction.Done,
+            ),
+            onValueChange = { onValueChanged(it.uppercase(Locale.getDefault())) },
+        )
+        TextDropDownMenu(
             label = stringResource(id = R.string.units_hint),
             modifier = Modifier.padding(top = 12.dp),
             selectedOption = resistor.units,
             items = DropdownLists.UNITS_LIST,
-            reset = reset.value,
-            onOptionSelected = { onValueChanged(code.value, it, true) }
+            onOptionSelected = { onOptionSelected(it) },
         )
         Spacer(modifier = Modifier.height(24.dp))
-        AppActionCard(
-            icon = Icons.Outlined.Lightbulb,
-            iconTint = MaterialTheme.colorScheme.primary,
-            cardTitle = stringResource(R.string.smd_info_card_title_text),
-            cardBody = stringResource(R.string.smd_info_card_body_text),
-            leftActionButton = CardAction(
-                buttonLabel = stringResource(R.string.smd_info_card_cta_text),
-                onClick = onLearnSmdCodesTapped,
+        M3OutlinedCard {
+            M3CardContent(
+                headline = stringResource(R.string.smd_info_card_title_text),
+                subhead = stringResource(R.string.smd_info_card_subhead_text),
+                bodyText = stringResource(R.string.smd_info_card_body_text),
+                primaryButtonText = stringResource(R.string.smd_info_card_cta_text),
+                onPrimaryClick = onLearnSmdCodesTapped,
             )
-        )
+        }
         BottomScreenSpacer()
     }
 }
@@ -191,14 +207,16 @@ private fun SmdScreenContent(
 private fun SmdScreenPreview() {
     ResistorCalculatorTheme {
         SmdScreen(
-            openMenu = remember { mutableStateOf(false) },
-            reset = remember { mutableStateOf(false) },
             resistor = SmdResistor(),
             isError = false,
             onNavigateBack = {},
             onClearSelectionsTapped = {},
+            onShareTextTapped = {},
+            onShareImageTapped = {},
+            onFeedbackTapped = {},
             onAboutTapped = {},
-            onValueChanged = { _, _, _-> },
+            onValueChanged = {},
+            onOptionSelected = {},
             onNavBarSelectionChanged = { _ -> },
             onLearnSmdCodesTapped = {},
         )

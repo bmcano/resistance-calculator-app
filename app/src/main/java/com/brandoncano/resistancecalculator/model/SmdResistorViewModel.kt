@@ -1,14 +1,14 @@
-package com.brandoncano.resistancecalculator.model.smd
+package com.brandoncano.resistancecalculator.model
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.brandoncano.resistancecalculator.adapter.SharedPreferencesAdapter
 import com.brandoncano.resistancecalculator.to.SmdResistor
 import com.brandoncano.resistancecalculator.util.resistor.formatResistance
 import com.brandoncano.resistancecalculator.util.resistor.isSmdInputInvalid
 
-class SmdResistorViewModel(private val savedStateHandle: SavedStateHandle, context: Context): ViewModel() {
+class SmdResistorViewModel(private val savedStateHandle: SavedStateHandle): ViewModel() {
 
     private companion object {
         private const val TAG = "SmdResistorViewModel"
@@ -16,8 +16,7 @@ class SmdResistorViewModel(private val savedStateHandle: SavedStateHandle, conte
         private const val KEY_ERROR_STATE_BOOL = "KEY_ERROR_STATE_BOOL"
     }
 
-    private val application = context.applicationContext
-    private val repository = SmdResistorRepository.getInstance(application)
+    private val sharedPreferencesAdapter = SharedPreferencesAdapter()
     val resistorStateTOStateFlow = savedStateHandle.getStateFlow(KEY_RESISTOR_STATE_TO, SmdResistor())
     val isErrorStateFlow = savedStateHandle.getStateFlow(KEY_ERROR_STATE_BOOL, false)
 
@@ -27,7 +26,7 @@ class SmdResistorViewModel(private val savedStateHandle: SavedStateHandle, conte
     }
 
     fun loadData() {
-        val resistor = repository.loadResistor()
+        val resistor = sharedPreferencesAdapter.getSmdResistorPreference()
         val navBar = resistor.navBarSelection
 
         savedStateHandle[KEY_RESISTOR_STATE_TO] = resistor
@@ -37,9 +36,9 @@ class SmdResistorViewModel(private val savedStateHandle: SavedStateHandle, conte
 
     fun clear() {
         val currentNavBar = resistorStateTOStateFlow.value.navBarSelection
-        repository.clearData(currentNavBar)
-
         val blankResistor = SmdResistor(navBarSelection = currentNavBar)
+
+        sharedPreferencesAdapter.setSmdResistorPreference(blankResistor)
         savedStateHandle[KEY_RESISTOR_STATE_TO] = blankResistor
         savedStateHandle[KEY_ERROR_STATE_BOOL] = false
     }
@@ -54,7 +53,7 @@ class SmdResistorViewModel(private val savedStateHandle: SavedStateHandle, conte
         updateErrorState(updatedResistor)
         if (!isErrorStateFlow.value) {
             updatedResistor.formatResistance()
-            repository.saveResistor(updatedResistor)
+            sharedPreferencesAdapter.setSmdResistorPreference(updatedResistor)
         }
 
         savedStateHandle[KEY_RESISTOR_STATE_TO] = updatedResistor
@@ -68,7 +67,7 @@ class SmdResistorViewModel(private val savedStateHandle: SavedStateHandle, conte
         updateErrorState(updatedResistor)
         if (!isErrorStateFlow.value) {
             updatedResistor.formatResistance()
-            repository.saveResistor(updatedResistor)
+            sharedPreferencesAdapter.setSmdResistorPreference(updatedResistor)
         }
 
         savedStateHandle[KEY_RESISTOR_STATE_TO] = updatedResistor

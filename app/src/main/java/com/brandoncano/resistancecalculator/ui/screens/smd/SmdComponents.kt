@@ -1,28 +1,35 @@
 package com.brandoncano.resistancecalculator.ui.screens.smd
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.to.SmdResistor
+import com.brandoncano.resistancecalculator.ui.screens.ctv.ResistanceText
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.ui.theme.black
+import com.brandoncano.resistancecalculator.ui.theme.resistor_wire
 import com.brandoncano.resistancecalculator.ui.theme.white
 import com.brandoncano.resistancecalculator.util.resistor.formatResistance
-import com.brandoncano.sharedcomponents.composables.AppCard
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
-import com.brandoncano.sharedcomponents.text.textStyleLargeTitle
-import com.brandoncano.sharedcomponents.text.textStyleTitle
 
 @Composable
 fun SmdResistorLayout(resistor: SmdResistor, isError: Boolean, verticalPadding: Dp = 0.dp) {
@@ -40,34 +47,41 @@ fun SmdResistorLayout(resistor: SmdResistor, isError: Boolean, verticalPadding: 
         modifier = Modifier.padding(horizontal = 32.dp, vertical = verticalPadding),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Box(
-            modifier = Modifier.clip(RoundedCornerShape(4.dp)),
-            contentAlignment = Alignment.Center,
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.img_smd_resistor),
-                contentDescription = stringResource(id = R.string.smd_resistor_content_description),
-            )
+        SmdResistorImage {
             Text(
                 text = code,
-                style = textStyleLargeTitle().white(),
+                style = MaterialTheme.typography.headlineLarge.white(),
             )
         }
-        SmdResistanceText(resistance)
+        ResistanceText(resistance)
     }
 }
 
 @Composable
-fun SmdResistanceText(resistance: String) {
-    AppCard(modifier = Modifier.padding(top = 12.dp)) {
-        Text(
-            text = resistance,
+fun SmdResistorImage(content: @Composable (BoxScope.() -> Unit)) {
+    Box(
+        modifier = Modifier
+            .width(pxToDp(512f))
+            .height(pxToDp(224f))
+            .clip(RoundedCornerShape(4.dp))
+            .background(color = resistor_wire),
+        contentAlignment = Alignment.Center,
+    ) {
+        Box(
             modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(vertical = 8.dp, horizontal = 16.dp),
-            style = textStyleTitle(),
+                .width(pxToDp(448f))
+                .height(pxToDp(200f))
+                .background(color = black),
+            contentAlignment = Alignment.Center,
+            content = content,
         )
     }
+}
+
+@Composable
+fun pxToDp(px: Float): Dp {
+    val density = LocalDensity.current
+    return with(density) { px.toDp() }
 }
 
 @AppComponentPreviews

@@ -12,8 +12,8 @@ android {
         applicationId = "com.brandoncano.resistancecalculator"
         minSdk = 21
         targetSdk = 36
-        versionCode = 33 // for 4.0.1
-        versionName = "4.0.1"
+        versionCode = 34 // for 4.1.0
+        versionName = "4.1.0"
 
         // Notes for 4.1.0
         // :Started:
@@ -23,6 +23,8 @@ android {
         // - Started bringing M3 components & menu items into app
         // - About screen is in app
         // - Update to target SDK 36
+        // - Removing openMenu and Reset Mutable state variables from screens
+        // - Rewrote menu item composables
 
         // :Not Started:
         // - Update Dependencies to be organized better
@@ -30,8 +32,6 @@ android {
         // - Bring billing manager into app code
         // - Update shared lib to be just pre-defined M3 components
         // - Update remaining elements using old structure (menu items)
-        // - val openMenu = remember { mutableStateOf(false) } and val reset = remember { mutableStateOf(false) } - we want to remove MutableState<Boolean> from a param type if possible
-        // - Make app wide VM more useful for more menu related states (or app wide states)
         // - App obfuscation? R8?
         // - "Pro" version - can pay 1.99 for access to PDFs
 
@@ -44,7 +44,7 @@ android {
     applicationVariants.configureEach {
         val suffix = if (buildType.name == "debug") ", DEBUG" else ""
         resValue("string", "version", "$versionName$suffix")
-        resValue("string", "last_updated", "5/25/2025")
+        resValue("string", "last_updated", "7/24/2025")
     }
     buildTypes {
         release {
