@@ -127,6 +127,7 @@ class SharedPreferencesAdapter {
         }
     }
 
+    @Suppress("unused") // In case we ever want to fully remove a key later on
     private fun removeSharedPreference(sharedPreferencesKey: SharedPreferencesKey) {
         getSharedPreferences().edit {
             remove(sharedPreferencesKey.key)

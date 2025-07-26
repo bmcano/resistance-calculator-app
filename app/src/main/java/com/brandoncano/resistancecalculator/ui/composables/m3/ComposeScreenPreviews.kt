@@ -19,6 +19,5 @@ annotation class ScreenPreviews
 @Preview("8_Tall_Phone", showBackground = true, heightDp = 2000)
 annotation class LongScreenPreview
 
-@Suppress("unused")
 @Preview("9_Desktop", showBackground = true, device = "spec:width=1920dp,height=1080dp,dpi=160")
 annotation class DesktopScreenPreview

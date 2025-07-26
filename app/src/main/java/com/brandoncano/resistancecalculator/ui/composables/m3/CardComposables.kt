@@ -16,19 +16,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-@Suppress("unused")
 @Composable
 fun filledCardColor(): Color {
     return MaterialTheme.colorScheme.surfaceContainerHighest
 }
 
-@Suppress("unused")
 @Composable
 fun outlinedCardColor(): Color {
     return MaterialTheme.colorScheme.surface
 }
 
-@Suppress("unused")
 @Composable
 fun elevatedCardColor(): Color {
     return MaterialTheme.colorScheme.surfaceContainerLow
