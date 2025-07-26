@@ -2,7 +2,7 @@ package com.brandoncano.resistancecalculator.util.resistor
 
 import com.brandoncano.resistancecalculator.to.ResistorCtv
 import com.brandoncano.resistancecalculator.util.UnitsFromMultiplier
-import com.brandoncano.resistancecalculator.util.ValueFinder
+import com.brandoncano.resistancecalculator.util.resistor.ValueFinder
 import com.brandoncano.resistancecalculator.constants.Colors as C
 import com.brandoncano.resistancecalculator.constants.Symbols as S
 

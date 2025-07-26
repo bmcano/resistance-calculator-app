@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.util
+package com.brandoncano.resistancecalculator.util.resistor
 
 /**
  * Job: gets the proper EIA-96 base value or NaN if it doesn't exist

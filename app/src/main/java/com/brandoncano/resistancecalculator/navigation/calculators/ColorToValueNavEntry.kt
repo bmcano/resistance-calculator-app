@@ -19,9 +19,9 @@ import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.navigation.navigateToColorCodeIec
 import com.brandoncano.resistancecalculator.ui.screens.calculators.ColorToValueScreen
+import com.brandoncano.resistancecalculator.util.SendFeedback
 import com.brandoncano.resistancecalculator.util.share.ShareResistor
-import com.brandoncano.sharedcomponents.utils.SendFeedback
-import com.brandoncano.sharedcomponents.utils.ShareText
+import com.brandoncano.resistancecalculator.util.share.ShareText
 
 fun NavGraphBuilder.colorToValueScreen(
     navHostController: NavHostController,
@@ -57,7 +57,7 @@ fun NavGraphBuilder.colorToValueScreen(
                 }
             },
             onShareTextTapped = { ShareText.execute(context, it) },
-            onFeedbackTapped = { SendFeedback.execute(context, Links.APP_NAME) },
+            onFeedbackTapped = { SendFeedback.execute(context) },
             onAboutTapped = { navigateToAbout(navHostController) },
             onUpdateBand = { bandNumber, color ->
                 viewModel.updateBand(bandNumber, color)

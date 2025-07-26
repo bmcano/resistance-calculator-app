@@ -20,10 +20,10 @@ import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.navigation.navigateToPreferredValuesIec
 import com.brandoncano.resistancecalculator.ui.screens.calculators.ValueToColorScreen
+import com.brandoncano.resistancecalculator.util.SendFeedback
 import com.brandoncano.resistancecalculator.util.eseries.formatResistanceString
 import com.brandoncano.resistancecalculator.util.share.ShareResistor
-import com.brandoncano.sharedcomponents.utils.SendFeedback
-import com.brandoncano.sharedcomponents.utils.ShareText
+import com.brandoncano.resistancecalculator.util.share.ShareText
 
 fun NavGraphBuilder.valueToColorScreen(
     navHostController: NavHostController,
@@ -65,7 +65,7 @@ fun NavGraphBuilder.valueToColorScreen(
                 }
             },
             onShareTextTapped = { ShareText.execute(context, it) },
-            onFeedbackTapped = { SendFeedback.execute(context, Links.APP_NAME) },
+            onFeedbackTapped = { SendFeedback.execute(context) },
             onAboutTapped = { navigateToAbout(navHostController) },
             onValueChanged = { resistance ->
                 viewModel.updateCardContent(ESeriesCardContent.DefaultContent)

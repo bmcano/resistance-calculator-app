@@ -6,9 +6,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.ui.screens.HomeScreen
-import com.brandoncano.sharedcomponents.utils.SendFeedback
+import com.brandoncano.resistancecalculator.util.SendFeedback
 
 fun NavGraphBuilder.homeScreen(
     navHostController: NavHostController,
@@ -21,7 +20,7 @@ fun NavGraphBuilder.homeScreen(
     ) {
         val context = LocalContext.current
         HomeScreen(
-            onFeedbackTapped = { SendFeedback.execute(context, Links.APP_NAME) },
+            onFeedbackTapped = { SendFeedback.execute(context) },
             onOpenAppThemeDialog = onOpenAppThemeDialog,
             onAboutTapped = { navigateToAbout(navHostController) },
             onColorToValueTapped = { navigateToColorToValue(navHostController) },

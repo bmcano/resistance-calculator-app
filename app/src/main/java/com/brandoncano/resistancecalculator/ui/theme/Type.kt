@@ -1,11 +1,25 @@
 package com.brandoncano.resistancecalculator.ui.theme
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.composables.m3.ComponentPreviews
-import com.brandoncano.sharedcomponents.text.rubikFontFamily
+
+val rubikFontFamily = FontFamily(
+    Font(R.font.rubik_light, FontWeight.Light),
+    Font(R.font.rubik_regular, FontWeight.Normal),
+    Font(R.font.rubik_italic, FontWeight.Normal, FontStyle.Italic),
+    Font(R.font.rubik_medium, FontWeight.Medium),
+    Font(R.font.rubik_bold, FontWeight.Bold)
+)
 
 val bodyFontFamily = rubikFontFamily
 val displayFontFamily = rubikFontFamily
@@ -28,6 +42,15 @@ val RubikTypography = Typography(
     labelMedium = baseline.labelMedium.copy(fontFamily = bodyFontFamily),
     labelSmall = baseline.labelSmall.copy(fontFamily = bodyFontFamily),
 )
+
+@Composable
+fun TextStyle.white() = this.merge(color = white)
+
+@Composable
+fun TextStyle.black() = this.merge(color = black)
+
+@Composable
+fun TextStyle.gray() = this.merge(color = MaterialTheme.colorScheme.onSurfaceVariant)
 
 @ComponentPreviews
 @Composable

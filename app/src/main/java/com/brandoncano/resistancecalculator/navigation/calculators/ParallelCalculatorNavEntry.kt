@@ -14,13 +14,12 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.model.CircuitViewModel
 import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.navigation.navigateToCircuitEquations
 import com.brandoncano.resistancecalculator.ui.screens.calculators.CircuitCalculatorScreen
-import com.brandoncano.sharedcomponents.utils.SendFeedback
+import com.brandoncano.resistancecalculator.util.SendFeedback
 
 fun NavGraphBuilder.parallelCalculatorScreen(
     navHostController: NavHostController,
@@ -49,7 +48,7 @@ fun NavGraphBuilder.parallelCalculatorScreen(
                 viewModel.clear()
                 focusManager.clearFocus()
             },
-            onFeedbackTapped = { SendFeedback.execute(context, Links.APP_NAME) },
+            onFeedbackTapped = { SendFeedback.execute(context) },
             onAboutTapped = { navigateToAbout(navHostController) },
             onOptionSelected = { sameValues, resistorCount, units ->
                 viewModel.updateValues(sameValues, resistorCount, units, false)

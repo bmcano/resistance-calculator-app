@@ -1,5 +1,6 @@
 package com.brandoncano.resistancecalculator.util
 
+import com.brandoncano.resistancecalculator.util.resistor.FindEIA96Value
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

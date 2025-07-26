@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.core.content.FileProvider
-import com.brandoncano.sharedcomponents.utils.ErrorDialog
+import com.brandoncano.resistancecalculator.util.ErrorDialog
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream

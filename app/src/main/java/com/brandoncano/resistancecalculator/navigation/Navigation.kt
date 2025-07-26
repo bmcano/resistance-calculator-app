@@ -17,11 +17,11 @@ import com.brandoncano.resistancecalculator.navigation.learn.learnCircuitEquatio
 import com.brandoncano.resistancecalculator.navigation.learn.learnColorCodes
 import com.brandoncano.resistancecalculator.navigation.learn.learnPreferredValues
 import com.brandoncano.resistancecalculator.navigation.learn.learnSmdCodes
+import com.brandoncano.resistancecalculator.util.OpenLink
 import com.brandoncano.sharedcomponents.data.Apps
 import com.brandoncano.sharedcomponents.navigation.SharedScreens
 import com.brandoncano.sharedcomponents.navigation.donateScreen
 import com.brandoncano.sharedcomponents.navigation.viewOurAppsScreen
-import com.brandoncano.sharedcomponents.utils.OpenLink
 
 /**
  * Note: Keep each navigation route in alphabetical order
