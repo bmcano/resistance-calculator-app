@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.ui.screens.ctv
+package com.brandoncano.resistancecalculator.ui.screens.calculators
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -6,22 +6,22 @@ import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.outlined.Looks3
+import androidx.compose.material.icons.outlined.Looks4
+import androidx.compose.material.icons.outlined.Looks5
+import androidx.compose.material.icons.outlined.Looks6
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,28 +29,38 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Lists
+import com.brandoncano.resistancecalculator.data.NavigationBarItemPO
+import com.brandoncano.resistancecalculator.data.ResistorImageColorPair
 import com.brandoncano.resistancecalculator.to.ResistorCtv
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3CardContent
 import com.brandoncano.resistancecalculator.ui.composables.MenuIconButton
 import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ShareTextMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3CardContent
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3DisplayCard
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3NavigationBar
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3Scaffold
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3ScreenColumn
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.util.ColorFinder
+import com.brandoncano.resistancecalculator.util.resistor.ResistorImageBuilder
+import com.brandoncano.resistancecalculator.util.resistor.formatResistance
 import com.brandoncano.resistancecalculator.util.resistor.shareableText
-import com.brandoncano.sharedcomponents.composables.AppNavigationBar
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
+import kotlin.collections.forEach
 
 @OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
 @Composable
@@ -67,10 +77,7 @@ fun ColorToValueScreen(
     onLearnColorCodesTapped: () -> Unit,
 ) {
     var showMenu by remember { mutableStateOf(false) }
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+    M3Scaffold(
         topBar = {
             M3TopAppBar(
                 titleText = stringResource(R.string.ctv_title),
@@ -106,17 +113,16 @@ fun ColorToValueScreen(
                         }
                     }
                 },
-                scrollBehavior = scrollBehavior,
+                scrollBehavior = it,
             )
         },
         bottomBar = {
-            AppNavigationBar(
+            M3NavigationBar(
                 selection = resistor.navBarSelection,
                 onClick = { onNavBarSelectionChanged(it) },
-                options = navigationBarOptions(),
+                options = navigationBarItemPOs(),
             )
         },
-        contentWindowInsets = WindowInsets.safeDrawing,
     ) { paddingValues ->
         ColorToValueScreenContent(
             paddingValues = paddingValues,
@@ -134,14 +140,9 @@ private fun ColorToValueScreenContent(
     onUpdateBand: (Int, String) -> Unit,
     onLearnColorCodesTapped: () -> Unit,
 ) {
-    val sidePadding = dimensionResource(R.dimen.app_side_padding)
     val navBarSelection = resistor.navBarSelection
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(paddingValues)
-            .padding(horizontal = sidePadding),
+    M3ScreenColumn(
+        paddingValues = paddingValues,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Spacer(modifier = Modifier.padding(top = 32.dp))
@@ -214,11 +215,71 @@ private fun ColorToValueScreenContent(
                 bodyText = stringResource(R.string.ctv_info_card_body_text),
                 primaryButtonText = stringResource(R.string.ctv_info_card_cta_text),
                 onPrimaryClick = onLearnColorCodesTapped,
-                // secondaryButtonText = "View PDF",
-                // onSecondaryClick = {},
             )
         }
         BottomScreenSpacer()
+    }
+}
+
+@Composable
+private fun ResistorLayout(resistor: ResistorCtv, verticalPadding: Dp = 0.dp) {
+    val imageColorPairs = remember(resistor) {
+        ResistorImageBuilder.execute(resistor)
+    }
+    Column(
+        modifier = Modifier.padding(horizontal = 0.dp, vertical = verticalPadding),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        ResistorRow(imageColorPairs)
+        Spacer(modifier = Modifier.height(16.dp))
+        M3DisplayCard(
+            text = if (resistor.isEmpty()) {
+                stringResource(id = R.string.ctv_default_value)
+            } else {
+                resistor.formatResistance()
+            },
+        )
+    }
+}
+
+/**
+ * Note: Used for both CtV and VtC
+ */
+@Composable
+fun navigationBarItemPOs(): List<NavigationBarItemPO> {
+    return listOf(
+        NavigationBarItemPO(
+            label = stringResource(id = R.string.navbar_three_band),
+            imageVector = Icons.Outlined.Looks3,
+        ),
+        NavigationBarItemPO(
+            label = stringResource(id = R.string.navbar_four_band),
+            imageVector = Icons.Outlined.Looks4,
+        ),
+        NavigationBarItemPO(
+            label = stringResource(id = R.string.navbar_five_band),
+            imageVector = Icons.Outlined.Looks5,
+        ),
+        NavigationBarItemPO(
+            label = stringResource(id = R.string.navbar_six_band),
+            imageVector = Icons.Outlined.Looks6,
+        ),
+    )
+}
+
+@Composable
+fun ResistorRow(resistorImages: List<ResistorImageColorPair>) {
+    Row(
+        horizontalArrangement = Arrangement.Absolute.Center,
+    ) {
+        resistorImages.forEach { (drawableRes, color) ->
+            val tint = remember(color) { ColorFinder.textToColor(color) }
+            Image(
+                painter = painterResource(id = drawableRes),
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(tint),
+            )
+        }
     }
 }
 

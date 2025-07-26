@@ -129,7 +129,7 @@ private fun AboutScreenContent(
 }
 
 @Composable
-fun AppInformationCard(version: String, lastUpdated: String) {
+private fun AppInformationCard(version: String, lastUpdated: String) {
     M3ElevatedCard(
         defaultElevation = 0.dp,
     ) {

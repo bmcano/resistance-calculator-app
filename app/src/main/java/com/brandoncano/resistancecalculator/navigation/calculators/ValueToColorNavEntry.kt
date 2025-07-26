@@ -19,7 +19,7 @@ import com.brandoncano.resistancecalculator.model.ResistorVtcViewModel
 import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.navigation.navigateToPreferredValuesIec
-import com.brandoncano.resistancecalculator.ui.screens.vtc.ValueToColorScreen
+import com.brandoncano.resistancecalculator.ui.screens.calculators.ValueToColorScreen
 import com.brandoncano.resistancecalculator.util.eseries.formatResistanceString
 import com.brandoncano.resistancecalculator.util.share.ShareResistor
 import com.brandoncano.sharedcomponents.utils.SendFeedback

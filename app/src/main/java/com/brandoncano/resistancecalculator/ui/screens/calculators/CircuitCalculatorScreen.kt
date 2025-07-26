@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.ui.screens.circuit
+package com.brandoncano.resistancecalculator.ui.screens.calculators
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
@@ -8,22 +8,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -32,10 +26,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
@@ -46,13 +40,15 @@ import com.brandoncano.resistancecalculator.ui.composables.AppTextField
 import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3CardContent
 import com.brandoncano.resistancecalculator.ui.composables.MenuIconButton
 import com.brandoncano.resistancecalculator.ui.composables.TextDropDownMenu
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3CardContent
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3DisplayCard
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3Scaffold
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3ScreenColumn
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3Switch
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
-import com.brandoncano.resistancecalculator.ui.screens.ctv.ResistanceText
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.circuit.IsValidNumber
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
@@ -68,14 +64,11 @@ fun CircuitCalculatorScreen(
     onClearSelectionsTapped: () -> Unit,
     onFeedbackTapped: () -> Unit,
     onAboutTapped: () -> Unit,
-    onValueChanged: (Boolean, Int, String) -> Unit,
+    onOptionSelected: (Boolean, Int, String) -> Unit,
     onLearnCircuitEquationsTapped: () -> Unit,
 ) {
     var showMenu by remember { mutableStateOf(false) }
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+    M3Scaffold(
         topBar = {
             M3TopAppBar(
                 titleText = stringResource(id = circuitTitle),
@@ -101,17 +94,16 @@ fun CircuitCalculatorScreen(
                         }
                     }
                 },
-                scrollBehavior = scrollBehavior,
+                scrollBehavior = it,
             )
         },
-        contentWindowInsets = WindowInsets.safeDrawing,
     ) { paddingValues ->
         CircuitCalculatorScreenContent(
             paddingValues = paddingValues,
             circuitVector = circuitVector,
             vectorSize = vectorSize,
             circuit = circuit,
-            onValueChanged = onValueChanged,
+            onOptionSelected = onOptionSelected,
             onLearnCircuitEquationsTapped = onLearnCircuitEquationsTapped,
         )
     }
@@ -123,16 +115,11 @@ private fun CircuitCalculatorScreenContent(
     circuitVector: Int,
     vectorSize: Pair<Dp, Dp>,
     circuit: Circuit,
-    onValueChanged: (Boolean, Int, String) -> Unit,
+    onOptionSelected: (Boolean, Int, String) -> Unit,
     onLearnCircuitEquationsTapped: () -> Unit,
 ) {
-    val sidePadding = dimensionResource(R.dimen.app_side_padding)
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(paddingValues)
-            .padding(horizontal = sidePadding),
+    M3ScreenColumn(
+        paddingValues = paddingValues,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Image(
@@ -144,14 +131,12 @@ private fun CircuitCalculatorScreenContent(
                 .align(Alignment.CenterHorizontally),
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
         )
-        ResistanceText("${circuit.totalResistance} ${circuit.units}")
+        M3DisplayCard(text = "${circuit.totalResistance} ${circuit.units}")
         Spacer(modifier = Modifier.height(24.dp))
         M3Switch(
             labelText = stringResource(R.string.circuit_use_same_values),
             checked = circuit.isSameValues,
-            onCheckedChange = {
-                onValueChanged(it, circuit.resistorCount, circuit.units)
-            },
+            onCheckedChange = { onOptionSelected(it, circuit.resistorCount, circuit.units) },
             horizontalInsetPadding = 0.dp,
         )
         Spacer(modifier = Modifier.height(24.dp))
@@ -168,7 +153,7 @@ private fun CircuitCalculatorScreenContent(
                 items = Lists.CIRCUIT_RESISTOR_COUNT,
             ) {
                 val resistorCount = it.toIntOrNull() ?: 2
-                onValueChanged(circuit.isSameValues, resistorCount, circuit.units)
+                onOptionSelected(circuit.isSameValues, resistorCount, circuit.units)
             }
             TextDropDownMenu(
                 label = stringResource(id = R.string.circuit_units_label),
@@ -177,7 +162,7 @@ private fun CircuitCalculatorScreenContent(
                     .padding(start = 8.dp),
                 selectedOption = circuit.units,
                 items = Lists.UNITS,
-                onOptionSelected = { onValueChanged(circuit.isSameValues, circuit.resistorCount, it) }
+                onOptionSelected = { onOptionSelected(circuit.isSameValues, circuit.resistorCount, it) },
             )
         }
         Column(
@@ -196,9 +181,13 @@ private fun CircuitCalculatorScreenContent(
                         .padding(top = 12.dp),
                     value = circuit.resistorInputs[index],
                     isError = !IsValidNumber.execute(circuit.resistorInputs[index]),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Number,
+                        imeAction = if (index == fieldsToShow - 1) ImeAction.Done else ImeAction.Next
+                    ),
                 ) { newValue ->
                     circuit.resistorInputs[index] = newValue
-                    onValueChanged(circuit.isSameValues, circuit.resistorCount, circuit.units)
+                    onOptionSelected(circuit.isSameValues, circuit.resistorCount, circuit.units)
                 }
             }
             Spacer(modifier = Modifier.height(24.dp))
@@ -216,6 +205,15 @@ private fun CircuitCalculatorScreenContent(
     }
 }
 
+@Composable
+private fun getResistanceLabelText(sameValues: Boolean, units: String, count: Int): String {
+    return if (sameValues) {
+        stringResource(id = R.string.circuit_text_field_label, units)
+    } else {
+        stringResource(id = R.string.circuit_text_field_label_multiple, count, units)
+    }
+}
+
 @AppScreenPreviews
 @Composable
 private fun CircuitCalculatorScreenSeriesPreview() {
@@ -229,7 +227,7 @@ private fun CircuitCalculatorScreenSeriesPreview() {
             onClearSelectionsTapped = {},
             onFeedbackTapped = {},
             onAboutTapped = {},
-            onValueChanged = { _, _, _ -> },
+            onOptionSelected = { _, _, _ -> },
             onLearnCircuitEquationsTapped = {},
         )
     }
@@ -248,7 +246,7 @@ private fun CircuitCalculatorScreenParallelPreview() {
             onClearSelectionsTapped = {},
             onFeedbackTapped = {},
             onAboutTapped = {},
-            onValueChanged = { _, _, _ -> },
+            onOptionSelected = { _, _, _ -> },
             onLearnCircuitEquationsTapped = {},
         )
     }

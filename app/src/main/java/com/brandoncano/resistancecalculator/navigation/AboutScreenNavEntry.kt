@@ -25,7 +25,7 @@ fun NavGraphBuilder.aboutScreen(
     ) {
         val context = LocalContext.current
         AboutScreen(
-            onNavigateBack = { navHostController.popBackStack() },
+            onNavigateBack = { popBackStackSafely(navHostController) },
             onViewPrivacyPolicyTapped = { navigateToPrivacyPolicy(context) },
             onViewColorCodeIecTapped = { navigateToColorCodeIec(navHostController) },
             onViewPreferredValuesIecTapped = { navigateToPreferredValuesIec(navHostController) },

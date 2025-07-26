@@ -280,7 +280,9 @@ private fun InfoResistorLayout(resistor: ResistorCtv) {
     }
 }
 
-// Note: Used for all info screens
+/**
+ * Note: Used for all info screens
+ */
 @Composable
 fun DisclaimerText() {
     M3Divider(modifier = Modifier.padding(vertical = 24.dp))

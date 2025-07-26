@@ -30,9 +30,9 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.data.DropdownItemPO
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.RoundedSquare
+import com.brandoncano.resistancecalculator.ui.theme.gray
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
-import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 
 @OptIn(ExperimentalMaterial3Api::class) // For ExposedDropdownMenuBox
 @Composable
@@ -183,7 +183,7 @@ private fun DropdownItemView(item: DropdownItemPO, onClick: () -> Unit) {
                 )
                 Text(
                     text = item.value,
-                    style = MaterialTheme.typography.bodySmall.onSurfaceVariant(),
+                    style = MaterialTheme.typography.bodySmall.gray(),
                     modifier = Modifier.padding(start = 8.dp, end = 8.dp)
                 )
             }

@@ -23,8 +23,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.brandoncano.resistancecalculator.ui.theme.gray
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
-import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 
 /**
  * A labeled switch with optional icons for on/off states.
@@ -71,7 +71,7 @@ fun M3Switch(
         Text(
             text = labelText,
             modifier = Modifier.weight(1f),
-            style = MaterialTheme.typography.bodyLarge.onSurfaceVariant(),
+            style = MaterialTheme.typography.bodyLarge.gray(),
         )
         Switch(
             checked = checkedState,

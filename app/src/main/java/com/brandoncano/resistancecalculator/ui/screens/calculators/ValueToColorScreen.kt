@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.ui.screens.vtc
+package com.brandoncano.resistancecalculator.ui.screens.calculators
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -9,20 +9,15 @@ import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.outlined.CheckCircle
+import androidx.compose.material.icons.rounded.WarningAmber
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -30,9 +25,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Lists
@@ -48,14 +42,21 @@ import com.brandoncano.resistancecalculator.ui.composables.MenuIconButton
 import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ShareTextMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.TextDropDownMenu
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3CardContent
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3DisplayCard
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3ElevatedCard
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3FilledButton
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3NavigationBar
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3Scaffold
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3ScreenColumn
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
-import com.brandoncano.resistancecalculator.ui.screens.ctv.navigationBarOptions
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.ui.theme.validGreen
+import com.brandoncano.resistancecalculator.ui.theme.warningGold
+import com.brandoncano.resistancecalculator.util.resistor.ResistorImageBuilder
 import com.brandoncano.resistancecalculator.util.resistor.shareableText
-import com.brandoncano.sharedcomponents.composables.AppNavigationBar
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
-
 
 @OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
 @Composable
@@ -77,10 +78,7 @@ fun ValueToColorScreen(
     onLearnMoreTapped: () -> Unit,
 ) {
     var showMenu by remember { mutableStateOf(false) }
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+    M3Scaffold(
         topBar = {
             M3TopAppBar(
                 titleText = stringResource(R.string.vtc_title),
@@ -116,17 +114,16 @@ fun ValueToColorScreen(
                         }
                     }
                 },
-                scrollBehavior = scrollBehavior,
+                scrollBehavior = it,
             )
         },
         bottomBar = {
-            AppNavigationBar(
+            M3NavigationBar(
                 selection = resistor.navBarSelection,
                 onClick = { onNavBarSelectionChanged(it) },
-                options = navigationBarOptions(),
+                options = navigationBarItemPOs(),
             )
         },
-        contentWindowInsets = WindowInsets.safeDrawing,
     ) { paddingValues ->
         ValueToColorScreenContent(
             paddingValues = paddingValues,
@@ -154,14 +151,9 @@ private fun ValueToColorScreenContent(
     onUseValueTapped: () -> String,
     onLearnMoreTapped: () -> Unit,
 ) {
-    val sidePadding = dimensionResource(R.dimen.app_side_padding)
     val navBarSelection = resistor.navBarSelection
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(paddingValues)
-            .padding(horizontal = sidePadding),
+    M3ScreenColumn(
+        paddingValues = paddingValues,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Spacer(modifier = Modifier.padding(top = 32.dp))
@@ -229,9 +221,91 @@ private fun ValueToColorScreenContent(
     }
 }
 
+@Composable
+private fun ResistorLayout(resistor: ResistorVtc, isError: Boolean, verticalPadding: Dp = 0.dp) {
+    val imageColorPairs = remember(resistor) {
+        ResistorImageBuilder.execute(resistor)
+    }
+    val text = when {
+        resistor.isEmpty() -> stringResource(id = R.string.vtc_default_value)
+        isError -> stringResource(id = R.string.error_na)
+        else -> resistor.getResistorValue()
+    }
+    Column(
+        modifier = Modifier.padding(horizontal = 32.dp, vertical = verticalPadding),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        ResistorRow(imageColorPairs)
+        Spacer(modifier = Modifier.height(16.dp))
+        M3DisplayCard(text = text)
+    }
+}
+
+@Composable
+private fun ESeriesCard(
+    eSeriesCardContent: ESeriesCardContent,
+    onLearnMoreTapped: () -> Unit,
+    onUseValueTapped: () -> Unit,
+) {
+    when (eSeriesCardContent) {
+        is ESeriesCardContent.ValidResistance -> {
+            M3OutlinedCard {
+                M3CardContent(
+                    headline = stringResource(R.string.vtc_valid_card_title),
+                    subhead = stringResource(R.string.vtc_info_card_subhead),
+                    bodyText = stringResource(R.string.vtc_valid_card_body, eSeriesCardContent.value),
+                    icon = Icons.Outlined.CheckCircle,
+                    iconTint = validGreen,
+                    primaryButtonText = stringResource(R.string.vtc_info_card_action),
+                    onPrimaryClick = onLearnMoreTapped,
+                )
+            }
+        }
+        is ESeriesCardContent.InvalidTolerance -> {
+            M3ElevatedCard(defaultElevation = 1.dp) {
+                M3CardContent(
+                    headline = stringResource(R.string.vtc_invalid_tolerance_label),
+                    subhead = stringResource(R.string.vtc_info_card_subhead),
+                    bodyText = stringResource(R.string.vtc_invalid_tolerance_body, eSeriesCardContent.value),
+                    icon = Icons.Rounded.WarningAmber,
+                    iconTint = warningGold,
+                    primaryButtonText = stringResource(R.string.vtc_info_card_action),
+                    onPrimaryClick = onLearnMoreTapped,
+                )
+            }
+        }
+        is ESeriesCardContent.InvalidResistance -> {
+            M3ElevatedCard(defaultElevation = 1.dp) {
+                M3CardContent(
+                    headline = stringResource(R.string.vtc_invalid_card_title),
+                    subhead = stringResource(R.string.vtc_info_card_subhead),
+                    icon = Icons.Rounded.WarningAmber,
+                    iconTint = warningGold,
+                    bodyText = stringResource(R.string.vtc_invalid_card_body, eSeriesCardContent.value),
+                    primaryButtonText = stringResource(R.string.vtc_invalid_card_action),
+                    onPrimaryClick = onUseValueTapped,
+                    secondaryButtonText = stringResource(R.string.vtc_info_card_action),
+                    onSecondaryClick = onLearnMoreTapped,
+                )
+            }
+        }
+        ESeriesCardContent.DefaultContent -> {
+            M3OutlinedCard {
+                M3CardContent(
+                    headline = stringResource(R.string.vtc_info_card_title),
+                    subhead = stringResource(R.string.vtc_info_card_subhead),
+                    bodyText = stringResource(R.string.vtc_info_card_body),
+                    primaryButtonText = stringResource(R.string.vtc_info_card_action),
+                    onPrimaryClick = onLearnMoreTapped,
+                )
+            }
+        }
+    }
+}
+
 @AppScreenPreviews
 @Composable
-private fun ValueToColorScreenPreview() {
+private fun ValueToColorScreen4BandPreview() {
     ResistorCalculatorTheme {
         ValueToColorScreen(
             resistor = ResistorVtc(),

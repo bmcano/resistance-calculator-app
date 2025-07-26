@@ -28,7 +28,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.data.ArrowCardButtonPO
-import com.brandoncano.sharedcomponents.text.onSurfaceVariant
+import com.brandoncano.resistancecalculator.ui.theme.gray
 
 @Composable
 fun M3CallOutCard(
@@ -46,6 +46,29 @@ fun M3CallOutCard(
             modifier = Modifier
                 .padding(16.dp)
                 .fillMaxWidth(),
+            style = style,
+            textAlign = TextAlign.Center,
+        )
+    }
+}
+
+@Composable
+fun M3DisplayCard(
+    text: String,
+    modifier: Modifier = Modifier,
+    style: TextStyle = MaterialTheme.typography.headlineLarge,
+    color: Color = filledCardColor(),
+) {
+    Card(
+        modifier = modifier,
+        shape = MaterialTheme.shapes.large,
+        colors = CardDefaults.cardColors(containerColor = color)
+    ) {
+        Text(
+            text = text,
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(vertical = 12.dp, horizontal = 16.dp),
             style = style,
             textAlign = TextAlign.Center,
         )
@@ -126,7 +149,7 @@ fun M3CardContent(
         Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = subhead,
-            style = MaterialTheme.typography.titleMedium.onSurfaceVariant(),
+            style = MaterialTheme.typography.titleMedium.gray(),
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(

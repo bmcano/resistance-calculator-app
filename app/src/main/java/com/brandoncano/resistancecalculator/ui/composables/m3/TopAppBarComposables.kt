@@ -25,6 +25,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.ui.theme.gray
 import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 
 @Composable
@@ -51,7 +52,7 @@ private fun TitleContent(
         subTitleText?.let {
             Text(
                 text = subTitleText,
-                style = subTitleTextStyle.onSurfaceVariant(),
+                style = subTitleTextStyle.gray(),
             )
         }
     }

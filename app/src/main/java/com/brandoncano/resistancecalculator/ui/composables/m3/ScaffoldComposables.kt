@@ -26,12 +26,14 @@ import com.brandoncano.resistancecalculator.R
 fun M3Scaffold(
     modifier: Modifier = Modifier,
     topBar: @Composable ((scrollBehavior: TopAppBarScrollBehavior) -> Unit) = {},
+    bottomBar: @Composable () -> Unit = {},
     scrollBehavior: TopAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
     content: @Composable ((PaddingValues) -> Unit),
 ) {
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = { topBar.invoke(scrollBehavior) },
+        bottomBar = bottomBar,
         contentWindowInsets = WindowInsets.safeDrawing,
         content = { content.invoke(it) }
     )
@@ -56,3 +58,6 @@ fun M3ScreenColumn(
         content = content,
     )
 }
+
+// TODO Lazy Column Next?
+// CircuitScreen, Info Screens?

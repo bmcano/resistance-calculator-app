@@ -18,7 +18,7 @@ import com.brandoncano.resistancecalculator.model.SmdResistorViewModel
 import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.navigation.navigateToSmdCodeIec
-import com.brandoncano.resistancecalculator.ui.screens.smd.SmdScreen
+import com.brandoncano.resistancecalculator.ui.screens.calculators.SmdScreen
 import com.brandoncano.resistancecalculator.util.share.ShareResistor
 import com.brandoncano.sharedcomponents.utils.SendFeedback
 import com.brandoncano.sharedcomponents.utils.ShareText

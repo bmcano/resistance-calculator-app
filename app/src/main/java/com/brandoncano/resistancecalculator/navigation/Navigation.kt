@@ -1,6 +1,7 @@
 package com.brandoncano.resistancecalculator.navigation
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -10,8 +11,8 @@ import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.navigation.calculators.colorToValueScreen
 import com.brandoncano.resistancecalculator.navigation.calculators.smdScreen
 import com.brandoncano.resistancecalculator.navigation.calculators.valueToColorScreen
-import com.brandoncano.resistancecalculator.navigation.circuit.parallelCalculatorScreen
-import com.brandoncano.resistancecalculator.navigation.circuit.seriesCalculatorScreen
+import com.brandoncano.resistancecalculator.navigation.calculators.parallelCalculatorScreen
+import com.brandoncano.resistancecalculator.navigation.calculators.seriesCalculatorScreen
 import com.brandoncano.resistancecalculator.navigation.learn.learnCircuitEquations
 import com.brandoncano.resistancecalculator.navigation.learn.learnColorCodes
 import com.brandoncano.resistancecalculator.navigation.learn.learnPreferredValues
@@ -49,6 +50,15 @@ fun Navigation(onOpenAppThemeDialog: () -> Unit) {
         // from shared library
         donateScreen(navController)
         viewOurAppsScreen(navController, Apps.Resistor)
+    }
+}
+
+// TODO - add to screens
+fun popBackStackSafely(navController: NavHostController) {
+    if (navController.previousBackStackEntry != null) {
+        navController.popBackStack()
+    } else {
+        Log.e("Navigation", "Attempted navController.popBackStack(), but no BackStackEntry exists.")
     }
 }
 
