@@ -35,14 +35,14 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.constants.DropdownLists
+import com.brandoncano.resistancecalculator.constants.Lists
 import com.brandoncano.resistancecalculator.to.SmdResistor
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppTextField
 import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.M3CardContent
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3CardContent
 import com.brandoncano.resistancecalculator.ui.composables.MenuIconButton
 import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ShareTextMenuItem
@@ -185,7 +185,7 @@ private fun SmdScreenContent(
             label = stringResource(id = R.string.units_hint),
             modifier = Modifier.padding(top = 12.dp),
             selectedOption = resistor.units,
-            items = DropdownLists.UNITS_LIST,
+            items = Lists.UNITS,
             onOptionSelected = { onOptionSelected(it) },
         )
         Spacer(modifier = Modifier.height(24.dp))

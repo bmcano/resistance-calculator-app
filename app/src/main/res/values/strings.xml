@@ -140,8 +140,8 @@
     <string name="info_smd_multipliers_headline">Multipliers</string>
     <string name="info_smd_multipliers_body">The multiplier indicates the factor by which to multiply the significant figures. In the EIA-96 code, letters represent multipliers as follows:</string>
     <string name="info_smd_code_value_col1">Code</string>
-    <string name="info_smd_code_value_col2">Value</string>
-    <string name="info_smd_code_value_headline">Value codes</string>
+    <string name="info_smd_code_value_col2">Value (Ω)</string>
+    <string name="info_smd_code_value_headline">EIA-96 Code Lookup Table</string>
     <string name="info_smd_code_value_body">"These are the common resistance value codes, but a manufacturer may use a variation on these or even something completely different. It is therefore always important to verify the manufacturer's marking system."</string>
     <string name="info_values_preferred_values_title">Preferred Values</string>
     <string name="info_values_body1">"The IEC 60063 standard defines 'preferred values' or the 'E-series' system which standardizes resistor values by spacing them on a logarithmic scale. This makes mass production and inventory management far simpler, since manufacturers only need to stock a small set of values instead of every possible resistance."</string>

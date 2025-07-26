@@ -1,41 +1,42 @@
-package com.brandoncano.resistancecalculator.ui.screens.about
+package com.brandoncano.resistancecalculator.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.outlined.History
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Policy
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.data.ArrowCardButtonPO
-import com.brandoncano.resistancecalculator.ui.composables.ArrowCardButtonContent
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3ArrowButtonCardContent
 import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
-import com.brandoncano.resistancecalculator.ui.composables.elevatedCardColor
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3Scaffold
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3ScreenColumn
+import com.brandoncano.resistancecalculator.ui.composables.m3.elevatedCardColor
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3Divider
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3ElevatedCard
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3ListItem
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
-import com.brandoncano.resistancecalculator.ui.screens.home.InformationCardButtons
-import com.brandoncano.resistancecalculator.ui.screens.home.OurAppsButtons
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.ui.theme.gray
+import com.brandoncano.sharedcomponents.composables.AppLongScreenPreview
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
-
 
 @OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
 @Composable
@@ -50,19 +51,15 @@ fun AboutScreen(
     onViewOurAppsTapped: () -> Unit,
     onDonateTapped: () -> Unit,
 ) {
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+    M3Scaffold(
         topBar = {
             M3TopAppBar(
                 titleText = stringResource(R.string.about_title),
                 navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,
                 onNavigateBack = onNavigateBack,
-                scrollBehavior = scrollBehavior,
+                scrollBehavior = it,
             )
         },
-        contentWindowInsets = WindowInsets.safeDrawing,
     ) { paddingValues ->
         AboutScreenContent(
             paddingValues = paddingValues,
@@ -90,14 +87,8 @@ private fun AboutScreenContent(
     onViewOurAppsTapped: () -> Unit,
     onDonateTapped: () -> Unit,
 ) {
-    val sidePadding = dimensionResource(R.dimen.app_side_padding)
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(paddingValues)
-            .padding(horizontal = sidePadding),
-        horizontalAlignment = Alignment.Start,
+    M3ScreenColumn (
+        paddingValues = paddingValues,
     ) {
         Spacer(modifier = Modifier.height(24.dp))
         AppInformationCard(
@@ -107,8 +98,9 @@ private fun AboutScreenContent(
         Spacer(modifier = Modifier.height(12.dp))
         M3ElevatedCard(
             modifier = Modifier.fillMaxWidth(),
+            defaultElevation = 0.dp,
         ) {
-            ArrowCardButtonContent(
+            M3ArrowButtonCardContent(
                 color = elevatedCardColor(),
                 ArrowCardButtonPO(
                     text = stringResource(id = R.string.about_view_privacy_policy),
@@ -136,9 +128,83 @@ private fun AboutScreenContent(
     }
 }
 
-@AppScreenPreviews
 @Composable
-private fun AboutPreview() {
+fun AppInformationCard(version: String, lastUpdated: String) {
+    M3ElevatedCard(
+        defaultElevation = 0.dp,
+    ) {
+        M3ListItem(
+            headlineText = stringResource(R.string.about_created_by),
+            supportingText = stringResource(R.string.about_author),
+            leadingContent = {
+                Image(
+                    imageVector = Icons.Outlined.Person,
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant),
+                )
+            },
+            containerColor = elevatedCardColor(),
+        )
+        M3Divider(insetPadding = 16.dp)
+        M3ListItem(
+            headlineText = stringResource(R.string.about_app_version),
+            supportingText = version,
+            leadingContent = {
+                Image(
+                    imageVector = Icons.Outlined.Info,
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant),
+                )
+            },
+            containerColor = elevatedCardColor(),
+        )
+        M3Divider(insetPadding = 16.dp)
+        M3ListItem(
+            headlineText = stringResource(R.string.about_last_updated_on),
+            supportingText = lastUpdated,
+            leadingContent = {
+                Image(
+                    imageVector = Icons.Outlined.History,
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant),
+                )
+            },
+            containerColor = elevatedCardColor(),
+        )
+    }
+}
+
+@Composable
+fun AboutOverviewCard() {
+    Column {
+        Text(
+            text = stringResource(id = R.string.about_overview_title),
+            modifier = Modifier.align(Alignment.Start),
+            style = MaterialTheme.typography.titleMedium,
+        )
+        Spacer(modifier = Modifier.height(12.dp))
+        M3ElevatedCard(
+            modifier = Modifier.fillMaxWidth(),
+            defaultElevation = 0.dp,
+        ) {
+            Text(
+                text = stringResource(id = R.string.about_overview_body_01),
+                modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 12.dp),
+                style = MaterialTheme.typography.bodyMedium.gray(),
+            )
+            Text(
+                text = stringResource(id = R.string.about_overview_body_02),
+                modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                style = MaterialTheme.typography.bodyMedium.gray(),
+            )
+        }
+    }
+}
+
+@AppScreenPreviews
+@AppLongScreenPreview
+@Composable
+private fun AboutScreenPreview() {
     ResistorCalculatorTheme {
         AboutScreen(
             onNavigateBack = {},

@@ -35,7 +35,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.constants.DropdownLists
+import com.brandoncano.resistancecalculator.constants.Lists
 import com.brandoncano.resistancecalculator.data.ESeriesCardContent
 import com.brandoncano.resistancecalculator.to.ResistorVtc
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
@@ -178,7 +178,7 @@ private fun ValueToColorScreenContent(
             label = stringResource(id = R.string.units_hint),
             modifier = Modifier.padding(top = 12.dp),
             selectedOption = resistor.units,
-            items = DropdownLists.UNITS_LIST,
+            items = Lists.UNITS,
             onOptionSelected = {
                 onOptionSelected(it, resistor.band5, resistor.band6)
             },
@@ -192,7 +192,7 @@ private fun ValueToColorScreenContent(
                 modifier = Modifier.padding(top = 12.dp),
                 label = stringResource(R.string.tolerance_band_hint),
                 selectedOption = resistor.band5,
-                items = DropdownLists.TOLERANCE_LIST,
+                items = Lists.RESISTOR_TOLERANCES,
                 isValueToColor = true,
                 onOptionSelected = { onOptionSelected(resistor.units, it, resistor.band6) },
             )
@@ -206,7 +206,7 @@ private fun ValueToColorScreenContent(
                 modifier = Modifier.padding(top = 12.dp),
                 label = stringResource(R.string.ppm_band_hint),
                 selectedOption = resistor.band6,
-                items = DropdownLists.PPM_LIST,
+                items = Lists.RESISTOR_PPM,
                 isValueToColor = true,
                 onOptionSelected = { onOptionSelected(resistor.units, resistor.band5, it) },
             )

@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.ui.composables
+package com.brandoncano.resistancecalculator.ui.composables.m3
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -28,30 +28,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.data.ArrowCardButtonPO
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3Divider
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3FilledButton
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedButton
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3SingleLineListItem
 import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 
-@Suppress("unused")
 @Composable
-fun filledCardColor(): Color {
-    return MaterialTheme.colorScheme.surfaceContainerHighest
-}
-
-@Composable
-fun outlinedCardColor(): Color {
-    return MaterialTheme.colorScheme.surface
-}
-
-@Composable
-fun elevatedCardColor(): Color {
-    return MaterialTheme.colorScheme.surfaceContainerLow
-}
-
-@Composable
-fun CalloutCard(
+fun M3CallOutCard(
     text: String,
     style: TextStyle = MaterialTheme.typography.titleMedium,
     color: Color = filledCardColor(),
@@ -73,9 +53,9 @@ fun CalloutCard(
 }
 
 @Composable
-fun ArrowCardButtonContent(color: Color, vararg arrowCardButtonPOs: ArrowCardButtonPO) {
+fun M3ArrowButtonCardContent(color: Color, vararg arrowCardButtonPOs: ArrowCardButtonPO) {
     arrowCardButtonPOs.forEachIndexed { index, it ->
-        AppCardRowView(color, it.text, it.imageVector, it.onClick)
+        M3ArrowButtonRowView(color, it.text, it.imageVector, it.onClick)
         if (arrowCardButtonPOs.lastIndex != index) {
             M3Divider(insetPadding = 16.dp)
         }
@@ -83,7 +63,7 @@ fun ArrowCardButtonContent(color: Color, vararg arrowCardButtonPOs: ArrowCardBut
 }
 
 @Composable
-private fun AppCardRowView(
+private fun M3ArrowButtonRowView(
     color: Color,
     text: String,
     imageVector: ImageVector,
@@ -172,7 +152,6 @@ fun M3CardContent(
                 ) {
                     Spacer(modifier = Modifier.width(8.dp))
                 }
-
                 if (primaryButtonText != null && onPrimaryClick != null) {
                     M3FilledButton(
                         buttonLabel = primaryButtonText,

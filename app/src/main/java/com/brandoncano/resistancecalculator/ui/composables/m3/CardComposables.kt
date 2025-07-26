@@ -8,8 +8,24 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+
+@Composable
+fun filledCardColor(): Color {
+    return MaterialTheme.colorScheme.surfaceContainerHighest
+}
+
+@Composable
+fun outlinedCardColor(): Color {
+    return MaterialTheme.colorScheme.surface
+}
+
+@Composable
+fun elevatedCardColor(): Color {
+    return MaterialTheme.colorScheme.surfaceContainerLow
+}
 
 @Composable
 fun M3Card(

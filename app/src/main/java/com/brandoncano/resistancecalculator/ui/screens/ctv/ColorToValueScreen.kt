@@ -34,14 +34,14 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.constants.DropdownLists
+import com.brandoncano.resistancecalculator.constants.Lists
 import com.brandoncano.resistancecalculator.to.ResistorCtv
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
-import com.brandoncano.resistancecalculator.ui.composables.M3CardContent
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3CardContent
 import com.brandoncano.resistancecalculator.ui.composables.MenuIconButton
 import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ShareTextMenuItem
@@ -150,14 +150,14 @@ private fun ColorToValueScreenContent(
             modifier = Modifier.padding(top = 32.dp),
             label = stringResource(R.string.number_band_hint1),
             selectedOption = resistor.band1,
-            items = DropdownLists.NUMBER_LIST_NO_BLACK,
+            items = Lists.RESISTOR_SIG_FIGS_NO_BLACK,
             onOptionSelected = { onUpdateBand(1, it) },
         )
         ImageTextDropDownMenu(
             modifier = Modifier.padding(top = 12.dp),
             label = stringResource(R.string.number_band_hint2),
             selectedOption = resistor.band2,
-            items = DropdownLists.NUMBER_LIST,
+            items = Lists.RESISTOR_SIG_FIGS,
             onOptionSelected = { onUpdateBand(2, it) },
         )
         AnimatedVisibility(
@@ -169,7 +169,7 @@ private fun ColorToValueScreenContent(
                 modifier = Modifier.padding(top = 12.dp),
                 label = stringResource(R.string.number_band_hint3),
                 selectedOption = resistor.band3,
-                items = DropdownLists.NUMBER_LIST,
+                items = Lists.RESISTOR_SIG_FIGS,
                 onOptionSelected = { onUpdateBand(3, it) },
             )
         }
@@ -177,7 +177,7 @@ private fun ColorToValueScreenContent(
             modifier = Modifier.padding(top = 12.dp),
             label = stringResource(R.string.multiplier_band_hint),
             selectedOption = resistor.band4,
-            items = DropdownLists.MULTIPLIER_LIST,
+            items = Lists.RESISTOR_MULTIPLIERS,
             onOptionSelected = { onUpdateBand(4, it) },
         )
         AnimatedVisibility(
@@ -189,7 +189,7 @@ private fun ColorToValueScreenContent(
                 modifier = Modifier.padding(top = 12.dp),
                 label = stringResource(R.string.tolerance_band_hint),
                 selectedOption = resistor.band5,
-                items = DropdownLists.TOLERANCE_LIST,
+                items = Lists.RESISTOR_TOLERANCES,
                 onOptionSelected = { onUpdateBand(5, it) },
             )
         }
@@ -202,7 +202,7 @@ private fun ColorToValueScreenContent(
                 modifier = Modifier.padding(top = 12.dp),
                 label = stringResource(R.string.ppm_band_hint),
                 selectedOption = resistor.band6,
-                items = DropdownLists.PPM_LIST,
+                items = Lists.RESISTOR_PPM,
                 onOptionSelected = { onUpdateBand(6, it) },
             )
         }

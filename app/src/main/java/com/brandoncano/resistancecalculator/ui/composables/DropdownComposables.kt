@@ -27,7 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
-import com.brandoncano.resistancecalculator.data.DropdownItem
+import com.brandoncano.resistancecalculator.data.DropdownItemPO
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.RoundedSquare
 import com.brandoncano.resistancecalculator.util.ColorFinder
@@ -107,7 +107,7 @@ fun ImageTextDropDownMenu(
     modifier: Modifier = Modifier,
     label: String,
     selectedOption: String = "",
-    items: List<DropdownItem>,
+    items: List<DropdownItemPO>,
     isValueToColor: Boolean = false,
     onOptionSelected: (String) -> Unit,
 ) {
@@ -162,7 +162,7 @@ fun ImageTextDropDownMenu(
 }
 
 @Composable
-private fun DropdownItemView(item: DropdownItem, onClick: () -> Unit) {
+private fun DropdownItemView(item: DropdownItemPO, onClick: () -> Unit) {
     val color = ColorFinder.textToColor(item.name)
     Column(
         modifier = Modifier
@@ -195,7 +195,7 @@ private fun DropdownItemView(item: DropdownItem, onClick: () -> Unit) {
 @Composable
 private fun CustomDropdownRowPreview() {
     ResistorCalculatorTheme {
-        val item1 = DropdownItem(name = "Item 1", value = "Value 1")
+        val item1 = DropdownItemPO(name = "Item 1", value = "Value 1")
         Column {
             DropdownItemView(item1) { }
             DropdownItemView(item1) { }
@@ -206,7 +206,7 @@ private fun CustomDropdownRowPreview() {
 @AppComponentPreviews
 @Composable
 private fun CustomDropdownPreview() {
-    val item1 = DropdownItem(name = "Item 1", value = "Value 1")
+    val item1 = DropdownItemPO(name = "Item 1", value = "Value 1")
     val list = listOf(item1)
     ResistorCalculatorTheme {
         Column {

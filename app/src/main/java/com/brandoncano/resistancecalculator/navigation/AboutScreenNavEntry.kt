@@ -10,7 +10,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.brandoncano.resistancecalculator.constants.Links
-import com.brandoncano.resistancecalculator.ui.screens.about.AboutScreen
+import com.brandoncano.resistancecalculator.ui.screens.AboutScreen
 import com.brandoncano.sharedcomponents.utils.OpenLink
 
 fun NavGraphBuilder.aboutScreen(

@@ -99,6 +99,6 @@ private fun MenuIcon(imageVector: ImageVector) {
     Image(
         imageVector = imageVector,
         contentDescription = null,
-        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant)
+        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant),
     )
 }

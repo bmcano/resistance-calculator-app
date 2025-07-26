@@ -39,14 +39,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.constants.DropdownLists
+import com.brandoncano.resistancecalculator.constants.Lists
 import com.brandoncano.resistancecalculator.to.Circuit
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppTextField
 import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.M3CardContent
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3CardContent
 import com.brandoncano.resistancecalculator.ui.composables.MenuIconButton
 import com.brandoncano.resistancecalculator.ui.composables.TextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
@@ -165,7 +165,7 @@ private fun CircuitCalculatorScreenContent(
                     .weight(0.5f)
                     .padding(end = 8.dp),
                 selectedOption = circuit.resistorCount.toString(),
-                items = DropdownLists.RESISTOR_COUNT_LIST,
+                items = Lists.CIRCUIT_RESISTOR_COUNT,
             ) {
                 val resistorCount = it.toIntOrNull() ?: 2
                 onValueChanged(circuit.isSameValues, resistorCount, circuit.units)
@@ -176,7 +176,7 @@ private fun CircuitCalculatorScreenContent(
                     .weight(0.5f)
                     .padding(start = 8.dp),
                 selectedOption = circuit.units,
-                items = DropdownLists.UNITS_LIST,
+                items = Lists.UNITS,
                 onOptionSelected = { onValueChanged(circuit.isSameValues, circuit.resistorCount, it) }
             )
         }

@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.data.ESeriesCardContent
 import com.brandoncano.resistancecalculator.to.ResistorVtc
-import com.brandoncano.resistancecalculator.ui.composables.M3CardContent
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3CardContent
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3ElevatedCard
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
 import com.brandoncano.resistancecalculator.ui.screens.ctv.ResistanceText

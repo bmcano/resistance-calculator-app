@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -236,59 +237,59 @@ private fun ButtonsPreview() {
         ) {
             M3ElevatedButton(
                 buttonLabel = "Elevated",
-                onClick = { /*noop*/ },
+                onClick = {},
                 icon = Icons.Default.Favorite,
                 iconContentDescription = "Favorite"
             )
             M3ElevatedButton(
                 buttonLabel = "Elevated Square",
-                onClick = { /*noop*/ },
+                onClick = {},
                 useSquareShape = true,
-                icon = Icons.Default.Favorite,
+                icon = Icons.Default.Add,
                 iconContentDescription = "Favorite"
             )
             M3FilledButton(
                 buttonLabel = "Filled",
-                onClick = { /*noop*/ },
+                onClick = {},
                 icon = Icons.Default.Favorite,
                 iconContentDescription = "Favorite"
             )
             M3FilledButton(
                 buttonLabel = "Filled Square",
-                onClick = { /*noop*/ },
+                onClick = {},
                 useSquareShape = true,
-                icon = Icons.Default.Favorite,
+                icon = Icons.Default.Add,
                 iconContentDescription = "Favorite"
             )
             M3FilledTonalButton(
                 buttonLabel = "Tonal",
-                onClick = { /*noop*/ },
+                onClick = {},
                 icon = Icons.Default.Favorite,
                 iconContentDescription = "Favorite"
             )
             M3FilledTonalButton(
                 buttonLabel = "Tonal Square",
-                onClick = { /*noop*/ },
+                onClick = {},
                 useSquareShape = true,
-                icon = Icons.Default.Favorite,
+                icon = Icons.Default.Add,
                 iconContentDescription = "Favorite"
             )
             M3OutlinedButton(
                 buttonLabel = "Outlined",
-                onClick = { /*noop*/ },
+                onClick = {},
                 icon = Icons.Default.Favorite,
                 iconContentDescription = "Favorite"
             )
             M3OutlinedButton(
                 buttonLabel = "Outlined Square",
-                onClick = { /*noop*/ },
+                onClick = {},
                 useSquareShape = true,
-                icon = Icons.Default.Favorite,
+                icon = Icons.Default.Add,
                 iconContentDescription = "Favorite"
             )
             M3TextButton(
                 buttonLabel = "Text Button",
-                onClick = { /*noop*/ },
+                onClick = {},
                 icon = Icons.Default.Favorite,
                 iconContentDescription = "Favorite"
             )

@@ -1,35 +1,27 @@
 package com.brandoncano.resistancecalculator.ui.screens.info
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3Divider
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3Scaffold
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3ScreenColumn
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.gray
@@ -41,19 +33,15 @@ import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 fun LearnCircuitEquationsScreen(
     onNavigateBack: () -> Unit,
 ) {
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+    M3Scaffold (
         topBar = {
             M3TopAppBar(
                 titleText = stringResource(R.string.info_circuit_title),
                 navigationIcon =  Icons.AutoMirrored.Filled.ArrowBack,
                 onNavigateBack = onNavigateBack,
-                scrollBehavior = scrollBehavior,
+                scrollBehavior = it,
             )
         },
-        contentWindowInsets = WindowInsets.safeDrawing,
     ) { paddingValues ->
         LearnCircuitEquationsScreenContent(paddingValues)
     }
@@ -61,13 +49,8 @@ fun LearnCircuitEquationsScreen(
 
 @Composable
 private fun LearnCircuitEquationsScreenContent(paddingValues: PaddingValues) {
-    val sidePadding = dimensionResource(R.dimen.app_side_padding)
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(paddingValues)
-            .padding(horizontal = sidePadding),
+    M3ScreenColumn (
+        paddingValues = paddingValues,
     ) {
         Spacer(modifier = Modifier.padding(top = 24.dp))
         Text(

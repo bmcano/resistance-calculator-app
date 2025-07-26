@@ -31,7 +31,6 @@ android {
         // - Bring donate and view apps screens into app code, remove from shared lib
         // - Bring billing manager into app code
         // - Update shared lib to be just pre-defined M3 components
-        // - Update remaining elements using old structure (menu items)
         // - App obfuscation? R8?
         // - "Pro" version - can pay 1.99 for access to PDFs
 

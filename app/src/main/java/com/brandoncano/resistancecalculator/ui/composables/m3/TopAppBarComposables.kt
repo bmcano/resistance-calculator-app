@@ -57,7 +57,7 @@ private fun TitleContent(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
 @Composable
 fun M3TopAppBar(
     titleText: String,
