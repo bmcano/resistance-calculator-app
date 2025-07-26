@@ -10,7 +10,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
+import com.brandoncano.resistancecalculator.ui.composables.m3.ComponentPreviews
 
 @Composable
 fun RoundedSquare(color: Color, size: Dp) {
@@ -22,7 +22,7 @@ fun RoundedSquare(color: Color, size: Dp) {
     )
 }
 
-@AppComponentPreviews
+@ComponentPreviews
 @Composable
 private fun RoundedSquarePreview() {
     ResistorCalculatorTheme {

@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.ui.composables
+package com.brandoncano.resistancecalculator.ui.composables.m3
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,10 +13,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3Divider
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
 import com.brandoncano.resistancecalculator.ui.theme.gray
-import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
 
 /**
  * A reusable table composable supporting dynamic columns and rows.
@@ -96,9 +93,9 @@ private fun RowScope.TableCell(
     )
 }
 
-@AppComponentPreviews
+@ComponentPreviews
 @Composable
-private fun AppTablePreviews() {
+private fun TablePreviews() {
     val headers = listOf("Column1", "Column2", "Column3", "Column4")
     val rows = listOf(
         listOf("11", "12", "13", "14"),
@@ -121,13 +118,6 @@ private fun AppTablePreviews() {
                 columnTitles = headers.take(3),
                 rows = rows.map { row -> row.take(3) },
                 horizontalPadding = 8.dp,
-                showDividers = false,
-            )
-        }
-        M3OutlinedCard {
-            M3Table(
-                columnTitles = headers.take(2),
-                rows = rows.map { row -> row.take(2) },
                 showDividers = false,
             )
         }

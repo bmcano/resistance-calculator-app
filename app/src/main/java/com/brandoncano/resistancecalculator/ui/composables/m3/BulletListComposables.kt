@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.ui.composables
+package com.brandoncano.resistancecalculator.ui.composables.m3
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,7 +14,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.constants.Symbols
-import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
 
 /**
  * A reusable bullet list component that displays a vertical list of bullet points with uniform spacing
@@ -27,7 +26,7 @@ import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
  * @param bulletStartPadding The start padding for the whole list from the left screen edge. Default is `16.dp`.
  */
 @Composable
-fun BulletList(
+fun M3BulletList(
     bulletStrings: List<String>,
     textStyle: TextStyle,
     bulletVerticalSpace: Dp = 8.dp,
@@ -73,7 +72,7 @@ private fun BulletRow(
     }
 }
 
-@AppComponentPreviews
+@ComponentPreviews
 @Composable
 private fun AppBulletListPreview() {
     Column {
@@ -82,7 +81,7 @@ private fun AppBulletListPreview() {
             modifier = Modifier.padding(bottom = 16.dp),
             style = MaterialTheme.typography.bodyLarge,
         )
-        BulletList(
+        M3BulletList(
             bulletStrings = listOf("First item", "Second item", "Third item"),
             textStyle = MaterialTheme.typography.bodyLarge,
         )

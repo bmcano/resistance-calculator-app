@@ -9,11 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
-
-/**
- * Note: Text colors
- */
+import com.brandoncano.resistancecalculator.ui.composables.m3.ComponentPreviews
 
 @Composable
 fun TextStyle.white() = this.merge(
@@ -30,7 +26,7 @@ fun TextStyle.gray() = this.merge(
     color = MaterialTheme.colorScheme.onSurfaceVariant
 )
 
-@AppComponentPreviews
+@ComponentPreviews
 @Composable
 private fun TextStyleColorsPreview() {
     ResistorCalculatorTheme {
@@ -47,7 +43,7 @@ private fun TextStyleColorsPreview() {
                 style = MaterialTheme.typography.titleMedium.black(),
             )
             Text(
-                text = "Black",
+                text = "Gray",
                 style = MaterialTheme.typography.titleMedium.gray(),
             )
         }

@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.ui.composables
+package com.brandoncano.resistancecalculator.ui.composables.m3
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height

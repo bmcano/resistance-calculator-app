@@ -21,8 +21,6 @@ import androidx.compose.ui.unit.dp
  * @param leadingContent Optional composable shown at the start (e.g., an icon).
  * @param trailingImage Optional icon displayed at the end.
  * @param containerColor Background color of the list item.
- *
- * Note: MaterialTheme.colorScheme.surfaceContainerHighest is the color for a [androidx.compose.material3.Card].
  */
 @Composable
 fun M3SingleLineListItem(
@@ -54,8 +52,6 @@ fun M3SingleLineListItem(
             }
         },
         colors = ListItemDefaults.colors(containerColor = containerColor),
-        tonalElevation = ListItemDefaults.Elevation, // Default parameter
-        shadowElevation = ListItemDefaults.Elevation, // Default parameter
     )
 }
 
@@ -69,8 +65,6 @@ fun M3SingleLineListItem(
  * @param leadingContent Optional composable shown at the start (e.g., an avatar).
  * @param trailingContent Optional icon displayed at the end.
  * @param containerColor Background color of the list item.
- *
- * Note: MaterialTheme.colorScheme.surfaceContainerHighest is the color for a [androidx.compose.material3.Card].
  */
 @Composable
 fun M3ListItem(
@@ -112,7 +106,5 @@ fun M3ListItem(
         leadingContent = leadingContent,
         trailingContent = trailingContent,
         colors = ListItemDefaults.colors(containerColor = containerColor),
-        tonalElevation = ListItemDefaults.Elevation, // Default parameter
-        shadowElevation = ListItemDefaults.Elevation, // Default parameter
     )
 }

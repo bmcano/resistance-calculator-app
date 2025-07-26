@@ -2,6 +2,7 @@ package com.brandoncano.resistancecalculator.ui.composables
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.outlined.Cancel
@@ -16,11 +17,12 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.ui.theme.gray
 
 @Composable
 fun MenuIconButton(onClick: () -> Unit) {
@@ -90,13 +92,14 @@ fun ShareTextMenuItem(onClick: () -> Unit) {
 private fun MenuText(@StringRes stringRes: Int) {
     Text(
         text = stringResource(id = stringRes),
-        style = MaterialTheme.typography.bodyLarge.gray(),
+        style = MaterialTheme.typography.bodyLarge,
     )
 }
 
 @Composable
 private fun MenuIcon(imageVector: ImageVector) {
     Image(
+        modifier = Modifier.size(24.dp),
         imageVector = imageVector,
         contentDescription = null,
         colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant),

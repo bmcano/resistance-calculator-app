@@ -30,13 +30,15 @@ import com.brandoncano.resistancecalculator.constants.Lists
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.data.ResistorColorCodeItemPO
 import com.brandoncano.resistancecalculator.to.ResistorCtv
-import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
+import com.brandoncano.resistancecalculator.ui.composables.m3.BottomScreenSpacer
+import com.brandoncano.resistancecalculator.ui.composables.m3.LongScreenPreview
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3CallOutCard
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3Divider
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3Scaffold
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3ScreenColumn
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
+import com.brandoncano.resistancecalculator.ui.composables.m3.ScreenPreviews
 import com.brandoncano.resistancecalculator.ui.composables.m3.elevatedCardColor
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.black
@@ -47,8 +49,6 @@ import com.brandoncano.resistancecalculator.ui.theme.violet
 import com.brandoncano.resistancecalculator.ui.theme.white
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.resistancecalculator.util.resistor.ResistorImageBuilder
-import com.brandoncano.sharedcomponents.composables.AppLongScreenPreview
-import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import com.brandoncano.resistancecalculator.constants.Colors as C
 
 /**
@@ -292,8 +292,8 @@ fun DisclaimerText() {
     )
 }
 
-@AppScreenPreviews
-@AppLongScreenPreview
+@ScreenPreviews
+@LongScreenPreview
 @Composable
 private fun LearnColorCodesScreenPreview() {
     ResistorCalculatorTheme { LearnColorCodesScreen {} }

@@ -3,17 +3,17 @@ package com.brandoncano.resistancecalculator.ui.composables
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.keys.AppAppearance
+import com.brandoncano.resistancecalculator.ui.composables.m3.ComponentPreviews
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3RadioButtonGroup
-import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3TextButton
 
 @Composable
-fun AppThemeDialog(
+fun AppAppearanceDialog(
     currentAppAppearance: AppAppearance,
     onThemeSelected: (AppAppearance) -> Unit,
     onDismissRequest: () -> Unit,
@@ -48,20 +48,18 @@ fun AppThemeDialog(
             )
         },
         confirmButton = {
-            TextButton(onClick = onDismissRequest) {
-                Text(
-                    text = stringResource(R.string.dialog_confirm_button),
-                    style = MaterialTheme.typography.titleMedium,
-                )
-            }
+            M3TextButton(
+                buttonLabel = stringResource(R.string.dialog_confirm_button),
+                onClick = onDismissRequest
+            )
         }
     )
 }
 
-@AppComponentPreviews
+@ComponentPreviews
 @Composable
 private fun AppThemeDialogPreview() {
-    AppThemeDialog(
+    AppAppearanceDialog(
         currentAppAppearance = AppAppearance.SYSTEM_DEFAULT,
         onThemeSelected = {},
         onDismissRequest = {},

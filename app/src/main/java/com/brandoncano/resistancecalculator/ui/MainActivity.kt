@@ -12,7 +12,7 @@ import androidx.compose.runtime.setValue
 import com.brandoncano.resistancecalculator.adapter.SharedPreferencesAdapter
 import com.brandoncano.resistancecalculator.keys.AppAppearance
 import com.brandoncano.resistancecalculator.navigation.Navigation
-import com.brandoncano.resistancecalculator.ui.composables.AppThemeDialog
+import com.brandoncano.resistancecalculator.ui.composables.AppAppearanceDialog
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
 
             ResistorCalculatorTheme(appAppearance = appAppearanceState.value) {
                 if (showAppThemeDialog) {
-                    AppThemeDialog(
+                    AppAppearanceDialog(
                         currentAppAppearance = appAppearanceState.value,
                         onThemeSelected = {
                             sharedPreferencesAdapter.setAppAppearancePreference(it.toString())

@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
-import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
+import com.brandoncano.resistancecalculator.ui.composables.m3.ComponentPreviews
 import com.brandoncano.sharedcomponents.text.rubikFontFamily
 
 val bodyFontFamily = rubikFontFamily
@@ -29,7 +29,7 @@ val RubikTypography = Typography(
     labelSmall = baseline.labelSmall.copy(fontFamily = bodyFontFamily),
 )
 
-@AppComponentPreviews
+@ComponentPreviews
 @Composable
 private fun AppTypographyPreview() {
     Column {

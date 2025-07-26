@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.data.NavigationBarItemPO
-import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
 
 @Composable
 fun M3NavigationBar(
@@ -43,7 +42,7 @@ fun M3NavigationBar(
                     Image(
                         imageVector = it.imageVector,
                         contentDescription = null,
-                        modifier = Modifier.size(32.dp),
+                        modifier = Modifier.size(24.dp),
                         colorFilter = ColorFilter.tint(color),
                     )
                 },
@@ -53,7 +52,7 @@ fun M3NavigationBar(
     }
 }
 
-@AppComponentPreviews
+@ComponentPreviews
 @Composable
 private fun NavigationBarPreview() {
     M3NavigationBar(

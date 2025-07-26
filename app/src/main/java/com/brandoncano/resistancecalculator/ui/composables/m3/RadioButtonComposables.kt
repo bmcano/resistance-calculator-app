@@ -17,8 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
-import kotlin.collections.forEach
 
 /**
  * Renders a vertical group of radio buttons for selecting one option.
@@ -73,7 +71,7 @@ fun M3RadioButtonGroup(
     }
 }
 
-@AppComponentPreviews
+@ComponentPreviews
 @Composable
 private fun RadioButtonPreview() {
     M3RadioButtonGroup(

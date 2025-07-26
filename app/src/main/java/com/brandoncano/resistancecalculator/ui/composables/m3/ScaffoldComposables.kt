@@ -21,6 +21,9 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
 import com.brandoncano.resistancecalculator.R
 
+/**
+ * Reusable scaffold that accounts for edge-to-edge and scroll behaviors
+ */
 @OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
 @Composable
 fun M3Scaffold(
@@ -39,6 +42,9 @@ fun M3Scaffold(
     )
 }
 
+/**
+ * Reusable screen column that accounts for edge-to-edge and scroll states
+ */
 @Composable
 fun M3ScreenColumn(
     paddingValues: PaddingValues,

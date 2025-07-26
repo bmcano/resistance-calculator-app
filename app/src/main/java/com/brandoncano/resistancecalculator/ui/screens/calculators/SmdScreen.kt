@@ -40,27 +40,27 @@ import com.brandoncano.resistancecalculator.constants.Lists
 import com.brandoncano.resistancecalculator.data.NavigationBarItemPO
 import com.brandoncano.resistancecalculator.to.SmdResistor
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.AppTextField
-import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3TextField
+import com.brandoncano.resistancecalculator.ui.composables.m3.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3CardContent
 import com.brandoncano.resistancecalculator.ui.composables.MenuIconButton
 import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ShareTextMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.TextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3DisplayCard
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3NavigationBar
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3Scaffold
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3ScreenColumn
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3TextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
+import com.brandoncano.resistancecalculator.ui.composables.m3.ScreenPreviews
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.black
 import com.brandoncano.resistancecalculator.ui.theme.resistor_wire
 import com.brandoncano.resistancecalculator.ui.theme.white
 import com.brandoncano.resistancecalculator.util.resistor.formatResistance
-import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
@@ -166,7 +166,7 @@ private fun SmdScreenContent(
     ) {
         Spacer(modifier = Modifier.padding(top = 32.dp))
         SmdResistorLayout(resistor, isError)
-        AppTextField(
+        M3TextField(
             label = stringResource(id = R.string.smd_code_hint),
             modifier = Modifier.padding(top = 32.dp),
             value = resistor.code,
@@ -180,7 +180,7 @@ private fun SmdScreenContent(
             ),
             onValueChange = { onValueChanged(it.uppercase(Locale.getDefault())) },
         )
-        TextDropDownMenu(
+        M3TextDropDownMenu(
             label = stringResource(id = R.string.units_hint),
             modifier = Modifier.padding(top = 12.dp),
             selectedOption = resistor.units,
@@ -255,7 +255,7 @@ private fun pxToDp(px: Float): Dp {
     return with(density) { px.toDp() }
 }
 
-@AppScreenPreviews
+@ScreenPreviews
 @Composable
 private fun SmdScreenPreview() {
     ResistorCalculatorTheme {

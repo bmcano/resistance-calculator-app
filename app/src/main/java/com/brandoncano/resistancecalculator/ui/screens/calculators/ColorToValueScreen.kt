@@ -40,7 +40,7 @@ import com.brandoncano.resistancecalculator.data.NavigationBarItemPO
 import com.brandoncano.resistancecalculator.data.ResistorImageColorPair
 import com.brandoncano.resistancecalculator.to.ResistorCtv
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
+import com.brandoncano.resistancecalculator.ui.composables.m3.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
@@ -54,12 +54,12 @@ import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3Scaffold
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3ScreenColumn
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
+import com.brandoncano.resistancecalculator.ui.composables.m3.ScreenPreviews
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.resistancecalculator.util.resistor.ResistorImageBuilder
 import com.brandoncano.resistancecalculator.util.resistor.formatResistance
 import com.brandoncano.resistancecalculator.util.resistor.shareableText
-import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import kotlin.collections.forEach
 
 @OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
@@ -283,7 +283,7 @@ fun ResistorRow(resistorImages: List<ResistorImageColorPair>) {
     }
 }
 
-@AppScreenPreviews
+@ScreenPreviews
 @Composable
 private fun ColorToValueScreen4BandPreview() {
     ResistorCalculatorTheme {
@@ -302,7 +302,7 @@ private fun ColorToValueScreen4BandPreview() {
     }
 }
 
-@AppScreenPreviews
+@ScreenPreviews
 @Composable
 private fun ColorToValueScreen3BandPreview() {
     ResistorCalculatorTheme {
@@ -321,7 +321,7 @@ private fun ColorToValueScreen3BandPreview() {
     }
 }
 
-@AppScreenPreviews
+@ScreenPreviews
 @Composable
 private fun ColorToValueScreen5BandPreview() {
     ResistorCalculatorTheme {
@@ -340,7 +340,7 @@ private fun ColorToValueScreen5BandPreview() {
     }
 }
 
-@AppScreenPreviews
+@ScreenPreviews
 @Composable
 private fun ColorToValueScreen6BandPreview() {
     ResistorCalculatorTheme {

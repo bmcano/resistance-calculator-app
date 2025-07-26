@@ -21,18 +21,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.ESeries
-import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
-import com.brandoncano.resistancecalculator.ui.composables.BulletList
-import com.brandoncano.resistancecalculator.ui.composables.M3Table
+import com.brandoncano.resistancecalculator.ui.composables.m3.BottomScreenSpacer
+import com.brandoncano.resistancecalculator.ui.composables.m3.LongScreenPreview
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3BulletList
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3Table
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3Divider
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3Scaffold
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3ScreenColumn
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
+import com.brandoncano.resistancecalculator.ui.composables.m3.ScreenPreviews
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.gray
-import com.brandoncano.sharedcomponents.composables.AppLongScreenPreview
-import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 
 /**
  * Note: Information originated from - https://eepower.com/resistor-guide/resistor-standards-and-codes/resistor-values/
@@ -86,7 +86,7 @@ private fun LearnPreferredValuesScreenContent(paddingValues: PaddingValues) {
             modifier = Modifier.padding(bottom = 8.dp),
             style = MaterialTheme.typography.bodyMedium.gray(),
         )
-        BulletList(
+        M3BulletList(
             bulletStrings = listOf(
                 stringResource(R.string.info_values_preferred_values_bullet1),
                 stringResource(R.string.info_values_preferred_values_bullet2),
@@ -147,8 +147,8 @@ private fun ESeriesTable(seriesName: String, values: List<Int>) {
     }
 }
 
-@AppScreenPreviews
-@AppLongScreenPreview
+@ScreenPreviews
+@LongScreenPreview
 @Composable
 private fun LearnPreferredValuesScreenPreview() {
     ResistorCalculatorTheme { LearnPreferredValuesScreen {} }

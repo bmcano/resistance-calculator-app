@@ -33,18 +33,18 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.data.ArrowCardButtonPO
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppThemeMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3ArrowButtonCardContent
-import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.MenuIconButton
+import com.brandoncano.resistancecalculator.ui.composables.m3.BottomScreenSpacer
+import com.brandoncano.resistancecalculator.ui.composables.m3.LongScreenPreview
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3ArrowButtonCardContent
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3ElevatedCard
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3Scaffold
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3ScreenColumn
-import com.brandoncano.resistancecalculator.ui.composables.MenuIconButton
-import com.brandoncano.resistancecalculator.ui.composables.m3.elevatedCardColor
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3ElevatedCard
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
+import com.brandoncano.resistancecalculator.ui.composables.m3.ScreenPreviews
+import com.brandoncano.resistancecalculator.ui.composables.m3.elevatedCardColor
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
-import com.brandoncano.sharedcomponents.composables.AppLongScreenPreview
-import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 
 @OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
 @Composable
@@ -270,8 +270,8 @@ fun OurAppsButtons(
     }
 }
 
-@AppScreenPreviews
-@AppLongScreenPreview
+@ScreenPreviews
+@LongScreenPreview
 @Composable
 private fun HomeScreenPreview() {
     ResistorCalculatorTheme {

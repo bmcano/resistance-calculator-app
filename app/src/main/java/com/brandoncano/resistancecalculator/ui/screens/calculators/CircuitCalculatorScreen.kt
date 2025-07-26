@@ -36,22 +36,22 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Lists
 import com.brandoncano.resistancecalculator.to.Circuit
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.AppTextField
-import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3TextField
+import com.brandoncano.resistancecalculator.ui.composables.m3.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.MenuIconButton
-import com.brandoncano.resistancecalculator.ui.composables.TextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3CardContent
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3DisplayCard
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3Scaffold
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3ScreenColumn
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3Switch
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3TextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
+import com.brandoncano.resistancecalculator.ui.composables.m3.ScreenPreviews
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.circuit.IsValidNumber
-import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 
 @OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
 @Composable
@@ -144,7 +144,7 @@ private fun CircuitCalculatorScreenContent(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
-            TextDropDownMenu(
+            M3TextDropDownMenu(
                 label = stringResource(id = R.string.circuit_num_resistors_label),
                 modifier = Modifier
                     .weight(0.5f)
@@ -155,7 +155,7 @@ private fun CircuitCalculatorScreenContent(
                 val resistorCount = it.toIntOrNull() ?: 2
                 onOptionSelected(circuit.isSameValues, resistorCount, circuit.units)
             }
-            TextDropDownMenu(
+            M3TextDropDownMenu(
                 label = stringResource(id = R.string.circuit_units_label),
                 modifier = Modifier
                     .weight(0.5f)
@@ -174,7 +174,7 @@ private fun CircuitCalculatorScreenContent(
             val fieldsToShow = if (circuit.isSameValues) 1 else circuit.resistorCount
             repeat(fieldsToShow) { index ->
                 val labelText = getResistanceLabelText(circuit.isSameValues, circuit.units, index + 1)
-                AppTextField(
+                M3TextField(
                     label = labelText,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -214,7 +214,7 @@ private fun getResistanceLabelText(sameValues: Boolean, units: String, count: In
     }
 }
 
-@AppScreenPreviews
+@ScreenPreviews
 @Composable
 private fun CircuitCalculatorScreenSeriesPreview() {
     ResistorCalculatorTheme {
@@ -233,7 +233,7 @@ private fun CircuitCalculatorScreenSeriesPreview() {
     }
 }
 
-@AppScreenPreviews
+@ScreenPreviews
 @Composable
 private fun CircuitCalculatorScreenParallelPreview() {
     ResistorCalculatorTheme {

@@ -24,7 +24,6 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.ui.theme.gray
-import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
 
 /**
  * A labeled switch with optional icons for on/off states.
@@ -100,7 +99,7 @@ fun M3Switch(
     }
 }
 
-@AppComponentPreviews
+@ComponentPreviews
 @Composable
 private fun SwitchPreview() {
     Column {
