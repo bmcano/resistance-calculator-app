@@ -18,6 +18,7 @@ import com.brandoncano.resistancecalculator.model.SmdResistorViewModel
 import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.navigation.navigateToSmdCodeIec
+import com.brandoncano.resistancecalculator.navigation.popBackStackSafely
 import com.brandoncano.resistancecalculator.ui.screens.calculators.SmdScreen
 import com.brandoncano.resistancecalculator.util.SendFeedback
 import com.brandoncano.resistancecalculator.util.share.ShareResistor
@@ -43,7 +44,7 @@ fun NavGraphBuilder.smdScreen(
         SmdScreen(
             resistor = resistor,
             isError = isError,
-            onNavigateBack = { navHostController.popBackStack() },
+            onNavigateBack = { popBackStackSafely(navHostController) },
             onClearSelectionsTapped = {
                 viewModel.clear()
                 focusManager.clearFocus()

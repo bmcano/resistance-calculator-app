@@ -19,6 +19,7 @@ import com.brandoncano.resistancecalculator.model.ResistorVtcViewModel
 import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.navigation.navigateToPreferredValuesIec
+import com.brandoncano.resistancecalculator.navigation.popBackStackSafely
 import com.brandoncano.resistancecalculator.ui.screens.calculators.ValueToColorScreen
 import com.brandoncano.resistancecalculator.util.SendFeedback
 import com.brandoncano.resistancecalculator.util.eseries.formatResistanceString
@@ -48,7 +49,7 @@ fun NavGraphBuilder.valueToColorScreen(
             resistor = resistor,
             isError = isError,
             eSeriesCardContent = eSeriesCardContent,
-            onNavigateBack = { navHostController.popBackStack() },
+            onNavigateBack = { popBackStackSafely(navHostController) },
             onClearSelectionsTapped = {
                 viewModel.updateCardContent(ESeriesCardContent.DefaultContent)
                 viewModel.clear()

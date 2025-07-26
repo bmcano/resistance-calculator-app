@@ -18,6 +18,7 @@ import com.brandoncano.resistancecalculator.model.CircuitViewModel
 import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.navigation.navigateToCircuitEquations
+import com.brandoncano.resistancecalculator.navigation.popBackStackSafely
 import com.brandoncano.resistancecalculator.ui.screens.calculators.CircuitCalculatorScreen
 import com.brandoncano.resistancecalculator.util.SendFeedback
 
@@ -43,7 +44,7 @@ fun NavGraphBuilder.seriesCalculatorScreen(
             circuitVector = R.drawable.img_resistors_series,
             vectorSize = Pair(390.dp, 106.dp),
             circuit = circuit,
-            onNavigateBack = { navHostController.popBackStack() },
+            onNavigateBack = { popBackStackSafely(navHostController) },
             onClearSelectionsTapped = {
                 viewModel.clear()
                 focusManager.clearFocus()

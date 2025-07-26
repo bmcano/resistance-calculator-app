@@ -9,19 +9,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.navigation.calculators.colorToValueScreen
-import com.brandoncano.resistancecalculator.navigation.calculators.smdScreen
-import com.brandoncano.resistancecalculator.navigation.calculators.valueToColorScreen
 import com.brandoncano.resistancecalculator.navigation.calculators.parallelCalculatorScreen
 import com.brandoncano.resistancecalculator.navigation.calculators.seriesCalculatorScreen
+import com.brandoncano.resistancecalculator.navigation.calculators.smdScreen
+import com.brandoncano.resistancecalculator.navigation.calculators.valueToColorScreen
 import com.brandoncano.resistancecalculator.navigation.learn.learnCircuitEquations
 import com.brandoncano.resistancecalculator.navigation.learn.learnColorCodes
 import com.brandoncano.resistancecalculator.navigation.learn.learnPreferredValues
 import com.brandoncano.resistancecalculator.navigation.learn.learnSmdCodes
 import com.brandoncano.resistancecalculator.util.OpenLink
-import com.brandoncano.sharedcomponents.data.Apps
 import com.brandoncano.sharedcomponents.navigation.SharedScreens
 import com.brandoncano.sharedcomponents.navigation.donateScreen
-import com.brandoncano.sharedcomponents.navigation.viewOurAppsScreen
 
 /**
  * Note: Keep each navigation route in alphabetical order
@@ -47,13 +45,12 @@ fun Navigation(onOpenAppThemeDialog: () -> Unit) {
         seriesCalculatorScreen(navController)
         smdScreen(navController)
         valueToColorScreen(navController)
+        viewOurAppsScreen(navController)
         // from shared library
         donateScreen(navController)
-        viewOurAppsScreen(navController, Apps.Resistor)
     }
 }
 
-// TODO - add to screens
 fun popBackStackSafely(navController: NavHostController) {
     if (navController.previousBackStackEntry != null) {
         navController.popBackStack()
@@ -113,7 +110,7 @@ fun navigateToSmdCodeIec(navController: NavHostController) {
 }
 
 fun navigateToOurApps(navController: NavHostController) {
-    navController.navigate(SharedScreens.ViewOurApps.route)
+    navController.navigate(Screen.ViewOurApps.route)
 }
 
 fun navigateToDonate(navController: NavHostController) {

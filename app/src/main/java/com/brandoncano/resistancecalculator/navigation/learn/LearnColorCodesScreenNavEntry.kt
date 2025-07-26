@@ -8,6 +8,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.brandoncano.resistancecalculator.navigation.Screen
+import com.brandoncano.resistancecalculator.navigation.popBackStackSafely
 import com.brandoncano.resistancecalculator.ui.screens.info.LearnColorCodesScreen
 
 fun NavGraphBuilder.learnColorCodes(
@@ -21,7 +22,7 @@ fun NavGraphBuilder.learnColorCodes(
         popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
         LearnColorCodesScreen(
-            onNavigateBack = { navHostController.popBackStack() },
+            onNavigateBack = { popBackStackSafely(navHostController) },
         )
     }
 }

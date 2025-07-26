@@ -18,6 +18,7 @@ import com.brandoncano.resistancecalculator.model.ResistorCtvViewModel
 import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.navigation.navigateToColorCodeIec
+import com.brandoncano.resistancecalculator.navigation.popBackStackSafely
 import com.brandoncano.resistancecalculator.ui.screens.calculators.ColorToValueScreen
 import com.brandoncano.resistancecalculator.util.SendFeedback
 import com.brandoncano.resistancecalculator.util.share.ShareResistor
@@ -41,7 +42,7 @@ fun NavGraphBuilder.colorToValueScreen(
 
         ColorToValueScreen(
             resistor = resistor,
-            onNavigateBack = { navHostController.popBackStack() },
+            onNavigateBack = { popBackStackSafely(navHostController) },
             onClearSelectionsTapped = {
                 viewModel.clear()
                 focusManager.clearFocus()
