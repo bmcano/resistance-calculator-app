@@ -10,17 +10,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.toSize
 
 @Composable
 fun M3TextField(
@@ -34,15 +28,11 @@ fun M3TextField(
     onValueChange: (String) -> Unit,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
-    var textFieldSize by remember { mutableStateOf(Size.Zero) }
     val displayText = value
-
     OutlinedTextField(
         value = displayText,
         onValueChange = onValueChange,
-        modifier = modifier
-            .fillMaxWidth()
-            .onGloballyPositioned { coordinates -> textFieldSize = coordinates.size.toSize() },
+        modifier = modifier.fillMaxWidth(),
         enabled = enabled,
         label = { Text(text = label, maxLines = 1, overflow = TextOverflow.Ellipsis) },
         trailingIcon = {

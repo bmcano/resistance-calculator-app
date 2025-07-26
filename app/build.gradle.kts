@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin)
@@ -58,20 +60,18 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
+    kotlin {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_17
+
+        }
     }
     buildFeatures {
         compose = true
     }
-
     testOptions {
         unitTests.isReturnDefaultValues = true
     }
-}
-
-composeCompiler {
-    enableStrongSkippingMode = true
 }
 
 dependencies {
@@ -89,9 +89,8 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    // androidx.compose
     implementation(libs.androidx.compose.runtime.livedata)
-    implementation(libs.androidx.compose.material.icons)
+    implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.compose.material3)
     // com.google
     implementation(libs.gson)
