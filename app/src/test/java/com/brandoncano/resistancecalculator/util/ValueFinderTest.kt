@@ -1,5 +1,6 @@
 package com.brandoncano.resistancecalculator.util
 
+import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.util.resistor.ValueFinder
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -71,15 +72,15 @@ class ValueFinderTest {
 
     @Test
     fun `check all ppm values`() {
-        assertEquals("250 ${S.PPM}", ValueFinder.getPPM(C.BLACK, true))
-        assertEquals("100 ${S.PPM}", ValueFinder.getPPM(C.BROWN, true))
-        assertEquals("50 ${S.PPM}", ValueFinder.getPPM(C.RED, true))
-        assertEquals("15 ${S.PPM}", ValueFinder.getPPM(C.ORANGE, true))
-        assertEquals("25 ${S.PPM}", ValueFinder.getPPM(C.YELLOW, true))
-        assertEquals("20 ${S.PPM}", ValueFinder.getPPM(C.GREEN, true))
-        assertEquals("10 ${S.PPM}", ValueFinder.getPPM(C.BLUE, true))
-        assertEquals("5 ${S.PPM}", ValueFinder.getPPM(C.VIOLET, true))
-        assertEquals("1 ${S.PPM}", ValueFinder.getPPM(C.GRAY, true))
+        assertEquals("250${Symbols.NBSP}${S.PPM}", ValueFinder.getPPM(C.BLACK, true))
+        assertEquals("100${Symbols.NBSP}${S.PPM}", ValueFinder.getPPM(C.BROWN, true))
+        assertEquals("50${Symbols.NBSP}${S.PPM}", ValueFinder.getPPM(C.RED, true))
+        assertEquals("15${Symbols.NBSP}${S.PPM}", ValueFinder.getPPM(C.ORANGE, true))
+        assertEquals("25${Symbols.NBSP}${S.PPM}", ValueFinder.getPPM(C.YELLOW, true))
+        assertEquals("20${Symbols.NBSP}${S.PPM}", ValueFinder.getPPM(C.GREEN, true))
+        assertEquals("10${Symbols.NBSP}${S.PPM}", ValueFinder.getPPM(C.BLUE, true))
+        assertEquals("5${Symbols.NBSP}${S.PPM}", ValueFinder.getPPM(C.VIOLET, true))
+        assertEquals("1${Symbols.NBSP}${S.PPM}", ValueFinder.getPPM(C.GRAY, true))
         // colors that *should not* be reachable
         assertEquals("", ValueFinder.getPPM(C.WHITE, true))
         assertEquals("", ValueFinder.getPPM(C.GOLD, true))
