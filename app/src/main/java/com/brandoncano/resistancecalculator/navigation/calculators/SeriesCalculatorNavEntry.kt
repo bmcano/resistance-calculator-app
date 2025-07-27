@@ -2,8 +2,8 @@ package com.brandoncano.resistancecalculator.navigation.calculators
 
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
@@ -27,10 +27,10 @@ fun NavGraphBuilder.seriesCalculatorScreen(
 ) {
     composable(
         route = Screen.SeriesCalculator.route,
-        enterTransition = { slideInVertically(initialOffsetY = { it }) },
+        enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
         exitTransition = { ExitTransition.None },
         popEnterTransition = { EnterTransition.None },
-        popExitTransition = { slideOutVertically(targetOffsetY= { it }) },
+        popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
         val context = LocalContext.current
         val focusManager = LocalFocusManager.current

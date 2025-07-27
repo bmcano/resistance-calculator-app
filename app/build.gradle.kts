@@ -17,24 +17,6 @@ android {
         versionCode = 34 // for 4.1.0
         versionName = "4.1.0"
 
-        // Notes for 4.1.0
-        // :Started:
-        // - App theme controlled in app not shared lib
-        // - New SharedPreferenceAdapter
-        // - Create app wide Application for universal context retrieval
-        // - Started bringing M3 components & menu items into app
-        // - About screen is in app
-        // - Update to target SDK 36
-        // - Removing openMenu and Reset Mutable state variables from screens
-        // - Rewrote menu item composables
-        // - Update Dependencies to be organized better
-        // - Removed shared lib, no longer needed
-        // :Not Started:
-        // - Bring donate into app code, remove from shared lib
-        // - Bring billing manager into app code
-        // - App obfuscation? R8?
-        // - "Pro" version - can pay 1.99 for access to PDFs
-
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -42,11 +24,12 @@ android {
     applicationVariants.configureEach {
         val suffix = if (buildType.name == "debug") ", DEBUG" else ""
         resValue("string", "version", "$versionName$suffix")
-        resValue("string", "last_updated", "7/24/2025")
+        resValue("string", "last_updated", "7/27/2025")
     }
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
