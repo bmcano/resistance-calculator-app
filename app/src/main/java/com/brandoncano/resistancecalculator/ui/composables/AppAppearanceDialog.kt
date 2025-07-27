@@ -1,21 +1,28 @@
 package com.brandoncano.resistancecalculator.ui.composables
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.keys.AppAppearance
 import com.brandoncano.resistancecalculator.ui.composables.m3.ComponentPreviews
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3Divider
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3RadioButtonGroup
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3Switch
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TextButton
 
 @Composable
 fun AppAppearanceDialog(
     currentAppAppearance: AppAppearance,
-    onThemeSelected: (AppAppearance) -> Unit,
+    onAppAppearanceSelected: (AppAppearance) -> Unit,
+    dynamicColor: Boolean,
+    onDynamicColorSelected: (Boolean) -> Unit,
     onDismissRequest: () -> Unit,
 ) {
     val appearanceOptions = listOf(
@@ -37,15 +44,23 @@ fun AppAppearanceDialog(
             )
         },
         text = {
-            M3RadioButtonGroup(
-                options = options,
-                optionSelected = selectedOption,
-                onOptionSelected = { option ->
-                    val picked = appearanceOptions.first { it.second == option }.first
-                    onThemeSelected(picked)
-               },
-                verticalPadding = 12.dp,
-            )
+            Column {
+                M3RadioButtonGroup(
+                    options = options,
+                    optionSelected = selectedOption,
+                    onOptionSelected = { option ->
+                        val picked = appearanceOptions.first { it.second == option }.first
+                        onAppAppearanceSelected(picked)
+                    },
+                    verticalPadding = 12.dp,
+                )
+                M3Divider(modifier = Modifier.padding(vertical = 16.dp))
+                M3Switch(
+                    labelText = stringResource(R.string.dialog_dynamic_color),
+                    checked = dynamicColor,
+                    onCheckedChange = { onDynamicColorSelected(it) }
+                )
+            }
         },
         confirmButton = {
             M3TextButton(
@@ -61,7 +76,9 @@ fun AppAppearanceDialog(
 private fun AppThemeDialogPreview() {
     AppAppearanceDialog(
         currentAppAppearance = AppAppearance.SYSTEM_DEFAULT,
-        onThemeSelected = {},
+        onAppAppearanceSelected = {},
+        dynamicColor = false,
+        onDynamicColorSelected = {},
         onDismissRequest = {},
     )
 }

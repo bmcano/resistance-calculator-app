@@ -6,7 +6,7 @@ enum class SharedPreferencesKey(val key: String) {
 
     // App preferences
     KEY_APP_APPEARANCE("${Links.APPLICATION_ID}.app.appearance"),
-    //KEY_MATERIAL_YOU("${Links.APPLICATION_ID}.material.you"),
+    KEY_DYNAMIC_COLOR("${Links.APPLICATION_ID}.dynamic.color"), // Android 12+
     // KEY_LANGUAGE("${Links.APPLICATION_ID}.language"), // If we add it
 
     // Calculator data

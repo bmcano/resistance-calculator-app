@@ -213,6 +213,7 @@
     <string name="dialog_system_default">System default</string>
     <string name="dialog_light">Light</string>
     <string name="dialog_dark">Dark</string>
+    <string name="dialog_dynamic_color">Dynamic Colors (Android 12+)</string>
 
     <!-- Error messages -->
     <string name="error_na">N/A</string>

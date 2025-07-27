@@ -36,6 +36,14 @@ class SharedPreferencesAdapter {
         setString(SharedPreferencesKey.KEY_APP_APPEARANCE, appAppearance)
     }
 
+    fun getDynamicColorPreference(): Boolean {
+        return getBoolean(SharedPreferencesKey.KEY_DYNAMIC_COLOR, false)
+    }
+
+    fun setDynamicColorPreference(dynamicColor: Boolean) {
+        setBoolean(SharedPreferencesKey.KEY_DYNAMIC_COLOR, dynamicColor)
+    }
+
     fun getResistorCtvPreference(): ResistorCtv {
         val json = getString(SharedPreferencesKey.KEY_COLOR_TO_VALUE, null)
         if (json.isNullOrEmpty()) {
@@ -124,6 +132,17 @@ class SharedPreferencesAdapter {
     private fun setString(sharedPreferencesKey: SharedPreferencesKey, value: String?) {
         getSharedPreferences().edit {
             putString(sharedPreferencesKey.key, value)
+        }
+    }
+
+    private fun getBoolean(sharedPreferencesKey: SharedPreferencesKey, default: Boolean): Boolean {
+        val sharedPreferences = getSharedPreferences()
+        return sharedPreferences.getBoolean(sharedPreferencesKey.key, default)
+    }
+
+    private fun setBoolean(sharedPreferencesKey: SharedPreferencesKey, value: Boolean) {
+        getSharedPreferences().edit {
+            putBoolean(sharedPreferencesKey.key, value)
         }
     }
 

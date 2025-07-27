@@ -27,16 +27,13 @@ android {
         // - Update to target SDK 36
         // - Removing openMenu and Reset Mutable state variables from screens
         // - Rewrote menu item composables
-
-        // :Not Started:
         // - Update Dependencies to be organized better
-        // - Bring donate and view apps screens into app code, remove from shared lib
+        // - Removed shared lib, no longer needed
+        // :Not Started:
+        // - Bring donate into app code, remove from shared lib
         // - Bring billing manager into app code
-        // - Update shared lib to be just pre-defined M3 components
         // - App obfuscation? R8?
         // - "Pro" version - can pay 1.99 for access to PDFs
-
-        // Overall, this should make it easier to do the simple apps and their features without lots of redundancies in the app itself
 
         vectorDrawables {
             useSupportLibrary = true

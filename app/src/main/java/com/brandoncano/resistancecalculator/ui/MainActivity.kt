@@ -26,6 +26,7 @@ class MainActivity : ComponentActivity() {
             val sharedPreferencesAdapter = SharedPreferencesAdapter()
 
             val appAppearanceState = remember { mutableStateOf(AppAppearance.SYSTEM_DEFAULT) }
+            val dynamicColorState = remember { mutableStateOf(false) }
             var showAppThemeDialog by remember { mutableStateOf(false) }
 
             LaunchedEffect(Unit) {
@@ -33,15 +34,26 @@ class MainActivity : ComponentActivity() {
                     sharedPreferencesAdapter.getAppAppearancePreference()
                 }
                 appAppearanceState.value = AppAppearance.valueOf(savedAppAppearance)
+                dynamicColorState.value = withContext(Dispatchers.IO) {
+                    sharedPreferencesAdapter.getDynamicColorPreference()
+                }
             }
 
-            ResistorCalculatorTheme(appAppearance = appAppearanceState.value) {
+            ResistorCalculatorTheme(
+                appAppearance = appAppearanceState.value,
+                dynamicColor = dynamicColorState.value,
+            ) {
                 if (showAppThemeDialog) {
                     AppAppearanceDialog(
                         currentAppAppearance = appAppearanceState.value,
-                        onThemeSelected = {
-                            sharedPreferencesAdapter.setAppAppearancePreference(it.toString())
+                        onAppAppearanceSelected = {
                             appAppearanceState.value = it
+                            sharedPreferencesAdapter.setAppAppearancePreference(it.toString())
+                        },
+                        dynamicColor = dynamicColorState.value,
+                        onDynamicColorSelected = {
+                            dynamicColorState.value = it
+                            sharedPreferencesAdapter.setDynamicColorPreference(it)
                         },
                         onDismissRequest = { showAppThemeDialog = false }
                     )
