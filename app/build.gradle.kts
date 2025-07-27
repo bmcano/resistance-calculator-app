@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin)
     alias(libs.plugins.jetbrains.kotlin.compose)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -12,10 +13,10 @@ android {
 
     defaultConfig {
         applicationId = "com.brandoncano.resistancecalculator"
-        minSdk = 21
+        minSdk = 23 // Android 6.0
         targetSdk = 36
-        versionCode = 34 // for 4.1.0
-        versionName = "4.1.0"
+        versionCode = 35 // for 4.2.0
+        versionName = "4.2.0-Develop"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -48,6 +49,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     testOptions {
         unitTests.isReturnDefaultValues = true
@@ -72,7 +74,11 @@ dependencies {
     implementation(libs.androidx.compose.runtime.livedata)
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.compose.material3)
-    // com.google
+    // firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.config)
+    //implementation(libs.firebase.crashlytics) // Will also need to add crashlytics gradle build plugin
+    // google
     implementation(libs.billing.client)
     implementation(libs.gson)
     // unit testing

@@ -8,7 +8,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import com.brandoncano.resistancecalculator.constants.Links
+import com.brandoncano.resistancecalculator.firebase.FirebaseRemoteConfigKeys
+import com.brandoncano.resistancecalculator.firebase.getStringOrEmpty
 import com.brandoncano.resistancecalculator.ui.screens.AboutScreen
 import com.brandoncano.resistancecalculator.util.OpenLink
 
@@ -23,9 +24,10 @@ fun NavGraphBuilder.aboutScreen(
         popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
         val context = LocalContext.current
+        val privacyPolicyLink = FirebaseRemoteConfigKeys.PRIVACY_POLICY.getStringOrEmpty()
         AboutScreen(
             onNavigateBack = { popBackStackSafely(navHostController) },
-            onViewPrivacyPolicyTapped = { OpenLink.execute(context, Links.PRIVACY_POLICY) },
+            onViewPrivacyPolicyTapped = { OpenLink.execute(context, privacyPolicyLink) },
             onViewColorCodeIecTapped = { navigateToColorCodeIec(navHostController) },
             onViewPreferredValuesIecTapped = { navigateToPreferredValuesIec(navHostController) },
             onViewSmdCodeIecTapped = { navigateToSmdCodeIec(navHostController) },

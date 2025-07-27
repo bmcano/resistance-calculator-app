@@ -8,7 +8,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import com.brandoncano.resistancecalculator.constants.Links
+import com.brandoncano.resistancecalculator.firebase.FirebaseRemoteConfigKeys
+import com.brandoncano.resistancecalculator.firebase.getStringOrEmpty
 import com.brandoncano.resistancecalculator.ui.screens.ViewOurAppsScreen
 import com.brandoncano.resistancecalculator.util.OpenLink
 
@@ -23,11 +24,12 @@ fun NavGraphBuilder.viewOurAppsScreen(
         popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
         val context = LocalContext.current
+        val developerProfileLink = FirebaseRemoteConfigKeys.PLAYSTORE_DEVELOPER_PROFILE.getStringOrEmpty()
         ViewOurAppsScreen(
             onNavigateBack = { popBackStackSafely(navHostController) },
-            onFeatureCardTapped = { OpenLink.execute(context, Links.RESISTOR_PLAYSTORE) },
+            onFeatureCardTapped = { navigateToGooglePlay(context) },
             onMobileAppCardTapped = { OpenLink.execute(context, it) },
-            onViewMoreAppsTapped = { OpenLink.execute(context, Links.DEVELOPER_PROFILE) },
+            onViewMoreAppsTapped = { OpenLink.execute(context, developerProfileLink) },
         )
     }
 }

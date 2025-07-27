@@ -13,7 +13,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import com.brandoncano.resistancecalculator.constants.Links
+import com.brandoncano.resistancecalculator.BuildConfig
 import com.brandoncano.resistancecalculator.model.SmdResistorViewModel
 import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
@@ -54,7 +54,7 @@ fun NavGraphBuilder.smdScreen(
                     ShareResistor.execute(
                         activity = activity,
                         context = context,
-                        applicationId = Links.APPLICATION_ID,
+                        applicationId = BuildConfig.APPLICATION_ID,
                         content = { it.invoke() },
                     )
                 }
