@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin)
     alias(libs.plugins.jetbrains.kotlin.compose)
     alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.crashlytics.plugin)
 }
 
 android {
@@ -77,7 +78,7 @@ dependencies {
     // firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.config)
-    //implementation(libs.firebase.crashlytics) // Will also need to add crashlytics gradle build plugin
+    implementation(libs.firebase.crashlytics.ndk) // Will also need to add crashlytics gradle build plugin
     // google
     implementation(libs.billing.client)
     implementation(libs.gson)
