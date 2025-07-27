@@ -30,6 +30,7 @@ fun M3Scaffold(
     modifier: Modifier = Modifier,
     topBar: @Composable ((scrollBehavior: TopAppBarScrollBehavior) -> Unit) = {},
     bottomBar: @Composable () -> Unit = {},
+    snackbarHost: @Composable () -> Unit = {},
     scrollBehavior: TopAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
     content: @Composable ((PaddingValues) -> Unit),
 ) {
@@ -37,6 +38,7 @@ fun M3Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = { topBar.invoke(scrollBehavior) },
         bottomBar = bottomBar,
+        snackbarHost = snackbarHost,
         contentWindowInsets = WindowInsets.safeDrawing,
         content = { content.invoke(it) }
     )
@@ -65,5 +67,4 @@ fun M3ScreenColumn(
     )
 }
 
-// TODO Lazy Column Next?
-// CircuitScreen, Info Screens?
+// TODO - M3ScreenLazyColumn: Circuit, Info

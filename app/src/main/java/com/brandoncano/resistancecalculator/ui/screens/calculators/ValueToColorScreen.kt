@@ -33,14 +33,13 @@ import com.brandoncano.resistancecalculator.constants.Lists
 import com.brandoncano.resistancecalculator.data.ESeriesCardContent
 import com.brandoncano.resistancecalculator.to.ResistorVtc
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3TextField
-import com.brandoncano.resistancecalculator.ui.composables.m3.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.MenuIconButton
 import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ShareTextMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.m3.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3CardContent
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3DisplayCard
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3ElevatedCard
@@ -50,6 +49,7 @@ import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3Scaffold
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3ScreenColumn
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TextDropDownMenu
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3TextField
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
 import com.brandoncano.resistancecalculator.ui.composables.m3.ScreenPreviews
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
@@ -164,7 +164,7 @@ private fun ValueToColorScreenContent(
             value = resistor.resistance,
             isError = isError,
             errorMessage = stringResource(id = R.string.error_invalid_resistance),
-            onValueChange = { onValueChanged(it) }
+            onValueChange = { onValueChanged(it) },
         )
         M3TextDropDownMenu(
             label = stringResource(id = R.string.units_hint),

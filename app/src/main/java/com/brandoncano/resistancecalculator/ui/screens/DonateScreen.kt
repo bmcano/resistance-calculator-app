@@ -7,11 +7,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -22,7 +20,6 @@ import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -40,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.composables.m3.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3FilledButton
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3Scaffold
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3ScreenColumn
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
 import com.brandoncano.resistancecalculator.ui.composables.m3.ScreenPreviews
@@ -53,18 +51,18 @@ fun DonateScreen(
     snackbarHostState: SnackbarHostState,
 ) {
     var selectedAmount by remember { mutableStateOf<Int?>(null) }
-    Scaffold(
+    M3Scaffold(
         topBar = {
             M3TopAppBar(
                 titleText = stringResource(R.string.donate_title),
                 navigationIcon = Icons.Filled.Close,
                 onNavigateBack = onNavigateBack,
+                scrollBehavior = it,
             )
         },
         snackbarHost = {
             SnackbarHost(hostState = snackbarHostState)
         },
-        contentWindowInsets = WindowInsets.safeDrawing,
     ) { paddingValues ->
         DonateScreenContent(
             paddingValues = paddingValues,
