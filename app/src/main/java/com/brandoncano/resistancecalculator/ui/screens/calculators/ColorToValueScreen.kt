@@ -37,7 +37,7 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Lists
 import com.brandoncano.resistancecalculator.data.NavigationBarItemPO
-import com.brandoncano.resistancecalculator.data.ResistorImageColorPair
+import com.brandoncano.resistancecalculator.data.ResistorImageColorPairPO
 import com.brandoncano.resistancecalculator.to.ResistorCtv
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.m3.BottomScreenSpacer
@@ -268,7 +268,7 @@ fun navigationBarItemPOs(): List<NavigationBarItemPO> {
 }
 
 @Composable
-fun ResistorRow(resistorImages: List<ResistorImageColorPair>) {
+fun ResistorRow(resistorImages: List<ResistorImageColorPairPO>) {
     Row(
         horizontalArrangement = Arrangement.Absolute.Center,
     ) {

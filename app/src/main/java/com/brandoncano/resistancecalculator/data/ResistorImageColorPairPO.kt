@@ -5,7 +5,4 @@ import androidx.annotation.DrawableRes
 /**
  * Job: Holds the content for each resistor piece of the display image
  */
-data class ResistorImageColorPair(
-    @DrawableRes val drawableRes: Int,
-    val color: String
-)
+data class ResistorImageColorPairPO(@param:DrawableRes val drawableRes: Int, val color: String)
