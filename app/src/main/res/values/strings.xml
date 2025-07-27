@@ -183,6 +183,13 @@
     <string name="view_our_apps_ohms">"Ohm's Law Calculator"</string>
     <string name="view_our_apps_all_apps">See all apps on Google Play</string>
 
+    <!-- Donate screen/components text -->
+    <string name="donate_title">Donate</string>
+    <string name="donate_description_body">Your donation helps us improve the app and create new features for everyone to enjoy.</string>
+    <string name="donate_how_much_header">How much would you like to donate?</string>
+    <string name="donate_payment_cta">Continue to payment</string>
+    <string name="donate_caption">We appreciate your kindness and support. Thank you for your donation!</string>
+
     <!-- resistor colors -->
     <string name="color_black">Black</string>
     <string name="color_brown">Brown</string>
@@ -219,4 +226,5 @@
     <string name="error_na">N/A</string>
     <string name="error_invalid_resistance">Invalid resistance</string>
     <string name="error_invalid_code">Invalid code</string>
+    <string name="error_donate_screen">There was an error connecting to Google Play services. Please try again later.</string>
 </resources>

@@ -90,11 +90,11 @@ dependencies {
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.compose.material3)
     // com.google
+    implementation(libs.billing.client)
     implementation(libs.gson)
     // unit testing
     testImplementation(libs.mockk)
     testImplementation(libs.junit)
     // external libraries
     implementation(libs.ostermiller.util)
-    implementation(libs.bmcano.util)
 }

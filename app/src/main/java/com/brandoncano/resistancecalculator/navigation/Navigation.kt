@@ -18,8 +18,6 @@ import com.brandoncano.resistancecalculator.navigation.learn.learnColorCodes
 import com.brandoncano.resistancecalculator.navigation.learn.learnPreferredValues
 import com.brandoncano.resistancecalculator.navigation.learn.learnSmdCodes
 import com.brandoncano.resistancecalculator.util.OpenLink
-import com.brandoncano.sharedcomponents.navigation.SharedScreens
-import com.brandoncano.sharedcomponents.navigation.donateScreen
 
 /**
  * Note: Keep each navigation route in alphabetical order
@@ -36,6 +34,7 @@ fun Navigation(onOpenAppThemeDialog: () -> Unit) {
     ) {
         aboutScreen(navController)
         colorToValueScreen(navController)
+        donateScreen(navController)
         homeScreen(navController, onOpenAppThemeDialog)
         learnCircuitEquations(navController)
         learnColorCodes(navController)
@@ -46,8 +45,6 @@ fun Navigation(onOpenAppThemeDialog: () -> Unit) {
         smdScreen(navController)
         valueToColorScreen(navController)
         viewOurAppsScreen(navController)
-        // from shared library
-        donateScreen(navController)
     }
 }
 
@@ -114,7 +111,7 @@ fun navigateToOurApps(navController: NavHostController) {
 }
 
 fun navigateToDonate(navController: NavHostController) {
-    navController.navigate(SharedScreens.Donate.route)
+    navController.navigate(Screen.Donate.route)
 }
 
 fun navigateToGooglePlay(context: Context) {
