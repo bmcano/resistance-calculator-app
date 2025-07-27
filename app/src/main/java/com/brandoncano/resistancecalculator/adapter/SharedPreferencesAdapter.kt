@@ -1,3 +1,5 @@
+@file:Suppress("SameParameterValue","unused")
+
 package com.brandoncano.resistancecalculator.adapter
 
 import android.content.Context
@@ -146,7 +148,6 @@ class SharedPreferencesAdapter {
         }
     }
 
-    @Suppress("unused") // In case we ever want to fully remove a key later on
     private fun removeSharedPreference(sharedPreferencesKey: SharedPreferencesKey) {
         getSharedPreferences().edit {
             remove(sharedPreferencesKey.key)
