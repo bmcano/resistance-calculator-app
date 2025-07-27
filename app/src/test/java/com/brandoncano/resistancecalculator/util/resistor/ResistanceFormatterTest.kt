@@ -98,15 +98,15 @@ class ResistanceFormatterTest {
         )
 
         val answers = listOf(
-            "12.5 ${S.KOHMS} ${S.PM}5%, 250 ${S.PPM}",
-            "12.5 ${S.KOHMS} ${S.PM}5%, 100 ${S.PPM}",
-            "12.5 ${S.KOHMS} ${S.PM}5%, 50 ${S.PPM}",
-            "12.5 ${S.KOHMS} ${S.PM}5%, 15 ${S.PPM}",
-            "12.5 ${S.KOHMS} ${S.PM}5%, 25 ${S.PPM}",
-            "12.5 ${S.KOHMS} ${S.PM}5%, 20 ${S.PPM}",
-            "12.5 ${S.KOHMS} ${S.PM}5%, 10 ${S.PPM}",
-            "12.5 ${S.KOHMS} ${S.PM}5%, 5 ${S.PPM}",
-            "12.5 ${S.KOHMS} ${S.PM}5%, 1 ${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%, 250${S.NBSP}${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%, 100${S.NBSP}${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%, 50${S.NBSP}${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%, 15${S.NBSP}${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%, 25${S.NBSP}${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%, 20${S.NBSP}${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%, 10${S.NBSP}${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%, 5${S.NBSP}${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%, 1${S.NBSP}${S.PPM}",
         )
 
         val resistor = ResistorCtv(C.BROWN, C.RED, C.GREEN, C.RED, C.GOLD, C.BLACK, 3)
