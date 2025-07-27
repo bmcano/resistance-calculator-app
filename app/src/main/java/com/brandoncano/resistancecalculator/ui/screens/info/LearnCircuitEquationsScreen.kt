@@ -1,53 +1,47 @@
 package com.brandoncano.resistancecalculator.ui.screens.info
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.ui.composables.BottomScreenSpacer
+import com.brandoncano.resistancecalculator.ui.composables.m3.BottomScreenSpacer
+import com.brandoncano.resistancecalculator.ui.composables.m3.LongScreenPreview
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3Divider
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3Scaffold
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3ScreenColumn
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
+import com.brandoncano.resistancecalculator.ui.composables.m3.ScreenPreviews
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
-import com.brandoncano.sharedcomponents.composables.AppDivider
-import com.brandoncano.sharedcomponents.composables.AppLongScreenPreview
-import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
-import com.brandoncano.sharedcomponents.composables.AppTopAppBar
-import com.brandoncano.sharedcomponents.text.onSurfaceVariant
-import com.brandoncano.sharedcomponents.text.textStyleHeadline
-import com.brandoncano.sharedcomponents.text.textStyleSubhead
+import com.brandoncano.resistancecalculator.ui.theme.gray
 
+@OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
 @Composable
 fun LearnCircuitEquationsScreen(
     onNavigateBack: () -> Unit,
 ) {
-    Scaffold(
+    M3Scaffold (
         topBar = {
-            AppTopAppBar(
+            M3TopAppBar(
                 titleText = stringResource(R.string.info_circuit_title),
                 navigationIcon =  Icons.AutoMirrored.Filled.ArrowBack,
                 onNavigateBack = onNavigateBack,
+                scrollBehavior = it,
             )
         },
-        contentWindowInsets = WindowInsets.safeDrawing,
     ) { paddingValues ->
         LearnCircuitEquationsScreenContent(paddingValues)
     }
@@ -55,24 +49,19 @@ fun LearnCircuitEquationsScreen(
 
 @Composable
 private fun LearnCircuitEquationsScreenContent(paddingValues: PaddingValues) {
-    val sidePadding = dimensionResource(R.dimen.app_side_padding)
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(paddingValues)
-            .padding(horizontal = sidePadding),
+    M3ScreenColumn (
+        paddingValues = paddingValues,
     ) {
         Spacer(modifier = Modifier.padding(top = 24.dp))
         Text(
             text = stringResource(R.string.info_circuit_series_header),
             modifier = Modifier.padding(bottom = 12.dp),
-            style = textStyleHeadline(),
+            style = MaterialTheme.typography.titleMedium,
         )
         Text(
             text = stringResource(R.string.info_circuit_series_body1),
             modifier = Modifier.padding(bottom = 24.dp),
-            style = textStyleSubhead().onSurfaceVariant(),
+            style = MaterialTheme.typography.bodyMedium.gray(),
         )
         Image(
             painter = painterResource(R.drawable.img_series_equation),
@@ -83,7 +72,7 @@ private fun LearnCircuitEquationsScreenContent(paddingValues: PaddingValues) {
         Text(
             text = stringResource(R.string.info_circuit_series_body2),
             modifier = Modifier.padding(vertical = 24.dp),
-            style = textStyleSubhead().onSurfaceVariant(),
+            style = MaterialTheme.typography.bodyMedium.gray(),
         )
         Image(
             painter = painterResource(R.drawable.img_series_special_case),
@@ -91,16 +80,16 @@ private fun LearnCircuitEquationsScreenContent(paddingValues: PaddingValues) {
             modifier = Modifier.fillMaxWidth(),
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
         )
-        AppDivider(modifier = Modifier.padding(vertical = 24.dp))
+        M3Divider(modifier = Modifier.padding(vertical = 24.dp))
         Text(
             text = stringResource(R.string.info_circuit_parallel_header),
             modifier = Modifier.padding(bottom = 12.dp),
-            style = textStyleHeadline(),
+            style = MaterialTheme.typography.titleMedium,
         )
         Text(
             text = stringResource(R.string.info_circuit_parallel_body1),
             modifier = Modifier.padding(bottom = 24.dp),
-            style = textStyleSubhead().onSurfaceVariant(),
+            style = MaterialTheme.typography.bodyMedium.gray(),
         )
         Image(
             painter = painterResource(R.drawable.img_parallel_equation_1),
@@ -111,7 +100,7 @@ private fun LearnCircuitEquationsScreenContent(paddingValues: PaddingValues) {
         Text(
             text = stringResource(R.string.info_circuit_parallel_body2),
             modifier = Modifier.padding(vertical  = 24.dp),
-            style = textStyleSubhead().onSurfaceVariant(),
+            style = MaterialTheme.typography.bodyMedium.gray(),
         )
         Image(
             painter = painterResource(R.drawable.img_parallel_equation_2),
@@ -123,7 +112,7 @@ private fun LearnCircuitEquationsScreenContent(paddingValues: PaddingValues) {
         Text(
             text = stringResource(R.string.info_circuit_parallel_body3),
             modifier = Modifier.padding(bottom = 24.dp),
-            style = textStyleSubhead().onSurfaceVariant(),
+            style = MaterialTheme.typography.bodyMedium.gray(),
         )
         Image(
             painter = painterResource(R.drawable.img_parallel_special_case),
@@ -135,8 +124,8 @@ private fun LearnCircuitEquationsScreenContent(paddingValues: PaddingValues) {
     }
 }
 
-@AppScreenPreviews
-@AppLongScreenPreview
+@ScreenPreviews
+@LongScreenPreview
 @Composable
 private fun LearnCircuitEquationsScreenPreview() {
     ResistorCalculatorTheme { LearnCircuitEquationsScreen {} }

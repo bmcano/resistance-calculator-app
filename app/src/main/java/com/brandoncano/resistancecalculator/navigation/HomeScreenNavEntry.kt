@@ -2,17 +2,16 @@ package com.brandoncano.resistancecalculator.navigation
 
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import com.brandoncano.resistancecalculator.ui.screens.home.HomeScreen
+import com.brandoncano.resistancecalculator.ui.screens.HomeScreen
+import com.brandoncano.resistancecalculator.util.SendFeedback
 
 fun NavGraphBuilder.homeScreen(
     navHostController: NavHostController,
-    onOpenThemeDialog: () -> Unit,
+    onOpenAppThemeDialog: () -> Unit,
 ) {
     composable(
         route = Screen.Home.route,
@@ -20,14 +19,10 @@ fun NavGraphBuilder.homeScreen(
         exitTransition = { ExitTransition.None },
     ) {
         val context = LocalContext.current
-        val openMenu = remember { mutableStateOf(false) }
         HomeScreen(
-            openMenu = openMenu,
-            onOpenThemeDialog = onOpenThemeDialog,
-            onAboutTapped = {
-                openMenu.value = false
-                navigateToAbout(navHostController)
-            },
+            onFeedbackTapped = { SendFeedback.execute(context) },
+            onOpenAppThemeDialog = onOpenAppThemeDialog,
+            onAboutTapped = { navigateToAbout(navHostController) },
             onColorToValueTapped = { navigateToColorToValue(navHostController) },
             onValueToColorTapped = { navigateToValueToColor(navHostController) },
             onSmdTapped = { navigateToSmd(navHostController) },

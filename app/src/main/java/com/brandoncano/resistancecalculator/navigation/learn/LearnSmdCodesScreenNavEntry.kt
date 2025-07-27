@@ -8,6 +8,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.brandoncano.resistancecalculator.navigation.Screen
+import com.brandoncano.resistancecalculator.navigation.popBackStackSafely
 import com.brandoncano.resistancecalculator.ui.screens.info.LearnSmdCodesScreen
 
 fun NavGraphBuilder.learnSmdCodes(
@@ -21,7 +22,7 @@ fun NavGraphBuilder.learnSmdCodes(
         popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
         LearnSmdCodesScreen(
-            onNavigateBack = { navHostController.popBackStack() },
+            onNavigateBack = { popBackStackSafely(navHostController) },
         )
     }
 }

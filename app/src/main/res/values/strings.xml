@@ -8,18 +8,26 @@
     <string name="home_button_smd">SMD resistor</string>
     <string name="home_button_series_calculator">Resistors in series</string>
     <string name="home_button_parallel_calculator">Resistors in parallel</string>
+    <string name="home_info_header">Resistor standards &amp; guides</string>
+    <string name="home_standard_iec_button">View resistor color code</string>
+    <string name="home_smd_iec_button">View resistor SMD code</string>
+    <string name="home_circuit_equations_button">View series &amp; parallel formulas</string>
+    <string name="home_preferred_values_iec_button">View resistor preferred values</string>
+    <string name="home_support_us_header">Support us</string>
+    <string name="home_rate_us">Rate this app on Google Play</string>
+    <string name="home_view_our_apps">Check out our other apps</string>
+    <string name="home_donate">Donate</string>
 
     <!-- About screen/components text -->
     <string name="about_title">About The App</string>
+    <string name="about_created_by">Created by</string>
+    <string name="about_author">Brandon Cano</string>
+    <string name="about_app_version">App version</string>
+    <string name="about_last_updated_on">Last updated on</string>
     <string name="about_view_privacy_policy">View privacy policy</string>
     <string name="about_overview_title">Overview &amp; standards</string>
     <string name="about_overview_body_01">This app includes a range of calculators to determine and convert resistance values for color-band resistors, SMD resistors, and more, supporting various resistor configurations and coding formats.</string>
     <string name="about_overview_body_02">All calculations follow IEC 60062 and IEC 60063 standards for resistor color codes and preferred values to ensure precision and accuracy.</string>
-    <string name="about_iec_header_text">Resistor standards &amp; guides</string>
-    <string name="about_standard_iec_button">View resistor color code</string>
-    <string name="about_smd_iec_button">View resistor SMD code</string>
-    <string name="about_circuit_equations_button">View series &amp; parallel formulas</string>
-    <string name="about_preferred_values_iec_button">View resistor preferred values</string>
 
     <!-- Calculator screens shared text -->
     <string name="number_band_hint1">First band</string>
@@ -38,7 +46,8 @@
     <!-- CtV screen/components text -->
     <string name="ctv_title">Color to Value</string>
     <string name="ctv_info_card_title_text">Resistor color codes</string>
-    <string name="ctv_info_card_body_text">Learn to decode each band into precise values using the IEC 60062 standard.</string>
+    <string name="ctv_info_card_subhead_text">IEC 60062</string>
+    <string name="ctv_info_card_body_text">Use the color code chart to translate each band into its exact resistance value.</string>
     <string name="ctv_info_card_cta_text">Learn more</string>
     <string name="ctv_default_value">Select colors</string>
 
@@ -46,7 +55,8 @@
     <string name="vtc_title">Value to Color</string>
     <string name="vtc_default_value">Enter resistance</string>
     <string name="vtc_validate_e_series_button">Validate resistance against E-series</string>
-    <string name="vtc_info_card_title">Discover E-series values</string>
+    <string name="vtc_info_card_title">Preferred values</string>
+    <string name="vtc_info_card_subhead">IEC 60063</string>
     <string name="vtc_info_card_body">"Tap \"Validate\" to see if your resistance matches a standard E‑series value for the chosen tolerance."</string>
     <string name="vtc_info_card_action">Learn more</string>
     <string name="vtc_valid_card_title">Valid E-series value</string>
@@ -59,10 +69,10 @@
 
     <!-- SMD screen/components text -->
     <string name="smd_title">SMD Resistor</string>
-    <string name="smd_resistor_content_description">SMD Resistor</string>
     <string name="smd_default_value">Enter code</string>
     <string name="smd_code_hint">Code</string>
     <string name="smd_info_card_title_text">SMD resistor codes</string>
+    <string name="smd_info_card_subhead_text">IEC 60062</string>
     <string name="smd_info_card_body_text">Learn how 3‑ and 4‑digit markings on SMD resistors correspond to resistance and tolerance.</string>
     <string name="smd_info_card_cta_text">Learn more</string>
     <string name="smd_navbar_three_eia">Three Digit EIA</string>
@@ -77,8 +87,9 @@
     <string name="circuit_units_label">Units</string>
     <string name="circuit_text_field_label">Resistance (%1$s)</string>
     <string name="circuit_text_field_label_multiple">Resistance %1$s (%2$s)</string>
-    <string name="circuit_info_card_title_text">Resistor equations</string>
-    <string name="circuit_info_card_body_text">Discover how series &amp; parallel formulas determine total resistance.</string>
+    <string name="circuit_info_card_header">Resistor equations</string>
+    <string name="circuit_info_card_subhead">Series &amp; parallel</string>
+    <string name="circuit_info_card_body">Discover how series &amp; parallel formulas determine total resistance.</string>
     <string name="circuit_info_card_cta_text">Learn more</string>
 
     <!-- Info screen/components text -->
@@ -129,8 +140,8 @@
     <string name="info_smd_multipliers_headline">Multipliers</string>
     <string name="info_smd_multipliers_body">The multiplier indicates the factor by which to multiply the significant figures. In the EIA-96 code, letters represent multipliers as follows:</string>
     <string name="info_smd_code_value_col1">Code</string>
-    <string name="info_smd_code_value_col2">Value</string>
-    <string name="info_smd_code_value_headline">Value codes</string>
+    <string name="info_smd_code_value_col2">Value (Ω)</string>
+    <string name="info_smd_code_value_headline">EIA-96 Code Lookup Table</string>
     <string name="info_smd_code_value_body">"These are the common resistance value codes, but a manufacturer may use a variation on these or even something completely different. It is therefore always important to verify the manufacturer's marking system."</string>
     <string name="info_values_preferred_values_title">Preferred Values</string>
     <string name="info_values_body1">"The IEC 60063 standard defines 'preferred values' or the 'E-series' system which standardizes resistor values by spacing them on a logarithmic scale. This makes mass production and inventory management far simpler, since manufacturers only need to stock a small set of values instead of every possible resistance."</string>
@@ -163,6 +174,22 @@
     <string name="info_circuit_parallel_body3">There is also a two-resistor shortcut for parallel resistors, which can be written as:</string>
     <string name="info_circuit_parallel_equation_cd">Parallel resistor formula</string>
 
+    <!-- View our apps screen/components text -->
+    <string name="view_our_apps_title">Our apps</string>
+    <string name="view_our_apps_header">More great apps to explore</string>
+    <string name="view_out_apps_rate_us">Rate this app on Google Play</string>
+    <string name="view_our_apps_capacitor">Capacitor Code Calculator</string>
+    <string name="view_our_apps_inductor">Inductor Color Code Calculator</string>
+    <string name="view_our_apps_ohms">"Ohm's Law Calculator"</string>
+    <string name="view_our_apps_all_apps">See all apps on Google Play</string>
+
+    <!-- Donate screen/components text -->
+    <string name="donate_title">Donate</string>
+    <string name="donate_description_body">Your donation helps us improve the app and create new features for everyone to enjoy.</string>
+    <string name="donate_how_much_header">How much would you like to donate?</string>
+    <string name="donate_payment_cta">Continue to payment</string>
+    <string name="donate_caption">We appreciate your kindness and support. Thank you for your donation!</string>
+
     <!-- resistor colors -->
     <string name="color_black">Black</string>
     <string name="color_brown">Brown</string>
@@ -179,10 +206,25 @@
     <string name="color_none">None</string>
 
     <!-- Menu items -->
+    <string name="menu_icon_cd">Menu</string>
+    <string name="menu_about">About the app</string>
+    <string name="menu_app_theme">App appearance</string>
+    <string name="menu_clear_selections">Clear selections</string>
+    <string name="menu_feedback">Send feedback</string>
     <string name="menu_share_image">Share as image</string>
+    <string name="menu_share_text">Share as text</string>
+
+    <!-- Dialogs -->
+    <string name="dialog_app_appearance">App appearance</string>
+    <string name="dialog_confirm_button">Done</string>
+    <string name="dialog_system_default">System default</string>
+    <string name="dialog_light">Light</string>
+    <string name="dialog_dark">Dark</string>
+    <string name="dialog_dynamic_color">Dynamic Colors (Android 12+)</string>
 
     <!-- Error messages -->
     <string name="error_na">N/A</string>
     <string name="error_invalid_resistance">Invalid resistance</string>
     <string name="error_invalid_code">Invalid code</string>
+    <string name="error_donate_screen">There was an error connecting to Google Play services. Please try again later.</string>
 </resources>

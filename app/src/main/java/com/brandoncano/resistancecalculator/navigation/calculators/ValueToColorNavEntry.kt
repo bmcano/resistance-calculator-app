@@ -1,43 +1,45 @@
 package com.brandoncano.resistancecalculator.navigation.calculators
 
+import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.data.ESeriesCardContent
-import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
-import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
+import com.brandoncano.resistancecalculator.model.ResistorVtcViewModel
 import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.navigation.navigateToPreferredValuesIec
-import com.brandoncano.resistancecalculator.ui.screens.vtc.ValueToColorScreen
+import com.brandoncano.resistancecalculator.navigation.popBackStackSafely
+import com.brandoncano.resistancecalculator.ui.screens.calculators.ValueToColorScreen
+import com.brandoncano.resistancecalculator.util.SendFeedback
 import com.brandoncano.resistancecalculator.util.eseries.formatResistanceString
+import com.brandoncano.resistancecalculator.util.share.ShareResistor
+import com.brandoncano.resistancecalculator.util.share.ShareText
 
 fun NavGraphBuilder.valueToColorScreen(
     navHostController: NavHostController,
 ) {
     composable(
         route = Screen.ValueToColor.route,
-        enterTransition = { slideInVertically(initialOffsetY = { it }) },
+        enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
         exitTransition = { ExitTransition.None },
         popEnterTransition = { EnterTransition.None },
-        popExitTransition = { slideOutVertically(targetOffsetY= { it }) },
+        popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
+        val activity = LocalActivity.current
         val context = LocalContext.current
         val focusManager = LocalFocusManager.current
-        val openMenu = remember { mutableStateOf(false) }
-        val reset = remember { mutableStateOf(false) }
-        val viewModel: ResistorVtcViewModel = viewModel(factory = ResistorViewModelFactory(context))
+        val viewModel: ResistorVtcViewModel = viewModel<ResistorVtcViewModel>()
         val resistor by viewModel.resistorStateTOStateFlow.collectAsState()
         val isError by viewModel.isErrorStateFlow.collectAsState()
         val eSeriesCardContent: ESeriesCardContent by viewModel.eSeriesCardContentStateTOStateFlow.collectAsState()
@@ -46,26 +48,34 @@ fun NavGraphBuilder.valueToColorScreen(
         ValueToColorScreen(
             resistor = resistor,
             isError = isError,
-            openMenu = openMenu,
-            reset = reset,
             eSeriesCardContent = eSeriesCardContent,
-            onNavigateBack = { navHostController.popBackStack() },
+            onNavigateBack = { popBackStackSafely(navHostController) },
             onClearSelectionsTapped = {
-                openMenu.value = false
-                reset.value = true
                 viewModel.updateCardContent(ESeriesCardContent.DefaultContent)
                 viewModel.clear()
                 focusManager.clearFocus()
             },
-            onAboutTapped = {
-                openMenu.value = false
-                navigateToAbout(navHostController)
+            onShareImageTapped = {
+                if (activity != null) {
+                    ShareResistor.execute(
+                        activity = activity,
+                        context = context,
+                        applicationId = Links.APPLICATION_ID,
+                        content = { it.invoke() },
+                    )
+                }
             },
-            onValueChanged = { resistance, units, band5, band6, clearFocus ->
-                reset.value = false
+            onShareTextTapped = { ShareText.execute(context, it) },
+            onFeedbackTapped = { SendFeedback.execute(context) },
+            onAboutTapped = { navigateToAbout(navHostController) },
+            onValueChanged = { resistance ->
                 viewModel.updateCardContent(ESeriesCardContent.DefaultContent)
-                viewModel.updateValues(resistance, units, band5, band6)
-                if (clearFocus) focusManager.clearFocus()
+                viewModel.updateValues(resistance, resistor.units, resistor.band5, resistor.band6)
+            },
+            onOptionSelected = { units, band5, band6 ->
+                viewModel.updateCardContent(ESeriesCardContent.DefaultContent)
+                viewModel.updateValues(resistor.resistance, units, band5, band6)
+                focusManager.clearFocus()
             },
             onNavBarSelectionChanged = { viewModel.updateNavBarSelection(it) },
             onValidateResistanceTapped = { viewModel.validateResistance() },

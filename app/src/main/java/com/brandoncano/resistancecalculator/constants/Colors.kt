@@ -1,5 +1,8 @@
 package com.brandoncano.resistancecalculator.constants
 
+/**
+ * Job: Holds all resistor colors as constants for internal logic processing.
+ */
 object Colors {
     const val BLACK = "Black"
     const val BROWN = "Brown"

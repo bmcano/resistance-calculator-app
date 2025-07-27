@@ -8,4 +8,6 @@ object Symbols {
     const val X = "×"
     const val PM = "±"
     const val PPM = "ppm/°C"
+    const val NBSP = " "
+    const val BULLET = "•"
 }
