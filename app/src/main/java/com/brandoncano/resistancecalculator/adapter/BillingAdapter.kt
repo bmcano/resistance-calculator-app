@@ -1,7 +1,6 @@
 package com.brandoncano.resistancecalculator.adapter
 
 import android.app.Activity
-import android.content.Context
 import android.util.Log
 import com.android.billingclient.api.AcknowledgePurchaseParams
 import com.android.billingclient.api.BillingClient
@@ -19,10 +18,12 @@ import com.brandoncano.resistancecalculator.ui.MainApplication
  * Job: Handles the in-app purchases for the donation screen
  */
 class BillingAdapter() {
+
     private companion object {
         const val TAG = "BillingAdapter"
     }
 
+    val application = MainApplication.instance
     private val purchaseListener = PurchasesUpdatedListener { billingResult, purchases ->
         when (billingResult.responseCode) {
             BillingClient.BillingResponseCode.OK -> {
@@ -43,7 +44,6 @@ class BillingAdapter() {
         }
     }
 
-    val application = MainApplication.instance
     private val billingClient = BillingClient.newBuilder(application)
         .setListener(purchaseListener)
         .enablePendingPurchases(
@@ -71,6 +71,10 @@ class BillingAdapter() {
                 billingClient.startConnection(this)
             }
         })
+    }
+
+    fun endConnection() {
+        billingClient.endConnection()
     }
 
     fun launchPurchaseFlow(activity: Activity, productId: String) {

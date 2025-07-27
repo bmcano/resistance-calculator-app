@@ -1,23 +1,21 @@
 package com.brandoncano.resistancecalculator.navigation
 
-import android.app.Activity
 import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.adapter.BillingAdapter
+import com.brandoncano.resistancecalculator.model.BillingViewModel
 import com.brandoncano.resistancecalculator.ui.screens.DonateScreen
-import com.brandoncano.resistancecalculator.util.GetProductIdForAmount
-import kotlinx.coroutines.launch
 
 fun NavGraphBuilder.donateScreen(
     navHostController: NavHostController,
@@ -29,29 +27,20 @@ fun NavGraphBuilder.donateScreen(
         popEnterTransition = { EnterTransition.None },
         popExitTransition = { slideOutVertically(targetOffsetY= { it }) },
     ) {
-        val context = LocalContext.current
-        val activity = LocalActivity.current ?: return@composable
-
-        val scope = rememberCoroutineScope()
+        val viewModel: BillingViewModel = viewModel<BillingViewModel>()
+        val errorMessages by viewModel.errorMessages.collectAsState()
         val snackbarHostState = remember { SnackbarHostState() }
-        val billingManager = remember { BillingAdapter() }
 
-        billingManager.startConnection(
-            onError = {
-                scope.launch {
-                    snackbarHostState.showSnackbar(
-                        message = context.getString(R.string.error_donate_screen)
-                    )
-                }
+        LaunchedEffect(errorMessages) {
+            errorMessages.forEach { message ->
+                snackbarHostState.showSnackbar(message)
             }
-        )
+        }
 
+        val activity = LocalActivity.current ?: return@composable
         DonateScreen(
             onNavigateBack = { popBackStackSafely(navHostController) },
-            onContinueToPaymentTapped = {
-                val productId = GetProductIdForAmount.execute(it)
-                billingManager.launchPurchaseFlow(activity, productId)
-            },
+            onContinueToPaymentTapped = { amount -> viewModel.donate(amount, activity) },
             snackbarHostState = snackbarHostState,
         )
     }

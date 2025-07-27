@@ -54,9 +54,6 @@ fun DonateScreen(
 ) {
     var selectedAmount by remember { mutableStateOf<Int?>(null) }
     Scaffold(
-        snackbarHost = {
-            SnackbarHost(hostState = snackbarHostState)
-        },
         topBar = {
             M3TopAppBar(
                 titleText = stringResource(R.string.donate_title),
@@ -64,13 +61,16 @@ fun DonateScreen(
                 onNavigateBack = onNavigateBack,
             )
         },
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState)
+        },
         contentWindowInsets = WindowInsets.safeDrawing,
     ) { paddingValues ->
         DonateScreenContent(
             paddingValues = paddingValues,
             selectedAmount = selectedAmount,
-            onAmountSelected = { amount -> selectedAmount = amount },
-            onContinueToPaymentTapped = onContinueToPaymentTapped
+            onAmountSelected = { selectedAmount = it },
+            onContinueToPaymentTapped = { selectedAmount?.let(onContinueToPaymentTapped) }
         )
     }
 }
@@ -80,7 +80,7 @@ private fun DonateScreenContent(
     paddingValues: PaddingValues,
     selectedAmount: Int?,
     onAmountSelected: (Int) -> Unit,
-    onContinueToPaymentTapped: (Int) -> Unit,
+    onContinueToPaymentTapped: () -> Unit,
 ) {
     M3ScreenColumn(
         paddingValues = paddingValues,
@@ -107,7 +107,7 @@ private fun DonateScreenContent(
         )
         M3FilledButton(
             buttonLabel = stringResource(R.string.donate_payment_cta),
-            onClick = { onContinueToPaymentTapped(selectedAmount ?: 0) },
+            onClick = onContinueToPaymentTapped,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 32.dp),
