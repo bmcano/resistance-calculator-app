@@ -54,6 +54,9 @@ fun NavGraphBuilder.parallelCalculatorScreen(
             onOptionSelected = { sameValues, resistorCount, units ->
                 viewModel.updateValues(sameValues, resistorCount, units, false)
             },
+            onValueChange = { resistance, index ->
+                viewModel.updateResistorInput(resistance, index, true)
+            },
             onLearnCircuitEquationsTapped = { navigateToCircuitEquations(navHostController) },
         )
     }
