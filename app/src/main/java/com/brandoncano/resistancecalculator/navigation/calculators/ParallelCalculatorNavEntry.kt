@@ -34,10 +34,8 @@ fun NavGraphBuilder.parallelCalculatorScreen(
     ) {
         val context = LocalContext.current
         val focusManager = LocalFocusManager.current
-        val viewModel: CircuitViewModel = viewModel<CircuitViewModel>()
+        val viewModel: CircuitViewModel = viewModel(factory = CircuitViewModel.getFactory(false))
         val circuit by viewModel.circuitStateTOStateFlow.collectAsState()
-        // We need to call this update because of shared preferences being used for both
-        viewModel.updateValues(circuit.isSameValues, circuit.resistorCount, circuit.units, false)
 
         CircuitCalculatorScreen(
             circuitTitle = R.string.circuit_title_parallel,
@@ -52,10 +50,10 @@ fun NavGraphBuilder.parallelCalculatorScreen(
             onFeedbackTapped = { SendFeedback.execute(context) },
             onAboutTapped = { navigateToAbout(navHostController) },
             onOptionSelected = { sameValues, resistorCount, units ->
-                viewModel.updateValues(sameValues, resistorCount, units, false)
+                viewModel.updateValues(sameValues, resistorCount, units)
             },
             onValueChange = { resistance, index ->
-                viewModel.updateResistorInput(resistance, index, true)
+                viewModel.updateResistorInput(resistance, index)
             },
             onLearnCircuitEquationsTapped = { navigateToCircuitEquations(navHostController) },
         )

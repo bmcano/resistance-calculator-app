@@ -9,4 +9,9 @@ data class Circuit(
     val resistorCount: Int = 2,
     val units: String = Symbols.OHMS,
     val totalResistance: String = "0",
-) : Serializable
+) : Serializable {
+
+    fun getInputs(): List<String> {
+        return resistorInputs.take(resistorCount)
+    }
+}
