@@ -31,8 +31,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.data.ArrowCardButtonPO
+import com.brandoncano.resistancecalculator.firebase.FirebaseRemoteConfigKeys
+import com.brandoncano.resistancecalculator.firebase.getStringOrEmpty
 import com.brandoncano.resistancecalculator.ui.composables.m3.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.m3.DesktopScreenPreview
 import com.brandoncano.resistancecalculator.ui.composables.m3.LongScreenPreview
@@ -95,21 +96,21 @@ private fun ViewOurAppsScreenContent(
         MobileAppCard(
             appName = stringResource(id = R.string.view_our_apps_capacitor),
             appImageRes = R.drawable.img_playstore_capacitor,
-            appLink = Links.CAPACITOR_PLAYSTORE,
+            appLink = FirebaseRemoteConfigKeys.PLAYSTORE_CAPACITOR.getStringOrEmpty(),
             onClick = onMobileAppCardTapped,
         )
         Spacer(modifier = Modifier.height(12.dp))
         MobileAppCard(
             appName = stringResource(id = R.string.view_our_apps_inductor),
             appImageRes = R.drawable.img_playstore_inductor,
-            appLink = Links.INDUCTOR_PLAYSTORE,
+            appLink = FirebaseRemoteConfigKeys.PLAYSTORE_INDUCTOR.getStringOrEmpty(),
             onClick = onMobileAppCardTapped,
         )
         Spacer(modifier = Modifier.height(12.dp))
         MobileAppCard(
             appName = stringResource(id = R.string.view_our_apps_ohms),
             appImageRes = R.drawable.img_playstore_ohms,
-            appLink = Links.OHMS_LAW_PLAYSTORE,
+            appLink = FirebaseRemoteConfigKeys.PLAYSTORE_OHMS.getStringOrEmpty(),
             onClick = onMobileAppCardTapped,
         )
         M3Divider(modifier = Modifier.padding(vertical = 16.dp))

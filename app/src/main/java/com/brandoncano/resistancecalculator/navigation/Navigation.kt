@@ -7,7 +7,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.brandoncano.resistancecalculator.constants.Links
+import com.brandoncano.resistancecalculator.firebase.FirebaseRemoteConfigKeys
+import com.brandoncano.resistancecalculator.firebase.getStringOrEmpty
 import com.brandoncano.resistancecalculator.navigation.calculators.colorToValueScreen
 import com.brandoncano.resistancecalculator.navigation.calculators.parallelCalculatorScreen
 import com.brandoncano.resistancecalculator.navigation.calculators.seriesCalculatorScreen
@@ -115,5 +116,6 @@ fun navigateToDonate(navController: NavHostController) {
 }
 
 fun navigateToGooglePlay(context: Context) {
-    OpenLink.execute(context, Links.RESISTOR_PLAYSTORE)
+    val playstoreResistorLink = FirebaseRemoteConfigKeys.PLAYSTORE_RESISTOR.getStringOrEmpty()
+    OpenLink.execute(context, playstoreResistorLink)
 }

@@ -2,8 +2,10 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin)
-    alias(libs.plugins.jetbrains.kotlin.compose)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.jetbrains.kotlin.plugin.compose)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.crashlytics)
 }
 
 android {
@@ -12,10 +14,10 @@ android {
 
     defaultConfig {
         applicationId = "com.brandoncano.resistancecalculator"
-        minSdk = 21
+        minSdk = 23 // Android 6.0
         targetSdk = 36
-        versionCode = 34 // for 4.1.0
-        versionName = "4.1.0"
+        versionCode = 35 // for 4.2.0
+        versionName = "4.2.0"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -24,7 +26,7 @@ android {
     applicationVariants.configureEach {
         val suffix = if (buildType.name == "debug") ", DEBUG" else ""
         resValue("string", "version", "$versionName$suffix")
-        resValue("string", "last_updated", "7/27/2025")
+        resValue("string", "last_updated", "7/28/2025")
     }
     buildTypes {
         release {
@@ -48,6 +50,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     testOptions {
         unitTests.isReturnDefaultValues = true
@@ -72,12 +75,16 @@ dependencies {
     implementation(libs.androidx.compose.runtime.livedata)
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.compose.material3)
-    // com.google
+    // firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.config)
+    implementation(libs.firebase.crashlytics.ndk) // Will also need to add crashlytics gradle build plugin
+    // google
     implementation(libs.billing.client)
     implementation(libs.gson)
     // unit testing
     testImplementation(libs.mockk)
     testImplementation(libs.junit)
     // external libraries
-    implementation(libs.ostermiller.util)
+    implementation(libs.ostermiller.utils)
 }

@@ -36,11 +36,10 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Lists
 import com.brandoncano.resistancecalculator.to.Circuit
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3TextField
-import com.brandoncano.resistancecalculator.ui.composables.m3.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.MenuIconButton
+import com.brandoncano.resistancecalculator.ui.composables.m3.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3CardContent
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3DisplayCard
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
@@ -48,6 +47,7 @@ import com.brandoncano.resistancecalculator.ui.composables.m3.M3Scaffold
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3ScreenColumn
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3Switch
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TextDropDownMenu
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3TextField
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
 import com.brandoncano.resistancecalculator.ui.composables.m3.ScreenPreviews
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
@@ -65,6 +65,7 @@ fun CircuitCalculatorScreen(
     onFeedbackTapped: () -> Unit,
     onAboutTapped: () -> Unit,
     onOptionSelected: (Boolean, Int, String) -> Unit,
+    onValueChange: (String, Int) -> Unit,
     onLearnCircuitEquationsTapped: () -> Unit,
 ) {
     var showMenu by remember { mutableStateOf(false) }
@@ -104,6 +105,7 @@ fun CircuitCalculatorScreen(
             vectorSize = vectorSize,
             circuit = circuit,
             onOptionSelected = onOptionSelected,
+            onValueChange = onValueChange,
             onLearnCircuitEquationsTapped = onLearnCircuitEquationsTapped,
         )
     }
@@ -116,6 +118,7 @@ private fun CircuitCalculatorScreenContent(
     vectorSize: Pair<Dp, Dp>,
     circuit: Circuit,
     onOptionSelected: (Boolean, Int, String) -> Unit,
+    onValueChange: (String, Int) -> Unit,
     onLearnCircuitEquationsTapped: () -> Unit,
 ) {
     M3ScreenColumn(
@@ -185,10 +188,8 @@ private fun CircuitCalculatorScreenContent(
                         keyboardType = KeyboardType.Number,
                         imeAction = if (index == fieldsToShow - 1) ImeAction.Done else ImeAction.Next
                     ),
-                ) { newValue ->
-                    circuit.resistorInputs[index] = newValue
-                    onOptionSelected(circuit.isSameValues, circuit.resistorCount, circuit.units)
-                }
+                    onValueChange = { onValueChange(it, index) }
+                )
             }
             Spacer(modifier = Modifier.height(24.dp))
         }
@@ -228,6 +229,7 @@ private fun CircuitCalculatorScreenSeriesPreview() {
             onFeedbackTapped = {},
             onAboutTapped = {},
             onOptionSelected = { _, _, _ -> },
+            onValueChange = { _, _ -> },
             onLearnCircuitEquationsTapped = {},
         )
     }
@@ -247,6 +249,7 @@ private fun CircuitCalculatorScreenParallelPreview() {
             onFeedbackTapped = {},
             onAboutTapped = {},
             onOptionSelected = { _, _, _ -> },
+            onValueChange = { _, _ -> },
             onLearnCircuitEquationsTapped = {},
         )
     }

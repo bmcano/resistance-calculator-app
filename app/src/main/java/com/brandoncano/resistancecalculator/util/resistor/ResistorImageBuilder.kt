@@ -2,7 +2,7 @@ package com.brandoncano.resistancecalculator.util.resistor
 
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Colors
-import com.brandoncano.resistancecalculator.data.ResistorImageColorPair
+import com.brandoncano.resistancecalculator.data.ResistorImageColorPairPO
 import com.brandoncano.resistancecalculator.to.ResistorCtv
 import com.brandoncano.resistancecalculator.to.ResistorVtc
 
@@ -11,7 +11,7 @@ import com.brandoncano.resistancecalculator.to.ResistorVtc
  */
 object ResistorImageBuilder {
 
-    fun execute(resistor: ResistorCtv): List<ResistorImageColorPair> {
+    fun execute(resistor: ResistorCtv): List<ResistorImageColorPairPO> {
         val resistorColor = resistor.deriveResistorColor()
         return listOf(
             R.drawable.img_resistor_wire to Colors.RESISTOR_WIRE,
@@ -29,10 +29,10 @@ object ResistorImageBuilder {
             R.drawable.img_resistor_band_96 to resistor.bandSixForDisplay(),
             R.drawable.img_resistor_end_right to resistorColor,
             R.drawable.img_resistor_wire to Colors.RESISTOR_WIRE
-        ).map { (res, color) -> ResistorImageColorPair(res, color) }
+        ).map { (res, color) -> ResistorImageColorPairPO(res, color) }
     }
 
-    fun execute(resistor: ResistorVtc): List<ResistorImageColorPair> {
+    fun execute(resistor: ResistorVtc): List<ResistorImageColorPairPO> {
         val resistorColor = resistor.deriveResistorColor()
         return listOf(
             R.drawable.img_resistor_wire to Colors.RESISTOR_WIRE,
@@ -50,6 +50,6 @@ object ResistorImageBuilder {
             R.drawable.img_resistor_band_96 to resistor.bandSixForDisplay(),
             R.drawable.img_resistor_end_right to resistorColor,
             R.drawable.img_resistor_wire to Colors.RESISTOR_WIRE
-        ).map { (res, color) -> ResistorImageColorPair(res, color) }
+        ).map { (res, color) -> ResistorImageColorPairPO(res, color) }
     }
 }

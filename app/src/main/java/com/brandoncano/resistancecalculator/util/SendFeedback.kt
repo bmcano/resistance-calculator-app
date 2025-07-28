@@ -19,7 +19,7 @@ object SendFeedback {
             context.startActivity(Intent.createChooser(intent, title))
         } catch (ex: Exception) {
             ex.printStackTrace()
-            ErrorDialog.build(context, "A problem occurred when trying to send an email.")
+            ErrorDialog.build(context, context.getString(R.string.error_send_feedback))
         }
     }
 }

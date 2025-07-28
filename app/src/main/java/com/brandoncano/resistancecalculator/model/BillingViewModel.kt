@@ -8,9 +8,7 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.adapter.BillingAdapter
 import com.brandoncano.resistancecalculator.ui.MainApplication
 import com.brandoncano.resistancecalculator.util.GetProductIdForAmount
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 

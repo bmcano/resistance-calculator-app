@@ -226,5 +226,10 @@
     <string name="error_na">N/A</string>
     <string name="error_invalid_resistance">Invalid resistance</string>
     <string name="error_invalid_code">Invalid code</string>
+    <string name="error_dialog_title">Error</string>
+    <string name="error_dialog_close">Close</string>
     <string name="error_donate_screen">There was an error connecting to Google Play services. Please try again later.</string>
+    <string name="error_open_link">A problem occurred while trying to open the link. Please try again later.</string>
+    <string name="error_send_feedback">A problem occurred when trying to create an email. Please try again later.</string>
+    <string name="error_share_image">A problem occurred when trying to share the image. Please try again later.</string>
 </resources>

@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.core.content.FileProvider
+import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.util.ErrorDialog
 import java.io.File
 import java.io.FileNotFoundException
@@ -15,9 +16,8 @@ import java.io.IOException
  */
 object SaveBitmap {
 
-    private const val ERROR_MESSAGE = "A problem occurred when trying to share the image."
-
     fun execute(bitmap: Bitmap, context: Context, applicationId: String): Uri? {
+        val errorMessage = context.getString(R.string.error_share_image)
         val imagesFolder = File(context.cacheDir, "images")
         try {
             imagesFolder.mkdirs()
@@ -33,11 +33,11 @@ object SaveBitmap {
             )
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
-            ErrorDialog.build(context, ERROR_MESSAGE)
+            ErrorDialog.build(context, errorMessage)
             return null
         } catch (e: IOException) {
             e.printStackTrace()
-            ErrorDialog.build(context, ERROR_MESSAGE)
+            ErrorDialog.build(context, errorMessage)
             return null
         }
     }
