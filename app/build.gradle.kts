@@ -2,10 +2,10 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin)
-    alias(libs.plugins.jetbrains.kotlin.compose)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.jetbrains.kotlin.plugin.compose)
     alias(libs.plugins.google.services)
-    alias(libs.plugins.firebase.crashlytics.plugin)
+    alias(libs.plugins.firebase.crashlytics)
 }
 
 android {
@@ -17,7 +17,7 @@ android {
         minSdk = 23 // Android 6.0
         targetSdk = 36
         versionCode = 35 // for 4.2.0
-        versionName = "4.2.0-Develop"
+        versionName = "4.2.0"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -26,7 +26,7 @@ android {
     applicationVariants.configureEach {
         val suffix = if (buildType.name == "debug") ", DEBUG" else ""
         resValue("string", "version", "$versionName$suffix")
-        resValue("string", "last_updated", "7/27/2025")
+        resValue("string", "last_updated", "7/28/2025")
     }
     buildTypes {
         release {
@@ -86,5 +86,5 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.junit)
     // external libraries
-    implementation(libs.ostermiller.util)
+    implementation(libs.ostermiller.utils)
 }
