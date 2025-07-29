@@ -77,6 +77,7 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     // firebase
     implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
     implementation(libs.firebase.config)
     implementation(libs.firebase.crashlytics.ndk) // Will also need to add crashlytics gradle build plugin
     // google

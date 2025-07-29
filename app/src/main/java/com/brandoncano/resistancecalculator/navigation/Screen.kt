@@ -6,7 +6,6 @@ package com.brandoncano.resistancecalculator.navigation
 sealed class Screen(val route: String) {
     data object About : Screen("about")
     data object ColorToValue: Screen("color_to_value")
-    // TODO - Likely to be removed once a "pro" version/features are released
     data object Donate : Screen("donate")
     data object Home : Screen("home")
     data object LearnCircuitEquations : Screen("circuit/learn")
