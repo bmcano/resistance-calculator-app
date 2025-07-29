@@ -15,6 +15,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.brandoncano.resistancecalculator.BuildConfig
 import com.brandoncano.resistancecalculator.data.ESeriesCardContent
+import com.brandoncano.resistancecalculator.firebase.FirebaseAnalyticsEvent
+import com.brandoncano.resistancecalculator.firebase.FirebaseAnalyticsEventLogger
 import com.brandoncano.resistancecalculator.model.ResistorVtcViewModel
 import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
@@ -78,7 +80,10 @@ fun NavGraphBuilder.valueToColorScreen(
                 focusManager.clearFocus()
             },
             onNavBarSelectionChanged = { viewModel.updateNavBarSelection(it) },
-            onValidateResistanceTapped = { viewModel.validateResistance() },
+            onValidateResistanceTapped = {
+                FirebaseAnalyticsEventLogger.execute(FirebaseAnalyticsEvent.ACTION_VALIDATE_E_SERIES)
+                viewModel.validateResistance()
+            },
             onUseValueTapped = {
                 viewModel.updateCardContent(ESeriesCardContent.DefaultContent)
                 val sigFigs = if (resistor.navBarSelection <= 1) 2 else 3

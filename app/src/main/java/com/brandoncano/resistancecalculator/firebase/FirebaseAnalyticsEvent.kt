@@ -8,7 +8,7 @@ package com.brandoncano.resistancecalculator.firebase
  * + Actions should be logged as "action_<name>"
  * + Event names can only contain number, letters, and underscores
  */
-enum class FirebaseAnalyticsEvent(val eventName: String) {
+enum class FirebaseAnalyticsEvent(val analyticName: String) {
     // Screens
     SCREEN_COLOR_TO_VALUE("screen_color_to_value"),
     SCREEN_VALUE_TO_COLOR("screen_value_to_color"),
@@ -20,7 +20,8 @@ enum class FirebaseAnalyticsEvent(val eventName: String) {
     SCREEN_INFO_SMD_CODES("screen_info_smd_codes"),
     SCREEN_INFO_CIRCUIT_EQUATIONS("screen_info_circuit_equations"),
     SCREEN_DONATE("screen_donate"),
-    SCREEN_VIEW_APPS("screen_view_apps")
+    SCREEN_VIEW_APPS("screen_view_apps"),
 
     // Actions
+    ACTION_VALIDATE_E_SERIES("action_validate_e_series"),
 }
