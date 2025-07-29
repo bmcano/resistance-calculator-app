@@ -3,11 +3,12 @@ package com.brandoncano.resistancecalculator.ui
 import android.app.Application
 import android.util.Log
 import android.widget.Toast
-import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.BuildConfig
+import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.firebase.FIREBASE_TAG
 import com.brandoncano.resistancecalculator.firebase.FirebaseRemoteConfigBackupValues
 import com.google.firebase.Firebase
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.remoteconfig.remoteConfig
 import com.google.firebase.remoteconfig.remoteConfigSettings
 
@@ -23,7 +24,15 @@ class MainApplication : Application() {
         super.onCreate()
         instance = this
         Log.i(TAG, "onCreate called")
+        setupFirebaseAnalytics()
         setupFirebaseRemoteConfig()
+    }
+
+    private fun setupFirebaseAnalytics() {
+        if (BuildConfig.DEBUG) return // We don't want to log in DEBUG mode
+        // TODO - Add shared prefs on settings (or about) allowing users to opt out
+        val firebaseAnalytics = FirebaseAnalytics.getInstance(this)
+        firebaseAnalytics.setAnalyticsCollectionEnabled(true)
     }
 
     private fun setupFirebaseRemoteConfig() {
