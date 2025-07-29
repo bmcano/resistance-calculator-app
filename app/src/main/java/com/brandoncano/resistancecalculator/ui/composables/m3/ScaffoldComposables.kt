@@ -5,9 +5,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -19,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.LayoutDirection
 import com.brandoncano.resistancecalculator.R
 
 /**
@@ -67,4 +75,31 @@ fun M3ScreenColumn(
     )
 }
 
-// TODO - M3ScreenLazyColumn: Circuit, Info
+/**
+ * Reusable lazy column that accounts for edge-to-edge and lazy list state
+ */
+@Composable
+fun M3LazyColumn(
+    paddingValues: PaddingValues,
+    modifier: Modifier = Modifier,
+    state: LazyListState = rememberLazyListState(),
+    horizontalAlignment: Alignment.Horizontal = Alignment.Start,
+    content: LazyListScope.() -> Unit,
+) {
+    val sidePadding = dimensionResource(R.dimen.app_side_padding)
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .consumeWindowInsets(paddingValues)
+            .padding(horizontal = sidePadding),
+        state = state,
+        contentPadding = PaddingValues(
+            top = paddingValues.calculateTopPadding(),
+            start = paddingValues.calculateStartPadding(LayoutDirection.Ltr),
+            end = paddingValues.calculateEndPadding(LayoutDirection.Ltr),
+            bottom = paddingValues.calculateBottomPadding()
+        ),
+        horizontalAlignment = horizontalAlignment,
+        content = content
+    )
+}

@@ -16,8 +16,8 @@ android {
         applicationId = "com.brandoncano.resistancecalculator"
         minSdk = 23 // Android 6.0
         targetSdk = 36
-        versionCode = 35 // for 4.2.0
-        versionName = "4.2.0"
+        versionCode = 36 // for 4.2.1
+        versionName = "4.2.1"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -77,6 +77,7 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     // firebase
     implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
     implementation(libs.firebase.config)
     implementation(libs.firebase.crashlytics.ndk) // Will also need to add crashlytics gradle build plugin
     // google

@@ -42,7 +42,13 @@ class BillingViewModel : ViewModel() {
     }
 
     fun donate(amount: Int, activity: Activity) {
-        val productId = GetProductIdForAmount.execute(amount)
-        billingAdapter.launchPurchaseFlow(activity, productId)
+        try {
+            val productId = GetProductIdForAmount.execute(amount)
+            billingAdapter.launchPurchaseFlow(activity, productId)
+        } catch (ex: NullPointerException) {
+            Log.e(TAG, Log.getStackTraceString(ex))
+            val errorMessage = application.getString(R.string.error_donate_screen)
+            _errorMessages.value.add(errorMessage)
+        }
     }
 }

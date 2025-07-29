@@ -1,10 +1,13 @@
 package com.brandoncano.resistancecalculator.ui.screens.calculators
 
-import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -42,9 +45,9 @@ import com.brandoncano.resistancecalculator.ui.composables.MenuIconButton
 import com.brandoncano.resistancecalculator.ui.composables.m3.BottomScreenSpacer
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3CardContent
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3DisplayCard
+import com.brandoncano.resistancecalculator.ui.composables.m3.M3LazyColumn
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3Scaffold
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3ScreenColumn
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3Switch
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.m3.M3TextField
@@ -121,61 +124,64 @@ private fun CircuitCalculatorScreenContent(
     onValueChange: (String, Int) -> Unit,
     onLearnCircuitEquationsTapped: () -> Unit,
 ) {
-    M3ScreenColumn(
+    val maxFieldCount = 8
+    val fieldsToShow = if (circuit.isSameValues) 1 else circuit.resistorCount
+    M3LazyColumn(
         paddingValues = paddingValues,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Image(
-            painter = painterResource(circuitVector),
-            contentDescription = null,
-            modifier = Modifier
-                .padding(vertical = 16.dp)
-                .size(width = vectorSize.first, height = vectorSize.second)
-                .align(Alignment.CenterHorizontally),
-            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
-        )
-        M3DisplayCard(text = "${circuit.totalResistance} ${circuit.units}")
-        Spacer(modifier = Modifier.height(24.dp))
-        M3Switch(
-            labelText = stringResource(R.string.circuit_use_same_values),
-            checked = circuit.isSameValues,
-            onCheckedChange = { onOptionSelected(it, circuit.resistorCount, circuit.units) },
-            horizontalInsetPadding = 0.dp,
-        )
-        Spacer(modifier = Modifier.height(24.dp))
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly,
-        ) {
-            M3TextDropDownMenu(
-                label = stringResource(id = R.string.circuit_num_resistors_label),
+        item {
+            Image(
+                painter = painterResource(circuitVector),
+                contentDescription = null,
                 modifier = Modifier
-                    .weight(0.5f)
-                    .padding(end = 8.dp),
-                selectedOption = circuit.resistorCount.toString(),
-                items = Lists.CIRCUIT_RESISTOR_COUNT,
-            ) {
-                val resistorCount = it.toIntOrNull() ?: 2
-                onOptionSelected(circuit.isSameValues, resistorCount, circuit.units)
-            }
-            M3TextDropDownMenu(
-                label = stringResource(id = R.string.circuit_units_label),
-                modifier = Modifier
-                    .weight(0.5f)
-                    .padding(start = 8.dp),
-                selectedOption = circuit.units,
-                items = Lists.UNITS,
-                onOptionSelected = { onOptionSelected(circuit.isSameValues, circuit.resistorCount, it) },
+                    .padding(vertical = 16.dp)
+                    .size(width = vectorSize.first, height = vectorSize.second),
+                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
             )
+            M3DisplayCard(text = "${circuit.totalResistance} ${circuit.units}")
+            Spacer(modifier = Modifier.height(24.dp))
         }
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .animateContentSize(animationSpec = tween(durationMillis = 300)),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            val fieldsToShow = if (circuit.isSameValues) 1 else circuit.resistorCount
-            repeat(fieldsToShow) { index ->
+        item {
+            M3Switch(
+                labelText = stringResource(R.string.circuit_use_same_values),
+                checked = circuit.isSameValues,
+                onCheckedChange = { onOptionSelected(it, circuit.resistorCount, circuit.units) },
+                horizontalInsetPadding = 0.dp,
+            )
+            Spacer(modifier = Modifier.height(24.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+            ) {
+                M3TextDropDownMenu(
+                    label = stringResource(id = R.string.circuit_num_resistors_label),
+                    modifier = Modifier
+                        .weight(0.5f)
+                        .padding(end = 8.dp),
+                    selectedOption = circuit.resistorCount.toString(),
+                    items = Lists.CIRCUIT_RESISTOR_COUNT,
+                ) {
+                    val resistorCount = it.toIntOrNull() ?: 2
+                    onOptionSelected(circuit.isSameValues, resistorCount, circuit.units)
+                }
+                M3TextDropDownMenu(
+                    label = stringResource(id = R.string.circuit_units_label),
+                    modifier = Modifier
+                        .weight(0.5f)
+                        .padding(start = 8.dp),
+                    selectedOption = circuit.units,
+                    items = Lists.UNITS,
+                    onOptionSelected = { onOptionSelected(circuit.isSameValues, circuit.resistorCount, it) },
+                )
+            }
+        }
+        items(count = maxFieldCount, key = { it }) { index ->
+            AnimatedVisibility(
+                visible = index < fieldsToShow,
+                enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
+                exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically()
+            ) {
                 val labelText = getResistanceLabelText(circuit.isSameValues, circuit.units, index + 1)
                 M3TextField(
                     label = labelText,
@@ -191,18 +197,20 @@ private fun CircuitCalculatorScreenContent(
                     onValueChange = { onValueChange(it, index) }
                 )
             }
+        }
+        item {
             Spacer(modifier = Modifier.height(24.dp))
+            M3OutlinedCard {
+                M3CardContent(
+                    headline = stringResource(R.string.circuit_info_card_header),
+                    subhead = stringResource(R.string.circuit_info_card_subhead),
+                    bodyText = stringResource(R.string.circuit_info_card_body),
+                    primaryButtonText = stringResource(R.string.circuit_info_card_cta_text),
+                    onPrimaryClick = onLearnCircuitEquationsTapped,
+                )
+            }
+            BottomScreenSpacer()
         }
-        M3OutlinedCard {
-            M3CardContent(
-                headline = stringResource(R.string.circuit_info_card_header),
-                subhead = stringResource(R.string.circuit_info_card_subhead),
-                bodyText = stringResource(R.string.circuit_info_card_body),
-                primaryButtonText = stringResource(R.string.circuit_info_card_cta_text),
-                onPrimaryClick = onLearnCircuitEquationsTapped,
-            )
-        }
-        BottomScreenSpacer()
     }
 }
 
