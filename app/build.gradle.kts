@@ -16,7 +16,7 @@ android {
         applicationId = "com.brandoncano.resistancecalculator"
         minSdk = 23 // Android 6.0
         targetSdk = 36
-        versionCode = 36 // for 4.2.1
+        versionCode = 37 // for 4.2.1
         versionName = "4.2.1"
 
         vectorDrawables {
@@ -45,7 +45,6 @@ android {
     kotlin {
         compilerOptions {
             jvmTarget = JvmTarget.JVM_17
-
         }
     }
     buildFeatures {
