@@ -12,26 +12,33 @@ class SmdResistorViewModel(private val savedStateHandle: SavedStateHandle): View
 
     private companion object {
         private const val TAG = "SmdResistorViewModel"
-        private const val KEY_RESISTOR_STATE_TO = "KEY_RESISTOR_STATE_TO"
+        private const val KEY_SCREEN_STATE_TO = "KEY_SCREEN_STATE_TO"
         private const val KEY_ERROR_STATE_BOOL = "KEY_ERROR_STATE_BOOL"
     }
 
     private val sharedPreferencesAdapter = SharedPreferencesAdapter()
-    val resistorStateTOStateFlow = savedStateHandle.getStateFlow(KEY_RESISTOR_STATE_TO, SmdResistor())
+    val resistorStateTOStateFlow = savedStateHandle.getStateFlow(KEY_SCREEN_STATE_TO, SmdResistor())
     val isErrorStateFlow = savedStateHandle.getStateFlow(KEY_ERROR_STATE_BOOL, false)
 
     init {
         Log.d(TAG, "Init: $this")
-        loadData()
+        setInitialScreenState()
     }
 
-    fun loadData() {
-        val resistor = sharedPreferencesAdapter.getSmdResistorPreference()
-        val navBar = resistor.navBarSelection
+    private fun setInitialScreenState() {
+        Log.d(TAG, "setInitialScreenState")
+        savedStateHandle[KEY_SCREEN_STATE_TO] = deriveContentTO()
+    }
 
-        savedStateHandle[KEY_RESISTOR_STATE_TO] = resistor
-        Log.d(TAG, "loadData(): resistor = $resistor, navBar = $navBar")
-        updateErrorState(resistor)
+    private fun deriveContentTO(): SmdResistor {
+        val resistor = sharedPreferencesAdapter.getSmdResistorPreference()
+        deriveErrorState(resistor)
+        return resistor
+    }
+
+    private fun deriveErrorState(resistor: SmdResistor) {
+        val isInvalid = resistor.isSmdInputInvalid()
+        savedStateHandle[KEY_ERROR_STATE_BOOL] = isInvalid
     }
 
     fun clear() {
@@ -39,7 +46,7 @@ class SmdResistorViewModel(private val savedStateHandle: SavedStateHandle): View
         val blankResistor = SmdResistor(navBarSelection = currentNavBar)
 
         sharedPreferencesAdapter.setSmdResistorPreference(blankResistor)
-        savedStateHandle[KEY_RESISTOR_STATE_TO] = blankResistor
+        savedStateHandle[KEY_SCREEN_STATE_TO] = blankResistor
         savedStateHandle[KEY_ERROR_STATE_BOOL] = false
     }
 
@@ -50,13 +57,13 @@ class SmdResistorViewModel(private val savedStateHandle: SavedStateHandle): View
             units = units,
         )
 
-        updateErrorState(updatedResistor)
+        deriveErrorState(updatedResistor)
         if (!isErrorStateFlow.value) {
             updatedResistor.formatResistance()
-            sharedPreferencesAdapter.setSmdResistorPreference(updatedResistor)
         }
 
-        savedStateHandle[KEY_RESISTOR_STATE_TO] = updatedResistor
+        sharedPreferencesAdapter.setSmdResistorPreference(updatedResistor)
+        savedStateHandle[KEY_SCREEN_STATE_TO] = updatedResistor
     }
 
     fun updateNavBarSelection(number: Int) {
@@ -64,17 +71,12 @@ class SmdResistorViewModel(private val savedStateHandle: SavedStateHandle): View
         val currentResistor = resistorStateTOStateFlow.value
         val updatedResistor = currentResistor.copy(navBarSelection = navBar)
 
-        updateErrorState(updatedResistor)
+        deriveErrorState(updatedResistor)
         if (!isErrorStateFlow.value) {
             updatedResistor.formatResistance()
-            sharedPreferencesAdapter.setSmdResistorPreference(updatedResistor)
         }
 
-        savedStateHandle[KEY_RESISTOR_STATE_TO] = updatedResistor
-    }
-
-    private fun updateErrorState(resistor: SmdResistor) {
-        val isInvalid = resistor.isSmdInputInvalid()
-        savedStateHandle[KEY_ERROR_STATE_BOOL] = isInvalid
+        sharedPreferencesAdapter.setSmdResistorPreference(updatedResistor)
+        savedStateHandle[KEY_SCREEN_STATE_TO] = updatedResistor
     }
 }

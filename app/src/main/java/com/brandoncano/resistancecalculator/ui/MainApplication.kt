@@ -5,8 +5,10 @@ import android.util.Log
 import android.widget.Toast
 import com.brandoncano.resistancecalculator.BuildConfig
 import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.adapter.SharedPreferencesAdapter
 import com.brandoncano.resistancecalculator.firebase.FIREBASE_TAG
 import com.brandoncano.resistancecalculator.firebase.FirebaseRemoteConfigBackupValues
+import com.brandoncano.resistancecalculator.keys.SharedPreferencesKey
 import com.google.firebase.Firebase
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.remoteconfig.remoteConfig
@@ -23,9 +25,23 @@ class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        Log.i(TAG, "onCreate called")
+        Log.d(TAG, "onCreate called")
+        setupFirstAppLaunchPreference()
         setupFirebaseAnalytics()
         setupFirebaseRemoteConfig()
+    }
+
+    private fun setupFirstAppLaunchPreference() {
+        val sharedPreferencesAdapter = SharedPreferencesAdapter()
+        val resetPreferences = sharedPreferencesAdapter.getResetPreferences()
+        if (!resetPreferences) return
+        with (sharedPreferencesAdapter) {
+            removeSharedPreference(SharedPreferencesKey.KEY_COLOR_TO_VALUE)
+            removeSharedPreference(SharedPreferencesKey.KEY_VALUE_TO_COLOR)
+            removeSharedPreference(SharedPreferencesKey.KEY_SMD_RESISTOR)
+            removeSharedPreference(SharedPreferencesKey.KEY_CIRCUIT)
+            setResetPreferences()
+        }
     }
 
     private fun setupFirebaseAnalytics() {

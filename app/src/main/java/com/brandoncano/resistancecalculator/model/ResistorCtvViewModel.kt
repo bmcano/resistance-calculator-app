@@ -10,22 +10,25 @@ class ResistorCtvViewModel(private val savedStateHandle: SavedStateHandle): View
 
     private companion object {
         private const val TAG = "ResistorCtvViewModel"
-        private const val KEY_RESISTOR_STATE_TO = "KEY_RESISTOR_STATE_TO"
+        private const val KEY_SCREEN_STATE_TO = "KEY_SCREEN_STATE_TO"
     }
 
     private val sharedPreferencesAdapter = SharedPreferencesAdapter()
-    val resistorStateTOStateFlow = savedStateHandle.getStateFlow(KEY_RESISTOR_STATE_TO,
-        ResistorCtv()
-    )
+    val resistorStateTOStateFlow = savedStateHandle.getStateFlow(KEY_SCREEN_STATE_TO, ResistorCtv())
 
     init {
         Log.d(TAG, "Init: $this")
-        loadData()
+        setInitialScreenState()
     }
 
-    fun loadData() {
+    private fun setInitialScreenState() {
+        Log.d(TAG, "setInitialScreenState")
+        savedStateHandle[KEY_SCREEN_STATE_TO] = deriveContentTO()
+    }
+
+    private fun deriveContentTO(): ResistorCtv {
         val resistor = sharedPreferencesAdapter.getResistorCtvPreference()
-        savedStateHandle[KEY_RESISTOR_STATE_TO] = resistor
+        return resistor
     }
 
     fun clear() {
@@ -33,7 +36,7 @@ class ResistorCtvViewModel(private val savedStateHandle: SavedStateHandle): View
         val blankResistor = ResistorCtv(navBarSelection = currentNavBar)
 
         sharedPreferencesAdapter.setResistorCtvPreference(blankResistor)
-        savedStateHandle[KEY_RESISTOR_STATE_TO] = blankResistor
+        savedStateHandle[KEY_SCREEN_STATE_TO] = blankResistor
     }
 
     fun updateBand(bandNumber: Int, color: String) {
@@ -49,7 +52,7 @@ class ResistorCtvViewModel(private val savedStateHandle: SavedStateHandle): View
         }
 
         sharedPreferencesAdapter.setResistorCtvPreference(updatedResistor)
-        savedStateHandle[KEY_RESISTOR_STATE_TO] = updatedResistor
+        savedStateHandle[KEY_SCREEN_STATE_TO] = updatedResistor
     }
 
     fun updateNavBarSelection(number: Int) {
@@ -58,6 +61,6 @@ class ResistorCtvViewModel(private val savedStateHandle: SavedStateHandle): View
         val updatedResistor = currentResistor.copy(navBarSelection = navBar)
 
         sharedPreferencesAdapter.setResistorCtvPreference(updatedResistor)
-        savedStateHandle[KEY_RESISTOR_STATE_TO] = updatedResistor
+        savedStateHandle[KEY_SCREEN_STATE_TO] = updatedResistor
     }
 }

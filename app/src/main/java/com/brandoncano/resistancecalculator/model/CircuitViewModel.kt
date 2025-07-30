@@ -15,7 +15,7 @@ class CircuitViewModel(private val savedStateHandle: SavedStateHandle, private v
 
     companion object {
         private const val TAG = "CircuitViewModel"
-        private const val KEY_CIRCUIT_STATE_TO = "KEY_RESISTOR_STATE_TO"
+        private const val KEY_SCREEN_STATE_TO = "KEY_SCREEN_STATE_TO"
 
         fun getFactory(isSeriesCircuit: Boolean): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
@@ -29,21 +29,24 @@ class CircuitViewModel(private val savedStateHandle: SavedStateHandle, private v
     }
 
     private val sharedPreferencesAdapter = SharedPreferencesAdapter()
-    val circuitStateTOStateFlow = savedStateHandle.getStateFlow(KEY_CIRCUIT_STATE_TO, Circuit())
+    val circuitStateTOStateFlow = savedStateHandle.getStateFlow(KEY_SCREEN_STATE_TO, Circuit())
 
     init {
         Log.d(TAG, "Init: $this")
-        loadData()
+        setInitialScreenState()
     }
 
-    fun loadData() {
+    private fun setInitialScreenState() {
+        Log.d(TAG, "setInitialScreenState")
+        savedStateHandle[KEY_SCREEN_STATE_TO] = deriveContentTO()
+    }
+
+    private fun deriveContentTO(): Circuit {
         val circuit = sharedPreferencesAdapter.getCircuitPreference()
         val totalResistance = calculateTotalResistance(circuit)
-        val updateCircuit = circuit.copy(totalResistance = totalResistance)
-
-        sharedPreferencesAdapter.setCircuitPreference(updateCircuit)
-        savedStateHandle[KEY_CIRCUIT_STATE_TO] = updateCircuit
-        Log.d(TAG, "loadData(): circuit = $circuit")
+        val circuitContent = circuit.copy(totalResistance = totalResistance)
+        sharedPreferencesAdapter.setCircuitPreference(circuitContent)
+        return circuitContent
     }
 
     fun clear() {
@@ -51,9 +54,8 @@ class CircuitViewModel(private val savedStateHandle: SavedStateHandle, private v
         val resistorCount = circuitStateTOStateFlow.value.resistorCount
         val units = circuitStateTOStateFlow.value.units
         val blankCircuit = Circuit(isSameValues = sameValues, resistorCount = resistorCount, units = units)
-
         sharedPreferencesAdapter.setCircuitPreference(blankCircuit)
-        savedStateHandle[KEY_CIRCUIT_STATE_TO] = blankCircuit
+        savedStateHandle[KEY_SCREEN_STATE_TO] = blankCircuit
     }
 
     fun updateValues(isSameValues: Boolean, resistorCount: Int, units: String) {
@@ -61,7 +63,7 @@ class CircuitViewModel(private val savedStateHandle: SavedStateHandle, private v
         val totalResistance = calculateTotalResistance(currentCircuit)
         val updatedCircuit = currentCircuit.copy(totalResistance = totalResistance)
         sharedPreferencesAdapter.setCircuitPreference(updatedCircuit.copy(totalResistance = totalResistance))
-        savedStateHandle[KEY_CIRCUIT_STATE_TO] = updatedCircuit.copy(totalResistance = totalResistance)
+        savedStateHandle[KEY_SCREEN_STATE_TO] = updatedCircuit.copy(totalResistance = totalResistance)
     }
 
     fun updateResistorInput(resistance: String, index: Int) {
@@ -71,9 +73,8 @@ class CircuitViewModel(private val savedStateHandle: SavedStateHandle, private v
         }
         val totalResistance = calculateTotalResistance(currentCircuit.copy(resistorInputs = updatedInputs))
         val updatedCircuit = currentCircuit.copy(resistorInputs = updatedInputs, totalResistance = totalResistance)
-
         sharedPreferencesAdapter.setCircuitPreference(updatedCircuit)
-        savedStateHandle[KEY_CIRCUIT_STATE_TO] = updatedCircuit
+        savedStateHandle[KEY_SCREEN_STATE_TO] = updatedCircuit
     }
 
     private fun calculateTotalResistance(circuit: Circuit): String {

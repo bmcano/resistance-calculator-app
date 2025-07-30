@@ -65,37 +65,27 @@ fun navigateToAbout(navController: NavHostController) {
 
 fun navigateToColorToValue(navController: NavHostController) {
     FirebaseAnalyticsScreenLogger.execute(FirebaseAnalyticsEvent.SCREEN_COLOR_TO_VALUE)
-    navController.navigate(Screen.ColorToValue.route) {
-        popUpTo(Screen.Home.route)
-    }
+    navController.navigate(Screen.ColorToValue.route)
 }
 
 fun navigateToValueToColor(navController: NavHostController) {
     FirebaseAnalyticsScreenLogger.execute(FirebaseAnalyticsEvent.SCREEN_VALUE_TO_COLOR)
-    navController.navigate(Screen.ValueToColor.route) {
-        popUpTo(Screen.Home.route)
-    }
+    navController.navigate(Screen.ValueToColor.route)
 }
 
 fun navigateToSmd(navController: NavHostController) {
     FirebaseAnalyticsScreenLogger.execute(FirebaseAnalyticsEvent.SCREEN_SMD)
-    navController.navigate(Screen.Smd.route) {
-        popUpTo(Screen.Home.route)
-    }
+    navController.navigate(Screen.Smd.route)
 }
 
 fun navigateToSeriesCalculator(navController: NavController) {
     FirebaseAnalyticsScreenLogger.execute(FirebaseAnalyticsEvent.SCREEN_CIRCUIT_SERIES)
-    navController.navigate(Screen.SeriesCalculator.route) {
-        popUpTo(Screen.Home.route)
-    }
+    navController.navigate(Screen.SeriesCalculator.route)
 }
 
 fun navigateToParallelCalculator(navController: NavController) {
     FirebaseAnalyticsScreenLogger.execute(FirebaseAnalyticsEvent.SCREEN_CIRCUIT_PARALLEL)
-    navController.navigate(Screen.ParallelCalculator.route) {
-        popUpTo(Screen.Home.route)
-    }
+    navController.navigate(Screen.ParallelCalculator.route)
 }
 
 fun navigateToCircuitEquations(navController: NavHostController) {
