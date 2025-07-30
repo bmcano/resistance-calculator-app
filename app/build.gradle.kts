@@ -16,8 +16,8 @@ android {
         applicationId = "com.brandoncano.resistancecalculator"
         minSdk = 23 // Android 6.0
         targetSdk = 36
-        versionCode = 37 // for 4.2.1
-        versionName = "4.2.1"
+        versionCode = 42 // for 4.2.4
+        versionName = "4.2.4"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -26,10 +26,12 @@ android {
     applicationVariants.configureEach {
         val suffix = if (buildType.name == "debug") ", DEBUG" else ""
         resValue("string", "version", "$versionName$suffix")
-        resValue("string", "last_updated", "7/28/2025")
+        resValue("string", "last_updated", "7/30/2025")
     }
     buildTypes {
         release {
+            // adb uninstall com.brandoncano.resistancecalculator
+            // adb install -r .\app\release\app-release.apk
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
@@ -78,7 +80,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.config)
-    implementation(libs.firebase.crashlytics.ndk) // Will also need to add crashlytics gradle build plugin
+    implementation(libs.firebase.crashlytics.ndk)
     // google
     implementation(libs.billing.client)
     implementation(libs.gson)
