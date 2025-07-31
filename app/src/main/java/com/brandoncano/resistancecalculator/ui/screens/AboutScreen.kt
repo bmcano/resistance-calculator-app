@@ -175,7 +175,7 @@ private fun AppInformationCard(version: String, lastUpdated: String) {
 }
 
 @Composable
-fun AboutOverviewCard() {
+private fun AboutOverviewCard() {
     Column {
         Text(
             text = stringResource(id = R.string.about_overview_title),

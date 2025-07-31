@@ -28,6 +28,8 @@ import com.brandoncano.resistancecalculator.util.OpenLink
  * TODO - Convert to Nav3 when it is ready and stable
  */
 
+private const val TAG = "Navigation"
+
 @Composable
 fun Navigation(onOpenAppThemeDialog: () -> Unit) {
     val navController = rememberNavController()
@@ -55,7 +57,7 @@ fun popBackStackSafely(navController: NavHostController) {
     if (navController.previousBackStackEntry != null) {
         navController.popBackStack()
     } else {
-        Log.e("Navigation", "Attempted navController.popBackStack(), but no BackStackEntry exists.")
+        Log.e(TAG, "Attempted navController.popBackStack(), but no BackStackEntry exists.")
     }
 }
 
