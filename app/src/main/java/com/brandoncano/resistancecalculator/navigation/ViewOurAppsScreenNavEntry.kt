@@ -4,12 +4,15 @@ import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import com.brandoncano.resistancecalculator.keys.FirebaseRemoteConfigKeys
-import com.brandoncano.resistancecalculator.firebase.getStringOrEmpty
+import com.brandoncano.library.firebase.FirebaseAnalyticsEvent
+import com.brandoncano.library.firebase.FirebaseAnalyticsScreenLogger
+import com.brandoncano.library.firebase.FirebaseRemoteConfigKeys
+import com.brandoncano.library.firebase.getStringOrEmpty
 import com.brandoncano.resistancecalculator.ui.screens.ViewOurAppsScreen
 import com.brandoncano.library.util.OpenLink
 
@@ -25,6 +28,14 @@ fun NavGraphBuilder.viewOurAppsScreen(
     ) {
         val context = LocalContext.current
         val developerProfileLink = FirebaseRemoteConfigKeys.PLAYSTORE_DEVELOPER_PROFILE.getStringOrEmpty()
+
+        LaunchedEffect(Unit) {
+            FirebaseAnalyticsScreenLogger.execute(
+                context = context,
+                event = FirebaseAnalyticsEvent.SCREEN_RESISTOR_VIEW_APPS
+            )
+        }
+
         ViewOurAppsScreen(
             onNavigateBack = { popBackStackSafely(navHostController) },
             onFeatureCardTapped = { navigateToGooglePlay(context) },

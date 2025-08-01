@@ -1,6 +1,4 @@
-package com.brandoncano.resistancecalculator.firebase
-
-import com.brandoncano.resistancecalculator.keys.FirebaseRemoteConfigKeys
+package com.brandoncano.library.firebase
 
 const val FIREBASE_TAG = "FirebaseTag"
 

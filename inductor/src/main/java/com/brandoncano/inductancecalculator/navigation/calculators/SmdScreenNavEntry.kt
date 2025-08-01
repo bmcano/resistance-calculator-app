@@ -5,6 +5,7 @@ import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
@@ -21,6 +22,8 @@ import com.brandoncano.inductancecalculator.navigation.navigateToLearnSmdCodes
 import com.brandoncano.inductancecalculator.navigation.popBackStackSafely
 import com.brandoncano.inductancecalculator.ui.screens.calculators.SmdScreen
 import com.brandoncano.inductancecalculator.util.SendFeedbackWrapper
+import com.brandoncano.library.firebase.FirebaseAnalyticsEvent
+import com.brandoncano.library.firebase.FirebaseAnalyticsScreenLogger
 import com.brandoncano.library.util.ShareComposableAsImage
 import com.brandoncano.library.util.ShareText
 
@@ -40,6 +43,13 @@ fun NavGraphBuilder.smdScreen(
         val viewModel: SmdInductorViewModel = viewModel<SmdInductorViewModel>()
         val inductor by viewModel.inductorStateTOStateFlow.collectAsState()
         val isError by viewModel.isErrorStateFlow.collectAsState()
+
+        LaunchedEffect(Unit) {
+            FirebaseAnalyticsScreenLogger.execute(
+                context = context,
+                event = FirebaseAnalyticsEvent.SCREEN_INDUCTOR_SMD,
+            )
+        }
 
         SmdScreen(
             inductor = inductor,

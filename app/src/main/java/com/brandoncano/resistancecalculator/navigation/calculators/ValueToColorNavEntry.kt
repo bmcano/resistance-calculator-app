@@ -5,6 +5,7 @@ import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
@@ -17,8 +18,9 @@ import com.brandoncano.library.util.ShareComposableAsImage
 import com.brandoncano.library.util.ShareText
 import com.brandoncano.resistancecalculator.BuildConfig
 import com.brandoncano.resistancecalculator.data.ESeriesCardContent
-import com.brandoncano.resistancecalculator.firebase.FirebaseAnalyticsEvent
-import com.brandoncano.resistancecalculator.firebase.FirebaseAnalyticsEventLogger
+import com.brandoncano.library.firebase.FirebaseAnalyticsEvent
+import com.brandoncano.library.firebase.FirebaseAnalyticsEventLogger
+import com.brandoncano.library.firebase.FirebaseAnalyticsScreenLogger
 import com.brandoncano.resistancecalculator.model.ResistorVtcViewModel
 import com.brandoncano.resistancecalculator.navigation.ResistorScreen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
@@ -46,6 +48,13 @@ fun NavGraphBuilder.valueToColorScreen(
         val isError by viewModel.isErrorStateFlow.collectAsState()
         val eSeriesCardContent: ESeriesCardContent by viewModel.eSeriesCardContentStateTOStateFlow.collectAsState()
         val closestStandardValue by viewModel.closestStandardValueStateFlow.collectAsState()
+
+        LaunchedEffect(Unit) {
+            FirebaseAnalyticsScreenLogger.execute(
+                context = context,
+                event = FirebaseAnalyticsEvent.SCREEN_RESISTOR_VALUE_TO_COLOR,
+            )
+        }
 
         ValueToColorScreen(
             resistor = resistor,
@@ -81,7 +90,7 @@ fun NavGraphBuilder.valueToColorScreen(
             },
             onNavBarSelectionChanged = { viewModel.updateNavBarSelection(it) },
             onValidateResistanceTapped = {
-                FirebaseAnalyticsEventLogger.execute(FirebaseAnalyticsEvent.ACTION_VALIDATE_E_SERIES)
+                FirebaseAnalyticsEventLogger.execute(context, FirebaseAnalyticsEvent.ACTION_VALIDATE_E_SERIES)
                 viewModel.validateResistance()
             },
             onUseValueTapped = {

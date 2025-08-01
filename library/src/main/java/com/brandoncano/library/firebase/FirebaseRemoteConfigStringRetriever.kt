@@ -1,4 +1,4 @@
-package com.brandoncano.inductancecalculator.firebase
+package com.brandoncano.library.firebase
 
 import android.util.Log
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig

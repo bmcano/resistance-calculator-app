@@ -5,7 +5,7 @@ import com.brandoncano.inductancecalculator.data.DropdownItemPO
 import com.brandoncano.inductancecalculator.data.InductorColorCodeItemPO
 
 /**
- * Job: Holds the list of items for each dropdown
+ * Job: Holds predefined lists
  */
 object Lists {
 

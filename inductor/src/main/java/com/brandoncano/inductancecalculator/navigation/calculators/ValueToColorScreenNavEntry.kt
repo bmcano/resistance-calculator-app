@@ -5,6 +5,7 @@ import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
@@ -22,6 +23,8 @@ import com.brandoncano.inductancecalculator.navigation.popBackStackSafely
 import com.brandoncano.inductancecalculator.ui.screens.calculators.ValueToColorScreen
 import com.brandoncano.inductancecalculator.util.SendFeedbackWrapper
 import com.brandoncano.inductancecalculator.util.formatInductor
+import com.brandoncano.library.firebase.FirebaseAnalyticsEvent
+import com.brandoncano.library.firebase.FirebaseAnalyticsScreenLogger
 import com.brandoncano.library.util.ShareComposableAsImage
 import com.brandoncano.library.util.ShareText
 
@@ -41,7 +44,13 @@ fun NavGraphBuilder.valueToColorScreen(
         val viewModel: InductorVtcViewModel = viewModel<InductorVtcViewModel>()
         val inductor by viewModel.inductorStateTOStateFlow.collectAsState()
         val isError by viewModel.isErrorStateFlow.collectAsState()
-        inductor.formatInductor()
+
+        LaunchedEffect(Unit) {
+            FirebaseAnalyticsScreenLogger.execute(
+                context = context,
+                event = FirebaseAnalyticsEvent.SCREEN_INDUCTOR_VALUE_TO_COLOR,
+            )
+        }
 
         ValueToColorScreen(
             inductor = inductor,

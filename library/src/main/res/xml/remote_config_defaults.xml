@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<defaults>
+<?xml version="1.0" encoding="UTF-8"?><defaults>
   <entry>
     <key>android_url_privacy_policy_resistor</key>
     <value>https://bmcano.github.io/mobile-app-suite/privacy-policy/resistor.html</value>
+  </entry>
+  <entry>
+    <key>android_url_privacy_policy_ohms</key>
+    <value>https://bmcano.github.io/mobile-app-suite//privacy-policy/ohms-law.html</value>
   </entry>
   <entry>
     <key>android_url_playstore_ohms</key>
@@ -11,6 +14,10 @@
   <entry>
     <key>android_url_playstore_inductor</key>
     <value>https://play.google.com/store/apps/details?id=com.brandoncano.inductancecalculator</value>
+  </entry>
+  <entry>
+    <key>android_url_privacy_policy_inductor</key>
+    <value>https://bmcano.github.io/mobile-app-suite//privacy-policy/inductor.html</value>
   </entry>
   <entry>
     <key>android_url_playstore_developer_profile</key>
@@ -23,5 +30,9 @@
   <entry>
     <key>android_url_playstore_resistor</key>
     <value>https://play.google.com/store/apps/details?id=com.brandoncano.resistancecalculator</value>
+  </entry>
+  <entry>
+    <key>android_url_privacy_policy_capacitor</key>
+    <value>https://bmcano.github.io/mobile-app-suite//privacy-policy/capacitor.html</value>
   </entry>
 </defaults>

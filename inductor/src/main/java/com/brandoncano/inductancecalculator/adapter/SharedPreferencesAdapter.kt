@@ -2,7 +2,6 @@ package com.brandoncano.inductancecalculator.adapter
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.core.content.edit
 import com.brandoncano.inductancecalculator.keys.AppAppearance
 import com.brandoncano.inductancecalculator.keys.SharedPreferencesKey
@@ -10,6 +9,7 @@ import com.brandoncano.inductancecalculator.to.InductorCtv
 import com.brandoncano.inductancecalculator.to.InductorVtc
 import com.brandoncano.inductancecalculator.to.SmdInductor
 import com.brandoncano.inductancecalculator.ui.InductorApplication
+import com.brandoncano.library.fromJsonStringToTypeOrNull
 import com.google.gson.Gson
 
 /**
@@ -109,16 +109,5 @@ class SharedPreferencesAdapter() {
     private fun getSharedPreferences(): SharedPreferences {
         val application = InductorApplication.instance
         return application.getSharedPreferences(NAME, Context.MODE_PRIVATE)
-    }
-
-    private inline fun <reified T : Any> String?.fromJsonStringToTypeOrNull(): T? {
-        if (this == null) return null
-        if (T::class == String::class) return this as T
-        return try {
-            Gson().fromJson(this, T::class.java)
-        } catch (ex: Exception) {
-            Log.e(NAME, Log.getStackTraceString(ex))
-            null
-        }
     }
 }

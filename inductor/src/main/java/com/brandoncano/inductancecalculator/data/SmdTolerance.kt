@@ -1,7 +1,7 @@
 package com.brandoncano.inductancecalculator.data
 
 import com.brandoncano.inductancecalculator.constants.Symbols as S
-
+// TODO - current purpose is just for the companion object functions, rewrite this to be more straight-forward
 enum class SmdTolerance(val letter: String, val tolerance: String) {
     A("A", "${S.PM}0.05nH"),
     B("B", "${S.PM}0.1nH"),

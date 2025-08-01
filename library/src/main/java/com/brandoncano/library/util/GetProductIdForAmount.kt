@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.util
+package com.brandoncano.library.util
 
 /**
  * Job: Get the productID for the play console in-app purchase

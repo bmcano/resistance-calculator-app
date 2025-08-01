@@ -10,10 +10,13 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.brandoncano.library.firebase.FirebaseAnalyticsEvent
+import com.brandoncano.library.firebase.FirebaseAnalyticsScreenLogger
 import com.brandoncano.resistancecalculator.model.BillingViewModel
 import com.brandoncano.resistancecalculator.ui.screens.DonateScreen
 
@@ -27,6 +30,7 @@ fun NavGraphBuilder.donateScreen(
         popEnterTransition = { EnterTransition.None },
         popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
+        val context = LocalContext.current
         val viewModel: BillingViewModel = viewModel<BillingViewModel>()
         val errorMessages by viewModel.errorMessages.collectAsState()
         val snackbarHostState = remember { SnackbarHostState() }
@@ -35,6 +39,13 @@ fun NavGraphBuilder.donateScreen(
             errorMessages.forEach { message ->
                 snackbarHostState.showSnackbar(message)
             }
+        }
+
+        LaunchedEffect(Unit) {
+            FirebaseAnalyticsScreenLogger.execute(
+                context = context,
+                event = FirebaseAnalyticsEvent.SCREEN_RESISTOR_DONATE,
+            )
         }
 
         val activity = LocalActivity.current ?: return@composable

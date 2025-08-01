@@ -1,7 +1,7 @@
 package com.brandoncano.inductancecalculator.constants
 
 /**
- * Job: Holds constants of the different colors as strings.
+ * Job: Holds all inductor colors as constants for internal logic processing.
  */
 object Colors {
     const val BLACK = "Black"

@@ -6,9 +6,9 @@ import android.widget.Toast
 import com.brandoncano.inductancecalculator.BuildConfig
 import com.brandoncano.inductancecalculator.R
 import com.brandoncano.inductancecalculator.adapter.SharedPreferencesAdapter
-import com.brandoncano.inductancecalculator.firebase.FIREBASE_TAG
-import com.brandoncano.inductancecalculator.firebase.FirebaseRemoteConfigBackupValues
 import com.brandoncano.inductancecalculator.keys.SharedPreferencesKey
+import com.brandoncano.library.firebase.FIREBASE_TAG
+import com.brandoncano.library.firebase.FirebaseRemoteConfigBackupValues
 import com.google.firebase.Firebase
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.remoteconfig.remoteConfig

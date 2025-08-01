@@ -4,10 +4,10 @@ import android.app.Activity
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.brandoncano.library.util.GetProductIdForAmount
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.adapter.BillingAdapter
+import com.brandoncano.library.DonationBillingAdapter
 import com.brandoncano.resistancecalculator.ui.ResistorApplication
-import com.brandoncano.resistancecalculator.util.GetProductIdForAmount
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -19,7 +19,7 @@ class BillingViewModel : ViewModel() {
     }
 
     private val application = ResistorApplication.instance
-    private val billingAdapter = BillingAdapter()
+    private val billingAdapter = DonationBillingAdapter(application)
 
     private val _errorMessages = MutableStateFlow<MutableList<String>>(mutableListOf())
     val errorMessages: StateFlow<List<String>> = _errorMessages

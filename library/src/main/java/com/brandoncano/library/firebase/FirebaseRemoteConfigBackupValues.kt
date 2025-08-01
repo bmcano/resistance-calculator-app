@@ -1,8 +1,8 @@
-package com.brandoncano.resistancecalculator.firebase
+package com.brandoncano.library.firebase
 
 import android.content.Context
 import android.util.Log
-import com.brandoncano.resistancecalculator.R
+import com.brandoncano.library.R
 import org.xmlpull.v1.XmlPullParser
 
 /**

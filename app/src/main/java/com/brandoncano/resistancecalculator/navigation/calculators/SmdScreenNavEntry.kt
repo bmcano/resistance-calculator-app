@@ -5,6 +5,7 @@ import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
@@ -13,6 +14,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.brandoncano.library.firebase.FirebaseAnalyticsEvent
+import com.brandoncano.library.firebase.FirebaseAnalyticsScreenLogger
 import com.brandoncano.library.util.ShareComposableAsImage
 import com.brandoncano.library.util.ShareText
 import com.brandoncano.resistancecalculator.BuildConfig
@@ -40,6 +43,13 @@ fun NavGraphBuilder.smdScreen(
         val viewModel: SmdResistorViewModel = viewModel<SmdResistorViewModel>()
         val resistor by viewModel.resistorStateTOStateFlow.collectAsState()
         val isError by viewModel.isErrorStateFlow.collectAsState()
+
+        LaunchedEffect(Unit) {
+            FirebaseAnalyticsScreenLogger.execute(
+                context = context,
+                event = FirebaseAnalyticsEvent.SCREEN_RESISTOR_SMD,
+            )
+        }
 
         SmdScreen(
             resistor = resistor,

@@ -6,13 +6,13 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.brandoncano.inductancecalculator.firebase.FirebaseRemoteConfigKeys
-import com.brandoncano.inductancecalculator.firebase.getStringOrEmpty
 import com.brandoncano.inductancecalculator.navigation.calculators.colorToValueScreen
 import com.brandoncano.inductancecalculator.navigation.calculators.smdScreen
 import com.brandoncano.inductancecalculator.navigation.calculators.valueToColorScreen
 import com.brandoncano.inductancecalculator.navigation.learn.learnColorCodes
 import com.brandoncano.inductancecalculator.navigation.learn.learnSmdCodes
+import com.brandoncano.library.firebase.FirebaseRemoteConfigKeys
+import com.brandoncano.library.firebase.getStringOrEmpty
 import com.brandoncano.library.util.OpenLink
 
 /**

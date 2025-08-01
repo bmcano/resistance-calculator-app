@@ -3,11 +3,11 @@ package com.brandoncano.resistancecalculator.ui
 import android.app.Application
 import android.util.Log
 import android.widget.Toast
+import com.brandoncano.library.R as baseR
 import com.brandoncano.resistancecalculator.BuildConfig
-import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.adapter.SharedPreferencesAdapter
-import com.brandoncano.resistancecalculator.firebase.FIREBASE_TAG
-import com.brandoncano.resistancecalculator.firebase.FirebaseRemoteConfigBackupValues
+import com.brandoncano.library.firebase.FIREBASE_TAG
+import com.brandoncano.library.firebase.FirebaseRemoteConfigBackupValues
 import com.brandoncano.resistancecalculator.keys.SharedPreferencesKey
 import com.google.firebase.Firebase
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -60,7 +60,7 @@ class ResistorApplication : Application() {
         }
 
         remoteConfig.setConfigSettingsAsync(configSettings)
-        remoteConfig.setDefaultsAsync(R.xml.remote_config_defaults)
+        remoteConfig.setDefaultsAsync(baseR.xml.remote_config_defaults)
         remoteConfig
             .fetchAndActivate()
             .addOnCompleteListener {
