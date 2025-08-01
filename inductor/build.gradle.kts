@@ -17,7 +17,7 @@ android {
         minSdk = 23 // Android 6.0
         targetSdk = 36
         versionCode = 9 // for 1.3.0
-        versionName = "1.3.0-Develop"
+        versionName = "1.3.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -27,7 +27,7 @@ android {
     applicationVariants.configureEach {
         val suffix = if (buildType.name == "debug") ", DEBUG" else ""
         resValue("string", "version", "$versionName$suffix")
-        resValue("string", "last_updated", "7/30/2025")
+        resValue("string", "last_updated", "8/1/2025")
     }
     buildTypes {
         release {
