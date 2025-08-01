@@ -27,23 +27,24 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.data.ArrowCardButtonPO
+import com.brandoncano.library.data.ArrowCardButtonPO
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppThemeMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.MenuIconButton
-import com.brandoncano.resistancecalculator.ui.composables.m3.BottomScreenSpacer
-import com.brandoncano.resistancecalculator.ui.composables.m3.LongScreenPreview
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3ArrowButtonCardContent
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3ElevatedCard
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3Scaffold
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3ScreenColumn
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
-import com.brandoncano.resistancecalculator.ui.composables.m3.ScreenPreviews
-import com.brandoncano.resistancecalculator.ui.composables.m3.elevatedCardColor
+import com.brandoncano.library.m3.BottomScreenSpacer
+import com.brandoncano.library.m3.LongScreenPreview
+import com.brandoncano.library.m3.M3ArrowButtonCardContent
+import com.brandoncano.library.m3.M3ElevatedCard
+import com.brandoncano.library.m3.M3Scaffold
+import com.brandoncano.library.m3.M3ScreenColumn
+import com.brandoncano.library.m3.M3TopAppBar
+import com.brandoncano.library.m3.ScreenPreviews
+import com.brandoncano.library.m3.elevatedCardColor
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 
 @OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
@@ -70,6 +71,7 @@ fun HomeScreen(
         topBar = {
             M3TopAppBar(
                 titleText = stringResource(R.string.app_name),
+                appIcon = painterResource(R.drawable.img_app_icon),
                 actions = {
                     MenuIconButton { showMenu = true }
                     DropdownMenu(

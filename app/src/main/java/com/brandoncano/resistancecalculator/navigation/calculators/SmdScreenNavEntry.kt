@@ -5,6 +5,7 @@ import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
@@ -13,22 +14,24 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.brandoncano.library.firebase.FirebaseAnalyticsEvent
+import com.brandoncano.library.firebase.FirebaseAnalyticsScreenLogger
+import com.brandoncano.library.util.ShareComposableAsImage
+import com.brandoncano.library.util.ShareText
 import com.brandoncano.resistancecalculator.BuildConfig
 import com.brandoncano.resistancecalculator.model.SmdResistorViewModel
-import com.brandoncano.resistancecalculator.navigation.Screen
+import com.brandoncano.resistancecalculator.navigation.ResistorScreen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.navigation.navigateToSmdCodeIec
 import com.brandoncano.resistancecalculator.navigation.popBackStackSafely
 import com.brandoncano.resistancecalculator.ui.screens.calculators.SmdScreen
-import com.brandoncano.resistancecalculator.util.SendFeedback
-import com.brandoncano.resistancecalculator.util.share.ShareResistor
-import com.brandoncano.resistancecalculator.util.share.ShareText
+import com.brandoncano.resistancecalculator.util.SendFeedbackWrapper
 
 fun NavGraphBuilder.smdScreen(
     navHostController: NavHostController,
 ) {
     composable(
-        route = Screen.Smd.route,
+        route = ResistorScreen.Smd.route,
         enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
         exitTransition = { ExitTransition.None },
         popEnterTransition = { EnterTransition.None },
@@ -41,6 +44,13 @@ fun NavGraphBuilder.smdScreen(
         val resistor by viewModel.resistorStateTOStateFlow.collectAsState()
         val isError by viewModel.isErrorStateFlow.collectAsState()
 
+        LaunchedEffect(Unit) {
+            FirebaseAnalyticsScreenLogger.execute(
+                context = context,
+                event = FirebaseAnalyticsEvent.SCREEN_RESISTOR_SMD,
+            )
+        }
+
         SmdScreen(
             resistor = resistor,
             isError = isError,
@@ -51,7 +61,7 @@ fun NavGraphBuilder.smdScreen(
             },
             onShareImageTapped = {
                 if (activity != null) {
-                    ShareResistor.execute(
+                    ShareComposableAsImage.execute(
                         activity = activity,
                         context = context,
                         applicationId = BuildConfig.APPLICATION_ID,
@@ -60,7 +70,7 @@ fun NavGraphBuilder.smdScreen(
                 }
             },
             onShareTextTapped = { ShareText.execute(context, it) },
-            onFeedbackTapped = { SendFeedback.execute(context) },
+            onFeedbackTapped = { SendFeedbackWrapper.execute(context) },
             onAboutTapped = { navigateToAbout(navHostController) },
             onValueChanged = { viewModel.updateValues(it, resistor.units) },
             onOptionSelected = {

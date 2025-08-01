@@ -11,11 +11,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.keys.AppAppearance
-import com.brandoncano.resistancecalculator.ui.composables.m3.ComponentPreviews
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3Divider
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3RadioButtonGroup
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3Switch
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3TextButton
+import com.brandoncano.library.m3.ComponentPreviews
+import com.brandoncano.library.m3.M3Divider
+import com.brandoncano.library.m3.M3RadioButtonGroup
+import com.brandoncano.library.m3.M3Switch
+import com.brandoncano.library.m3.M3TextButton
 
 @Composable
 fun AppAppearanceDialog(

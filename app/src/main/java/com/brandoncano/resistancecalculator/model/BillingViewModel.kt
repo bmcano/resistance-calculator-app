@@ -2,27 +2,26 @@ package com.brandoncano.resistancecalculator.model
 
 import android.app.Activity
 import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.brandoncano.library.DonationBillingAdapter
+import com.brandoncano.library.util.GetProductIdForAmount
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.adapter.BillingAdapter
-import com.brandoncano.resistancecalculator.ui.MainApplication
-import com.brandoncano.resistancecalculator.util.GetProductIdForAmount
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import com.brandoncano.resistancecalculator.ui.ResistorApplication
 import kotlinx.coroutines.launch
 
-class BillingViewModel : ViewModel() {
+class BillingViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
 
     private companion object {
         private const val TAG = "BillingViewModel"
+        private const val KEY_ERROR_MESSAGES_STATE = "KEY_ERROR_MESSAGES_STATE"
     }
 
-    private val application = MainApplication.instance
-    private val billingAdapter = BillingAdapter()
+    private val application = ResistorApplication.instance
+    private val billingAdapter = DonationBillingAdapter(application)
 
-    private val _errorMessages = MutableStateFlow<MutableList<String>>(mutableListOf())
-    val errorMessages: StateFlow<List<String>> = _errorMessages
+    val errorMessagesStateFlow = savedStateHandle.getStateFlow(KEY_ERROR_MESSAGES_STATE, emptySet<String>())
 
     init {
         Log.d(TAG, "Init: $this")
@@ -30,7 +29,7 @@ class BillingViewModel : ViewModel() {
             viewModelScope.launch {
                 Log.e(TAG, "Connection error.")
                 val errorMessage = application.getString(R.string.error_donate_screen)
-                _errorMessages.value.add(errorMessage)
+                savedStateHandle[KEY_ERROR_MESSAGES_STATE] = setOf(errorMessage)
             }
         }
     }
@@ -39,6 +38,7 @@ class BillingViewModel : ViewModel() {
         super.onCleared()
         Log.d(TAG, "onCleared: $this")
         billingAdapter.endConnection()
+        savedStateHandle[KEY_ERROR_MESSAGES_STATE] = emptySet<String>()
     }
 
     fun donate(amount: Int, activity: Activity) {
@@ -48,7 +48,7 @@ class BillingViewModel : ViewModel() {
         } catch (ex: NullPointerException) {
             Log.e(TAG, Log.getStackTraceString(ex))
             val errorMessage = application.getString(R.string.error_donate_screen)
-            _errorMessages.value.add(errorMessage)
+            savedStateHandle[KEY_ERROR_MESSAGES_STATE] = setOf(errorMessage)
         }
     }
 }

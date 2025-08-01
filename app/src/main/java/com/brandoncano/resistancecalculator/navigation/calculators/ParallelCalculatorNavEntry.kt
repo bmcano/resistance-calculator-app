@@ -4,6 +4,7 @@ import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
@@ -13,20 +14,22 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.brandoncano.library.firebase.FirebaseAnalyticsEvent
+import com.brandoncano.library.firebase.FirebaseAnalyticsScreenLogger
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.model.CircuitViewModel
-import com.brandoncano.resistancecalculator.navigation.Screen
+import com.brandoncano.resistancecalculator.navigation.ResistorScreen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.navigation.navigateToCircuitEquations
 import com.brandoncano.resistancecalculator.navigation.popBackStackSafely
 import com.brandoncano.resistancecalculator.ui.screens.calculators.CircuitCalculatorScreen
-import com.brandoncano.resistancecalculator.util.SendFeedback
+import com.brandoncano.resistancecalculator.util.SendFeedbackWrapper
 
 fun NavGraphBuilder.parallelCalculatorScreen(
     navHostController: NavHostController,
 ) {
     composable(
-        route = Screen.ParallelCalculator.route,
+        route = ResistorScreen.ParallelCalculator.route,
         enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
         exitTransition = { ExitTransition.None },
         popEnterTransition = { EnterTransition.None },
@@ -36,6 +39,13 @@ fun NavGraphBuilder.parallelCalculatorScreen(
         val focusManager = LocalFocusManager.current
         val viewModel: CircuitViewModel = viewModel(factory = CircuitViewModel.getFactory(false))
         val circuit by viewModel.circuitStateTOStateFlow.collectAsState()
+
+        LaunchedEffect(Unit) {
+            FirebaseAnalyticsScreenLogger.execute(
+                context = context,
+                event = FirebaseAnalyticsEvent.SCREEN_RESISTOR_CIRCUIT_PARALLEL,
+            )
+        }
 
         CircuitCalculatorScreen(
             circuitTitle = R.string.circuit_title_parallel,
@@ -47,7 +57,7 @@ fun NavGraphBuilder.parallelCalculatorScreen(
                 viewModel.clear()
                 focusManager.clearFocus()
             },
-            onFeedbackTapped = { SendFeedback.execute(context) },
+            onFeedbackTapped = { SendFeedbackWrapper.execute(context) },
             onAboutTapped = { navigateToAbout(navHostController) },
             onOptionSelected = { sameValues, resistorCount, units ->
                 viewModel.updateValues(sameValues, resistorCount, units)

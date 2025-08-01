@@ -5,6 +5,7 @@ import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
@@ -13,26 +14,27 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.brandoncano.library.util.ShareComposableAsImage
+import com.brandoncano.library.util.ShareText
 import com.brandoncano.resistancecalculator.BuildConfig
 import com.brandoncano.resistancecalculator.data.ESeriesCardContent
-import com.brandoncano.resistancecalculator.firebase.FirebaseAnalyticsEvent
-import com.brandoncano.resistancecalculator.firebase.FirebaseAnalyticsEventLogger
+import com.brandoncano.library.firebase.FirebaseAnalyticsEvent
+import com.brandoncano.library.firebase.FirebaseAnalyticsEventLogger
+import com.brandoncano.library.firebase.FirebaseAnalyticsScreenLogger
 import com.brandoncano.resistancecalculator.model.ResistorVtcViewModel
-import com.brandoncano.resistancecalculator.navigation.Screen
+import com.brandoncano.resistancecalculator.navigation.ResistorScreen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.navigation.navigateToPreferredValuesIec
 import com.brandoncano.resistancecalculator.navigation.popBackStackSafely
 import com.brandoncano.resistancecalculator.ui.screens.calculators.ValueToColorScreen
-import com.brandoncano.resistancecalculator.util.SendFeedback
+import com.brandoncano.resistancecalculator.util.SendFeedbackWrapper
 import com.brandoncano.resistancecalculator.util.eseries.formatResistanceString
-import com.brandoncano.resistancecalculator.util.share.ShareResistor
-import com.brandoncano.resistancecalculator.util.share.ShareText
 
 fun NavGraphBuilder.valueToColorScreen(
     navHostController: NavHostController,
 ) {
     composable(
-        route = Screen.ValueToColor.route,
+        route = ResistorScreen.ValueToColor.route,
         enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
         exitTransition = { ExitTransition.None },
         popEnterTransition = { EnterTransition.None },
@@ -47,6 +49,13 @@ fun NavGraphBuilder.valueToColorScreen(
         val eSeriesCardContent: ESeriesCardContent by viewModel.eSeriesCardContentStateTOStateFlow.collectAsState()
         val closestStandardValue by viewModel.closestStandardValueStateFlow.collectAsState()
 
+        LaunchedEffect(Unit) {
+            FirebaseAnalyticsScreenLogger.execute(
+                context = context,
+                event = FirebaseAnalyticsEvent.SCREEN_RESISTOR_VALUE_TO_COLOR,
+            )
+        }
+
         ValueToColorScreen(
             resistor = resistor,
             isError = isError,
@@ -59,7 +68,7 @@ fun NavGraphBuilder.valueToColorScreen(
             },
             onShareImageTapped = {
                 if (activity != null) {
-                    ShareResistor.execute(
+                    ShareComposableAsImage.execute(
                         activity = activity,
                         context = context,
                         applicationId = BuildConfig.APPLICATION_ID,
@@ -68,7 +77,7 @@ fun NavGraphBuilder.valueToColorScreen(
                 }
             },
             onShareTextTapped = { ShareText.execute(context, it) },
-            onFeedbackTapped = { SendFeedback.execute(context) },
+            onFeedbackTapped = { SendFeedbackWrapper.execute(context) },
             onAboutTapped = { navigateToAbout(navHostController) },
             onValueChanged = { resistance ->
                 viewModel.updateCardContentState(ESeriesCardContent.DefaultContent)
@@ -81,7 +90,7 @@ fun NavGraphBuilder.valueToColorScreen(
             },
             onNavBarSelectionChanged = { viewModel.updateNavBarSelection(it) },
             onValidateResistanceTapped = {
-                FirebaseAnalyticsEventLogger.execute(FirebaseAnalyticsEvent.ACTION_VALIDATE_E_SERIES)
+                FirebaseAnalyticsEventLogger.execute(context, FirebaseAnalyticsEvent.ACTION_VALIDATE_E_SERIES)
                 viewModel.validateResistance()
             },
             onUseValueTapped = {

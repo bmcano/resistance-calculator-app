@@ -10,7 +10,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.brandoncano.resistancecalculator.ui.composables.m3.ComponentPreviews
+import com.brandoncano.library.m3.ComponentPreviews
 
 @Composable
 fun RoundedSquare(color: Color, size: Dp) {

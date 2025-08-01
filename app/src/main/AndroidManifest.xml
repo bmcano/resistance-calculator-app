@@ -4,7 +4,7 @@
     <uses-permission android:name="com.android.vending.BILLING" />
 
     <application
-        android:name = ".ui.MainApplication"
+        android:name = ".ui.ResistorApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -22,7 +22,7 @@
                 android:resource="@xml/provider_paths" />
         </provider>
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.ResistorActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

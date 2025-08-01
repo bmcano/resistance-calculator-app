@@ -6,7 +6,7 @@ import com.brandoncano.resistancecalculator.data.DropdownItemPO
 import com.brandoncano.resistancecalculator.data.ResistorColorCodeItemPO
 
 /**
- * Job: Holds the list of items for each dropdown menu
+ * Job: Holds predefined lists
  */
 object Lists {
 

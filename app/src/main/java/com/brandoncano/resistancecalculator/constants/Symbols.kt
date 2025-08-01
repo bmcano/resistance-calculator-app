@@ -1,5 +1,8 @@
 package com.brandoncano.resistancecalculator.constants
 
+/**
+ * Job: Holds constants that contains specific symbols.
+ */
 object Symbols {
     const val OHMS = "Ω"
     const val KOHMS = "kΩ"
@@ -9,5 +12,4 @@ object Symbols {
     const val PM = "±"
     const val PPM = "ppm/°C"
     const val NBSP = " "
-    const val BULLET = "•"
 }

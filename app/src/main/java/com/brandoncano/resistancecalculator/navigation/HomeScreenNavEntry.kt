@@ -7,20 +7,20 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.brandoncano.resistancecalculator.ui.screens.HomeScreen
-import com.brandoncano.resistancecalculator.util.SendFeedback
+import com.brandoncano.resistancecalculator.util.SendFeedbackWrapper
 
 fun NavGraphBuilder.homeScreen(
     navHostController: NavHostController,
     onOpenAppThemeDialog: () -> Unit,
 ) {
     composable(
-        route = Screen.Home.route,
+        route = ResistorScreen.Home.route,
         enterTransition = { EnterTransition.None },
         exitTransition = { ExitTransition.None },
     ) {
         val context = LocalContext.current
         HomeScreen(
-            onFeedbackTapped = { SendFeedback.execute(context) },
+            onFeedbackTapped = { SendFeedbackWrapper.execute(context) },
             onOpenAppThemeDialog = onOpenAppThemeDialog,
             onAboutTapped = { navigateToAbout(navHostController) },
             onColorToValueTapped = { navigateToColorToValue(navHostController) },

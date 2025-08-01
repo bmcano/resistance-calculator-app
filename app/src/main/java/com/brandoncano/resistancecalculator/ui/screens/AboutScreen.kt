@@ -22,21 +22,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.brandoncano.library.data.ArrowCardButtonPO
+import com.brandoncano.library.m3.BottomScreenSpacer
+import com.brandoncano.library.m3.LongScreenPreview
+import com.brandoncano.library.m3.M3ArrowButtonCardContent
+import com.brandoncano.library.m3.M3Divider
+import com.brandoncano.library.m3.M3ElevatedCard
+import com.brandoncano.library.m3.M3ListItem
+import com.brandoncano.library.m3.M3Scaffold
+import com.brandoncano.library.m3.M3ScreenColumn
+import com.brandoncano.library.m3.M3TopAppBar
+import com.brandoncano.library.m3.ScreenPreviews
+import com.brandoncano.library.m3.elevatedCardColor
+import com.brandoncano.library.theme.gray
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.data.ArrowCardButtonPO
-import com.brandoncano.resistancecalculator.ui.composables.m3.BottomScreenSpacer
-import com.brandoncano.resistancecalculator.ui.composables.m3.LongScreenPreview
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3ArrowButtonCardContent
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3Divider
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3ElevatedCard
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3ListItem
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3Scaffold
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3ScreenColumn
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
-import com.brandoncano.resistancecalculator.ui.composables.m3.ScreenPreviews
-import com.brandoncano.resistancecalculator.ui.composables.m3.elevatedCardColor
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
-import com.brandoncano.resistancecalculator.ui.theme.gray
 
 @OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
 @Composable
@@ -175,7 +175,7 @@ private fun AppInformationCard(version: String, lastUpdated: String) {
 }
 
 @Composable
-fun AboutOverviewCard() {
+private fun AboutOverviewCard() {
     Column {
         Text(
             text = stringResource(id = R.string.about_overview_title),

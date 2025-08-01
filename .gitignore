@@ -21,6 +21,7 @@ app/build
 misc.xml
 deploymentTargetDropDown.xml
 render.experimental.xml
+/inductor/release/
 # Keystore files
 *.jks
 *.keystore
