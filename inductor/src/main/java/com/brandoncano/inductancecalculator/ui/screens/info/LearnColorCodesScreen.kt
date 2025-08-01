@@ -38,11 +38,12 @@ import com.brandoncano.inductancecalculator.ui.theme.violet
 import com.brandoncano.inductancecalculator.util.ColorFinder
 import com.brandoncano.inductancecalculator.util.InductorImageBuilder
 import com.brandoncano.library.m3.BottomScreenSpacer
+import com.brandoncano.library.m3.LongScreenPreview
 import com.brandoncano.library.m3.M3CallOutCard
 import com.brandoncano.library.m3.M3Divider
+import com.brandoncano.library.m3.M3LazyColumn
 import com.brandoncano.library.m3.M3OutlinedCard
 import com.brandoncano.library.m3.M3Scaffold
-import com.brandoncano.library.m3.M3ScreenColumn
 import com.brandoncano.library.m3.M3TopAppBar
 import com.brandoncano.library.m3.ScreenPreviews
 import com.brandoncano.library.m3.elevatedCardColor
@@ -71,57 +72,67 @@ fun LearnColorCodesScreen(
 
 @Composable
 private fun LearnColorCodesScreenContent(paddingValues: PaddingValues) {
-    M3ScreenColumn (
+    M3LazyColumn(
         paddingValues = paddingValues,
     ) {
-        Spacer(modifier = Modifier.height(24.dp))
-        Text(
-            text = stringResource(R.string.info_color_body1),
-            modifier = Modifier.padding(bottom = 16.dp),
-            style = MaterialTheme.typography.bodyMedium.gray(),
-        )
-        Text(
-            text = stringResource(R.string.info_color_body2),
-            modifier = Modifier.padding(bottom = 24.dp),
-            style = MaterialTheme.typography.bodyMedium.gray(),
-        )
-        InductorColorCodeTable()
-        Spacer(modifier = Modifier.height(24.dp))
-        Text(
-            text = stringResource(R.string.learn_color_four_band_headline),
-            modifier = Modifier.padding(bottom = 12.dp),
-            style = MaterialTheme.typography.titleMedium,
-        )
-        Text(
-            text = stringResource(R.string.learn_color_four_band_body),
-            modifier = Modifier.padding(bottom = 16.dp),
-            style = MaterialTheme.typography.bodyMedium.gray(),
-        )
-        InfoInductorLayout(InductorCtv(Colors.YELLOW, Colors.VIOLET, Colors.RED, Colors.GOLD))
-        Text(
-            text = stringResource(R.string.info_color_code_calculation),
-            modifier = Modifier.padding(vertical = 12.dp),
-            style = MaterialTheme.typography.bodyLarge.gray(),
-        )
-        M3CallOutCard(stringResource(R.string.learn_color_four_band_code), color = elevatedCardColor())
-        Text(
-            text = stringResource(R.string.info_color_code_band_breakdown),
-            modifier = Modifier.padding(vertical = 12.dp),
-            style = MaterialTheme.typography.bodyLarge.gray(),
-        )
-        M3CallOutCard(stringResource(R.string.learn_color_four_band_description), color = elevatedCardColor())
-        Spacer(modifier = Modifier.height(24.dp))
-        Text(
-            text = stringResource(R.string.learn_color_five_band_headline),
-            modifier = Modifier.padding(bottom = 12.dp),
-            style = MaterialTheme.typography.titleMedium,
-        )
-        Text(
-            text = stringResource(R.string.learn_color_five_band_body),
-            style = MaterialTheme.typography.bodyMedium.gray(),
-        )
-        DisclaimerText()
-        BottomScreenSpacer()
+        item {
+            Spacer(modifier = Modifier.height(24.dp))
+            Text(
+                text = stringResource(R.string.info_color_body1),
+                modifier = Modifier.padding(bottom = 16.dp),
+                style = MaterialTheme.typography.bodyMedium.gray(),
+            )
+            Text(
+                text = stringResource(R.string.info_color_body2),
+                modifier = Modifier.padding(bottom = 24.dp),
+                style = MaterialTheme.typography.bodyMedium.gray(),
+            )
+        }
+        item {
+            InductorColorCodeTable()
+        }
+        item {
+            Spacer(modifier = Modifier.height(32.dp))
+            Text(
+                text = stringResource(R.string.learn_color_four_band_headline),
+                modifier = Modifier.padding(bottom = 12.dp),
+                style = MaterialTheme.typography.titleMedium,
+            )
+            Text(
+                text = stringResource(R.string.learn_color_four_band_body),
+                modifier = Modifier.padding(bottom = 16.dp),
+                style = MaterialTheme.typography.bodyMedium.gray(),
+            )
+            InfoInductorLayout(InductorCtv(Colors.YELLOW, Colors.VIOLET, Colors.RED, Colors.GOLD))
+            Text(
+                text = stringResource(R.string.info_color_code_calculation),
+                modifier = Modifier.padding(vertical = 12.dp),
+                style = MaterialTheme.typography.bodyLarge.gray(),
+            )
+            M3CallOutCard(stringResource(R.string.learn_color_four_band_code), color = elevatedCardColor())
+            Text(
+                text = stringResource(R.string.info_color_code_band_breakdown),
+                modifier = Modifier.padding(vertical = 12.dp),
+                style = MaterialTheme.typography.bodyLarge.gray(),
+            )
+            M3CallOutCard(stringResource(R.string.learn_color_four_band_description), color = elevatedCardColor())
+        }
+        item {
+            Spacer(modifier = Modifier.height(24.dp))
+            Text(
+                text = stringResource(R.string.learn_color_five_band_headline),
+                modifier = Modifier.padding(bottom = 12.dp),
+                style = MaterialTheme.typography.titleMedium,
+            )
+            Text(
+                text = stringResource(R.string.learn_color_five_band_body),
+                style = MaterialTheme.typography.bodyMedium.gray(),
+            )
+        }
+        item {
+            DisclaimerText()
+            BottomScreenSpacer()
+        }
     }
 }
 
@@ -265,9 +276,8 @@ fun DisclaimerText() {
 }
 
 @ScreenPreviews
+@LongScreenPreview
 @Composable
 private fun LearnColorCodesScreenPreview() {
-    InductorCalculatorTheme {
-        LearnColorCodesScreen {}
-    }
+    InductorCalculatorTheme { LearnColorCodesScreen {} }
 }

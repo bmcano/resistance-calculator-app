@@ -13,19 +13,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.constants.Lists
 import com.brandoncano.library.m3.BottomScreenSpacer
 import com.brandoncano.library.m3.LongScreenPreview
 import com.brandoncano.library.m3.M3CallOutCard
+import com.brandoncano.library.m3.M3LazyColumn
 import com.brandoncano.library.m3.M3OutlinedCard
 import com.brandoncano.library.m3.M3Scaffold
-import com.brandoncano.library.m3.M3ScreenColumn
 import com.brandoncano.library.m3.M3Table
 import com.brandoncano.library.m3.M3TopAppBar
 import com.brandoncano.library.m3.ScreenPreviews
 import com.brandoncano.library.m3.elevatedCardColor
 import com.brandoncano.library.theme.gray
+import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.constants.Lists
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 
 /**
@@ -53,74 +53,90 @@ fun LearnSmdCodesScreen(
 
 @Composable
 private fun LearnSmdCodesScreenContent(paddingValues: PaddingValues) {
-    M3ScreenColumn(
+    M3LazyColumn(
         paddingValues = paddingValues,
     ) {
-        Spacer(modifier = Modifier.height(24.dp))
-        Text(
-            text = stringResource(R.string.info_smd_body1),
-            modifier = Modifier.padding(bottom = 16.dp),
-            style = MaterialTheme.typography.bodyMedium.gray(),
-        )
-        Text(
-            text = stringResource(R.string.info_smd_body2),
-            modifier = Modifier.padding(bottom = 32.dp),
-            style = MaterialTheme.typography.bodyMedium.gray(),
-        )
-        CodeSystemSectionContent(
-            headlineRes = R.string.info_smd_three_code_headline,
-            bodyRes = R.string.info_smd_three_code_body,
-            formulaRes = R.string.info_smd_three_digit_formula,
-            exampleLabelRes = R.string.info_smd_three_digit_example_label,
-            exampleRes = R.string.info_smd_three_digit_example,
-        )
-        Spacer(modifier = Modifier.height(32.dp))
-        CodeSystemSectionContent(
-            headlineRes = R.string.info_smd_four_code_headline,
-            bodyRes = R.string.info_smd_four_code_body,
-            formulaRes = R.string.info_smd_four_digit_formula,
-            exampleLabelRes = R.string.info_smd_four_digit_example_label,
-            exampleRes = R.string.info_smd_four_digit_example,
-        )
-        Text(
-            text = stringResource(R.string.info_smd_four_digit_body2),
-            modifier = Modifier.padding(top = 16.dp),
-            style = MaterialTheme.typography.bodyMedium.gray(),
-        )
-        Spacer(modifier = Modifier.height(32.dp))
-        CodeSystemSectionContent(
-            headlineRes = R.string.info_smd_eia_headline,
-            bodyRes = R.string.info_smd_eia_body,
-            formulaRes = R.string.info_smd_eia_formula,
-            exampleLabelRes = R.string.info_smd_eia_example_label,
-            exampleRes = R.string.info_smd_eia_example,
-        )
-        Spacer(modifier = Modifier.height(24.dp))
-        Text(
-            text = stringResource(R.string.info_smd_multipliers_headline),
-            modifier = Modifier.padding(bottom = 12.dp),
-            style = MaterialTheme.typography.titleMedium,
-        )
-        Text(
-            text = stringResource(R.string.info_smd_multipliers_body),
-            modifier = Modifier.padding(bottom = 16.dp),
-            style = MaterialTheme.typography.bodyMedium.gray(),
-        )
-        MultiplierTable()
-        Spacer(modifier = Modifier.height(24.dp))
-        Text(
-            text = stringResource(R.string.info_smd_code_value_headline),
-            modifier = Modifier.padding(bottom = 12.dp),
-            style = MaterialTheme.typography.titleMedium,
-        )
-        Text(
-            text = stringResource(R.string.info_smd_code_value_body),
-            modifier = Modifier.padding(bottom = 16.dp),
-            style = MaterialTheme.typography.bodyMedium.gray(),
-        )
-        CodeLookupTable()
-        DisclaimerText()
-        BottomScreenSpacer()
+        item {
+            Spacer(modifier = Modifier.height(24.dp))
+            Text(
+                text = stringResource(R.string.info_smd_body1),
+                modifier = Modifier.padding(bottom = 16.dp),
+                style = MaterialTheme.typography.bodyMedium.gray(),
+            )
+            Text(
+                text = stringResource(R.string.info_smd_body2),
+                modifier = Modifier.padding(bottom = 32.dp),
+                style = MaterialTheme.typography.bodyMedium.gray(),
+            )
+        }
+        item {
+            CodeSystemSectionContent(
+                headlineRes = R.string.info_smd_three_code_headline,
+                bodyRes = R.string.info_smd_three_code_body,
+                formulaRes = R.string.info_smd_three_digit_formula,
+                exampleLabelRes = R.string.info_smd_three_digit_example_label,
+                exampleRes = R.string.info_smd_three_digit_example,
+            )
+        }
+        item {
+            Spacer(modifier = Modifier.height(32.dp))
+            CodeSystemSectionContent(
+                headlineRes = R.string.info_smd_four_code_headline,
+                bodyRes = R.string.info_smd_four_code_body,
+                formulaRes = R.string.info_smd_four_digit_formula,
+                exampleLabelRes = R.string.info_smd_four_digit_example_label,
+                exampleRes = R.string.info_smd_four_digit_example,
+            )
+            Text(
+                text = stringResource(R.string.info_smd_four_digit_body2),
+                modifier = Modifier.padding(top = 16.dp),
+                style = MaterialTheme.typography.bodyMedium.gray(),
+            )
+        }
+        item {
+            Spacer(modifier = Modifier.height(32.dp))
+            CodeSystemSectionContent(
+                headlineRes = R.string.info_smd_eia_headline,
+                bodyRes = R.string.info_smd_eia_body,
+                formulaRes = R.string.info_smd_eia_formula,
+                exampleLabelRes = R.string.info_smd_eia_example_label,
+                exampleRes = R.string.info_smd_eia_example,
+            )
+        }
+        item {
+            Spacer(modifier = Modifier.height(24.dp))
+            Text(
+                text = stringResource(R.string.info_smd_multipliers_headline),
+                modifier = Modifier.padding(bottom = 12.dp),
+                style = MaterialTheme.typography.titleMedium,
+            )
+            Text(
+                text = stringResource(R.string.info_smd_multipliers_body),
+                modifier = Modifier.padding(bottom = 16.dp),
+                style = MaterialTheme.typography.bodyMedium.gray(),
+            )
+            MultiplierTable()
+        }
+        item {
+            Spacer(modifier = Modifier.height(24.dp))
+            Text(
+                text = stringResource(R.string.info_smd_code_value_headline),
+                modifier = Modifier.padding(bottom = 12.dp),
+                style = MaterialTheme.typography.titleMedium,
+            )
+            Text(
+                text = stringResource(R.string.info_smd_code_value_body),
+                modifier = Modifier.padding(bottom = 16.dp),
+                style = MaterialTheme.typography.bodyMedium.gray(),
+            )
+        }
+        item {
+            CodeLookupTable()
+        }
+        item {
+            DisclaimerText()
+            BottomScreenSpacer()
+        }
     }
 }
 

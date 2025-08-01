@@ -29,6 +29,7 @@ import com.brandoncano.inductancecalculator.ui.composables.ImageTextDropDownMenu
 import com.brandoncano.inductancecalculator.ui.composables.MenuIconButton
 import com.brandoncano.inductancecalculator.ui.composables.ShareImageMenuItem
 import com.brandoncano.inductancecalculator.ui.composables.ShareTextMenuItem
+import com.brandoncano.inductancecalculator.ui.theme.InductorCalculatorTheme
 import com.brandoncano.inductancecalculator.util.InductorImageBuilder
 import com.brandoncano.inductancecalculator.util.shareableText
 import com.brandoncano.library.m3.BottomScreenSpacer
@@ -123,6 +124,7 @@ private fun ValueToColorScreenContent(
         paddingValues = paddingValues,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Spacer(modifier = Modifier.padding(top = 32.dp))
         InductorLayout(inductor, isError)
         M3TextField(
             label = stringResource(id = R.string.vtc_hint_inductance),
@@ -172,7 +174,7 @@ private fun InductorLayout(inductor: InductorVtc, isError: Boolean, verticalPadd
         else -> inductor.getInductanceValue()
     }
     Column(
-        modifier = Modifier.padding(horizontal = 0.dp, vertical = verticalPadding),
+        modifier = Modifier.padding(horizontal = 32.dp, vertical = verticalPadding),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         InductorRow(imageColorPairs)
@@ -184,17 +186,19 @@ private fun InductorLayout(inductor: InductorVtc, isError: Boolean, verticalPadd
 @ScreenPreviews
 @Composable
 private fun ValueToColorScreenPreview() {
-    ValueToColorScreen(
-        inductor = InductorVtc(),
-        isError = false,
-        onNavigateBack = {},
-        onClearSelectionsTapped = {},
-        onShareTextTapped = {},
-        onShareImageTapped = {},
-        onFeedbackTapped = {},
-        onAboutTapped = {},
-        onValueChanged = {},
-        onOptionSelected = { _, _ -> },
-        onLearnColorCodesTapped = {},
-    )
+    InductorCalculatorTheme {
+        ValueToColorScreen(
+            inductor = InductorVtc(),
+            isError = false,
+            onNavigateBack = {},
+            onClearSelectionsTapped = {},
+            onShareTextTapped = {},
+            onShareImageTapped = {},
+            onFeedbackTapped = {},
+            onAboutTapped = {},
+            onValueChanged = {},
+            onOptionSelected = { _, _ -> },
+            onLearnColorCodesTapped = {},
+        )
+    }
 }

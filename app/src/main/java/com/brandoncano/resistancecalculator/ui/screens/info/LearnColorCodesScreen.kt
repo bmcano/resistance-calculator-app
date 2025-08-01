@@ -25,24 +25,24 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.constants.Lists
-import com.brandoncano.resistancecalculator.constants.Symbols
-import com.brandoncano.resistancecalculator.data.ResistorColorCodeItemPO
-import com.brandoncano.resistancecalculator.to.ResistorCtv
 import com.brandoncano.library.m3.BottomScreenSpacer
 import com.brandoncano.library.m3.LongScreenPreview
 import com.brandoncano.library.m3.M3CallOutCard
 import com.brandoncano.library.m3.M3Divider
+import com.brandoncano.library.m3.M3LazyColumn
 import com.brandoncano.library.m3.M3OutlinedCard
 import com.brandoncano.library.m3.M3Scaffold
-import com.brandoncano.library.m3.M3ScreenColumn
 import com.brandoncano.library.m3.M3TopAppBar
 import com.brandoncano.library.m3.ScreenPreviews
 import com.brandoncano.library.m3.elevatedCardColor
 import com.brandoncano.library.theme.black
 import com.brandoncano.library.theme.gray
 import com.brandoncano.library.theme.white
+import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.constants.Lists
+import com.brandoncano.resistancecalculator.constants.Symbols
+import com.brandoncano.resistancecalculator.data.ResistorColorCodeItemPO
+import com.brandoncano.resistancecalculator.to.ResistorCtv
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.black
 import com.brandoncano.resistancecalculator.ui.theme.blue
@@ -77,55 +77,69 @@ fun LearnColorCodesScreen(
 
 @Composable
 private fun LearnColorCodesScreenContent(paddingValues: PaddingValues) {
-    M3ScreenColumn(
+    M3LazyColumn(
         paddingValues = paddingValues,
     ) {
-        Spacer(modifier = Modifier.height(24.dp))
-        Text(
-            text = stringResource(R.string.info_color_body1),
-            modifier = Modifier.padding(bottom = 16.dp),
-            style = MaterialTheme.typography.bodyMedium.gray(),
-        )
-        Text(
-            text = stringResource(R.string.info_color_body2),
-            modifier = Modifier.padding(bottom = 24.dp),
-            style = MaterialTheme.typography.bodyMedium.gray(),
-        )
-        ResistorColorCodeTable()
-        Spacer(modifier = Modifier.height(32.dp))
-        ResistorBandSectionContent(
-            headlineRes = R.string.info_color_three_band_headline,
-            bodyRes = R.string.info_color_three_band_body,
-            codeRes = R.string.info_color_three_band_code,
-            descriptionRes = R.string.info_color_three_band_description,
-            resistor = ResistorCtv(C.RED, C.VIOLET, "", C.ORANGE, "", "", 0),
-        )
-        Spacer(modifier = Modifier.height(32.dp))
-        ResistorBandSectionContent(
-            headlineRes = R.string.info_color_four_band_headline,
-            bodyRes = R.string.info_color_four_band_body,
-            codeRes = R.string.info_color_four_band_code,
-            descriptionRes = R.string.info_color_four_band_description,
-            resistor = ResistorCtv(C.YELLOW, C.VIOLET, "", C.RED, C.GOLD, "", 1),
-        )
-        Spacer(modifier = Modifier.height(32.dp))
-        ResistorBandSectionContent(
-            headlineRes = R.string.info_color_five_band_headline,
-            bodyRes = R.string.info_color_five_band_body,
-            codeRes = R.string.info_color_five_band_code,
-            descriptionRes = R.string.info_color_five_band_description,
-            resistor = ResistorCtv(C.BROWN, C.GREEN, C.BLACK, C.ORANGE, C.BROWN, "", 2),
-        )
-        Spacer(modifier = Modifier.height(32.dp))
-        ResistorBandSectionContent(
-            headlineRes = R.string.info_color_six_band_headline,
-            bodyRes = R.string.info_color_six_band_body,
-            codeRes = R.string.info_color_six_band_code,
-            descriptionRes = R.string.info_color_six_band_description,
-            resistor = ResistorCtv(C.GREEN, C.BLUE, C.BLACK, C.BROWN, C.RED, C.BROWN, 3),
-        )
-        DisclaimerText()
-        BottomScreenSpacer()
+        item {
+            Spacer(modifier = Modifier.height(24.dp))
+            Text(
+                text = stringResource(R.string.info_color_body1),
+                modifier = Modifier.padding(bottom = 16.dp),
+                style = MaterialTheme.typography.bodyMedium.gray(),
+            )
+            Text(
+                text = stringResource(R.string.info_color_body2),
+                modifier = Modifier.padding(bottom = 24.dp),
+                style = MaterialTheme.typography.bodyMedium.gray(),
+            )
+        }
+        item {
+            ResistorColorCodeTable()
+        }
+        item {
+            Spacer(modifier = Modifier.height(32.dp))
+            ResistorBandSectionContent(
+                headlineRes = R.string.info_color_three_band_headline,
+                bodyRes = R.string.info_color_three_band_body,
+                codeRes = R.string.info_color_three_band_code,
+                descriptionRes = R.string.info_color_three_band_description,
+                resistor = ResistorCtv(C.RED, C.VIOLET, "", C.ORANGE, "", "", 0),
+            )
+        }
+        item {
+            Spacer(modifier = Modifier.height(32.dp))
+            ResistorBandSectionContent(
+                headlineRes = R.string.info_color_four_band_headline,
+                bodyRes = R.string.info_color_four_band_body,
+                codeRes = R.string.info_color_four_band_code,
+                descriptionRes = R.string.info_color_four_band_description,
+                resistor = ResistorCtv(C.YELLOW, C.VIOLET, "", C.RED, C.GOLD, "", 1),
+            )
+        }
+        item {
+            Spacer(modifier = Modifier.height(32.dp))
+            ResistorBandSectionContent(
+                headlineRes = R.string.info_color_five_band_headline,
+                bodyRes = R.string.info_color_five_band_body,
+                codeRes = R.string.info_color_five_band_code,
+                descriptionRes = R.string.info_color_five_band_description,
+                resistor = ResistorCtv(C.BROWN, C.GREEN, C.BLACK, C.ORANGE, C.BROWN, "", 2),
+            )
+        }
+        item {
+            Spacer(modifier = Modifier.height(32.dp))
+            ResistorBandSectionContent(
+                headlineRes = R.string.info_color_six_band_headline,
+                bodyRes = R.string.info_color_six_band_body,
+                codeRes = R.string.info_color_six_band_code,
+                descriptionRes = R.string.info_color_six_band_description,
+                resistor = ResistorCtv(C.GREEN, C.BLUE, C.BLACK, C.BROWN, C.RED, C.BROWN, 3),
+            )
+        }
+        item {
+            DisclaimerText()
+            BottomScreenSpacer()
+        }
     }
 }
 

@@ -130,6 +130,7 @@ private fun SmdScreenContent(
         paddingValues = paddingValues,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        Spacer(modifier = Modifier.padding(top = 32.dp))
         SmdInductorLayout(inductor, isError)
         M3TextField (
             label = stringResource(id = R.string.smd_hint_code),

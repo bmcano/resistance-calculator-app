@@ -22,7 +22,6 @@ import com.brandoncano.inductancecalculator.navigation.navigateToLearnColorCodes
 import com.brandoncano.inductancecalculator.navigation.popBackStackSafely
 import com.brandoncano.inductancecalculator.ui.screens.calculators.ValueToColorScreen
 import com.brandoncano.inductancecalculator.util.SendFeedbackWrapper
-import com.brandoncano.inductancecalculator.util.formatInductor
 import com.brandoncano.library.firebase.FirebaseAnalyticsEvent
 import com.brandoncano.library.firebase.FirebaseAnalyticsScreenLogger
 import com.brandoncano.library.util.ShareComposableAsImage

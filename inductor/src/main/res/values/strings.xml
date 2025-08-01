@@ -36,8 +36,6 @@
     <string name="ctv_info_card_subhead_text">IEC 60062</string>
     <string name="ctv_info_card_body_text">Use the color code chart to translate each band into its exact inductance value.</string>
     <string name="ctv_info_card_cta_text">Learn more</string>
-    <string name="ctv_learn_color_codes_headline">Learn about color codes</string>
-    <string name="ctv_learn_color_codes_button">Explore the IEC 60062 standard</string>
     <string name="vtc_title">Value to Color</string>
     <string name="vtc_default_value">Enter inductance</string>
     <string name="vtc_hint_inductance">Inductance</string>
@@ -60,8 +58,6 @@
     <string name="info_tolerance">Tolerance</string>
     <string name="info_color_body1">The inductor color code uses colored bands to indicate inductance values and tolerance. This system allows for easy identification of inductor values in a compact format.</string>
     <string name="info_color_body2">Each color corresponds to a specific value, depending on its position on the inductor body. The standard colors and their corresponding values are displayed in the table below.</string>
-    <string name="learn_color_meaning_title">Color Bands and Their Meanings</string>
-    <string name="learn_color_meaning_body">Each color corresponds to a specific value, depending on its position on the inductor. The standard colors and their corresponding values are displayed in the table below.</string>
     <string name="learn_color_four_band_headline">Four-Band Inductors</string>
     <string name="learn_color_four_band_body">Four-band inductors have two significant figure bands, one multiplier band, and one tolerance band.</string>
     <string name="info_color_code_calculation">Calculation:</string>
@@ -74,7 +70,6 @@
 
     <!-- smd info screen   -->
     <string name="info_smd_title">SMD Inductor Codes</string>
-    <string name="smd_info_intro_title">Introduction</string>
     <string name="smd_info_intro_body">The IEC 60062 standard defines alphanumeric markings for inductors, allowing manufacturers to label inductance values in a compact format. This is ideal for smaller components like SMD (Surface-Mount Device) inductors.</string>
     <string name="smd_info_code_title">SMD Inductor Codes</string>
     <string name="smd_info_code_body_1">In this system, inductors often use a three-digit code, with an optional letter for tolerance.</string>
@@ -92,8 +87,8 @@
     <string name="view_our_apps_header">More great apps to explore</string>
     <string name="view_out_apps_rate_us">Rate this app on Google Play</string>
     <string name="view_our_apps_capacitor">Capacitor Code Calculator</string>
-    <string name="view_our_apps_resistor">Resistor Color Code Calculator</string>
     <string name="view_our_apps_ohms">"Ohm's Law Calculator"</string>
+    <string name="view_our_apps_resistor">Resistor Color Code Calculator</string>
     <string name="view_our_apps_all_apps">See all apps on Google Play</string>
 
     <!-- Donate screen/components text -->
@@ -116,7 +111,6 @@
     <string name="color_white">White</string>
     <string name="color_gold">Gold</string>
     <string name="color_silver">Silver</string>
-    <string name="color_none">None</string>
 
     <!-- Menu items -->
     <string name="menu_icon_cd">Menu</string>

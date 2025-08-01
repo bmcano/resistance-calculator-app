@@ -7,10 +7,9 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.brandoncano.library.firebase.FirebaseAnalyticsScreenLogger
-import com.brandoncano.library.firebase.FirebaseAnalyticsEvent
 import com.brandoncano.library.firebase.FirebaseRemoteConfigKeys
 import com.brandoncano.library.firebase.getStringOrEmpty
+import com.brandoncano.library.util.OpenLink
 import com.brandoncano.resistancecalculator.navigation.calculators.colorToValueScreen
 import com.brandoncano.resistancecalculator.navigation.calculators.parallelCalculatorScreen
 import com.brandoncano.resistancecalculator.navigation.calculators.seriesCalculatorScreen
@@ -20,7 +19,6 @@ import com.brandoncano.resistancecalculator.navigation.learn.learnCircuitEquatio
 import com.brandoncano.resistancecalculator.navigation.learn.learnColorCodes
 import com.brandoncano.resistancecalculator.navigation.learn.learnPreferredValues
 import com.brandoncano.resistancecalculator.navigation.learn.learnSmdCodes
-import com.brandoncano.library.util.OpenLink
 
 /**
  * Note: Keep each navigation route in alphabetical order
