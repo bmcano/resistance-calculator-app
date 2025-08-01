@@ -44,10 +44,10 @@ val RubikTypography = Typography(
 )
 
 @Composable
-fun TextStyle.white() = this.merge(color = white)
+fun TextStyle.white() = this.merge(color = lib_white)
 
 @Composable
-fun TextStyle.black() = this.merge(color = black)
+fun TextStyle.black() = this.merge(color = lib_black)
 
 @Composable
 fun TextStyle.gray() = this.merge(color = MaterialTheme.colorScheme.onSurfaceVariant)

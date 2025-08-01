@@ -25,8 +25,8 @@ import com.brandoncano.library.m3.M3Scaffold
 import com.brandoncano.library.m3.M3ScreenColumn
 import com.brandoncano.library.m3.M3TopAppBar
 import com.brandoncano.library.m3.ScreenPreviews
+import com.brandoncano.library.theme.gray
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
-import com.brandoncano.resistancecalculator.ui.theme.gray
 
 @OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
 @Composable

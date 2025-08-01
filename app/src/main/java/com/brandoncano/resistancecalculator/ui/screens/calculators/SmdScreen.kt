@@ -56,10 +56,10 @@ import com.brandoncano.library.m3.M3ScreenColumn
 import com.brandoncano.library.m3.M3TextDropDownMenu
 import com.brandoncano.library.m3.M3TopAppBar
 import com.brandoncano.library.m3.ScreenPreviews
+import com.brandoncano.library.theme.white
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.black
 import com.brandoncano.resistancecalculator.ui.theme.resistor_wire
-import com.brandoncano.resistancecalculator.ui.theme.white
 import com.brandoncano.resistancecalculator.util.resistor.formatResistance
 import java.util.Locale
 

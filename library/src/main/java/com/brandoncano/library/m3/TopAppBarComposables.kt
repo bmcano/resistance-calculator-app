@@ -17,14 +17,13 @@ import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.brandoncano.library.R
 import com.brandoncano.library.theme.gray
 
 @Composable
@@ -64,7 +63,7 @@ fun M3TopAppBar(
     subTitleText: String? = null,
     navigationIcon: ImageVector? = null,
     onNavigateBack: () -> Unit = {},
-
+    appIcon: Painter? = null,
     actions: @Composable RowScope.() -> Unit = {},
     scrollBehavior: TopAppBarScrollBehavior? = null,
 ) {
@@ -92,18 +91,19 @@ fun M3TopAppBar(
                         contentDescription = "Back",
                     )
                 }
-            } else {
+                return@TopAppBar
+            }
+            if (appIcon != null) {
                 Box(
                     modifier = Modifier
                         .minimumInteractiveComponentSize()
                         .size(40.dp),
                     contentAlignment = Alignment.Center,
                 ) {
-                    // TODO - Rewrite how this is implemented
-//                    Image(
-//                        painter = painterResource(R.drawable.img_app_icon),
-//                        contentDescription = null,
-//                    )
+                    Image(
+                        painter = appIcon,
+                        contentDescription = null,
+                    )
                 }
             }
         },

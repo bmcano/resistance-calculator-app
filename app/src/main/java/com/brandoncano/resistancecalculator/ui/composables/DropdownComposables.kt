@@ -27,11 +27,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
-import com.brandoncano.resistancecalculator.data.DropdownItemPO
 import com.brandoncano.library.m3.ComponentPreviews
+import com.brandoncano.library.theme.gray
+import com.brandoncano.resistancecalculator.data.DropdownItemPO
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.RoundedSquare
-import com.brandoncano.resistancecalculator.ui.theme.gray
 import com.brandoncano.resistancecalculator.util.ColorFinder
 
 @OptIn(ExperimentalMaterial3Api::class) // For ExposedDropdownMenuBox

@@ -30,10 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.brandoncano.resistancecalculator.R
 import com.brandoncano.library.data.ArrowCardButtonPO
-import com.brandoncano.resistancecalculator.firebase.FirebaseRemoteConfigKeys
-import com.brandoncano.resistancecalculator.firebase.getStringOrEmpty
 import com.brandoncano.library.m3.BottomScreenSpacer
 import com.brandoncano.library.m3.DesktopScreenPreview
 import com.brandoncano.library.m3.LongScreenPreview
@@ -46,7 +43,10 @@ import com.brandoncano.library.m3.M3ScreenColumn
 import com.brandoncano.library.m3.M3TopAppBar
 import com.brandoncano.library.m3.ScreenPreviews
 import com.brandoncano.library.m3.outlinedCardColor
-import com.brandoncano.resistancecalculator.ui.theme.gray
+import com.brandoncano.library.theme.gray
+import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.firebase.FirebaseRemoteConfigKeys
+import com.brandoncano.resistancecalculator.firebase.getStringOrEmpty
 
 @OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
 @Composable

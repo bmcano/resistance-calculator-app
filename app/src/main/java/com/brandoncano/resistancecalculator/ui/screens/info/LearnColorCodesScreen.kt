@@ -40,13 +40,14 @@ import com.brandoncano.library.m3.M3ScreenColumn
 import com.brandoncano.library.m3.M3TopAppBar
 import com.brandoncano.library.m3.ScreenPreviews
 import com.brandoncano.library.m3.elevatedCardColor
+import com.brandoncano.library.theme.black
+import com.brandoncano.library.theme.gray
+import com.brandoncano.library.theme.white
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.black
 import com.brandoncano.resistancecalculator.ui.theme.blue
-import com.brandoncano.resistancecalculator.ui.theme.gray
 import com.brandoncano.resistancecalculator.ui.theme.red
 import com.brandoncano.resistancecalculator.ui.theme.violet
-import com.brandoncano.resistancecalculator.ui.theme.white
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.resistancecalculator.util.resistor.ResistorImageBuilder
 import com.brandoncano.resistancecalculator.constants.Colors as C
