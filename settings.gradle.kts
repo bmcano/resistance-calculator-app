@@ -18,6 +18,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ResistanceCalculator"
+rootProject.name = "ResistanceCalculator" // TODO - Change to: ElectronicCalculators
 include(":library")
-include(":app") // Resistor app
+include(":app") // Resistor Color Code Calculator
+include(":inductor") // Inductor Color Code Calculator

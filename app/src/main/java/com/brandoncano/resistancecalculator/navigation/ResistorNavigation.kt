@@ -28,7 +28,7 @@ import com.brandoncano.library.util.OpenLink
  * TODO - Convert to Nav3 when it is ready and stable
  */
 
-private const val TAG = "Navigation"
+private const val TAG = "ResistorNavigation"
 
 @Composable
 fun ResistorNavigation(onOpenAppThemeDialog: () -> Unit) {

@@ -1,0 +1,143 @@
+<resources>
+    <string name="app_name">Inductor Calculator</string>
+
+    <!-- home screen -->
+    <string name="home_calculators_header_text">Calculators</string>
+    <string name="home_button_color_to_value">Color to value</string>
+    <string name="home_button_value_to_color">Value to color</string>
+    <string name="home_button_smd">SMD inductor</string>
+    <string name="home_info_header">Inductor standards &amp; guides</string>
+    <string name="home_standard_iec_button">View inductor color code</string>
+    <string name="home_smd_iec_button">View inductor SMD code</string>
+    <string name="home_support_us_header">Support us</string>
+    <string name="home_rate_us">Rate this app on Google Play</string>
+    <string name="home_view_our_apps">Check out our other apps</string>
+    <string name="home_donate">Donate</string>
+
+    <!-- About screen/components text -->
+    <string name="about_title">About The App</string>
+    <string name="about_created_by">Created by</string>
+    <string name="about_author">Brandon Cano</string>
+    <string name="about_app_version">App version</string>
+    <string name="about_last_updated_on">Last updated on</string>
+    <string name="about_overview_title">Description</string>
+    <string name="about_overview_body_01">This app features calculators for color-band inductors, capable of converting between color to value and value to color and SMD inductors.</string>
+    <string name="about_overview_body_02">This app follows the IEC 60062 international standard for inductor coding and calculations to help ensure accuracy.</string>
+    <string name="about_view_privacy_policy">View privacy policy</string>
+
+    <!-- ctv/vtc screen -->
+    <string name="ctv_title">Color to Value</string>
+    <string name="ctv_default_value">Select colors</string>
+    <string name="ctv_hint_band_1">First band</string>
+    <string name="ctv_hint_band_2">Second band</string>
+    <string name="ctv_hint_band_3">Multiplier</string>
+    <string name="ctv_hint_band_4">Tolerance</string>
+    <string name="ctv_info_card_title_text">Inductor color codes</string>
+    <string name="ctv_info_card_subhead_text">IEC 60062</string>
+    <string name="ctv_info_card_body_text">Use the color code chart to translate each band into its exact inductance value.</string>
+    <string name="ctv_info_card_cta_text">Learn more</string>
+    <string name="ctv_learn_color_codes_headline">Learn about color codes</string>
+    <string name="ctv_learn_color_codes_button">Explore the IEC 60062 standard</string>
+    <string name="vtc_title">Value to Color</string>
+    <string name="vtc_default_value">Enter inductance</string>
+    <string name="vtc_hint_inductance">Inductance</string>
+    <string name="vtc_hint_units">Units</string>
+
+    <!-- smd screen -->
+    <string name="smd_title">SMD Inductor</string>
+    <string name="smd_default_value">Enter code</string>
+    <string name="smd_hint_code">Code</string>
+    <string name="smd_info_card_title_text">SMD inductor codes</string>
+    <string name="smd_info_card_subhead_text">IEC 60062</string>
+    <string name="smd_info_card_body_text">Learn how  markings on SMD inductors correspond to inductance and tolerance.</string>
+    <string name="smd_info_card_cta_text">Learn more</string>
+
+    <!-- color code info screen -->
+    <string name="info_color_title">Inductor Color Bands</string>
+    <string name="info_color">Color</string>
+    <string name="info_digit">Digit</string>
+    <string name="info_multiplier">Multiplier</string>
+    <string name="info_tolerance">Tolerance</string>
+    <string name="info_color_body1">The inductor color code uses colored bands to indicate inductance values and tolerance. This system allows for easy identification of inductor values in a compact format.</string>
+    <string name="info_color_body2">Each color corresponds to a specific value, depending on its position on the inductor body. The standard colors and their corresponding values are displayed in the table below.</string>
+    <string name="learn_color_meaning_title">Color Bands and Their Meanings</string>
+    <string name="learn_color_meaning_body">Each color corresponds to a specific value, depending on its position on the inductor. The standard colors and their corresponding values are displayed in the table below.</string>
+    <string name="learn_color_four_band_headline">Four-Band Inductors</string>
+    <string name="learn_color_four_band_body">Four-band inductors have two significant figure bands, one multiplier band, and one tolerance band.</string>
+    <string name="info_color_code_calculation">Calculation:</string>
+    <string name="info_color_code_band_breakdown">Band breakdown:</string>
+    <string name="learn_color_four_band_code">47 \u00D7 100 ±5%</string>
+    <string name="learn_color_four_band_description">Yellow[4], Violet[7], Red[×100], Gold[±5%]</string>
+    <string name="learn_color_five_band_headline">Five-Band Inductors</string>
+    <string name="learn_color_five_band_body">Some inductors have five bands. If the first band is a double-length silver band, it indicates that the inductor uses military standards. Please note that this app does not support five-band inductors.</string>
+    <string name="info_disclaimer_footer">The information provided here regarding IEC standards is intended for general guidance. Please note that not all components may strictly adhere to these standards, as manufacturers may have variations or different interpretations. Always consult the specific datasheet or contact the manufacturer directly if you are unsure about the specifications or standards for a particular component.</string>
+
+    <!-- smd info screen   -->
+    <string name="info_smd_title">SMD Inductor Codes</string>
+    <string name="smd_info_intro_title">Introduction</string>
+    <string name="smd_info_intro_body">The IEC 60062 standard defines alphanumeric markings for inductors, allowing manufacturers to label inductance values in a compact format. This is ideal for smaller components like SMD (Surface-Mount Device) inductors.</string>
+    <string name="smd_info_code_title">SMD Inductor Codes</string>
+    <string name="smd_info_code_body_1">In this system, inductors often use a three-digit code, with an optional letter for tolerance.</string>
+    <string name="smd_info_code_body_2">The first two digits represent the significant figures, while the third digit is the power-of-ten multiplier, making it similar to the color code used on through-hole inductors. The format can be expressed as:</string>
+    <string name="smd_info_three_digit_formula">xy \u00D7 10\u1dbb = μH</string>
+    <string name="smd_info_three_digit_example_label">For example, an inductor labeled 472 equates to:</string>
+    <string name="smd_info_three_digit_example">47 \u00D7 10\u00b2 = 4.7 mH</string>
+    <string name="smd_info_tolerance_title">Tolerance Table</string>
+    <string name="smd_info_tolerance_body">"Below is a reference for common inductor tolerance symbols and their corresponding deviation from the nominal inductance value. Use these codes to quickly determine how closely an inductor's actual inductance may match its marked rating."</string>
+    <string name="smd_info_tolerance_symbol">Symbol</string>
+    <string name="smd_info_tolerance_value">Tolerance (%)</string>
+
+    <!-- View our apps screen/components text -->
+    <string name="view_our_apps_title">Our apps</string>
+    <string name="view_our_apps_header">More great apps to explore</string>
+    <string name="view_out_apps_rate_us">Rate this app on Google Play</string>
+    <string name="view_our_apps_capacitor">Capacitor Code Calculator</string>
+    <string name="view_our_apps_resistor">Resistor Color Code Calculator</string>
+    <string name="view_our_apps_ohms">"Ohm's Law Calculator"</string>
+    <string name="view_our_apps_all_apps">See all apps on Google Play</string>
+
+    <!-- Donate screen/components text -->
+    <string name="donate_title">Donate</string>
+    <string name="donate_description_body">Your donation helps us improve the app and create new features for everyone to enjoy.</string>
+    <string name="donate_how_much_header">How much would you like to donate?</string>
+    <string name="donate_payment_cta">Continue to payment</string>
+    <string name="donate_caption">We appreciate your kindness and support. Thank you for your donation!</string>
+
+    <!-- inductor colors -->
+    <string name="color_black">Black</string>
+    <string name="color_brown">Brown</string>
+    <string name="color_red">Red</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_yellow">Yellow</string>
+    <string name="color_green">Green</string>
+    <string name="color_blue">Blue</string>
+    <string name="color_violet">Violet</string>
+    <string name="color_gray">Gray</string>
+    <string name="color_white">White</string>
+    <string name="color_gold">Gold</string>
+    <string name="color_silver">Silver</string>
+    <string name="color_none">None</string>
+
+    <!-- Menu items -->
+    <string name="menu_icon_cd">Menu</string>
+    <string name="menu_about">About the app</string>
+    <string name="menu_app_theme">App appearance</string>
+    <string name="menu_clear_selections">Clear selections</string>
+    <string name="menu_feedback">Send feedback</string>
+    <string name="menu_share_image">Share as image</string>
+    <string name="menu_share_text">Share as text</string>
+
+    <!-- Dialogs -->
+    <string name="dialog_app_appearance">App appearance</string>
+    <string name="dialog_confirm_button">Done</string>
+    <string name="dialog_system_default">System default</string>
+    <string name="dialog_light">Light</string>
+    <string name="dialog_dark">Dark</string>
+    <string name="dialog_dynamic_color">Dynamic Colors (Android 12+)</string>
+
+    <!-- error message -->
+    <string name="error_na">N/A</string>
+    <string name="error_invalid_inductance">Invalid inductance</string>
+    <string name="error_invalid_code">Invalid code</string>
+    <string name="error_donate_screen">There was an error connecting to Google Play services. Please try again later.</string>
+</resources>

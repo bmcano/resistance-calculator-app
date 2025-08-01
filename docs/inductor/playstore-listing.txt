@@ -1,0 +1,40 @@
+----------------------------------------------------------------------------------------------------
+App name: (30/30)
+
+Inductor Color Code Calculator
+----------------------------------------------------------------------------------------------------
+Short description: (77/80)
+
+Instantly calculate inductor color codes and values for electronics projects.
+----------------------------------------------------------------------------------------------------
+Full description: (1476/4000)
+
+Quickly and accurately calculate inductor values with our intuitive app, perfect for electronics hobbyists, students, and professionals.
+
+This app supports four band inductors, and the values consists of 2 numerals, a multiplier, and a tolerance band.
+
+<b>Key Features:</b>
+• Color-to-Value Calculator - Quickly calculate inductance values by selecting inductor color bands. Perfect for inductor color-code lookups in electronics projects.
+• Value-to-Color Calculator - Enter an inductance value and tolerance to view the matching color code bands in real-time.
+• SMD Inductor Code Calculator - Easily convert SMD (Surface-Mount Device) inductor codes to standard Henry values.
+
+<b>Additional Functionalities:</b>
+• Share Your Inductor Values - Share calculated inductor details by text or image for easy project collaboration.
+• Customize App Appearance - Switch between light and dark themes to personalize your experience.
+
+<b>Why Choose Our App?</b>
+• Accurate & Reliable - Based on the IEC 60062 standard, ensuring industry-standard results.
+• Fully Responsive - Optimized for all mobile devices, ensuring a smooth experience on any screen.
+
+<b>Your Feedback Matters:</b>
+Have suggestions or encountered a bug? Reach out anytime at:
+brandoncano.development@gmail.com
+
+<b>Tags:</b>
+Inductor color code calculator
+Inductor calculator
+Inductance calculator
+Inductor color to value calculator
+Inductor value to color calculator
+SMD (surface mount device) inductor calculator
+----------------------------------------------------------------------------------------------------

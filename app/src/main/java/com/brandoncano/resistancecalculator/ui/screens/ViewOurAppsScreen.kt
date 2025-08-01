@@ -30,6 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.brandoncano.library.R as baseR
 import com.brandoncano.library.data.ArrowCardButtonPO
 import com.brandoncano.library.m3.BottomScreenSpacer
 import com.brandoncano.library.m3.DesktopScreenPreview
@@ -95,21 +96,21 @@ private fun ViewOurAppsScreenContent(
         Spacer(modifier = Modifier.height(12.dp))
         MobileAppCard(
             appName = stringResource(id = R.string.view_our_apps_capacitor),
-            appImageRes = R.drawable.img_playstore_capacitor,
+            appImageRes = baseR.drawable.img_playstore_capacitor,
             appLink = FirebaseRemoteConfigKeys.PLAYSTORE_CAPACITOR.getStringOrEmpty(),
             onClick = onMobileAppCardTapped,
         )
         Spacer(modifier = Modifier.height(12.dp))
         MobileAppCard(
             appName = stringResource(id = R.string.view_our_apps_inductor),
-            appImageRes = R.drawable.img_playstore_inductor,
+            appImageRes = baseR.drawable.img_playstore_inductor,
             appLink = FirebaseRemoteConfigKeys.PLAYSTORE_INDUCTOR.getStringOrEmpty(),
             onClick = onMobileAppCardTapped,
         )
         Spacer(modifier = Modifier.height(12.dp))
         MobileAppCard(
             appName = stringResource(id = R.string.view_our_apps_ohms),
-            appImageRes = R.drawable.img_playstore_ohms,
+            appImageRes = baseR.drawable.img_playstore_ohms,
             appLink = FirebaseRemoteConfigKeys.PLAYSTORE_OHMS.getStringOrEmpty(),
             onClick = onMobileAppCardTapped,
         )
