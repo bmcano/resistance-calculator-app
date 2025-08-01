@@ -28,7 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.data.DropdownItemPO
-import com.brandoncano.resistancecalculator.ui.composables.m3.ComponentPreviews
+import com.brandoncano.library.m3.ComponentPreviews
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.RoundedSquare
 import com.brandoncano.resistancecalculator.ui.theme.gray

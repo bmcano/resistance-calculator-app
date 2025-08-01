@@ -19,4 +19,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "ResistanceCalculator"
-include(":app")
+include(":library")
+include(":app") // Resistor app

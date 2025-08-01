@@ -20,7 +20,7 @@ import com.brandoncano.resistancecalculator.navigation.learn.learnCircuitEquatio
 import com.brandoncano.resistancecalculator.navigation.learn.learnColorCodes
 import com.brandoncano.resistancecalculator.navigation.learn.learnPreferredValues
 import com.brandoncano.resistancecalculator.navigation.learn.learnSmdCodes
-import com.brandoncano.resistancecalculator.util.OpenLink
+import com.brandoncano.library.util.OpenLink
 
 /**
  * Note: Keep each navigation route in alphabetical order

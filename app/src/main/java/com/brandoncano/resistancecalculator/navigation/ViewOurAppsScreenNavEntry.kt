@@ -11,7 +11,7 @@ import androidx.navigation.compose.composable
 import com.brandoncano.resistancecalculator.firebase.FirebaseRemoteConfigKeys
 import com.brandoncano.resistancecalculator.firebase.getStringOrEmpty
 import com.brandoncano.resistancecalculator.ui.screens.ViewOurAppsScreen
-import com.brandoncano.resistancecalculator.util.OpenLink
+import com.brandoncano.library.util.OpenLink
 
 fun NavGraphBuilder.viewOurAppsScreen(
     navHostController: NavHostController,

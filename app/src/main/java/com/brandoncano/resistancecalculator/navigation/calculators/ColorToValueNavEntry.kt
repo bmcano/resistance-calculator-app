@@ -13,6 +13,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.brandoncano.library.util.ShareComposableAsImage
+import com.brandoncano.library.util.ShareText
 import com.brandoncano.resistancecalculator.BuildConfig
 import com.brandoncano.resistancecalculator.model.ResistorCtvViewModel
 import com.brandoncano.resistancecalculator.navigation.Screen
@@ -20,9 +22,7 @@ import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.navigation.navigateToColorCodeIec
 import com.brandoncano.resistancecalculator.navigation.popBackStackSafely
 import com.brandoncano.resistancecalculator.ui.screens.calculators.ColorToValueScreen
-import com.brandoncano.resistancecalculator.util.SendFeedback
-import com.brandoncano.resistancecalculator.util.share.ShareResistor
-import com.brandoncano.resistancecalculator.util.share.ShareText
+import com.brandoncano.resistancecalculator.util.SendFeedbackWrapper
 
 fun NavGraphBuilder.colorToValueScreen(
     navHostController: NavHostController,
@@ -49,7 +49,7 @@ fun NavGraphBuilder.colorToValueScreen(
             },
             onShareImageTapped = {
                 if (activity != null) {
-                    ShareResistor.execute(
+                    ShareComposableAsImage.execute(
                         activity = activity,
                         context = context,
                         applicationId = BuildConfig.APPLICATION_ID,
@@ -58,7 +58,7 @@ fun NavGraphBuilder.colorToValueScreen(
                 }
             },
             onShareTextTapped = { ShareText.execute(context, it) },
-            onFeedbackTapped = { SendFeedback.execute(context) },
+            onFeedbackTapped = { SendFeedbackWrapper.execute(context) },
             onAboutTapped = { navigateToAbout(navHostController) },
             onUpdateBand = { bandNumber, color ->
                 viewModel.updateBand(bandNumber, color)

@@ -20,7 +20,7 @@ import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.navigation.navigateToCircuitEquations
 import com.brandoncano.resistancecalculator.navigation.popBackStackSafely
 import com.brandoncano.resistancecalculator.ui.screens.calculators.CircuitCalculatorScreen
-import com.brandoncano.resistancecalculator.util.SendFeedback
+import com.brandoncano.resistancecalculator.util.SendFeedbackWrapper
 
 fun NavGraphBuilder.parallelCalculatorScreen(
     navHostController: NavHostController,
@@ -47,7 +47,7 @@ fun NavGraphBuilder.parallelCalculatorScreen(
                 viewModel.clear()
                 focusManager.clearFocus()
             },
-            onFeedbackTapped = { SendFeedback.execute(context) },
+            onFeedbackTapped = { SendFeedbackWrapper.execute(context) },
             onAboutTapped = { navigateToAbout(navHostController) },
             onOptionSelected = { sameValues, resistorCount, units ->
                 viewModel.updateValues(sameValues, resistorCount, units)

@@ -33,7 +33,7 @@ junit = "4.13.2" # 7/7/24
 mockk = "1.14.5" # 7/7/24
 
 # third party
-ostermiller-utils = "1.07.00" # 7/21/24
+ostermiller-utils = "1.07.00" # 7/21/24 - Used for getting number of significant figures
 
 [libraries]
 # androidx
@@ -85,3 +85,25 @@ jetbrains-kotlin-plugin-compose = { id = "org.jetbrains.kotlin.plugin.compose", 
 
 # misc
 gradle-ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+
+[bundles]
+core-implementation = [
+    "androidx-appcompat",
+    "androidx-browser",
+    "androidx-core-ktx",
+    "androidx-activity-compose",
+    "androidx-navigation-compose",
+    "androidx-compose-ui",
+    "androidx-compose-ui-graphics",
+    "androidx-compose-ui-tooling-preview",
+    "androidx-compose-runtime-livedata",
+    "androidx-compose-material-icons-extended",
+    "androidx-compose-material3",
+    "firebase-analytics",
+    "firebase-config",
+    "firebase-crashlytics-ndk",
+    "billing-client",
+    "gson",
+]
+test-implementation = ["junit", "mockk"]
+debug-implementation = ["androidx-compose-ui-tooling", "androidx-compose-ui-test-manifest"]

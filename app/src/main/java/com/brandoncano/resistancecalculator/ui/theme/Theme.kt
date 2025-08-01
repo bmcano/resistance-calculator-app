@@ -15,6 +15,7 @@ import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import com.brandoncano.library.theme.RubikTypography
 import com.brandoncano.resistancecalculator.keys.AppAppearance
 
 private val lightColorScheme = lightColorScheme(

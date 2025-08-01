@@ -35,12 +35,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.ui.composables.m3.BottomScreenSpacer
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3FilledButton
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3Scaffold
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3ScreenColumn
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
-import com.brandoncano.resistancecalculator.ui.composables.m3.ScreenPreviews
+import com.brandoncano.library.m3.BottomScreenSpacer
+import com.brandoncano.library.m3.M3FilledButton
+import com.brandoncano.library.m3.M3Scaffold
+import com.brandoncano.library.m3.M3ScreenColumn
+import com.brandoncano.library.m3.M3TopAppBar
+import com.brandoncano.library.m3.ScreenPreviews
 import com.brandoncano.resistancecalculator.ui.theme.gray
 
 @OptIn(ExperimentalMaterial3Api::class) // For TopAppBar

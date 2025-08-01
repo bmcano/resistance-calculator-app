@@ -19,6 +19,7 @@ android {
         versionCode = 42 // for 4.2.4
         versionName = "4.2.4"
 
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -59,34 +60,14 @@ android {
 }
 
 dependencies {
-    // AndroidX
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.browser)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.navigation.compose)
-    // androidx.compose.ui
+    implementation(project(":library"))
     implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.graphics)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    debugImplementation(libs.androidx.compose.ui.tooling)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    implementation(libs.androidx.compose.runtime.livedata)
-    implementation(libs.androidx.compose.material.icons.extended)
-    implementation(libs.androidx.compose.material3)
-    // firebase
     implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.analytics)
-    implementation(libs.firebase.config)
-    implementation(libs.firebase.crashlytics.ndk)
-    // google
-    implementation(libs.billing.client)
-    implementation(libs.gson)
-    // unit testing
-    testImplementation(libs.mockk)
-    testImplementation(libs.junit)
+    implementation(libs.bundles.core.implementation)
+    // test/debug
+    testImplementation(libs.bundles.test.implementation)
+    debugImplementation(libs.bundles.debug.implementation)
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     // external libraries
     implementation(libs.ostermiller.utils)
 }

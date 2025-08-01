@@ -31,21 +31,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.data.ArrowCardButtonPO
+import com.brandoncano.library.data.ArrowCardButtonPO
 import com.brandoncano.resistancecalculator.firebase.FirebaseRemoteConfigKeys
 import com.brandoncano.resistancecalculator.firebase.getStringOrEmpty
-import com.brandoncano.resistancecalculator.ui.composables.m3.BottomScreenSpacer
-import com.brandoncano.resistancecalculator.ui.composables.m3.DesktopScreenPreview
-import com.brandoncano.resistancecalculator.ui.composables.m3.LongScreenPreview
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3ArrowButtonCardContent
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3Divider
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3ElevatedCard
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3OutlinedCard
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3Scaffold
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3ScreenColumn
-import com.brandoncano.resistancecalculator.ui.composables.m3.M3TopAppBar
-import com.brandoncano.resistancecalculator.ui.composables.m3.ScreenPreviews
-import com.brandoncano.resistancecalculator.ui.composables.m3.outlinedCardColor
+import com.brandoncano.library.m3.BottomScreenSpacer
+import com.brandoncano.library.m3.DesktopScreenPreview
+import com.brandoncano.library.m3.LongScreenPreview
+import com.brandoncano.library.m3.M3ArrowButtonCardContent
+import com.brandoncano.library.m3.M3Divider
+import com.brandoncano.library.m3.M3ElevatedCard
+import com.brandoncano.library.m3.M3OutlinedCard
+import com.brandoncano.library.m3.M3Scaffold
+import com.brandoncano.library.m3.M3ScreenColumn
+import com.brandoncano.library.m3.M3TopAppBar
+import com.brandoncano.library.m3.ScreenPreviews
+import com.brandoncano.library.m3.outlinedCardColor
 import com.brandoncano.resistancecalculator.ui.theme.gray
 
 @OptIn(ExperimentalMaterial3Api::class) // For TopAppBar
