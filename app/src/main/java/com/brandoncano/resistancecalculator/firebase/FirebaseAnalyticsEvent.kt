@@ -24,4 +24,5 @@ enum class FirebaseAnalyticsEvent(val analyticName: String) {
 
     // Actions
     ACTION_VALIDATE_E_SERIES("action_validate_e_series"),
+
 }

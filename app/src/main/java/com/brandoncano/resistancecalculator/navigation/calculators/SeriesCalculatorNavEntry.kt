@@ -15,7 +15,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.model.CircuitViewModel
-import com.brandoncano.resistancecalculator.navigation.Screen
+import com.brandoncano.resistancecalculator.navigation.ResistorScreen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.navigation.navigateToCircuitEquations
 import com.brandoncano.resistancecalculator.navigation.popBackStackSafely
@@ -26,7 +26,7 @@ fun NavGraphBuilder.seriesCalculatorScreen(
     navHostController: NavHostController,
 ) {
     composable(
-        route = Screen.SeriesCalculator.route,
+        route = ResistorScreen.SeriesCalculator.route,
         enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
         exitTransition = { ExitTransition.None },
         popEnterTransition = { EnterTransition.None },

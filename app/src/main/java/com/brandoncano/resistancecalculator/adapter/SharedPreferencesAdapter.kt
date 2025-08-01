@@ -12,7 +12,7 @@ import com.brandoncano.resistancecalculator.to.Circuit
 import com.brandoncano.resistancecalculator.to.ResistorCtv
 import com.brandoncano.resistancecalculator.to.ResistorVtc
 import com.brandoncano.resistancecalculator.to.SmdResistor
-import com.brandoncano.resistancecalculator.ui.MainApplication
+import com.brandoncano.resistancecalculator.ui.ResistorApplication
 import com.google.gson.Gson
 
 /**
@@ -120,7 +120,7 @@ class SharedPreferencesAdapter {
     }
 
     private fun getSharedPreferences(): SharedPreferences {
-        val application = MainApplication.instance
+        val application = ResistorApplication.instance
         return application.getSharedPreferences(NAME, Context.MODE_PRIVATE)
     }
 

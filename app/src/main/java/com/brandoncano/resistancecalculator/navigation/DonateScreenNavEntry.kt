@@ -21,7 +21,7 @@ fun NavGraphBuilder.donateScreen(
     navHostController: NavHostController,
 ) {
     composable(
-        route = Screen.Donate.route,
+        route = ResistorScreen.Donate.route,
         enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
         exitTransition = { ExitTransition.None },
         popEnterTransition = { EnterTransition.None },

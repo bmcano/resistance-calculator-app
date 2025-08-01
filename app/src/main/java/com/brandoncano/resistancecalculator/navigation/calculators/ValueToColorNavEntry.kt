@@ -20,7 +20,7 @@ import com.brandoncano.resistancecalculator.data.ESeriesCardContent
 import com.brandoncano.resistancecalculator.firebase.FirebaseAnalyticsEvent
 import com.brandoncano.resistancecalculator.firebase.FirebaseAnalyticsEventLogger
 import com.brandoncano.resistancecalculator.model.ResistorVtcViewModel
-import com.brandoncano.resistancecalculator.navigation.Screen
+import com.brandoncano.resistancecalculator.navigation.ResistorScreen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.navigation.navigateToPreferredValuesIec
 import com.brandoncano.resistancecalculator.navigation.popBackStackSafely
@@ -32,7 +32,7 @@ fun NavGraphBuilder.valueToColorScreen(
     navHostController: NavHostController,
 ) {
     composable(
-        route = Screen.ValueToColor.route,
+        route = ResistorScreen.ValueToColor.route,
         enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
         exitTransition = { ExitTransition.None },
         popEnterTransition = { EnterTransition.None },

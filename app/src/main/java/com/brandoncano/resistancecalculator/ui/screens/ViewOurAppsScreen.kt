@@ -45,7 +45,7 @@ import com.brandoncano.library.m3.ScreenPreviews
 import com.brandoncano.library.m3.outlinedCardColor
 import com.brandoncano.library.theme.gray
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.firebase.FirebaseRemoteConfigKeys
+import com.brandoncano.resistancecalculator.keys.FirebaseRemoteConfigKeys
 import com.brandoncano.resistancecalculator.firebase.getStringOrEmpty
 
 @OptIn(ExperimentalMaterial3Api::class) // For TopAppBar

@@ -8,7 +8,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import com.brandoncano.resistancecalculator.firebase.FirebaseRemoteConfigKeys
+import com.brandoncano.resistancecalculator.keys.FirebaseRemoteConfigKeys
 import com.brandoncano.resistancecalculator.firebase.getStringOrEmpty
 import com.brandoncano.resistancecalculator.ui.screens.AboutScreen
 import com.brandoncano.library.util.OpenLink
@@ -17,7 +17,7 @@ fun NavGraphBuilder.aboutScreen(
     navHostController: NavHostController,
 ) {
     composable(
-        route = Screen.About.route,
+        route = ResistorScreen.About.route,
         enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
         exitTransition = { ExitTransition.None },
         popEnterTransition = { EnterTransition.None },

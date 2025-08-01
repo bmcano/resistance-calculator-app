@@ -17,7 +17,7 @@ import com.brandoncano.library.util.ShareComposableAsImage
 import com.brandoncano.library.util.ShareText
 import com.brandoncano.resistancecalculator.BuildConfig
 import com.brandoncano.resistancecalculator.model.SmdResistorViewModel
-import com.brandoncano.resistancecalculator.navigation.Screen
+import com.brandoncano.resistancecalculator.navigation.ResistorScreen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.navigation.navigateToSmdCodeIec
 import com.brandoncano.resistancecalculator.navigation.popBackStackSafely
@@ -28,7 +28,7 @@ fun NavGraphBuilder.smdScreen(
     navHostController: NavHostController,
 ) {
     composable(
-        route = Screen.Smd.route,
+        route = ResistorScreen.Smd.route,
         enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
         exitTransition = { ExitTransition.None },
         popEnterTransition = { EnterTransition.None },

@@ -17,7 +17,7 @@ import com.brandoncano.library.util.ShareComposableAsImage
 import com.brandoncano.library.util.ShareText
 import com.brandoncano.resistancecalculator.BuildConfig
 import com.brandoncano.resistancecalculator.model.ResistorCtvViewModel
-import com.brandoncano.resistancecalculator.navigation.Screen
+import com.brandoncano.resistancecalculator.navigation.ResistorScreen
 import com.brandoncano.resistancecalculator.navigation.navigateToAbout
 import com.brandoncano.resistancecalculator.navigation.navigateToColorCodeIec
 import com.brandoncano.resistancecalculator.navigation.popBackStackSafely
@@ -28,7 +28,7 @@ fun NavGraphBuilder.colorToValueScreen(
     navHostController: NavHostController,
 ) {
     composable(
-        route = Screen.ColorToValue.route,
+        route = ResistorScreen.ColorToValue.route,
         enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
         exitTransition = { ExitTransition.None },
         popEnterTransition = { EnterTransition.None },

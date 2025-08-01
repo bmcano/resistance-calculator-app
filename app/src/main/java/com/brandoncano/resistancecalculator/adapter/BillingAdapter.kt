@@ -12,7 +12,7 @@ import com.android.billingclient.api.PendingPurchasesParams
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.QueryProductDetailsParams
-import com.brandoncano.resistancecalculator.ui.MainApplication
+import com.brandoncano.resistancecalculator.ui.ResistorApplication
 
 /**
  * Job: Handles the in-app purchases for the donation screen
@@ -23,7 +23,7 @@ class BillingAdapter() {
         const val TAG = "BillingAdapter"
     }
 
-    val application = MainApplication.instance
+    val application = ResistorApplication.instance
     private val purchaseListener = PurchasesUpdatedListener { billingResult, purchases ->
         when (billingResult.responseCode) {
             BillingClient.BillingResponseCode.OK -> {

@@ -14,11 +14,11 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.remoteconfig.remoteConfig
 import com.google.firebase.remoteconfig.remoteConfigSettings
 
-class MainApplication : Application() {
+class ResistorApplication : Application() {
 
     companion object {
-        private const val TAG = "MainApplication"
-        var instance = MainApplication()
+        private const val TAG = "ResistorApplication"
+        var instance = ResistorApplication()
             private set
     }
 

@@ -11,13 +11,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.brandoncano.resistancecalculator.adapter.SharedPreferencesAdapter
 import com.brandoncano.resistancecalculator.keys.AppAppearance
-import com.brandoncano.resistancecalculator.navigation.Navigation
+import com.brandoncano.resistancecalculator.navigation.ResistorNavigation
 import com.brandoncano.resistancecalculator.ui.composables.AppAppearanceDialog
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class MainActivity : ComponentActivity() {
+class ResistorActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
                     )
                 }
 
-                Navigation(
+                ResistorNavigation(
                     onOpenAppThemeDialog = { showAppThemeDialog = true },
                 )
             }

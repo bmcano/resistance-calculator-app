@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.adapter.BillingAdapter
-import com.brandoncano.resistancecalculator.ui.MainApplication
+import com.brandoncano.resistancecalculator.ui.ResistorApplication
 import com.brandoncano.resistancecalculator.util.GetProductIdForAmount
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,7 +18,7 @@ class BillingViewModel : ViewModel() {
         private const val TAG = "BillingViewModel"
     }
 
-    private val application = MainApplication.instance
+    private val application = ResistorApplication.instance
     private val billingAdapter = BillingAdapter()
 
     private val _errorMessages = MutableStateFlow<MutableList<String>>(mutableListOf())

@@ -9,7 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.brandoncano.resistancecalculator.firebase.FirebaseAnalyticsScreenLogger
 import com.brandoncano.resistancecalculator.firebase.FirebaseAnalyticsEvent
-import com.brandoncano.resistancecalculator.firebase.FirebaseRemoteConfigKeys
+import com.brandoncano.resistancecalculator.keys.FirebaseRemoteConfigKeys
 import com.brandoncano.resistancecalculator.firebase.getStringOrEmpty
 import com.brandoncano.resistancecalculator.navigation.calculators.colorToValueScreen
 import com.brandoncano.resistancecalculator.navigation.calculators.parallelCalculatorScreen
@@ -31,11 +31,11 @@ import com.brandoncano.library.util.OpenLink
 private const val TAG = "Navigation"
 
 @Composable
-fun Navigation(onOpenAppThemeDialog: () -> Unit) {
+fun ResistorNavigation(onOpenAppThemeDialog: () -> Unit) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = Screen.Home.route,
+        startDestination = ResistorScreen.Home.route,
     ) {
         aboutScreen(navController)
         colorToValueScreen(navController)
@@ -62,62 +62,62 @@ fun popBackStackSafely(navController: NavHostController) {
 }
 
 fun navigateToAbout(navController: NavHostController) {
-    navController.navigate(Screen.About.route)
+    navController.navigate(ResistorScreen.About.route)
 }
 
 fun navigateToColorToValue(navController: NavHostController) {
     FirebaseAnalyticsScreenLogger.execute(FirebaseAnalyticsEvent.SCREEN_COLOR_TO_VALUE)
-    navController.navigate(Screen.ColorToValue.route)
+    navController.navigate(ResistorScreen.ColorToValue.route)
 }
 
 fun navigateToValueToColor(navController: NavHostController) {
     FirebaseAnalyticsScreenLogger.execute(FirebaseAnalyticsEvent.SCREEN_VALUE_TO_COLOR)
-    navController.navigate(Screen.ValueToColor.route)
+    navController.navigate(ResistorScreen.ValueToColor.route)
 }
 
 fun navigateToSmd(navController: NavHostController) {
     FirebaseAnalyticsScreenLogger.execute(FirebaseAnalyticsEvent.SCREEN_SMD)
-    navController.navigate(Screen.Smd.route)
+    navController.navigate(ResistorScreen.Smd.route)
 }
 
 fun navigateToSeriesCalculator(navController: NavController) {
     FirebaseAnalyticsScreenLogger.execute(FirebaseAnalyticsEvent.SCREEN_CIRCUIT_SERIES)
-    navController.navigate(Screen.SeriesCalculator.route)
+    navController.navigate(ResistorScreen.SeriesCalculator.route)
 }
 
 fun navigateToParallelCalculator(navController: NavController) {
     FirebaseAnalyticsScreenLogger.execute(FirebaseAnalyticsEvent.SCREEN_CIRCUIT_PARALLEL)
-    navController.navigate(Screen.ParallelCalculator.route)
+    navController.navigate(ResistorScreen.ParallelCalculator.route)
 }
 
 fun navigateToCircuitEquations(navController: NavHostController) {
     FirebaseAnalyticsScreenLogger.execute(FirebaseAnalyticsEvent.SCREEN_INFO_CIRCUIT_EQUATIONS)
-    navController.navigate(Screen.LearnCircuitEquations.route)
+    navController.navigate(ResistorScreen.LearnCircuitEquations.route)
 }
 
 fun navigateToColorCodeIec(navController: NavHostController) {
     FirebaseAnalyticsScreenLogger.execute(FirebaseAnalyticsEvent.SCREEN_INFO_COLOR_CODES)
-    navController.navigate(Screen.LearnColorCodes.route)
+    navController.navigate(ResistorScreen.LearnColorCodes.route)
 }
 
 fun navigateToPreferredValuesIec(navController: NavHostController) {
     FirebaseAnalyticsScreenLogger.execute(FirebaseAnalyticsEvent.SCREEN_INFO_PREFERRED_VALUES)
-    navController.navigate(Screen.LearnPreferredValues.route)
+    navController.navigate(ResistorScreen.LearnPreferredValues.route)
 }
 
 fun navigateToSmdCodeIec(navController: NavHostController) {
     FirebaseAnalyticsScreenLogger.execute(FirebaseAnalyticsEvent.SCREEN_INFO_SMD_CODES)
-    navController.navigate(Screen.LearnSmdCodes.route)
+    navController.navigate(ResistorScreen.LearnSmdCodes.route)
 }
 
 fun navigateToOurApps(navController: NavHostController) {
     FirebaseAnalyticsScreenLogger.execute(FirebaseAnalyticsEvent.SCREEN_VIEW_APPS)
-    navController.navigate(Screen.ViewOurApps.route)
+    navController.navigate(ResistorScreen.ViewOurApps.route)
 }
 
 fun navigateToDonate(navController: NavHostController) {
     FirebaseAnalyticsScreenLogger.execute(FirebaseAnalyticsEvent.SCREEN_DONATE)
-    navController.navigate(Screen.Donate.route)
+    navController.navigate(ResistorScreen.Donate.route)
 }
 
 fun navigateToGooglePlay(context: Context) {

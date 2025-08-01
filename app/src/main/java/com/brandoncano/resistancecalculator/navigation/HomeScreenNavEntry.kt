@@ -14,7 +14,7 @@ fun NavGraphBuilder.homeScreen(
     onOpenAppThemeDialog: () -> Unit,
 ) {
     composable(
-        route = Screen.Home.route,
+        route = ResistorScreen.Home.route,
         enterTransition = { EnterTransition.None },
         exitTransition = { ExitTransition.None },
     ) {

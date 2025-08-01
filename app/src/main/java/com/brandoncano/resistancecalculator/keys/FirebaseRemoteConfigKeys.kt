@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.firebase
+package com.brandoncano.resistancecalculator.keys
 
 /**
  * Job: Defined the remote config keys from the Firebase console.
