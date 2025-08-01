@@ -32,13 +32,13 @@ fun InductorNavigation(onOpenAppThemeDialog: () -> Unit) {
     ) {
         aboutScreen(navController)
         colorToValueScreen(navController)
-        //donateScreen(navController)
+        donateScreen(navController)
         homeScreen(navController, onOpenAppThemeDialog)
         learnColorCodes(navController)
         learnSmdCodes(navController)
         smdScreen(navController)
         valueToColorScreen(navController)
-        //viewOurAppsScreen(navController)
+        viewOurAppsScreen(navController)
     }
 }
 

@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.navigation
+package com.brandoncano.inductancecalculator.navigation
 
 import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.EnterTransition
@@ -15,16 +15,16 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.brandoncano.inductancecalculator.model.BillingViewModel
+import com.brandoncano.inductancecalculator.ui.screens.DonateScreen
 import com.brandoncano.library.firebase.FirebaseAnalyticsEvent
 import com.brandoncano.library.firebase.FirebaseAnalyticsScreenLogger
-import com.brandoncano.resistancecalculator.model.BillingViewModel
-import com.brandoncano.resistancecalculator.ui.screens.DonateScreen
 
 fun NavGraphBuilder.donateScreen(
     navHostController: NavHostController,
 ) {
     composable(
-        route = ResistorScreen.Donate.route,
+        route = InductorScreen.Donate.route,
         enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
         exitTransition = { ExitTransition.None },
         popEnterTransition = { EnterTransition.None },

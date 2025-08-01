@@ -1,14 +1,14 @@
-package com.brandoncano.resistancecalculator.model
+package com.brandoncano.inductancecalculator.model
 
 import android.app.Activity
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.brandoncano.inductancecalculator.ui.InductorApplication
 import com.brandoncano.library.DonationBillingAdapter
 import com.brandoncano.library.util.GetProductIdForAmount
-import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.ui.ResistorApplication
+import com.brandoncano.inductancecalculator.R
 import kotlinx.coroutines.launch
 
 class BillingViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
@@ -18,7 +18,7 @@ class BillingViewModel(private val savedStateHandle: SavedStateHandle) : ViewMod
         private const val KEY_ERROR_MESSAGES_STATE = "KEY_ERROR_MESSAGES_STATE"
     }
 
-    private val application = ResistorApplication.instance
+    private val application = InductorApplication.instance
     private val billingAdapter = DonationBillingAdapter(application)
 
     val errorMessagesStateFlow = savedStateHandle.getStateFlow(KEY_ERROR_MESSAGES_STATE, emptySet<String>())
