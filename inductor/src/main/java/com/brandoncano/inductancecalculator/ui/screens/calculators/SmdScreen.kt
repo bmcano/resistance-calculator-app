@@ -188,8 +188,8 @@ fun SmdInductorLayout(inductor: SmdInductor, isError: Boolean, verticalPadding: 
             )
             Text(
                 text = code,
-                modifier = Modifier.padding(bottom = 90.dp),
-                style = MaterialTheme.typography.headlineLarge.white()
+                modifier = Modifier.padding(bottom = 80.dp),
+                style = MaterialTheme.typography.headlineMedium.white()
             )
         }
         val text = when {
@@ -197,6 +197,7 @@ fun SmdInductorLayout(inductor: SmdInductor, isError: Boolean, verticalPadding: 
             isError -> stringResource(id = R.string.error_na)
             else -> "${inductor.formatInductance()} ${SmdTolerance.getTolerance(inductor.tolerance)}".trimEnd()
         }
+        Spacer(modifier = Modifier.height(16.dp))
         M3DisplayCard(text)
     }
 }

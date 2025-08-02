@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
@@ -64,7 +64,7 @@ fun ValueToColorScreen(
         topBar = {
             M3TopAppBar(
                 titleText = stringResource(R.string.vtc_title),
-                navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,
+                navigationIcon = Icons.Filled.Close,
                 onNavigateBack = onNavigateBack,
                 actions = {
                     MenuIconButton { showMenu = true }
