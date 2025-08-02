@@ -1,4 +1,6 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -29,10 +31,21 @@ android {
         resValue("string", "version", "$versionName$suffix")
         resValue("string", "last_updated", "8/1/2025")
     }
+    signingConfigs {
+        val keystorePropsFile = rootProject.file("local.properties")
+        val keystoreProps = Properties().apply {
+            load(FileInputStream(keystorePropsFile))
+        }
+        create("release") {
+            storeFile = file(keystoreProps["inductor.storeFile"] as String)
+            storePassword = keystoreProps["inductor.storePassword"] as String
+            keyAlias = keystoreProps["inductor.keyAlias"] as String
+            keyPassword = keystoreProps["inductor.keyPassword"] as String
+        }
+    }
     buildTypes {
         release {
-            // adb uninstall com.brandoncano.inductancecalculator
-            // adb install -r .\inductor\release\inductor-release.apk
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
@@ -70,4 +83,21 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     // external libraries
     implementation(libs.ostermiller.utils)
+}
+
+@Suppress("deprecation")
+tasks.register("installReleaseApk") {
+    group = "custom"
+    description = "Uninstall existing release, build new release APK, and install it on device"
+    dependsOn("assembleRelease")
+    doLast {
+        val pkg = android.defaultConfig.applicationId
+        exec {
+            commandLine("adb", "uninstall", pkg)
+            isIgnoreExitValue = true
+        }
+        exec {
+            commandLine("adb", "install", "-r", "${project.buildDir}/outputs/apk/release/inductor-release.apk")
+        }
+    }
 }

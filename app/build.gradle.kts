@@ -1,4 +1,6 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -29,10 +31,21 @@ android {
         resValue("string", "version", "$versionName$suffix")
         resValue("string", "last_updated", "7/30/2025")
     }
+    signingConfigs {
+        val keystorePropsFile = rootProject.file("local.properties")
+        val keystoreProps = Properties().apply {
+            load(FileInputStream(keystorePropsFile))
+        }
+        create("release") {
+            storeFile = file(keystoreProps["resistor.storeFile"] as String)
+            storePassword = keystoreProps["resistor.storePassword"] as String
+            keyAlias = keystoreProps["resistor.keyAlias"] as String
+            keyPassword = keystoreProps["resistor.keyPassword"] as String
+        }
+    }
     buildTypes {
         release {
-            // adb uninstall com.brandoncano.resistancecalculator
-            // adb install -r .\app\release\app-release.apk
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
@@ -70,4 +83,21 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     // external libraries
     implementation(libs.ostermiller.utils)
+}
+
+@Suppress("deprecation")
+tasks.register("installReleaseApk") {
+    group = "custom"
+    description = "Uninstall existing release, build new release APK, and install it on device"
+    dependsOn("assembleRelease")
+    doLast {
+        val pkg = android.defaultConfig.applicationId
+        exec {
+            commandLine("adb", "uninstall", pkg)
+            isIgnoreExitValue = true
+        }
+        exec {
+            commandLine("adb", "install", "-r", "${project.buildDir}/outputs/apk/release/app-release.apk")
+        }
+    }
 }
