@@ -16,7 +16,7 @@ android {
         applicationId = "com.brandoncano.inductancecalculator"
         minSdk = 23 // Android 6.0
         targetSdk = 36
-        versionCode = 9 // for 1.3.0
+        versionCode = 10 // for 1.3.0
         versionName = "1.3.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -32,7 +32,7 @@ android {
     buildTypes {
         release {
             // adb uninstall com.brandoncano.inductancecalculator
-            // adb install -r .\app\release\app-release.apk
+            // adb install -r .\inductor\release\inductor-release.apk
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(

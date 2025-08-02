@@ -5,6 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -13,7 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import com.brandoncano.library.R
 import com.brandoncano.library.m3.ComponentPreviews
 
-val rubikFontFamily = FontFamily(
+private val rubikFontFamily = FontFamily(
     Font(R.font.rubik_light, FontWeight.Light),
     Font(R.font.rubik_regular, FontWeight.Normal),
     Font(R.font.rubik_italic, FontWeight.Normal, FontStyle.Italic),
@@ -21,10 +22,10 @@ val rubikFontFamily = FontFamily(
     Font(R.font.rubik_bold, FontWeight.Bold)
 )
 
-val bodyFontFamily = rubikFontFamily
-val displayFontFamily = rubikFontFamily
+private val bodyFontFamily = rubikFontFamily
+private val displayFontFamily = rubikFontFamily
+private val baseline = Typography()
 
-val baseline = Typography()
 val RubikTypography = Typography(
     displayLarge = baseline.displayLarge.copy(fontFamily = displayFontFamily),
     displayMedium = baseline.displayMedium.copy(fontFamily = displayFontFamily),
@@ -42,6 +43,9 @@ val RubikTypography = Typography(
     labelMedium = baseline.labelMedium.copy(fontFamily = bodyFontFamily),
     labelSmall = baseline.labelSmall.copy(fontFamily = bodyFontFamily),
 )
+
+private val lib_white = Color(0xFFF5F5F5)
+private val lib_black = Color(0xFF00000F)
 
 @Composable
 fun TextStyle.white() = this.merge(color = lib_white)
